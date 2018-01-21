@@ -1,4 +1,4 @@
-package org.usfirst.frc.team694.robot;
+package org.usfirst.frc.team694.robot.util;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * Wireless Gamepad F710 (untested, but it has the exact same layout as the
  * F310).
  *
- * @authors Angelina Ballerina, Imperatoras, 3mi1y, and Renee
+ * @author wangmeister 
+ * @author Angelina Ballerina, Imperatoras, 3mi1y, and Renee
  */
 public class Gamepad extends Joystick {
 
