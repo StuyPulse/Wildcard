@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,16 +13,16 @@ public class DrivetrainPiotrDriveCommand extends Command {
     private boolean arcadeDrive;
     private boolean wasPressed;
 
-    private double rightTrigger;
-    private double leftTrigger;
+    private double rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
+    private double leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
 
-    private double leftTriggerSquared;
-    private double rightTriggerSquared;
+    private double leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);
+    private double rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
     
-    private double leftJoystickXValue;
+    private double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX() * Robot.oi.driverGamepad.getLeftX() * Math.signum(Robot.oi.driverGamepad.getLeftX());
     
-    private double leftJoystickYValue;
-    private double rightJoystickYValue;
+    private double leftJoystickYValue = Math.signum(Robot.oi.driverGamepad.getLeftY()) * Robot.oi.driverGamepad.getLeftY() * Robot.oi.driverGamepad.getLeftY();
+    private double rightJoystickYValue = Math.signum(Robot.oi.driverGamepad.getRightY()) * Robot.oi.driverGamepad.getRightY()* Robot.oi.driverGamepad.getRightY();
 
     public DrivetrainPiotrDriveCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -31,32 +32,19 @@ public class DrivetrainPiotrDriveCommand extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
-        leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
-        leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
-        
-        leftJoystickXValue = Robot.oi.driverGamepad.getLeftX() * Robot.oi.driverGamepad.getLeftX() * Math.signum(Robot.oi.driverGamepad.getLeftX());
-        
-        leftJoystickYValue = Math.signum(Robot.oi.driverGamepad.getLeftY()) * Robot.oi.driverGamepad.getLeftY() * Robot.oi.driverGamepad.getLeftY();
-        rightJoystickYValue = Math.signum(Robot.oi.driverGamepad.getRightY()) * Robot.oi.driverGamepad.getRightY()* Robot.oi.driverGamepad.getRightY();
-        
-        rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
-        leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);
-
         if (Robot.oi.driverGamepad.getRawButton(1) && wasPressed == false) {
             arcadeDrive =!arcadeDrive;
         }
         wasPressed = Robot.oi.driverGamepad.getRawButton(1);
         if (arcadeDrive) {
-            Robot.drivetrain.arcadeDrive((-1.0 * leftTriggerSquared) + rightTriggerSquared, -1.0 * leftJoystickXValue);
+            Drivetrain.arcadeDrive((-1.0 * leftTriggerSquared) + rightTriggerSquared, -1.0 * leftJoystickXValue);
         } else {
-            Robot.drivetrain.tankDrive(-1.0 * rightJoystickYValue, -1.0 * leftJoystickYValue);
+            Drivetrain.tankDrive(-1.0 * rightJoystickYValue, -1.0 * leftJoystickYValue);
         }
     }
 
