@@ -15,4 +15,9 @@ package org.usfirst.frc.team694.robot;
  */
 public interface RobotMap {
 
+    /**************************************************************************
+     * Gamepad Ports
+     *************************************************************************/
+    int DRIVER_GAMEPAD_PORT = 1;
+    int OPERATOR_GAMEPAD_PORT = 1;
 }
