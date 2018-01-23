@@ -8,6 +8,7 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.OI;
+import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -124,6 +125,7 @@ public class Drivetrain extends Subsystem {
 
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
+        setDefaultCommand(new DrivetrainPiotrDriveCommand());
     }
 
 }
