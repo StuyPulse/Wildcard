@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.util.Gamepad;
+import org.usfirst.frc.team694.util.Gamepad;
 
 /**
  * This class is the glue that binds the controls on the physical operator
