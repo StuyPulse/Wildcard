@@ -10,19 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DrivetrainPiotrDriveCommand extends Command {
 
-    private boolean arcadeDrive;
-    private boolean wasPressed;
 
-    private double rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
-    private double leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
 
-    private double leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);
-    private double rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
-    
-    private double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX() * Robot.oi.driverGamepad.getLeftX() * Math.signum(Robot.oi.driverGamepad.getLeftX());
-    
-    private double leftJoystickYValue = Math.signum(Robot.oi.driverGamepad.getLeftY()) * Robot.oi.driverGamepad.getLeftY() * Robot.oi.driverGamepad.getLeftY();
-    private double rightJoystickYValue = Math.signum(Robot.oi.driverGamepad.getRightY()) * Robot.oi.driverGamepad.getRightY()* Robot.oi.driverGamepad.getRightY();
+
 
     public DrivetrainPiotrDriveCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -37,8 +27,22 @@ public class DrivetrainPiotrDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        boolean arcadeDrive = false;
+        boolean wasPressed = false;
+        
+        double rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
+        double leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
+
+        double leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);
+        double rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
+        
+        double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX() * Robot.oi.driverGamepad.getLeftX() * Math.signum(Robot.oi.driverGamepad.getLeftX());
+        
+        double leftJoystickYValue = Math.signum(Robot.oi.driverGamepad.getLeftY()) * Robot.oi.driverGamepad.getLeftY() * Robot.oi.driverGamepad.getLeftY();
+        double rightJoystickYValue = Math.signum(Robot.oi.driverGamepad.getRightY()) * Robot.oi.driverGamepad.getRightY()* Robot.oi.driverGamepad.getRightY();
+        
         if (Robot.oi.driverGamepad.getRawButton(1) && wasPressed == false) {
-            arcadeDrive =!arcadeDrive;
+            arcadeDrive =! arcadeDrive;
         }
         wasPressed = Robot.oi.driverGamepad.getRawButton(1);
         if (arcadeDrive) {
