@@ -24,10 +24,10 @@ public interface RobotMap {
      * Drivetrain motor ports
      */
     int LEFT_FRONT_MOTOR_PORT = 1;
-    int LEFT_MIDDLE_MOTOR_PORT = 1;
-    int LEFT_REAR_MOTOR_PORT = 1;
+    int LEFT_MIDDLE_MOTOR_PORT = 2;
+    int LEFT_REAR_MOTOR_PORT = 3;
     
-    int RIGHT_FRONT_MOTOR_PORT = 1;
-    int RIGHT_MIDDLE_MOTOR_PORT = 1;
-    int RIGHT_REAR_MOTOR_PORT = 1;
+    int RIGHT_FRONT_MOTOR_PORT = 4;
+    int RIGHT_MIDDLE_MOTOR_PORT = 5;
+    int RIGHT_REAR_MOTOR_PORT = 6;
 }
