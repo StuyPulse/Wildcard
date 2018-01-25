@@ -23,7 +23,8 @@ public class Gamepad extends Joystick {
 	// "X" gives you access to the axis inputs
 	public enum GamepadSwitchMode {
 		SWITCH_X, // NOTE: getLeftTrigger and getRightTrigger will return null!
-		SWITCH_D
+		SWITCH_D,
+		PS4 //PS4 Controller Enum.
 	}
 
 	private GamepadSwitchMode switchMode;
@@ -67,6 +68,8 @@ public class Gamepad extends Joystick {
 				return getRawAxis(4);
 			case SWITCH_X:
 				return getRawAxis(0);
+			case PS4:
+			    return getRawAxis(2);
 			default:
 				return 0;
 		}
@@ -82,6 +85,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_D:
 				return -getRawAxis(3);
 			case SWITCH_X:
+			case PS4:
 				return -getRawAxis(5);
 			default:
 				return 0;
@@ -178,6 +182,8 @@ public class Gamepad extends Joystick {
 				return getRawLeftTrigger() ? 1 : 0;
 			case SWITCH_X:
 				return getRawAxis(2);
+			case PS4:
+			    return getRawAxis(3);
 			default:
 				return 0;
 		}
@@ -193,6 +199,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_D:
 				return getRawButton(7);
 			case SWITCH_X:
+			case PS4:
 				return getRawLeftTriggerAxis() > RAW_TRIGGER_PRESS_AXIS_THRESHOLD;
 			default:
 				return false;
@@ -220,6 +227,8 @@ public class Gamepad extends Joystick {
 				return getRawLeftTrigger() ? 1 : 0;
 			case SWITCH_X:
 				return getRawAxis(3);
+			case PS4:
+			    return getRawAxis(4);
 			default:
 				return 0;
 		}
@@ -235,6 +244,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_D:
 				return getRawButton(8);
 			case SWITCH_X:
+			case PS4:
 				return getRawRightTriggerAxis() > RAW_TRIGGER_PRESS_AXIS_THRESHOLD;
 			default:
 				return false;
@@ -258,6 +268,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawLeftButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(1);
 			case SWITCH_X:
 				return getRawButton(3);
@@ -269,6 +280,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getLeftButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 1);
 			case SWITCH_X:
 				return new JoystickButton(this, 3);
@@ -285,6 +297,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawBottomButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(2);
 			case SWITCH_X:
 				return getRawButton(1);
@@ -296,6 +309,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getBottomButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 2);
 			case SWITCH_X:
 				return new JoystickButton(this, 1);
@@ -312,6 +326,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawRightButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(3);
 			case SWITCH_X:
 				return getRawButton(2);
@@ -323,6 +338,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getRightButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 3);
 			case SWITCH_X:
 				return new JoystickButton(this, 2);
@@ -352,6 +368,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawSelectButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(9);
 			case SWITCH_X:
 				return getRawButton(7);
@@ -363,6 +380,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getSelectButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 9);
 			case SWITCH_X:
 				return new JoystickButton(this, 7);
@@ -379,6 +397,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawStartButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(10);
 			case SWITCH_X:
 				return getRawButton(8);
@@ -390,6 +409,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getStartButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 10);
 			case SWITCH_X:
 				return new JoystickButton(this, 8);
@@ -406,6 +426,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawLeftAnalogButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(11);
 			case SWITCH_X:
 				return getRawButton(9);
@@ -417,6 +438,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getLeftAnalogButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 11);
 			case SWITCH_X:
 				return new JoystickButton(this, 9);
@@ -433,6 +455,7 @@ public class Gamepad extends Joystick {
 	public boolean getRawRightAnalogButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return getRawButton(12);
 			case SWITCH_X:
 				return getRawButton(10);
@@ -444,6 +467,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getRightAnalogButton() {
 		switch (switchMode) {
 			case SWITCH_D:
+			case PS4:
 				return new JoystickButton(this, 12);
 			case SWITCH_X:
 				return new JoystickButton(this, 10);
