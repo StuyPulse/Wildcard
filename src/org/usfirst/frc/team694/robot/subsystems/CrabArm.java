@@ -21,6 +21,7 @@ public class CrabArm extends Subsystem {
         crabArmSolenoid = new Solenoid(RobotMap.CRAB_ARM_SOLENOID_PORT);
         leftCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_LEFT_MOTOR_PORT);
         rightCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_RIGHT_MOTOR_PORT);
+        crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
 
     public void release() {
@@ -28,13 +29,11 @@ public class CrabArm extends Subsystem {
     }
 
     public void acquire() {
-        leftCrabArmMotor.set(1);
-        rightCrabArmMotor.set(1);
+        crabArmMotors.set(1);
     }
 
     public void deacquire() {
-        leftCrabArmMotor.set(-1);
-        rightCrabArmMotor.set(-1);
+        crabArmMotors.set(-1);
     }
 
     public void initDefaultCommand() {
