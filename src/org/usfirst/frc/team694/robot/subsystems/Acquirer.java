@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Acquirer extends Subsystem {
 
-    public static WPI_VictorSPX leftFrontAcquirerMotor;
-    public static WPI_VictorSPX rightFrontAcquirerMotor;
-    public static WPI_VictorSPX rightBackAcquirerMotor;
-    public static WPI_VictorSPX leftBackAcquirerMotor;
+    public WPI_VictorSPX leftFrontAcquirerMotor;
+    public WPI_VictorSPX rightFrontAcquirerMotor;
+    public WPI_VictorSPX rightBackAcquirerMotor;
+    public WPI_VictorSPX leftBackAcquirerMotor;
         
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
