@@ -74,6 +74,7 @@ public class Drivetrain extends Subsystem {
         rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
+        gearShift.set(true);//default
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
