@@ -21,6 +21,7 @@ public class CrabArm extends Subsystem {
         crabArmSolenoid = new Solenoid(RobotMap.CRAB_ARM_SOLENOID_PORT);
         leftCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_LEFT_MOTOR_PORT);
         rightCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_RIGHT_MOTOR_PORT);
+        leftCrabArmMotor.setInverted(true);
         crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
 
