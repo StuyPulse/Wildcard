@@ -45,10 +45,9 @@ public interface RobotMap {
     int GEAR_SHIFT_CHANNEL = -1;
 =======
     
-    int ACQUIRER_FRONT_LEFT_MOTOR_PORT = -1;
-    int ACQUIRER_FRONT_RIGHT_MOTOR_PORT = -1;
-    int ACQUIRER_BACK_LEFT_MOTOR_PORT = -1;
-    int ACQUIRER_BACK_RIGHT_MOTOR_PORT = -1;
-    double ACQUIRER_MOTOR_SPEED = -1;
+    int ACQUIRER_LEFT_MOTOR_PORT = -1;
+    int ACQUIRER_RIGHT_MOTOR_PORT = -1;
+    int ACQUIRER_SOLENOID_PORT = -1;
+    double ACQUIRER_MOTOR_SPEED = 1;
 }
 
