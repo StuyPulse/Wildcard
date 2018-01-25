@@ -23,7 +23,8 @@ public class Lift extends Subsystem {
     //Solenoid brake system
     private Solenoid LiftBrake;
     //Limit switch
-    private DigitalInput limitSwitch;
+    private DigitalInput topLimitSwitch;
+    private DigitalInput bottomLimitSwitch;
     //Encoder
     private Encoder liftEncoder;
     //Overridden boolean
@@ -71,11 +72,11 @@ public class Lift extends Subsystem {
     }
 
     public boolean isAtBottom() {
-        return limitSwitch.get();
+        return bottomLimitSwitch.get();
     }
 
     public boolean isAtTop() { 
-       return getLiftEncoderDistance() >= 999; //&& !overridden; //FIXME: You need a RobotMap value to replace the 999
+       return topLimitSwitch.get();
     }
     
     public void checkForReset() {
