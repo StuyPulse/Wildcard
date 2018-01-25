@@ -34,17 +34,17 @@ public class Acquirer extends Subsystem {
     }
     
     public void acquire() {
-        leftFrontAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED);
-        leftBackAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED);
-        rightFrontAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED);
-        rightBackAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED);
+        leftFrontAcquirerMotor.set(1);
+        leftBackAcquirerMotor.set(1);
+        rightFrontAcquirerMotor.set(1);
+        rightBackAcquirerMotor.set(1);
     }
     
-    public void eject() {
-        leftFrontAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED * -1);
-        leftBackAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED * -1);
-        rightFrontAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED * -1);
-        rightBackAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED * -1);
+    public void deacquire() {
+        leftFrontAcquirerMotor.set(-1);
+        leftBackAcquirerMotor.set(-1);
+        rightFrontAcquirerMotor.set(-1);
+        rightBackAcquirerMotor.set(-1);
     }
 }
 

@@ -7,12 +7,16 @@
 
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.RobotMap;
+
 import org.usfirst.frc.team694.robot.OI;
+import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,8 +26,10 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 public class Drivetrain extends Subsystem {
     private static WPI_TalonSRX leftFrontMotor;
+    private static WPI_TalonSRX leftMiddleMotor;
     private static WPI_TalonSRX leftRearMotor;
     private static WPI_TalonSRX rightFrontMotor;
+    private static WPI_TalonSRX rightMiddleMotor;
     private static WPI_TalonSRX rightRearMotor;
 
     private SpeedControllerGroup leftSpeedController;
@@ -35,30 +41,40 @@ public class Drivetrain extends Subsystem {
 
     private static Encoder leftEncoder;
     private static Encoder rightEncoder;
+    
+    private static Solenoid gearShift;
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
-        leftFrontMotor = new WPI_TalonSRX(1);
-        leftRearMotor = new WPI_TalonSRX(2);
-        leftSpeedController = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
+        leftFrontMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
+        leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
+        leftRearMotor = new WPI_TalonSRX(RobotMap.LEFT_REAR_MOTOR_PORT);
+        leftSpeedController = new SpeedControllerGroup(leftFrontMotor, leftMiddleMotor, leftRearMotor);
 
-        rightFrontMotor = new WPI_TalonSRX(3);
-        rightRearMotor = new WPI_TalonSRX(4);
-        rightSpeedController = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+        rightFrontMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
+        rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
+        rightRearMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
+        rightSpeedController = new SpeedControllerGroup(rightFrontMotor, rightMiddleMotor, rightRearMotor);
 
         leftFrontMotor.setInverted(false);
+        leftMiddleMotor.setInverted(false);
         leftRearMotor.setInverted(false);
         rightFrontMotor.setInverted(false);
+        rightMiddleMotor.setInverted(false);
         rightRearMotor.setInverted(false);
 
-        leftFrontMotor.setNeutralMode(NeutralMode.Brake);
-        leftRearMotor.setNeutralMode(NeutralMode.Brake);
-        rightFrontMotor.setNeutralMode(NeutralMode.Brake);
-        rightRearMotor.setNeutralMode(NeutralMode.Brake);
+        leftFrontMotor.setNeutralMode(NeutralMode.Coast);
+        leftMiddleMotor.setNeutralMode(NeutralMode.Coast);
+        leftRearMotor.setNeutralMode(NeutralMode.Coast);
+        rightFrontMotor.setNeutralMode(NeutralMode.Coast);
+        rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
+        rightRearMotor.setNeutralMode(NeutralMode.Coast);
 
-        leftEncoder = new Encoder(0, 1);
-        rightEncoder = new Encoder(2, 3);
+        leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
+        rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
 
+        gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
+        gearShift.set(true);//default
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
@@ -109,6 +125,17 @@ public class Drivetrain extends Subsystem {
         tankDrive(0, 0);
     }
 
+    public static void highGearShift(){
+        gearShift.set(false);
+    }
+    
+    public static void lowGearShift(){
+        gearShift.set(true);
+    }
+    public static void toggleGearShift(){
+        boolean m = !(gearShift.get());
+        gearShift.set(m);
+    }
     /*TODO: Should we remove?
     public static int leftEncoderRaw() {
         return leftEncoder.getRaw();
@@ -124,6 +151,7 @@ public class Drivetrain extends Subsystem {
 
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
+        setDefaultCommand(new DrivetrainPiotrDriveCommand());
     }
 
 }
