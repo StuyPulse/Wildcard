@@ -9,5 +9,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
+<<<<<<< HEAD
+=======
+	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
+>>>>>>> e38c2c9cfb8bbf578a1ff40f1c95b1ac3cbc9f9d
 	<classpathentry kind="output" path="bin"/>
 </classpath>
