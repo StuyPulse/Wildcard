@@ -7,14 +7,16 @@
 
 package org.usfirst.frc.team694.robot.subsystems;
 
-import org.usfirst.frc.team694.robot.OI;
 import org.usfirst.frc.team694.robot.RobotMap;
+
+import org.usfirst.frc.team694.robot.OI;
 import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -39,6 +41,8 @@ public class Drivetrain extends Subsystem {
 
     private static Encoder leftEncoder;
     private static Encoder rightEncoder;
+    
+    private static Solenoid gearShift;
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
@@ -69,7 +73,7 @@ public class Drivetrain extends Subsystem {
         leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
         rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
 
-
+        gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
@@ -120,6 +124,17 @@ public class Drivetrain extends Subsystem {
         tankDrive(0, 0);
     }
 
+    public static void highGearShift(){
+        gearShift.set(false);
+    }
+    
+    public static void lowGearShift(){
+        gearShift.set(true);
+    }
+    public static void toggleGearShift(){
+        boolean m = !(gearShift.get());
+        gearShift.set(m);
+    }
     /*TODO: Should we remove?
     public static int leftEncoderRaw() {
         return leftEncoder.getRaw();

@@ -34,9 +34,14 @@ public interface RobotMap {
      * Encoder Ports
      */
     
-    int LEFT_ENCODER_CHANNEL_A = 2;
-    int LEFT_ENCODER_CHANNEL_B = 3;
+    int LEFT_ENCODER_CHANNEL_A = 0;
+    int LEFT_ENCODER_CHANNEL_B = 1;
     
     int RIGHT_ENCODER_CHANNEL_A = 2;
     int RIGHT_ENCODER_CHANNEL_B = 3;
+    /****************************************************************************
+     * Solenoid Ports
+     */
+    int GEAR_SHIFT_CHANNEL = -1;
 }
+
