@@ -32,8 +32,8 @@ public class Drivetrain extends Subsystem {
     private WPI_TalonSRX rightMiddleMotor;
     private WPI_TalonSRX rightRearMotor;
 
-    private SpeedControllerGroup leftSpeedController;
-    private SpeedControllerGroup rightSpeedController;
+    private SpeedControllerGroup leftDrivetrainMotorGroup;
+    private SpeedControllerGroup rightDrivetrainMotorGroup;
 
     private DifferentialDrive differentialDrive;
 
@@ -47,19 +47,14 @@ public class Drivetrain extends Subsystem {
         leftFrontMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
         leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftRearMotor = new WPI_TalonSRX(RobotMap.LEFT_REAR_MOTOR_PORT);
-        leftSpeedController = new SpeedControllerGroup(leftFrontMotor, leftMiddleMotor, leftRearMotor);
+        leftDrivetrainMotorGroup = new SpeedControllerGroup(leftFrontMotor, leftMiddleMotor, leftRearMotor);
 
         rightFrontMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
         rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
         rightRearMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
-        rightSpeedController = new SpeedControllerGroup(rightFrontMotor, rightMiddleMotor, rightRearMotor);
+        rightDrivetrainMotorGroup = new SpeedControllerGroup(rightFrontMotor, rightMiddleMotor, rightRearMotor);
 
-        leftFrontMotor.setInverted(false);
-        leftMiddleMotor.setInverted(false);
-        leftRearMotor.setInverted(false);
-        rightFrontMotor.setInverted(false);
-        rightMiddleMotor.setInverted(false);
-        rightRearMotor.setInverted(false);
+        leftDrivetrainMotorGroup.setInverted(true);
 
         leftFrontMotor.setNeutralMode(NeutralMode.Coast);
         leftMiddleMotor.setNeutralMode(NeutralMode.Coast);
@@ -72,11 +67,10 @@ public class Drivetrain extends Subsystem {
         rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-        gearShift.set(true);//default
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
-        differentialDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
+        differentialDrive = new DifferentialDrive(leftDrivetrainMotorGroup, rightDrivetrainMotorGroup);
 
     }
 

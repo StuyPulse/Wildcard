@@ -45,9 +45,9 @@ public class DrivetrainPiotrDriveCommand extends Command {
         }
         wasPressed = Robot.oi.driverGamepad.getRawButton(1);
         if (arcadeDrive) {
-            Drivetrain.arcadeDrive((-1.0 * leftTriggerSquared) + rightTriggerSquared, -1.0 * leftJoystickXValue);
+            Robot.drivetrain.arcadeDrive((-1.0 * leftTriggerSquared) + rightTriggerSquared, -1.0 * leftJoystickXValue);
         } else {
-            Drivetrain.tankDrive(-1.0 * rightJoystickYValue, -1.0 * leftJoystickYValue);
+            Robot.drivetrain.tankDrive(-1.0 * rightJoystickYValue, -1.0 * leftJoystickYValue);
         }
     }
 
