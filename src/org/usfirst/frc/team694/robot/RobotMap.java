@@ -43,5 +43,7 @@ public interface RobotMap {
      * Solenoid Ports
      */
     int GEAR_SHIFT_CHANNEL = -1;
+    int LIFT_BRAKE_CHANNEL = -2;
+    
 }
 
