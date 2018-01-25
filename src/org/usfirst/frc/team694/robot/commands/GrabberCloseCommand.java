@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleGrabberCommand extends Command {
+public class GrabberCloseCommand extends Command {
 
-    public ToggleGrabberCommand() {
+    public GrabberCloseCommand() {
         requires(Robot.grabber);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,7 +21,7 @@ public class ToggleGrabberCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.grabber.toggleGrabber();
+        Robot.grabber.close();
     }
 
     // Make this return true when this Command no longer needs to run execute()

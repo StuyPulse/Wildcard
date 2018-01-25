@@ -22,19 +22,19 @@ public class Grabber extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    public void openGrabber() {
+    public void open() {
         isOpen = true; 
         grabberSolenoid.set(isOpen);
     }
-    public void closeGrabber() {
+    public void close() {
         isOpen = false; 
         grabberSolenoid.set(isOpen);
     }
-    public void toggleGrabber() {
+    public void toggle() {
        if (isOpen) {
-           closeGrabber();
+           close();
        }else {
-           openGrabber();
+           open();
        }
     }
 }

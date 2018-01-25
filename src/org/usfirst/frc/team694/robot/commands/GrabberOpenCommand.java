@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class OpenGrabberCommand extends Command {
+public class GrabberOpenCommand extends Command {
 
-    public OpenGrabberCommand() {
+    public GrabberOpenCommand() {
         requires(Robot.grabber);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,7 +21,7 @@ public class OpenGrabberCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.grabber.openGrabber();
+        Robot.grabber.open();
     }
 
     // Make this return true when this Command no longer needs to run execute()
