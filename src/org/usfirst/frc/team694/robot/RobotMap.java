@@ -30,4 +30,13 @@ public interface RobotMap {
     int RIGHT_FRONT_MOTOR_PORT = 4;
     int RIGHT_MIDDLE_MOTOR_PORT = 5;
     int RIGHT_REAR_MOTOR_PORT = 6;
+    /***************************************************************************
+     * Encoder Ports
+     */
+    
+    int LEFT_ENCODER_CHANNEL_A = 2;
+    int LEFT_ENCODER_CHANNEL_B = 3;
+    
+    int RIGHT_ENCODER_CHANNEL_A = 2;
+    int RIGHT_ENCODER_CHANNEL_B = 3;
 }

@@ -13,7 +13,6 @@ import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -67,8 +66,8 @@ public class Drivetrain extends Subsystem {
         rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
         rightRearMotor.setNeutralMode(NeutralMode.Coast);
 
-        leftEncoder = new Encoder(RobotMap.LEFT_FRONT_MOTOR_PORT, RobotMap.LEFT_REAR_MOTOR_PORT);
-        rightEncoder = new Encoder(RobotMap.RIGHT_FRONT_MOTOR_PORT, RobotMap.RIGHT_REAR_MOTOR_PORT);
+        leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
+        rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
 
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
