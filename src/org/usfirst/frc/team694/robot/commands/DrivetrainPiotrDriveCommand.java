@@ -33,8 +33,8 @@ public class DrivetrainPiotrDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        rightTrigger = Robot.oi.driverGamepad.getLeftTriggerAxis();
-        leftTrigger = Robot.oi.driverGamepad.getRightTriggerAxis();
+        rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
+        leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
 
         rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
         leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);

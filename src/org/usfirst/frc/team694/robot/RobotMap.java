@@ -20,4 +20,10 @@ public interface RobotMap {
      *************************************************************************/
     int DRIVER_GAMEPAD_PORT = 1;
     int OPERATOR_GAMEPAD_PORT = 1;
+    
+    int ACQUIRER_FRONT_LEFT_MOTOR_PORT = -1;
+    int ACQUIRER_FRONT_RIGHT_MOTOR_PORT = -1;
+    int ACQUIRER_BACK_LEFT_MOTOR_PORT = -1;
+    int ACQUIRER_BACK_RIGHT_MOTOR_PORT = -1;
+    double ACQUIRER_MOTOR_SPEED = -1;
 }
