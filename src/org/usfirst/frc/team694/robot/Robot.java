@@ -10,6 +10,7 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.subsystems.Acquirer;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team694.robot.subsystems.Grabber;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
     public static Drivetrain drivetrain;
     public static Acquirer acquirer;
     public static CrabArm crabArm;
+    public static Grabber grabber; 
 
     public static OI oi;
 
@@ -43,6 +45,7 @@ public class Robot extends TimedRobot {
         drivetrain = new Drivetrain();
         acquirer = new Acquirer();
         crabArm = new CrabArm();
+        grabber = new Grabber();
         oi = new OI();
     }
 
