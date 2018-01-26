@@ -29,23 +29,17 @@ public class DrivetrainPiotrDriveCommand extends Command {
         double rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
 
-        double leftTriggerSquared = ((leftTrigger + 1) / 2) * ((leftTrigger + 1) / 2);
-        double rightTriggerSquared = ((rightTrigger + 1) / 2) * ((rightTrigger + 1) / 2);
+        double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX();
 
-        double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX() * Robot.oi.driverGamepad.getLeftX()
-                * Math.signum(Robot.oi.driverGamepad.getLeftX());
-
-        double leftJoystickYValue = Math.signum(Robot.oi.driverGamepad.getLeftY()) * Robot.oi.driverGamepad.getLeftY()
-                * Robot.oi.driverGamepad.getLeftY();
-        double rightJoystickYValue = Math.signum(Robot.oi.driverGamepad.getRightY())
-                * Robot.oi.driverGamepad.getRightY() * Robot.oi.driverGamepad.getRightY();
+        double leftJoystickYValue = Robot.oi.driverGamepad.getLeftY();
+        double rightJoystickYValue = Robot.oi.driverGamepad.getRightY();
 
         if (Robot.oi.driverGamepad.getRawButton(1) && wasPressed == false) {
             arcadeDrive = !arcadeDrive;
         }
         wasPressed = Robot.oi.driverGamepad.getRawButton(1);
         if (arcadeDrive) {
-            Robot.drivetrain.arcadeDrive((-1.0 * leftTriggerSquared) + rightTriggerSquared, -1.0 * leftJoystickXValue);
+            Robot.drivetrain.arcadeDrive((-1.0 * leftTrigger + rightTrigger), -1.0 * leftJoystickXValue);
         } else {
             Robot.drivetrain.tankDrive(-1.0 * rightJoystickYValue, -1.0 * leftJoystickYValue);
         }
