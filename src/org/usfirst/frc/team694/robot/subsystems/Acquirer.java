@@ -29,9 +29,9 @@ public class Acquirer extends Subsystem {
     public Acquirer() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
-        acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
         acquirerSolenoid = new Solenoid(RobotMap.ACQUIRER_SOLENOID_PORT);
         leftAcquirerMotor.setInverted(true);
+        acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
     }
     
     public void acquire() {

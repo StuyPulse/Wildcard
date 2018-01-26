@@ -10,6 +10,7 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.subsystems.Acquirer;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -32,6 +33,8 @@ public class Robot extends TimedRobot {
     public static Grabber grabber; 
 
     public static OI oi;
+    
+    public static Lift lift;
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
@@ -47,6 +50,7 @@ public class Robot extends TimedRobot {
         crabArm = new CrabArm();
         grabber = new Grabber();
         oi = new OI();
+        lift = new Lift();
     }
 
     /**
