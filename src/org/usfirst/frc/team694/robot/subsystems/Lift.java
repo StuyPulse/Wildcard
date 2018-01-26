@@ -39,7 +39,7 @@ public class Lift extends Subsystem {
         leftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         
-        liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_CHANNEL);
+        liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
     }
 
     public void initDefaultCommand() {
