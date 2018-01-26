@@ -146,6 +146,9 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.resetAmbient();
         rightLineSensor.resetAmbient();
     }
+    public double getGyroAngle(){
+        return gyro.getAngle();
+    }
     public boolean isOnLine(int mode){
         return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
     }
@@ -171,6 +174,11 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
         setDefaultCommand(new DrivetrainPiotrDriveCommand());
+    }
+
+    public void resetGyro() {
+        // TODO Auto-generated method stub
+        gyro.reset();
     }
 
 }
