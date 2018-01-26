@@ -5,7 +5,7 @@ package org.usfirst.frc.team694.robot;
  * All of our autons should be based on the field so that if our measurements 
  * change, we can adapt quickly. All measurements are in inches for encoder purposes.
  */
-public interface FieldMap {
+public class FieldMap {
 
 /* Given FRC Manual Measurements*/
     
