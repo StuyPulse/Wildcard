@@ -44,15 +44,15 @@ public interface RobotMap {
      * Solenoid Ports
      */
     int GEAR_SHIFT_CHANNEL = -1;
-    int LIFT_BRAKE_SOLENOID_CHANNEL = -2;
+    public static final int LIFT_BRAKE_SOLENOID_CHANNEL = -2;
     /***************************************************************************
      * Lift Motor Ports
      */
-    int LEFT_LIFT_MOTOR_PORT = -1;
-    int RIGHT_LIFT_MOTOR_PORT = -1; 
+    public static final int LEFT_LIFT_MOTOR_PORT = -1;
+    public static final int RIGHT_LIFT_MOTOR_PORT = -1; 
     /***************************************************************************
      * Lift Constants
      */
-    double LIFT_RAW_MULTIPLIER = -1;
+    public static final double LIFT_RAW_MULTIPLIER = -1;
 }
 

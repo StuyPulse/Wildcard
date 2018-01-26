@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,6 +18,8 @@ public class Lift extends Subsystem {
     
     private WPI_TalonSRX leftLiftMotor;
     private WPI_TalonSRX rightLiftMotor;
+    
+    private SpeedControllerGroup liftMotors; 
     
     private Solenoid liftSolenoid; 
 
@@ -29,13 +32,15 @@ public class Lift extends Subsystem {
         
         leftLiftMotor = new WPI_TalonSRX(RobotMap.LEFT_LIFT_MOTOR_PORT);
         rightLiftMotor= new WPI_TalonSRX(RobotMap.RIGHT_LIFT_MOTOR_PORT);
-
+        
 
         leftLiftMotor.setNeutralMode(NeutralMode.Brake);
         rightLiftMotor.setNeutralMode(NeutralMode.Brake);
         
         rightLiftMotor.setInverted(true);
 
+        liftMotors = new SpeedControllerGroup(leftLiftMotor, rightLiftMotor);
+        
         leftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         
@@ -69,18 +74,15 @@ public class Lift extends Subsystem {
     }
     
     public void goUp() {
-        rightLiftMotor.set(1.0);
-        leftLiftMotor.set(1.0);
+        liftMotors.set(1);
     }
     
     public void goDown() {
-        rightLiftMotor.set(-1.0);
-        leftLiftMotor.set(-1.0);
+        liftMotors.set(-1);
     }
     
     public void stop() {
-        rightLiftMotor.set(0);
-        leftLiftMotor.set(0);
+        liftMotors.set(0);
     }
   
     public boolean isAtBottom() {
