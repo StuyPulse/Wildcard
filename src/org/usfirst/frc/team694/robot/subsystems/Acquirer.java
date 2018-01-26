@@ -5,6 +5,7 @@ import org.usfirst.frc.team694.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -12,9 +13,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Acquirer extends Subsystem {
 
-    public static WPI_VictorSPX leftAcquirerMotor;
-    public static WPI_VictorSPX rightAcquirerMotor;
-    public static Solenoid acquirerSolenoid;
+    public WPI_VictorSPX leftAcquirerMotor;
+    public WPI_VictorSPX rightAcquirerMotor;
+    public Solenoid acquirerSolenoid;
+    public SpeedControllerGroup acquirerMotors;
         
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -27,18 +29,17 @@ public class Acquirer extends Subsystem {
     public Acquirer() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
+        acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
         acquirerSolenoid = new Solenoid(RobotMap.ACQUIRER_SOLENOID_PORT);
         leftAcquirerMotor.setInverted(true);
     }
     
     public void acquire() {
-        leftAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED);
-        rightAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED);
+        acquirerMotors.set(1);
     }
     
     public void eject() {
-        leftAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED * -1);
-        rightAcquirerMotor.set(RobotMap.ACQUIRER_MOTOR_SPEED * -1);
+        acquirerMotors.set(-1);
     }
     
     public void flipUp() {
