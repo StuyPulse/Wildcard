@@ -12,15 +12,17 @@ public class DrivetrainRotateDegreesGyroCommand extends Command {
     public double targetAngle;
     public double gyroAngle;
     public boolean targetReached;
-    public DrivetrainRotateDegreesGyroCommand() {
+    
+    public DrivetrainRotateDegreesGyroCommand(double degrees) {
         requires(Robot.drivetrain);
         //We need a drivetrain!
+        targetAngle = degrees;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.drivetrain.resetGyro();
-        SmartDashboard.getNumber("Target Angle",0);
+        SmartDashboard.getNumber("Target Angle", 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
