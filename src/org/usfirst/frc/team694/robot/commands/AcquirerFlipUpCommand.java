@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AcquirerFlipUpCommand extends Command {
+public class AcquirerFlipupCommand extends Command {
 
-    public AcquirerFlipUpCommand() {
+    public AcquirerFlipupCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        requires(Robot.acquirer)
+        requires(Robot.acquirer);
     }
 
     // Called just before this Command runs the first time
