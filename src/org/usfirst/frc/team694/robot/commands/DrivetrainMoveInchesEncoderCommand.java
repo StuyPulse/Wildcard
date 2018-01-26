@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DrivetrainMoveInchesEncoderCommand extends Command {
     public double targetDistance;
-    public double encoderDistance;
     public double driveSpeed;
-    public boolean targetReached;
     
     public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {
         requires(Robot.drivetrain);
+        speed = driveSpeed;
+        distance = targetDistance;
     }
 
     // Called just before this Command runs the first time
