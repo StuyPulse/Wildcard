@@ -46,7 +46,7 @@ public class DrivetrainMoveToLineCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (isReached && ((leftIsAligned + rightIsAligned) == 2));
+        return (isReached && ((leftIsAligned + rightIsAligned) == 2) ) || (Math.max(Robot.drivetrain.getRightEncoderDistance(),Robot.drivetrain.getLeftEncoderDistance()) > (distance + 5));
     }
 
     // Called once after isFinished returns true

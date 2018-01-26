@@ -16,6 +16,8 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.ADXL345_SPI.Axes;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -45,6 +47,9 @@ public class Drivetrain extends Subsystem {
     private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
+    
+    private ADXRS450_Gyro gyro;
+    
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
@@ -74,9 +79,12 @@ public class Drivetrain extends Subsystem {
         rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-        //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
-        //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
-
+        
+        leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
+        rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
+        
+        gyro = new ADXRS450_Gyro();
+        
         differentialDrive = new DifferentialDrive(leftDrivetrainMotorGroup, rightDrivetrainMotorGroup);
 
     }
