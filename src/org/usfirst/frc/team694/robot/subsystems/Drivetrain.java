@@ -39,9 +39,6 @@ public class Drivetrain extends Subsystem {
     private SpeedControllerGroup rightDrivetrainMotorGroup;
 
     private DifferentialDrive differentialDrive;
-
-    private Encoder leftEncoder;
-    private Encoder rightEncoder;
     
     private LineSensor leftLineSensor;
     private LineSensor rightLineSensor;
@@ -71,17 +68,14 @@ public class Drivetrain extends Subsystem {
         rightFrontMotor.setNeutralMode(NeutralMode.Coast);
         rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
         rightRearMotor.setNeutralMode(NeutralMode.Coast);
-
-        leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
-        rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
+        
+        leftRearMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        rightRearMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
         rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-        
-        leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
-        rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         
         gyro = new ADXRS450_Gyro();
         
@@ -90,16 +84,16 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetEncoders() {
-        leftEncoder.reset();
-        rightEncoder.reset();
+        leftRearMotor.setSelectedSensorPosition(0.0, 0, 0);
+        rightRearMotor.setSelectedSensorPosition(0.0, 0, 0);
     }
 
     public double getLeftSpeed() {
-        return leftEncoder.getRate();
+        return leftRearMotor.getSelectedSensorVelocity();
     }
 
     public double getRightSpeed() {
-        return rightEncoder.getRate();
+        return rightRearMotor.getSelectedSensorVelocity();
     }
 
     public double getSpeed() {
@@ -111,11 +105,19 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getLeftEncoderDistance() {
-        return leftEncoder.getDistance();
+        return leftRearMotor.getSelectedSensorPosition()  * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
 
     public double getRightEncoderDistance() {
-        return rightEncoder.getDistance();
+        return rightRearMotor.getSelectedSensorPosition() * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
+    }
+    
+    public double getLeftRawEncoderDistance() {
+        return leftRearMotor.getSelectedSensorPosition();;
+    }
+    
+    public double getRightRawEncoderDistance() {
+        return rightRearMotor.getSelectedSensorPosition();;
     }
 
     public void tankDrive(double left, double right) {
