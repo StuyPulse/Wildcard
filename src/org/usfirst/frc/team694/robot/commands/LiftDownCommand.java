@@ -7,21 +7,22 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AcquirerEjectCommand extends Command {
+public class LiftDownCommand extends Command {
 
-    public AcquirerEjectCommand() {
-        requires(Robot.acquirer);
+    public LiftDownCommand() {
+        requires(Robot.lift);
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        // eg. requires(chassi
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        Robot.lift.setBrakeOff();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.acquirer.deacquire();
+        Robot.lift.goDown();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,5 +37,6 @@ public class AcquirerEjectCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+        Robot.lift.setBrakeOn();
     }
 }

@@ -20,7 +20,6 @@ public final class RobotMap {
      *************************************************************************/
     public static final int DRIVER_GAMEPAD_PORT = 1;
     public static final int OPERATOR_GAMEPAD_PORT = 1;
-
     /**************************************************************************
      * Drivetrain motor ports
      *************************************************************************/
@@ -35,20 +34,25 @@ public final class RobotMap {
     /**************************************************************************
      * Acquirer motor ports
      *************************************************************************/
-    public static final int ACQUIRER_FRONT_LEFT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_FRONT_RIGHT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_BACK_LEFT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_BACK_RIGHT_MOTOR_PORT = -1;
+    public static final int ACQUIRER_LEFT_MOTOR_PORT = -1;
+    public static final int ACQUIRER_RIGHT_MOTOR_PORT = -1;
 
-    /***************************************************************************
-     * Encoder Ports
+    /****************************************************************************
+     * Solenoid Ports
      *************************************************************************/
-    /*public static final int LEFT_ENCODER_CHANNEL_A = 0;
-    public static final int LEFT_ENCODER_CHANNEL_B = 1;
-
-    public static final int RIGHT_ENCODER_CHANNEL_A = 2;
-    public static final int RIGHT_ENCODER_CHANNEL_B = 3;
-    */
+    public static final int GEAR_SHIFT_CHANNEL = -1;
+    public static final int LIFT_BRAKE_SOLENOID_CHANNEL = -2;
+  
+    /***************************************************************************
+     * Lift Motor Ports
+     *************************************************************************/
+    public static final int LEFT_LIFT_MOTOR_PORT = -1;
+    public static final int RIGHT_LIFT_MOTOR_PORT = -1; 
+    
+    /***************************************************************************
+     * Lift Constants
+     *************************************************************************/
+    public static final double LIFT_RAW_MULTIPLIER = -1;
 
     /****************************************************************************
      * Solenoid Ports
@@ -58,6 +62,7 @@ public final class RobotMap {
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     public static final int GRABBER_SOLENOID_PORT = -1;
+
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
@@ -79,5 +84,7 @@ public final class RobotMap {
     
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE = DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
     public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DIO_ENCODER_PULSES_PER_REVOLUTION;
-            
+    
+    public static final int ACQUIRER_SOLENOID_PORT = -1;
+
 }

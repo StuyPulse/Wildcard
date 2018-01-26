@@ -28,6 +28,9 @@ public class DrivetrainPiotrDriveCommand extends Command {
 
         double rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
+        rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
+        leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
+
 
         double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX();
 
