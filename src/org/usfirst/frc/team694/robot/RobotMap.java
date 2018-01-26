@@ -31,7 +31,7 @@ public interface RobotMap {
     int RIGHT_MIDDLE_MOTOR_PORT = 5;
     int RIGHT_REAR_MOTOR_PORT = 6;
     /***************************************************************************
-     * Encoder Ports
+     *Drivetrain Encoder Ports
      */
     
     int LEFT_ENCODER_CHANNEL_A = 0;
@@ -39,11 +39,20 @@ public interface RobotMap {
     
     int RIGHT_ENCODER_CHANNEL_A = 2;
     int RIGHT_ENCODER_CHANNEL_B = 3;
+    
     /****************************************************************************
      * Solenoid Ports
      */
     int GEAR_SHIFT_CHANNEL = -1;
     int LIFT_BRAKE_CHANNEL = -2;
-    
+    /***************************************************************************
+     * Lift Motor Ports
+     */
+    int LEFT_LIFT_MOTOR_PORT = -1;
+    int RIGHT_LIFT_MOTOR_PORT = -1; 
+    /***************************************************************************
+     * Lift Constants
+     */
+    double LIFT_RAW_MULTIPLIER = -1;
 }
 
