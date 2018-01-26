@@ -35,9 +35,11 @@ public class DrivetrainMoveToLineCommand extends Command {
         if (Robot.drivetrain.isOnLine(speedMode) && (!isReached)){
             linesCrossed++;
             isReached = (linesToBeCrossed == linesCrossed);
-            leftIsAligned = (Robot.drivetrain.leftIsOnLine(speedMode))? 1 : 0;
-            rightIsAligned = (Robot.drivetrain.rightIsOnLine(speedMode))? 1 : 0;
-            speedMode = 0;//slow down when aligning to tape
+            if (isReached) {
+                leftIsAligned = (Robot.drivetrain.leftIsOnLine(speedMode))? 1 : 0;
+                rightIsAligned = (Robot.drivetrain.rightIsOnLine(speedMode))? 1 : 0;
+                speedMode = 0;//slow down when aligning to tape   
+            }
         }else{
             leftIsAligned = (Robot.drivetrain.leftIsOnLine(speedMode))? 1 : 0;
             rightIsAligned = (Robot.drivetrain.rightIsOnLine(speedMode))? 1 : 0;
