@@ -7,7 +7,7 @@ package org.usfirst.frc.team694.robot;
  */
 public interface FieldMap {
 
-    /* Given FRC Manual Measurements*/
+/* Given FRC Manual Measurements*/
     
     public static final int DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE = 120;
     public static final int DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH = 168;
