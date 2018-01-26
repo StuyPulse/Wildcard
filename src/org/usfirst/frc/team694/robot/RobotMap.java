@@ -20,7 +20,6 @@ public final class RobotMap {
      *************************************************************************/
     public static final int DRIVER_GAMEPAD_PORT = 1;
     public static final int OPERATOR_GAMEPAD_PORT = 1;
-
     /**************************************************************************
      * Drivetrain motor ports
      *************************************************************************/
@@ -35,10 +34,8 @@ public final class RobotMap {
     /**************************************************************************
      * Acquirer motor ports
      *************************************************************************/
-    public static final int ACQUIRER_FRONT_LEFT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_FRONT_RIGHT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_BACK_LEFT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_BACK_RIGHT_MOTOR_PORT = -1;
+    public static final int ACQUIRER_LEFT_MOTOR_PORT = -1;
+    public static final int ACQUIRER_RIGHT_MOTOR_PORT = -1;
 
     /****************************************************************************
      * Solenoid Ports
@@ -65,5 +62,6 @@ public final class RobotMap {
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     public static final int GRABBER_SOLENOID_PORT = -1;
-
+    
+    public static final int ACQUIRER_SOLENOID_PORT = -1;
 }
