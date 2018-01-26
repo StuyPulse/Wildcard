@@ -38,7 +38,7 @@ public class Acquirer extends Subsystem {
         acquirerMotors.set(1);
     }
     
-    public void eject() {
+    public void deacquire() {
         acquirerMotors.set(-1);
     }
     

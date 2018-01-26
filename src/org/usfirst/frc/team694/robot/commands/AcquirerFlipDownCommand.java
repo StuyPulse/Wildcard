@@ -1,13 +1,15 @@
 package org.usfirst.frc.team694.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team694.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
  *
  */
-public class AcquirerFlipdownCommand extends Command {
+public class AcquirerFlipDownCommand extends InstantCommand {
 
-    public AcquirerFlipdownCommand() {
+    public AcquirerFlipDownCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.acquirer);
@@ -20,11 +22,6 @@ public class AcquirerFlipdownCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
     }
 
     // Called once after isFinished returns true

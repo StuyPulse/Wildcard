@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AcquirerEjectCommand extends Command {
+public class AcquirerDeacquireCommand extends Command {
 
-    public AcquirerEjectCommand() {
+    public AcquirerDeacquireCommand() {
         requires(Robot.acquirer);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,7 +21,7 @@ public class AcquirerEjectCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.acquirer.eject();
+        Robot.acquirer.deacquire();
     }
 
     // Make this return true when this Command no longer needs to run execute()
