@@ -16,6 +16,8 @@ public interface FieldMap {
     public static final int LOWEST_PLATE_HEIGHT_OF_SCALE = 48;
     public static final int HEIGHT_FROM_CARPET_TO_RUNG = 84;
     public static final double HEIGHT_OF_SWITCH_FENCE = 18.75;
+    
+    /*null territory --> 6 ft, 3ft*/
 
     /* Calculated Measurement Values */
     
@@ -24,5 +26,5 @@ public interface FieldMap {
      * 7ft + 10ft = 17ft = 204in. */
     public static final int DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE = 204;
     
-    
+         
 }
