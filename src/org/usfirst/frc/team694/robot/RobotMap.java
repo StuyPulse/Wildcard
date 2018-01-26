@@ -57,5 +57,15 @@ public final class RobotMap {
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     public static final int GRABBER_SOLENOID_PORT = -1;
-
+    /*****************************************************************************
+     * Analog Ports
+     ****************************************************************************/
+    public static final int DRVETRAIN_LINE_SENSOR_LEFT_PORT = -1;
+    public static final int DRVETRAIN_LINE_SENSOR_RIGHT_PORT = -1;
+    
+    /******************************************************************************
+     * Line Sensor Constants
+     *****************************************************************************/
+    public static final int DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME = 3;
+            
 }

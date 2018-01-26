@@ -11,6 +11,7 @@ import org.usfirst.frc.team694.robot.RobotMap;
 
 import org.usfirst.frc.team694.robot.OI;
 import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
+import org.usfirst.frc.team694.util.LineSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -39,6 +40,9 @@ public class Drivetrain extends Subsystem {
 
     private Encoder leftEncoder;
     private Encoder rightEncoder;
+    
+    private LineSensor leftLineSensor;
+    private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
 
@@ -66,6 +70,9 @@ public class Drivetrain extends Subsystem {
         leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
         rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
 
+        leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
@@ -127,7 +134,19 @@ public class Drivetrain extends Subsystem {
         boolean m = !(gearShift.get());
         gearShift.set(m);
     }
-
+    public void resetLineSensors(){
+        leftLineSensor.resetAmbient();
+        rightLineSensor.resetAmbient();
+    }
+    public boolean isOnLine(int mode){
+        return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
+    }
+    public boolean rightIsOnLine(int mode){
+        return rightLineSensor.basicFind(mode);
+    }
+    public boolean leftIsOnLine(int mode){
+        return leftLineSensor.basicFind(mode);
+    }
     /*TODO: Should we remove?
     public int leftEncoderRaw() {
     return leftEncoder.getRaw();
