@@ -43,11 +43,12 @@ public final class RobotMap {
     /***************************************************************************
      * Encoder Ports
      *************************************************************************/
-    public static final int LEFT_ENCODER_CHANNEL_A = 0;
+    /*public static final int LEFT_ENCODER_CHANNEL_A = 0;
     public static final int LEFT_ENCODER_CHANNEL_B = 1;
 
     public static final int RIGHT_ENCODER_CHANNEL_A = 2;
     public static final int RIGHT_ENCODER_CHANNEL_B = 3;
+    */
 
     /****************************************************************************
      * Solenoid Ports
@@ -69,11 +70,13 @@ public final class RobotMap {
     public static final int DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME = 3;
     public static final int DIO_ENCODER_PULSES_PER_REVOLUTION = 360;
 
-    public static final double DRIVETRAIN_WHEEL_DIAMETER = 8;
+    public static final double DRIVETRAIN_WHEEL_DIAMETER = 6.0;
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
+    public static final double DRIVETRAIN_ENCODERS_INCHES_PER_PULSE = 1 / (512 / 3);
     public static final double DRIVETRAIN_ENCODERS_FACTOR = 4.0;
     public static final double DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION = Math.PI * DRIVETRAIN_WHEEL_DIAMETER;
-
+    public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_PULSE;
+    
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE = DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
     public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DIO_ENCODER_PULSES_PER_REVOLUTION;
             
