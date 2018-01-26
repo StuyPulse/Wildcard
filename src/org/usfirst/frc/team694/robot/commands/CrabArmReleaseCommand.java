@@ -11,7 +11,7 @@ public class CrabArmReleaseCommand extends InstantCommand {
 
     public CrabArmReleaseCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.crabArm);
     }
 
     // Called just before this Command runs the first time
