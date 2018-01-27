@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class CrabArmDeacquireCommand extends Command {
 
     public CrabArmDeacquireCommand() {
+        requires(Robot.crabArm);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
