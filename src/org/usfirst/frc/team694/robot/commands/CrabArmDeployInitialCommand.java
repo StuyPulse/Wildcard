@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class CrabArmDeployCommand extends InstantCommand {
+public class CrabArmDeployInitialCommand extends InstantCommand {
 
-    public CrabArmDeployCommand() {
+    public CrabArmDeployInitialCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,7 +20,7 @@ public class CrabArmDeployCommand extends InstantCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.crabArm.deploy();
+        Robot.crabArm.deployInitial();
     }
 
     // Called once after isFinished returns true

@@ -12,12 +12,15 @@ public class AcquirerFlipDownCommand extends InstantCommand {
     public AcquirerFlipDownCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(Robot.crabArm);
         requires(Robot.acquirer);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.acquirer.flipDown();
+        Robot.crabArm.retractPush();
+        
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -48,5 +49,6 @@ public class Acquirer extends Subsystem {
 
     public void flipDown() {
         acquirerSolenoid.set(false);
+        Timer.delay(0.5);
     }
 }
