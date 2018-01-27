@@ -1,16 +1,15 @@
-package org.usfirst.frc.team694.robot.commands;
+package org.usfirst.frc.team694.robot.commands.auton;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class MobilityAutonUsingEncodersCommand extends CommandGroup {
+public class DrivetrainMobilityAutonCommand extends CommandGroup {
 
-    public MobilityAutonUsingEncodersCommand() {
+    public DrivetrainMobilityAutonCommand() {
         // Add Commands here:
-        addSequential(new DrivetrainMoveInchesEncoderCommand(0.5, 168));
-        // e.g. addSequential(new Command1());
+        addSequential(new DrivetrainMoveToLineCommand(3,60.0,0.25));
         //      addSequential(new Command2());
         // these will run in order.
 
