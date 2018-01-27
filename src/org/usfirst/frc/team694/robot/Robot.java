@@ -31,10 +31,8 @@ public class Robot extends TimedRobot {
     public static Acquirer acquirer;
     public static CrabArm crabArm;
     public static Grabber grabber; 
-
-    public static OI oi;
-    
     public static Lift lift;
+    public static OI oi;
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
@@ -49,8 +47,8 @@ public class Robot extends TimedRobot {
         acquirer = new Acquirer();
         crabArm = new CrabArm();
         grabber = new Grabber();
-        oi = new OI();
         lift = new Lift();
+        oi = new OI();
     }
 
     /**
