@@ -14,6 +14,7 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -24,11 +25,11 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class Drivetrain extends Subsystem {
-    private WPI_TalonSRX leftTopMotor;
-    private WPI_TalonSRX leftMiddleMotor;
+    private WPI_VictorSPX leftTopMotor;
+    private WPI_VictorSPX leftMiddleMotor;
     private WPI_TalonSRX leftBottomMotor;
-    private WPI_TalonSRX rightTopMotor;
-    private WPI_TalonSRX rightMiddleMotor;
+    private WPI_VictorSPX rightTopMotor;
+    private WPI_VictorSPX rightMiddleMotor;
     private WPI_TalonSRX rightBottomMotor;
 
     private DifferentialDrive differentialDrive;
@@ -43,21 +44,18 @@ public class Drivetrain extends Subsystem {
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
-        leftTopMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
-        leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
+        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_FRONT_MOTOR_PORT);
+        leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
         leftMiddleMotor.follow(leftBottomMotor);
-        leftBottomMotor.follow(leftBottomMotor);
 
-        rightTopMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
-        rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
+        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
+        rightMiddleMotor = new WPI_VictorSPX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
         
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
-        
-        rightMiddleMotor.follow(rightBottomMotor);
         rightMiddleMotor.follow(rightBottomMotor);
 
         leftTopMotor.setNeutralMode(NeutralMode.Coast);
