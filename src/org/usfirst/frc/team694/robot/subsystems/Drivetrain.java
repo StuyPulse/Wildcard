@@ -72,7 +72,7 @@ public class Drivetrain extends Subsystem {
 
         leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
         rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
-        
+
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
