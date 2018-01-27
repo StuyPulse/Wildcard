@@ -81,5 +81,21 @@ public final class RobotMap {
     public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DIO_ENCODER_PULSES_PER_REVOLUTION;
     
     public static final int ACQUIRER_SOLENOID_PORT = -1;
+    
+    /******************************************************************************
+     * IRSensor Constants
+     *****************************************************************************/
+    /******************************************************************************
+     * Note that these constants were copied from the RobotMap.java from Rafael. 
+     * These require further testing. 
+     *****************************************************************************/ 
+    
+    public static final int IR_SENSOR_PORT = 0;
+    public static final double IR_SENSOR_THRESHOLD = 1.5;
+    public static final double IR_TIME_IN_MECHANISM_THRESHOLD = 1.0;
 
+    public static final double EQUATION_FACTOR = 12.23368994;
+    public static final double EQUATION_EXPONENT = -0.9779601588;
+    public static final double CONVERSION_FACTOR_CM_TO_INCHES = 0.393701;
+   
 }
