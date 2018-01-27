@@ -94,11 +94,11 @@ public class Lift extends Subsystem {
     }
     
     public double getLeftLiftEncoderDistance() {
-        return leftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
+        return leftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
     
     public double getRightLiftEncoderDistance() {
-        return rightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
+        return rightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
     
     public double getMaxLiftEncoderDistance() {
