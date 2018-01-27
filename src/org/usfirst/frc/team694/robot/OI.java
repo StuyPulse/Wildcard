@@ -8,6 +8,7 @@
 package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.util.Gamepad;
+import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -18,8 +19,8 @@ public class OI {
     public Gamepad operatorGamepad;
 
     public OI() {
-         driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT);
-         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT);
+         driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
+         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
     }
 
 }
