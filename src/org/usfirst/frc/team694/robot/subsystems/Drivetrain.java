@@ -11,10 +11,13 @@ import org.usfirst.frc.team694.robot.RobotMap;
 
 import org.usfirst.frc.team694.robot.OI;
 import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
+import org.usfirst.frc.team694.util.LineSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.ADXL345_SPI.Axes;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -36,11 +39,14 @@ public class Drivetrain extends Subsystem {
     private SpeedControllerGroup rightDrivetrainMotorGroup;
 
     private DifferentialDrive differentialDrive;
-
-    private Encoder leftEncoder;
-    private Encoder rightEncoder;
+    
+    private LineSensor leftLineSensor;
+    private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
+    
+    private ADXRS450_Gyro gyro;
+    
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
@@ -62,29 +68,32 @@ public class Drivetrain extends Subsystem {
         rightFrontMotor.setNeutralMode(NeutralMode.Coast);
         rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
         rightRearMotor.setNeutralMode(NeutralMode.Coast);
+        
+        leftRearMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        rightRearMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
-        rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
-
+        leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-        //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
-        //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
-
+        
+        gyro = new ADXRS450_Gyro();
+        
         differentialDrive = new DifferentialDrive(leftDrivetrainMotorGroup, rightDrivetrainMotorGroup);
 
     }
 
     public void resetEncoders() {
-        leftEncoder.reset();
-        rightEncoder.reset();
+        leftRearMotor.setSelectedSensorPosition(0.0, 0, 0);
+        rightRearMotor.setSelectedSensorPosition(0.0, 0, 0);
     }
 
     public double getLeftSpeed() {
-        return leftEncoder.getRate();
+        return leftRearMotor.getSelectedSensorVelocity();
     }
 
     public double getRightSpeed() {
-        return rightEncoder.getRate();
+        return rightRearMotor.getSelectedSensorVelocity();
     }
 
     public double getSpeed() {
@@ -96,11 +105,19 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getLeftEncoderDistance() {
-        return leftEncoder.getDistance();
+        return leftRearMotor.getSelectedSensorPosition()  * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
 
     public double getRightEncoderDistance() {
-        return rightEncoder.getDistance();
+        return rightRearMotor.getSelectedSensorPosition() * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
+    }
+    
+    public double getLeftRawEncoderDistance() {
+        return leftRearMotor.getSelectedSensorPosition();;
+    }
+    
+    public double getRightRawEncoderDistance() {
+        return rightRearMotor.getSelectedSensorPosition();;
     }
 
     public void tankDrive(double left, double right) {
@@ -127,7 +144,22 @@ public class Drivetrain extends Subsystem {
         boolean m = !(gearShift.get());
         gearShift.set(m);
     }
-
+    public void resetLineSensors(){
+        leftLineSensor.resetAmbient();
+        rightLineSensor.resetAmbient();
+    }
+    public double getGyroAngle(){
+        return gyro.getAngle();
+    }
+    public boolean isOnLine(int mode){
+        return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
+    }
+    public boolean rightIsOnLine(int mode){
+        return rightLineSensor.basicFind(mode);
+    }
+    public boolean leftIsOnLine(int mode){
+        return leftLineSensor.basicFind(mode);
+    }
     /*TODO: Should we remove?
     public int leftEncoderRaw() {
     return leftEncoder.getRaw();
@@ -144,6 +176,11 @@ public class Drivetrain extends Subsystem {
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
         setDefaultCommand(new DrivetrainPiotrDriveCommand());
+    }
+
+    public void resetGyro() {
+        // TODO Auto-generated method stub
+        gyro.reset();
     }
 
 }
