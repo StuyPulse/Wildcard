@@ -49,7 +49,7 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Constants
      *************************************************************************/
-    public static final double LIFT_RAW_MULTIPLIER = -1;
+    public static final double LIFT_ENCODER_RAW_MULTIPLIER = -1;
 
     /****************************************************************************
      * Solenoid Ports
