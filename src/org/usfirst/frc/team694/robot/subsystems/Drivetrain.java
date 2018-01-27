@@ -63,9 +63,6 @@ public class Drivetrain extends Subsystem {
         rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
         rightRearMotor.setNeutralMode(NeutralMode.Coast);
 
-        leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_CHANNEL_A, RobotMap.LEFT_ENCODER_CHANNEL_B);
-        rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_CHANNEL_A, RobotMap.RIGHT_ENCODER_CHANNEL_B);
-
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
