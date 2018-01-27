@@ -17,7 +17,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -46,7 +45,7 @@ public class Drivetrain extends Subsystem {
         //TODO: Remove magic numbers: Add in RobotMap
         leftTopMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
         leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
-        leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_REAR_MOTOR_PORT);
+        leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
         leftMiddleMotor.follow(leftBottomMotor);
         leftBottomMotor.follow(leftBottomMotor);
 
@@ -85,11 +84,6 @@ public class Drivetrain extends Subsystem {
         
     }
 
-    public void resetEncoders() {
-        leftBottomMotor.setSelectedSensorPosition(0, 0, 0);
-        rightBottomMotor.setSelectedSensorPosition(0, 0, 0);
-    }
-
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }
@@ -120,6 +114,11 @@ public class Drivetrain extends Subsystem {
     
     public double getRightRawEncoderDistance() {
         return rightBottomMotor.getSelectedSensorPosition(0);
+    }
+
+    public void resetEncoders() {
+        leftBottomMotor.setSelectedSensorPosition(0, 0, 0);
+        rightBottomMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
     public void tankDrive(double left, double right) {
@@ -162,18 +161,6 @@ public class Drivetrain extends Subsystem {
     public boolean leftIsOnLine(int mode){
         return leftLineSensor.basicFind(mode);
     }
-    /*TODO: Should we remove?
-    public int leftEncoderRaw() {
-    return leftEncoder.getRaw();
-    }
-
-    public int rightEncoderRaw() {
-    return rightEncoder.getRaw();
-    }
-
-    public int encoderRaw() {
-    return Math.abs(Math.max(rightEncoderRaw(), leftEncoderRaw()));
-    }*/
 
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
