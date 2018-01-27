@@ -17,9 +17,15 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.kauailabs.navx.frc.AHRS;
+
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
@@ -40,6 +46,8 @@ public class Drivetrain extends Subsystem {
     private Solenoid gearShift;
     
     private ADXRS450_Gyro gyro;
+
+    public static AHRS accelerometer;
     
 
     public Drivetrain() {
@@ -75,6 +83,9 @@ public class Drivetrain extends Subsystem {
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
+
+        // Not sure about this next line: (what is kMXP?)
+        accelerometer = new AHRS(SPI.Port.kMXP);
 
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
         
@@ -173,5 +184,36 @@ public class Drivetrain extends Subsystem {
         // TODO Auto-generated method stub
         gyro.reset();
     }
+    
+
+    
+    public void resetAccelerometer() {
+        accelerometer.reset();
+    }
+    
+    public double getXAccel() {
+        return accelerometer.getWorldLinearAccelX();
+    }
+    
+    public double getYAccel() {
+        return accelerometer.getWorldLinearAccelY();
+    }
+    
+    public double getZAccel() {
+        return accelerometer.getWorldLinearAccelZ();
+    }
+    
+    public double getZRotation() {
+        return accelerometer.getYaw();
+    }
+    
+    public boolean testForBump() {
+        return getZAccel() > -1;
+    }
+    
+    public boolean isCalibrating() {
+        return accelerometer.isCalibrating();
+    }
+
 
 }
