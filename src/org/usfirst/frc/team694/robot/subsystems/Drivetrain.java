@@ -47,12 +47,14 @@ public class Drivetrain extends Subsystem {
         leftFrontMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
         leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftRearMotor = new WPI_TalonSRX(RobotMap.LEFT_REAR_MOTOR_PORT);
-        leftDrivetrainMotorGroup = new SpeedControllerGroup(leftFrontMotor, leftMiddleMotor, leftRearMotor);
+        leftMiddleMotor.follow(leftFrontMotor);
+        leftRearMotor.follow(leftFrontMotor);
 
         rightFrontMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
         rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
         rightRearMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
-        rightDrivetrainMotorGroup = new SpeedControllerGroup(rightFrontMotor, rightMiddleMotor, rightRearMotor);
+        rightMiddleMotor.follow(rightFrontMotor);
+        rightMiddleMotor.follow(rightFrontMotor);
 
         leftDrivetrainMotorGroup.setInverted(true);
 
@@ -70,7 +72,7 @@ public class Drivetrain extends Subsystem {
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
-        differentialDrive = new DifferentialDrive(leftDrivetrainMotorGroup, rightDrivetrainMotorGroup);
+        differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
 
     }
 
@@ -132,11 +134,11 @@ public class Drivetrain extends Subsystem {
     public int leftEncoderRaw() {
     return leftEncoder.getRaw();
     }
-    
+
     public int rightEncoderRaw() {
     return rightEncoder.getRaw();
     }
-    
+
     public int encoderRaw() {
     return Math.abs(Math.max(rightEncoderRaw(), leftEncoderRaw()));
     }*/
