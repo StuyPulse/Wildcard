@@ -2,13 +2,14 @@ package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,17 +18,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lift extends Subsystem {
 
     private WPI_TalonSRX leftLiftMotor;
-    private WPI_TalonSRX rightLiftMotor;
+    private WPI_TalonSRX rightLiftMotor; 
+    
+    private Solenoid liftSolenoid; 
 
-    private SpeedControllerGroup liftMotors;
-
-    private Solenoid liftSolenoid;
-
-    private DigitalInput topLimitSwitch;
-    private DigitalInput bottomLimitSwitch;
-
-    private static boolean brakeOn;
-
+    private boolean brakeOn; 
+  
     public Lift() {
 
         leftLiftMotor = new WPI_TalonSRX(RobotMap.LEFT_LIFT_MOTOR_PORT);
@@ -38,12 +34,20 @@ public class Lift extends Subsystem {
 
         rightLiftMotor.setInverted(true);
 
-        liftMotors = new SpeedControllerGroup(leftLiftMotor, rightLiftMotor);
-
+        rightLiftMotor.follow(leftLiftMotor);
+  
         leftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
+        
+        // Configures the limit switches (forward is top, reverse is bottom)
+        leftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+        leftLiftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+        
+        // Line below resets encoders when the bottom limit switch is activated
+        leftLiftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
+        
     }
 
     public void initDefaultCommand() {
@@ -73,23 +77,23 @@ public class Lift extends Subsystem {
     }
 
     public void goUp() {
-        liftMotors.set(1);
+        leftLiftMotor.set(1);
     }
 
     public void goDown() {
-        liftMotors.set(-1);
+        leftLiftMotor.set(-1);
     }
 
     public void stop() {
-        liftMotors.set(0);
+        leftLiftMotor.set(0);
     }
 
     public boolean isAtBottom() {
-        return bottomLimitSwitch.get();
+        return leftLiftMotor.getSensorCollection().isRevLimitSwitchClosed();
     }
 
-    public boolean isAtTop() {
-        return topLimitSwitch.get();
+    public boolean isAtTop() { 
+       return leftLiftMotor.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
     public double getLeftLiftEncoderDistance() {
@@ -103,5 +107,4 @@ public class Lift extends Subsystem {
     public double getMaxLiftEncoderDistance() {
         return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());
     }
-
 }
