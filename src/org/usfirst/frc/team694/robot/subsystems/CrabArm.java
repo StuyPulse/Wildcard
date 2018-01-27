@@ -25,7 +25,7 @@ public class CrabArm extends Subsystem {
         crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
 
-    public void release() {
+    public void deploy() {
         crabArmSolenoid.set(true);
     }
 
