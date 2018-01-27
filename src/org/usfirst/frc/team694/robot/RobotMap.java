@@ -90,8 +90,9 @@ public final class RobotMap {
      * These require further testing. 
      *****************************************************************************/ 
     
-    public static final int IR_SENSOR_PORT = 0;
-    public static final double IR_SENSOR_THRESHOLD = 1.5;
+    public static final int FIRST_IR_SENSOR_PORT = -1;
+    public static final int SECOND_IR_SENSOR_PORT = -1;
+    public static final double IR_SENSOR_THRESHOLD = 1.5; //TODO: Test to see if this is accurate. Should result in boolean returning true only when a cube is detected there
     public static final double IR_TIME_IN_MECHANISM_THRESHOLD = 1.0;
 
     public static final double EQUATION_FACTOR = 12.23368994;

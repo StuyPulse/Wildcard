@@ -11,7 +11,8 @@ public class IRSensor {
     //Resulted from forming an equation with graph using many coordinates and calculator
     //Power Regression used
 
-    private AnalogInput distanceSensor;
+    private AnalogInput firstSensor;
+    private AnalogInput secondSensor;
 
     // Create instance of a timer that we can use to keep track of how long the
     // gear is kept in the position for.
@@ -20,25 +21,26 @@ public class IRSensor {
     private boolean isTimerRunning;
 
     public IRSensor() {
-        distanceSensor = new AnalogInput(RobotMap.IR_SENSOR_PORT);
+        firstSensor = new AnalogInput(RobotMap.FIRST_IR_SENSOR_PORT);
+        secondSensor = new AnalogInput(RobotMap.SECOND_IR_SENSOR_PORT);
         timeSinceEntry = new Timer();
         isTimerRunning = false;
     }
 
-    public double getDistance() {
-        return RobotMap.CONVERSION_FACTOR_CM_TO_INCHES
-                * (RobotMap.EQUATION_FACTOR * Math.pow(getVoltage(), RobotMap.EQUATION_EXPONENT));
-        // Link to Graph of Equation:
-        // http://image.dfrobot.com/image/data/SEN0143/GP2Y0A41SK%20datasheet.pdf (pg. 4)
-        // This method is an approximation of that graph.
+    public double getFirstSensorVoltage() {
+        return firstSensor.getVoltage();
     }
 
-    public double getVoltage() {
-        return distanceSensor.getVoltage();
+    public static boolean isCubeDetected() {
+        return getFirstSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", RobotMap.IR_SENSOR_THRESHOLD);
     }
-
-    public boolean isCubeDetected() {
-        return getVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", RobotMap.IR_SENSOR_THRESHOLD);
+    
+    public double getSecondSensorVoltage() {
+        return secondSensor.getVoltage();
+    }
+    
+    public static boolean isCubeUpright() {
+        return getSecondSensorVoltage() > RobotMap.IR_SENSOR_THRESHOLD;
     }
 
     // The use of LEDs for the robot is currently unclear so this needs further detail in the future
