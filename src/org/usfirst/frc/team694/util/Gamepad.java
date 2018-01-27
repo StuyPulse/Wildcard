@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * the PS4 Wireless controller (the PS4 also comes with an extra button and 2
  * extra axis for the bumpers)
  *
- * @author wangmeister Extra contributors:
- * @author Angelina Ballerina, Imperatoras, 3mi1y, and Renee
+ * @author wangmeister
  */
 
 public class Gamepad extends Joystick {

@@ -15,35 +15,34 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Lift extends Subsystem {
-    
+
     private WPI_TalonSRX leftLiftMotor;
     private WPI_TalonSRX rightLiftMotor;
-    
-    private SpeedControllerGroup liftMotors; 
-    
-    private Solenoid liftSolenoid; 
+
+    private SpeedControllerGroup liftMotors;
+
+    private Solenoid liftSolenoid;
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
 
-    private static boolean brakeOn; 
+    private static boolean brakeOn;
 
     public Lift() {
-        
+
         leftLiftMotor = new WPI_TalonSRX(RobotMap.LEFT_LIFT_MOTOR_PORT);
-        rightLiftMotor= new WPI_TalonSRX(RobotMap.RIGHT_LIFT_MOTOR_PORT);
-        
+        rightLiftMotor = new WPI_TalonSRX(RobotMap.RIGHT_LIFT_MOTOR_PORT);
 
         leftLiftMotor.setNeutralMode(NeutralMode.Brake);
         rightLiftMotor.setNeutralMode(NeutralMode.Brake);
-        
+
         rightLiftMotor.setInverted(true);
 
         liftMotors = new SpeedControllerGroup(leftLiftMotor, rightLiftMotor);
-        
+
         leftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        
+
         liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
     }
 
@@ -56,15 +55,15 @@ public class Lift extends Subsystem {
     }
 
     public void setBrakeOn() {
-        brakeOn = true; 
+        brakeOn = true;
         liftSolenoid.set(brakeOn);
     }
 
     public void setBrakeOff() {
-        brakeOn = false; 
+        brakeOn = false;
         liftSolenoid.set(brakeOn);
     }
-    
+
     public void toggleBrake() {
         if (brakeOn) {
             setBrakeOff();
@@ -72,37 +71,37 @@ public class Lift extends Subsystem {
             setBrakeOn();
         }
     }
-    
+
     public void goUp() {
         liftMotors.set(1);
     }
-    
+
     public void goDown() {
         liftMotors.set(-1);
     }
-    
+
     public void stop() {
         liftMotors.set(0);
     }
-  
+
     public boolean isAtBottom() {
         return bottomLimitSwitch.get();
     }
 
-    public boolean isAtTop() { 
-       return topLimitSwitch.get();
+    public boolean isAtTop() {
+        return topLimitSwitch.get();
     }
-    
+
     public double getLeftLiftEncoderDistance() {
         return leftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
     }
-    
+
     public double getRightLiftEncoderDistance() {
         return rightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
     }
-    
+
     public double getMaxLiftEncoderDistance() {
-        return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());  
+        return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());
     }
-    
+
 }

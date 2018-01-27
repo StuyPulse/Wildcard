@@ -17,7 +17,7 @@ public class Acquirer extends Subsystem {
     public WPI_VictorSPX rightAcquirerMotor;
     public Solenoid acquirerSolenoid;
     public SpeedControllerGroup acquirerMotors;
-        
+
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -25,7 +25,7 @@ public class Acquirer extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-    
+
     public Acquirer() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
@@ -33,21 +33,20 @@ public class Acquirer extends Subsystem {
         leftAcquirerMotor.setInverted(true);
         acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
     }
-    
+
     public void acquire() {
         acquirerMotors.set(1);
     }
-    
+
     public void deacquire() {
         acquirerMotors.set(-1);
     }
-    
+
     public void flipUp() {
         acquirerSolenoid.set(true);
     }
-    
+
     public void flipDown() {
         acquirerSolenoid.set(false);
     }
 }
-
