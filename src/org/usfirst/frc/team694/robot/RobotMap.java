@@ -92,7 +92,9 @@ public final class RobotMap {
     
     public static final int FIRST_IR_SENSOR_PORT = -1;
     public static final int SECOND_IR_SENSOR_PORT = -1;
-    public static final double IR_SENSOR_THRESHOLD = 1.5; //TODO: Test to see if this is accurate. Should result in boolean returning true only when a cube is detected there
+    //TODO: Test the IR Sensor Threshold value. Should correspond with how far away the cube is from the IR sensor.
+    //The current value is accurate for when the cube is about 4 inches away from the IR sensor.
+    public static final double IR_SENSOR_THRESHOLD = 1;
     public static final double IR_TIME_IN_MECHANISM_THRESHOLD = 1.0;
 
     public static final double EQUATION_FACTOR = 12.23368994;
