@@ -183,7 +183,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_X:
 				return getRawAxis(2);
 			case PS4:
-			    return getRawAxis(3);
+			    return (getRawAxis(3) + 1) / 2;
 			default:
 				return 0;
 		}
@@ -228,7 +228,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_X:
 				return getRawAxis(3);
 			case PS4:
-			    return getRawAxis(4);
+			    return (getRawAxis(4) + 1) / 2;
 			default:
 				return 0;
 		}
