@@ -11,8 +11,8 @@ public class IRSensor {
     //Resulted from forming an equation with graph using many coordinates and calculator
     //Power Regression used
 
-    private AnalogInput firstSensor;
-    private AnalogInput secondSensor;
+    private static AnalogInput firstSensor;
+    private static AnalogInput secondSensor;
 
     // Create instance of a timer that we can use to keep track of how long the
     // gear is kept in the position for.
@@ -27,7 +27,7 @@ public class IRSensor {
         isTimerRunning = false;
     }
 
-    public double getFirstSensorVoltage() {
+    public static double getFirstSensorVoltage() {
         return firstSensor.getVoltage();
     }
 
@@ -35,7 +35,7 @@ public class IRSensor {
         return getFirstSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", RobotMap.IR_SENSOR_THRESHOLD);
     }
     
-    public double getSecondSensorVoltage() {
+    public static double getSecondSensorVoltage() {
         return secondSensor.getVoltage();
     }
     
