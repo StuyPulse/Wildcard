@@ -13,6 +13,7 @@ import org.usfirst.frc.team694.robot.OI;
 import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
 import org.usfirst.frc.team694.util.LineSensor;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -84,16 +85,16 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetEncoders() {
-        leftRearMotor.setSelectedSensorPosition(0.0, 0, 0);
-        rightRearMotor.setSelectedSensorPosition(0.0, 0, 0);
+        leftRearMotor.setSelectedSensorPosition(0, 0, 0);
+        rightRearMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
     public double getLeftSpeed() {
-        return leftRearMotor.getSelectedSensorVelocity();
+        return leftRearMotor.getSelectedSensorVelocity(0);
     }
 
     public double getRightSpeed() {
-        return rightRearMotor.getSelectedSensorVelocity();
+        return rightRearMotor.getSelectedSensorVelocity(0);
     }
 
     public double getSpeed() {
@@ -105,19 +106,19 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getLeftEncoderDistance() {
-        return leftRearMotor.getSelectedSensorPosition()  * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
+        return leftRearMotor.getSelectedSensorPosition(0)  * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
 
     public double getRightEncoderDistance() {
-        return rightRearMotor.getSelectedSensorPosition() * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
+        return rightRearMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
     
     public double getLeftRawEncoderDistance() {
-        return leftRearMotor.getSelectedSensorPosition();;
+        return leftRearMotor.getSelectedSensorPosition(0);
     }
     
     public double getRightRawEncoderDistance() {
-        return rightRearMotor.getSelectedSensorPosition();;
+        return rightRearMotor.getSelectedSensorPosition(0);
     }
 
     public void tankDrive(double left, double right) {
