@@ -91,8 +91,8 @@ public final class RobotMap {
      *****************************************************************************/ 
     
     public static final int IR_SENSOR_PORT = -1;
-    public static final int BOTTOM_IR_SENSOR_PORT = -1;
     //TODO: Test the IR Sensor Threshold value. Should correspond with how far away the cube is from the IR sensor.
+    //Use SmartDashboard, track the IR Sensor Voltage value.
     //The current value is accurate for when the cube is about 4 inches away from the IR sensor.
     public static final double IR_SENSOR_THRESHOLD = 1;
     public static final double IR_TIME_IN_MECHANISM_THRESHOLD = 1.0;
