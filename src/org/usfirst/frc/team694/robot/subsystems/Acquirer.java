@@ -2,6 +2,7 @@ package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -31,6 +32,8 @@ public class Acquirer extends Subsystem {
     public Acquirer() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
+        leftAcquirerMotor.setNeutralMode(NeutralMode.Coast);
+        rightAcquirerMotor.setNeutralMode(NeutralMode.Coast);
         acquirerFlipSolenoid = new Solenoid(RobotMap.ACQUIRER_FLIP_SOLENOID_PORT);
         acquirerHoldSolenoid = new Solenoid(RobotMap.ACQUIRER_HOLD_SOLENOID_PORT);
         acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
