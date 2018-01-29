@@ -16,7 +16,8 @@ public class Acquirer extends Subsystem {
 
     public WPI_VictorSPX leftAcquirerMotor;
     public WPI_VictorSPX rightAcquirerMotor;
-    public Solenoid acquirerSolenoid;
+    public Solenoid acquirerFlipSolenoid;
+    public Solenoid acquirerHoldSolenoid; 
     public SpeedControllerGroup acquirerMotors;
 
     // Put methods for controlling this subsystem
@@ -30,8 +31,8 @@ public class Acquirer extends Subsystem {
     public Acquirer() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
-        acquirerSolenoid = new Solenoid(RobotMap.ACQUIRER_SOLENOID_PORT);
-        leftAcquirerMotor.setInverted(true);
+        acquirerFlipSolenoid = new Solenoid(RobotMap.ACQUIRER_FLIP_SOLENOID_PORT);
+        acquirerHoldSolenoid = new Solenoid(RobotMap.ACQUIRER_HOLD_SOLENOID_PORT);
         acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
     }
 
@@ -44,11 +45,19 @@ public class Acquirer extends Subsystem {
     }
 
     public void flipUp() {
-        acquirerSolenoid.set(true);
+        acquirerFlipSolenoid.set(true);
     }
 
     public void flipDown() {
-        acquirerSolenoid.set(false);
+        acquirerFlipSolenoid.set(false);
         Timer.delay(0.5);
+    }
+    
+    public void holdCube() {
+        acquirerHoldSolenoid.set(true);
+    }
+    
+    public void releaseCube() {
+        acquirerHoldSolenoid.set(false);
     }
 }
