@@ -11,8 +11,8 @@ public class IRSensor {
     //Resulted from forming an equation with graph using many coordinates and calculator
     //Power Regression used
 
-    private static AnalogInput firstSensor;
-    private static AnalogInput secondSensor;
+    private static AnalogInput topSensor;
+    private static AnalogInput bottomSensor;
 
     // Create instance of a timer that we can use to keep track of how long the
     // gear is kept in the position for.
@@ -21,26 +21,26 @@ public class IRSensor {
     private boolean isTimerRunning;
 
     public IRSensor() {
-        firstSensor = new AnalogInput(RobotMap.FIRST_IR_SENSOR_PORT);
-        secondSensor = new AnalogInput(RobotMap.SECOND_IR_SENSOR_PORT);
+        topSensor = new AnalogInput(RobotMap.TOP_IR_SENSOR_PORT);
+        bottomSensor = new AnalogInput(RobotMap.BOTTOM_IR_SENSOR_PORT);
         timeSinceEntry = new Timer();
         isTimerRunning = false;
     }
 
-    public static double getFirstSensorVoltage() {
-        return firstSensor.getVoltage();
+    public static double getTopSensorVoltage() {
+        return topSensor.getVoltage();
     }
 
     public static boolean isCubeDetected() {
-        return getFirstSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", RobotMap.IR_SENSOR_THRESHOLD);
+        return getTopSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", RobotMap.TOP_IR_SENSOR_THRESHOLD);
     }
     
-    public static double getSecondSensorVoltage() {
-        return secondSensor.getVoltage();
+    public static double getBottomSensorVoltage() {
+        return bottomSensor.getVoltage();
     }
     
     public static boolean isCubeUpright() {
-        return getSecondSensorVoltage() > RobotMap.IR_SENSOR_THRESHOLD;
+        return getBottomSensorVoltage() > RobotMap.BOTTOM_IR_SENSOR_THRESHOLD;
     }
 
     // The use of LEDs for the robot is currently unclear so this needs further detail in the future
