@@ -70,7 +70,11 @@ public final class RobotMap {
      * Line Sensor Constants
      *****************************************************************************/
     public static final int DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME = 3;
-
+    public static final int DRIVETRAIN_LINE_SENSOR_THRESHOLD = -1;
+    
+    /******************************************************************************
+     * Drivetrain Encoder/Movement Constants
+     *****************************************************************************/
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6.0;
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
