@@ -13,12 +13,10 @@ public class AcquirerFlipUpCommand extends InstantCommand {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         requires(Robot.crabArm);
-        requires(Robot.acquirer);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.crabArm.deployPush();
         Robot.acquirer.flipUp();
     }
 

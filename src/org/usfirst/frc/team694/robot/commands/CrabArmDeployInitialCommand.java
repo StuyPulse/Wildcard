@@ -20,7 +20,7 @@ public class CrabArmDeployInitialCommand extends InstantCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.crabArm.deployInitial();
+        Robot.crabArm.deploy();
     }
 
     // Called once after isFinished returns true

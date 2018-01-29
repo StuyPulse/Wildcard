@@ -53,8 +53,7 @@ public final class RobotMap {
      * Solenoid Ports
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = -1;
-    public static final int CRAB_ARM_SOLENOID_INITIAL_PORT = -1;
-    public static final int CRAB_ARM_SOLENOID_PUSH_PORT = -1;
+    public static final int CRAB_ARM_SOLENOID_PORT = -1;
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     public static final int GRABBER_SOLENOID_PORT = -1;
