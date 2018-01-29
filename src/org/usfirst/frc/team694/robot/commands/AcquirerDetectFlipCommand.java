@@ -21,7 +21,7 @@ public class AcquirerDetectFlipCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        if (IRSensor.isCubeDetected() && !IRSensor.isCubeUpright()) {
+        if (IRSensor.isCubeDetected()) {
             Robot.acquirer.flipUp();
         }
     }
