@@ -158,6 +158,10 @@ public class Drivetrain extends Subsystem {
     public double getGyroAngle(){
         return gyro.getAngle();
     }
+    public void updateSensors(){
+        rightLineSensor.mainLoop();
+        leftLineSensor.mainLoop();
+    }
     public boolean isOnLine(int mode){
         return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
     }
