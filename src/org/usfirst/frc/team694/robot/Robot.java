@@ -37,6 +37,9 @@ public class Robot extends TimedRobot {
     public static Lift lift;
  
     public static OI oi;
+    public static boolean BITCOIN;
+    
+    public static BITCOINStage stage;
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
@@ -53,6 +56,8 @@ public class Robot extends TimedRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
+        BITCOIN = true;
+        stage = BITCOINStage.RESET;
     }
 
     /**
