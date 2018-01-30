@@ -41,7 +41,7 @@ public class LineSensor {
 		}
 		System.out.println(Max);
 		boolean temp = isChangedBefore;
-		isChangedBefore = ((Math.abs(rawValue - ambientLight)) < (Math.pow(mode, 2) * 15));
-		return (!temp) && ((Math.abs(rawValue - ambientLight)) < (Math.pow(mode, 2) * 15));
+		isChangedBefore = ((Math.abs(rawValue - ambientLight)) < RobotMap.DRIVETRAIN_LINE_SENSOR_THRESHOLD);
+		return (!temp) && ((Math.abs(rawValue - ambientLight)) < RobotMap.DRIVETRAIN_LINE_SENSOR_THRESHOLD);
 	}
 }

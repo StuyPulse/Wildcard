@@ -1,8 +1,6 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DrivetrainPiotrDriveCommand extends Command {
 
+    private double rightTrigger;
+    private double leftTrigger;
+    
     public DrivetrainPiotrDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
@@ -26,11 +27,8 @@ public class DrivetrainPiotrDriveCommand extends Command {
         boolean arcadeDrive = false;
         boolean wasPressed = false;
 
-        double rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
-        double leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
         rightTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
         leftTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
-
 
         double leftJoystickXValue = Robot.oi.driverGamepad.getLeftX();
 
