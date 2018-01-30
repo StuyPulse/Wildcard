@@ -41,8 +41,10 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
-    public static final int LEFT_LIFT_MOTOR_PORT = -1;
-    public static final int RIGHT_LIFT_MOTOR_PORT = -1;
+    public static final int INNER_LEFT_LIFT_MOTOR_PORT = -1;
+    public static final int INNER_RIGHT_LIFT_MOTOR_PORT = -1;
+    public static final int OUTER_LEFT_LIFT_MOTOR_PORT = -1;
+    public static final int OUTER_RIGHT_LIFT_MOTOR_PORT = -1;
 
     /***************************************************************************
      * Lift Constants

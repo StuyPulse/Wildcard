@@ -24,7 +24,7 @@ public class LiftMoveUpHeightCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.lift.setLiftMotors(1);
+        Robot.lift.goUp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,6 +36,7 @@ public class LiftMoveUpHeightCommand extends Command {
     protected void end() {
         Robot.lift.setBrakeOn();
         Robot.lift.resetEncoders();
+        Robot.lift.stop();
     }
 
     // Called when another command which requires one or more of the same
