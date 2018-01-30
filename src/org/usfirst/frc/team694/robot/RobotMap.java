@@ -59,7 +59,7 @@ public final class RobotMap {
     public static final int GRABBER_SOLENOID_PORT = -1;
     public static final int LIFT_BRAKE_SOLENOID_CHANNEL = -1;
     public static final int ACQUIRER_FLIP_SOLENOID_PORT = -1;
-    public static final int ACQUIRER_HOLD_SOLENOID_PORT = -1; 
+    public static final int ACQUIRER_SQUEEZE_SOLENOID_PORT = -1; 
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
@@ -84,7 +84,7 @@ public final class RobotMap {
     public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_PULSE;
     
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE = DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
-    public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DIO_ENCODER_PULSES_PER_REVOLUTION;
+    public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
     
     public static final int ACQUIRER_SOLENOID_PORT = -1;
     
