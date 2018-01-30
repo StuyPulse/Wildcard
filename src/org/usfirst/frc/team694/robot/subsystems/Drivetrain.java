@@ -32,33 +32,33 @@ public class Drivetrain extends Subsystem {
     private WPI_TalonSRX rightBottomMotor;
 
     private DifferentialDrive differentialDrive;
-    
+
     private LineSensor leftLineSensor;
     private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
-    
+
     private ADXRS450_Gyro gyro;
-    
+
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
         leftTopMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
         leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
-        leftMiddleMotor.follow(leftBottomMotor);
-        leftBottomMotor.follow(leftBottomMotor);
+        leftMiddleMotor.follow(leftTopMotor);
+        leftBottomMotor.follow(leftTopMotor);
 
         rightTopMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
         rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
-        
+
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
-        
-        rightMiddleMotor.follow(rightBottomMotor);
-        rightMiddleMotor.follow(rightBottomMotor);
+
+        rightMiddleMotor.follow(rightTopMotor);
+        rightBottomMotor.follow(rightTopMotor);
 
         leftTopMotor.setNeutralMode(NeutralMode.Coast);
         leftMiddleMotor.setNeutralMode(NeutralMode.Coast);
@@ -66,7 +66,7 @@ public class Drivetrain extends Subsystem {
         rightTopMotor.setNeutralMode(NeutralMode.Coast);
         rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
         rightBottomMotor.setNeutralMode(NeutralMode.Coast);
-        
+
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
@@ -79,9 +79,9 @@ public class Drivetrain extends Subsystem {
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
-        
+
         gyro = new ADXRS450_Gyro();
-        
+
     }
 
     public double getLeftSpeed() {
@@ -107,11 +107,11 @@ public class Drivetrain extends Subsystem {
     public double getRightEncoderDistance() {
         return rightBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
-    
+
     public double getLeftRawEncoderDistance() {
         return leftBottomMotor.getSelectedSensorPosition(0);
     }
-    
+
     public double getRightRawEncoderDistance() {
         return rightBottomMotor.getSelectedSensorPosition(0);
     }
