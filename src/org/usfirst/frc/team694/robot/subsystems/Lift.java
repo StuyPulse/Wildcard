@@ -25,6 +25,8 @@ public class Lift extends Subsystem {
     private boolean brakeOn; 
   
     public Lift() {
+        
+        
 
         leftLiftMotor = new WPI_TalonSRX(RobotMap.LEFT_LIFT_MOTOR_PORT);
         rightLiftMotor = new WPI_TalonSRX(RobotMap.RIGHT_LIFT_MOTOR_PORT);
@@ -76,12 +78,8 @@ public class Lift extends Subsystem {
         }
     }
 
-    public void goUp() {
-        leftLiftMotor.set(1);
-    }
-
-    public void goDown() {
-        leftLiftMotor.set(-1);
+    public void setLiftMotors(double speed) {
+        leftLiftMotor.set(speed);
     }
 
     public void stop() {
@@ -97,14 +95,18 @@ public class Lift extends Subsystem {
     }
 
     public double getLeftLiftEncoderDistance() {
-        return leftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
+        return leftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getRightLiftEncoderDistance() {
-        return rightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
+        return rightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getMaxLiftEncoderDistance() {
         return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());
+    }
+    
+    public double getLiftHeight() {
+        return getMaxLiftEncoderDistance() + RobotMap.MIN_HEIGHT_OF_GRABBER;
     }
 }
