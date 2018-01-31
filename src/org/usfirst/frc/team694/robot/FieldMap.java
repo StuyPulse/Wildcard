@@ -1,17 +1,14 @@
 package org.usfirst.frc.team694.robot;
 
 /**
- * FieldMap contains the field measurements that we use in our autons.
- * All of our autons should be based on the field so that if our measurements 
- * change, we can adapt quickly. All measurements are in inches for encoder purposes.
+ * FieldMap contains the field measurements that we use in our autonomous commands.
+ * All of our commands should be based on the field so that if our measurements 
+ * change, we can adapt quickly. All measurements are in inches and degrees for encoder purposes.
+ * These distances assume starting point at left side of field.
  */
 public final class FieldMap {
-
-/* Given FRC Manual Measurements*/
-    //These distances is us starting on the left side of the field
-    //all measurements in inches or degrees if specified 
-    //anything with // should be changed due to the actual field measure 
-    public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
+    //TODO: Anything with // after it should be changed to actual field measure
+    public static final double LENGTH_OF_BOT = 39.5;
     public static final double WIDTH_OF_BOT = 34.5;
     public static final double MIDDLE_OF_BOT = WIDTH_OF_BOT / 2;
     

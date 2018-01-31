@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turns the lift's brake off and makes it go up to maximum height.
  */
 public class LiftMaxUpCommand extends Command {
 

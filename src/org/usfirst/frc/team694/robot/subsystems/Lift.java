@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Lift Subsystem - Lifts cubes up and down
  */
 public class Lift extends Subsystem {
 

@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
- *
+ * Stop the lift and set the brake on
  */
 public class LiftStopCommand extends InstantCommand {
 

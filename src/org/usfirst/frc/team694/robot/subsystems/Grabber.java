@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Grabber Subsytem - Grabs cubes
  */
 public class Grabber extends Subsystem {
     public Solenoid grabberSolenoid;

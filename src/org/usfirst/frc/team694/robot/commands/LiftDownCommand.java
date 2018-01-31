@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turn the lift's brake off and makes it go down
  */
 public class LiftDownCommand extends Command {
 

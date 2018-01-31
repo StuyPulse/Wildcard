@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Crab Arm Subsystem - Crab Arm opens and closes to capture power cubes so the acquirer can acquire them
  */
 public class CrabArm extends Subsystem {
     public Solenoid crabArmSolenoid;

@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Drives until the robot reaches the line.
  */
 public class DrivetrainMoveToLineCommand extends Command {
     private boolean isReached = false; 
@@ -14,7 +14,6 @@ public class DrivetrainMoveToLineCommand extends Command {
     public DrivetrainMoveToLineCommand(double distance,double speed) {
         speedMode =  ((speed / 0.25) - 1);
         this.distance = distance;
-        // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
     }
 
