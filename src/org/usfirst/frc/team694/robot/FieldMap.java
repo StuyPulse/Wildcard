@@ -13,6 +13,7 @@ public final class FieldMap {
     //anything with // could be changed due to the actual field measure 
     
     //These are the measurements that need to be measured out before match.
+    public static final double hi = 0;
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
     public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
     public static final double WIDTH_OF_BOT = 34.5; //
@@ -26,7 +27,7 @@ public final class FieldMap {
     public static final double DISTANCE_FROM_ALLIANCE_STATION_TO_PLATFORM_EDGE = 261.47; //
     public static final double DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
     public static final int DISTANCE_FROM_NULL_TERRITORY_TO_NULL_BUMP = 36; //
-    public static final double DISTANCE_FROM_BORDER_TO_SWITCH_EDGE = 85.25; //
+    public static final double DISTANCE_FROM_BORDERz_TO_SWITCH_EDGE = 85.25; //
     public static final double DISTANCE_FROM_BORDER_TO_SCALE_EDGE = 71.57; //
     public static final double DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
     public static final double DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
@@ -42,7 +43,6 @@ public final class FieldMap {
     
     public static final double DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_ANOTHER =  DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP * 2;
     
-
     public static final double DISTANCE_FROM_BORDER_TO_OTHER_EDGE_OF_ROBOT = DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT + WIDTH_OF_BOT;
     public static final double DISTANCE_FROM_BORDER_TO_ROBOT_STARTING_POINT = DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT + MIDDLE_OF_BOT_WIDTHWISE; //
     
