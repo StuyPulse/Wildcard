@@ -16,8 +16,9 @@ public class LineSensor {
 		mySensor = new AnalogInput(Port);
 		rawValue = mySensor.getValue();
 	}
-	public void getRawData(){
+	public double getRawData(){
 		rawValue = mySensor.getValue();
+		return rawValue;
 	}
 	public void initialLoop(){
 	    setupDone = (framesExsisted == RobotMap.DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME);

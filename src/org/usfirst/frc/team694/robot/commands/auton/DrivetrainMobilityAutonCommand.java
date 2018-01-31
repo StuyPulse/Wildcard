@@ -9,7 +9,7 @@ public class DrivetrainMobilityAutonCommand extends CommandGroup {
 
     public DrivetrainMobilityAutonCommand() {
         // Add Commands here:
-        addSequential(new DrivetrainMoveToLineCommand(3,60.0,0.25));
+        addSequential(new DrivetrainMoveToLineCommand(60.0,0.25));
         //      addSequential(new Command2());
         // these will run in order.
 
