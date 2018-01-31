@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class GrabberOpenCommand extends InstantCommand {
 
     public GrabberOpenCommand() {
-        super();
         requires(Robot.grabber);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
