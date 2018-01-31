@@ -8,15 +8,32 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class BITCOINPartOneCommand extends CommandGroup {
-
-    public BITCOINPartOneCommand() {
-        addSequential(new LiftMaxDownCommand());
-        addSequential(new LiftMoveUpHeightCommand(2));
-        addSequential(new IRSensorRepeatUntilSensedCommand());
+public class BITCOINCommand extends CommandGroup {
+    public boolean startBITCOINAutomation; //records initial automation mode
+    public double height = 2;
+    public BITCOINCommand() {
+        addSequential(new AcquirerTightenHoldCommand());
         addSequential(new AcquirerFlipUpCommand());
+        addSequential(new LiftMaxDownCommand());
+        //TODO when merge to branch with command, uncomment
+        //addSequential(new LiftMoveUpHeightCommand(height));
+        addSequential(new AcquirerLoosenHoldCommand());
         addSequential(new GrabberCloseCommand());
         }
+    
+    public void initialize() {
+        startBITCOINAutomation = Robot.isBITCOINAutomation;
+    }
+    public boolean isFinished() {
+        //if started out in automation mode, 
+        //will stop when reset button is pressed to make it not in automation mode
+        if (startBITCOINAutomation && !(Robot.isBITCOINAutomation)) {
+            return true;
+        // in all other cases, the command will run until completion
+        } else {
+            return super.isFinished();
+        }
+    }
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
