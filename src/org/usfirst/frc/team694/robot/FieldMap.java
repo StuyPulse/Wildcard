@@ -13,7 +13,6 @@ public final class FieldMap {
     //anything with // could be changed due to the actual field measure 
     
     //These are the measurements that need to be measured out before match.
-    public static final double hi = 0;
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
     public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
     public static final double WIDTH_OF_BOT = 34.5; //
