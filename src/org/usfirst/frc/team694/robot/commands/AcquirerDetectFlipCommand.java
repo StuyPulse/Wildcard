@@ -1,18 +1,18 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.util.IRSensor;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 /**
- *
+ *This will flip the cube when the IR sensor detects that the cube is not upright, and leave it when it detects the cube is upright
  */
-public class AcquirerEjectCommand extends Command {
+public class AcquirerDetectFlipCommand extends Command {
 
-    public AcquirerEjectCommand() {
-        requires(Robot.acquirer);
+    public AcquirerDetectFlipCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(Robot.acquirer);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,9 @@ public class AcquirerEjectCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.acquirer.deacquire();
+        if (IRSensor.isCubeDetected()) {
+            Robot.acquirer.flipUp();
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -2,14 +2,15 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CrabArmReleaseCommand extends InstantCommand {
+public class AcquirerDeacquireCommand extends Command {
 
-    public CrabArmReleaseCommand() {
+    public AcquirerDeacquireCommand() {
+        requires(Robot.acquirer);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,7 +21,12 @@ public class CrabArmReleaseCommand extends InstantCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.crabArm.release();
+        Robot.acquirer.deacquire();
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
     }
 
     // Called once after isFinished returns true

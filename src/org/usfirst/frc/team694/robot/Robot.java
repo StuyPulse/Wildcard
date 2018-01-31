@@ -10,13 +10,15 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.subsystems.Acquirer;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
+import org.usfirst.frc.team694.robot.subsystems.Lift;
+import org.usfirst.frc.team694.util.IRSensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,10 +33,10 @@ public class Robot extends TimedRobot {
     public static Acquirer acquirer;
     public static CrabArm crabArm;
     public static Grabber grabber; 
-
-    public static OI oi;
-    
+    public static IRSensor irsensor;  
     public static Lift lift;
+ 
+    public static OI oi;
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
@@ -49,8 +51,8 @@ public class Robot extends TimedRobot {
         acquirer = new Acquirer();
         crabArm = new CrabArm();
         grabber = new Grabber();
-        oi = new OI();
         lift = new Lift();
+        oi = new OI();
     }
 
     /**
@@ -94,6 +96,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
     }
 
     @Override
