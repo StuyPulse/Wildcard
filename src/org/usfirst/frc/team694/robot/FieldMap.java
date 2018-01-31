@@ -26,7 +26,7 @@ public final class FieldMap {
     public static final double DISTANCE_FROM_ALLIANCE_STATION_TO_PLATFORM_EDGE = 261.47; //
     public static final double DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
     public static final int DISTANCE_FROM_NULL_TERRITORY_TO_NULL_BUMP = 36; //
-    public static final double DISTANCE_FROM_BORDERz_TO_SWITCH_EDGE = 85.25; //
+    public static final double DISTANCE_FROM_BORDER_TO_SWITCH_EDGE = 85.25; //
     public static final double DISTANCE_FROM_BORDER_TO_SCALE_EDGE = 71.57; //
     public static final double DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
     public static final double DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
