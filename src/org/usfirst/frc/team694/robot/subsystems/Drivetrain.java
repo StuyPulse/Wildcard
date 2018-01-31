@@ -46,6 +46,8 @@ public class Drivetrain extends Subsystem {
         leftTopMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
         leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
+
+        //master-follower, leftTopMotor designated master
         leftMiddleMotor.follow(leftTopMotor);
         leftBottomMotor.follow(leftTopMotor);
 
@@ -53,12 +55,13 @@ public class Drivetrain extends Subsystem {
         rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
 
+        //master-follower, rightTopMotor designated master
+        rightMiddleMotor.follow(rightTopMotor);
+        rightBottomMotor.follow(rightTopMotor);
+
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
-
-        rightMiddleMotor.follow(rightTopMotor);
-        rightBottomMotor.follow(rightTopMotor);
 
         leftTopMotor.setNeutralMode(NeutralMode.Coast);
         leftMiddleMotor.setNeutralMode(NeutralMode.Coast);
