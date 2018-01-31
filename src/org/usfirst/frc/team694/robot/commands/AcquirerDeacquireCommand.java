@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class AcquirerEjectCommand extends Command {
+public class AcquirerDeacquireCommand extends Command {
 
-    public AcquirerEjectCommand() {
+    public AcquirerDeacquireCommand() {
         requires(Robot.acquirer);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
