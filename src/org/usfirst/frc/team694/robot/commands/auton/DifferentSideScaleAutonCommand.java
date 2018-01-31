@@ -34,7 +34,7 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE, speed));
         addSequential(new DrivetrainMoveInchesEncoderCommand(FieldMap.DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE, speed));
         addSequential(new DrivetrainRotateDegreesPIDCommand(90));
-        addSequential(new DrivetrainMoveToLineCommand(placeholder, speed));
+        addSequential(new DrivetrainMoveToLineCommand(DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE, speed));
         addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_ANOTHER, speed));
         addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE, speed));
         addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
