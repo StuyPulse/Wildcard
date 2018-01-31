@@ -75,17 +75,15 @@ public class Drivetrain extends Subsystem {
         rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-<<<<<<< HEAD
+        //head
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
         differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
-=======
         
         gyro = new ADXRS450_Gyro();
         
         differentialDrive = new DifferentialDrive(leftDrivetrainMotorGroup, rightDrivetrainMotorGroup);
->>>>>>> b86adcf59e9d966ec49a39c12bb0ec3dfd7a96a0
 
     }
 

@@ -73,18 +73,21 @@ public class Lift extends Subsystem {
         }
     }
     
-    public void goUp() {
+    /*public void goUp() {
         liftMotors.set(1);
     }
     
     public void goDown() {
         liftMotors.set(-1);
     }
-    
+    */
     public void stop() {
         liftMotors.set(0);
     }
-  
+    
+    public void moveLift(double speed) {
+        liftMotors.set(speed);
+    }
     public boolean isAtBottom() {
         return bottomLimitSwitch.get();
     }

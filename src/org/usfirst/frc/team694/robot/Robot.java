@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.*;
+import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.robot.subsystems.Acquirer;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
@@ -109,6 +111,25 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        liftRun();
+    }
+
+    private void liftRun() {
+        if(oi.operatorGamepad.getLeftY() > 0.9) {
+            Scheduler.getInstance().add(new LiftMoveCommand(1));     
+        }
+        else if (oi.operatorGamepad.getLeftY() > 0.4) {
+            Scheduler.getInstance().add(new LiftMoveCommand(0.5));  
+        }
+        else if (oi.operatorGamepad.getLeftY() > -0.4) {
+            Scheduler.getInstance().add(new LiftStopCommand());
+        }
+        else if (oi.operatorGamepad.getLeftY() > -0.9) {
+            Scheduler.getInstance().add(new LiftMoveCommand(-0.5));
+        }
+        else {
+            Scheduler.getInstance().add(new LiftMoveCommand(-1));
+        }
     }
 
     /**
