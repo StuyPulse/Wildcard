@@ -8,7 +8,6 @@
 package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.*;
-import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.robot.subsystems.Acquirer;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
