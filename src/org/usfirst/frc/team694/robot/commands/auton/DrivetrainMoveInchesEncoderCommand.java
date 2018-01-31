@@ -31,7 +31,7 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.drivetrain.getEncoderDistance() >= targetDistance;
+        return Math.abs(Robot.drivetrain.getEncoderDistance()) >= targetDistance;
     }
 
     // Called once after isFinished returns true

@@ -11,7 +11,7 @@ public class DrivetrainMoveToLineCommand extends Command {
     private boolean isReached = false; 
     private double distance = 0;
     private double speedNumber = 0;// 0,1, or 2, repesents speeds 0.25,0.5,0.75 respectively.
-    public DrivetrainMoveToLineCommand(double distance,double speed) {
+    public DrivetrainMoveToLineCommand(double speed,double distance) {
         speedNumber =  ((speed / 0.25) - 1);
         this.distance = distance;//repesents length in inches to go, just in case line sensing fails.
         // Use requires() here to declare subsystem dependencies
