@@ -14,21 +14,28 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import com.kauailabs.navx.frc.AHRS;
+
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
  */
 public class Drivetrain extends Subsystem {
-    private WPI_TalonSRX leftTopMotor;
-    private WPI_TalonSRX leftMiddleMotor;
+    private WPI_VictorSPX leftTopMotor;
+    private WPI_VictorSPX leftMiddleMotor;
     private WPI_TalonSRX leftBottomMotor;
-    private WPI_TalonSRX rightTopMotor;
-    private WPI_TalonSRX rightMiddleMotor;
+    private WPI_VictorSPX rightTopMotor;
+    private WPI_VictorSPX rightMiddleMotor;
     private WPI_TalonSRX rightBottomMotor;
 
     private DifferentialDrive differentialDrive;
@@ -40,19 +47,17 @@ public class Drivetrain extends Subsystem {
 
     private ADXRS450_Gyro gyro;
 
-
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
-        leftTopMotor = new WPI_TalonSRX(RobotMap.LEFT_FRONT_MOTOR_PORT);
-        leftMiddleMotor = new WPI_TalonSRX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
+        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_FRONT_MOTOR_PORT);
+        leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
-
         //master-follower, leftTopMotor designated master
         leftMiddleMotor.follow(leftTopMotor);
         leftBottomMotor.follow(leftTopMotor);
 
-        rightTopMotor = new WPI_TalonSRX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
-        rightMiddleMotor = new WPI_TalonSRX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
+        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
+        rightMiddleMotor = new WPI_VictorSPX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
 
         //master-follower, rightTopMotor designated master
@@ -80,6 +85,9 @@ public class Drivetrain extends Subsystem {
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
+
+        // Not sure about this next line: (what is kMXP?)
+        accelerometer = new AHRS(SPI.Port.kMXP);
 
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
 
@@ -178,5 +186,36 @@ public class Drivetrain extends Subsystem {
         // TODO Auto-generated method stub
         gyro.reset();
     }
+    
+
+    
+    public void resetAccelerometer() {
+        accelerometer.reset();
+    }
+    
+    public double getXAccel() {
+        return accelerometer.getWorldLinearAccelX();
+    }
+    
+    public double getYAccel() {
+        return accelerometer.getWorldLinearAccelY();
+    }
+    
+    public double getZAccel() {
+        return accelerometer.getWorldLinearAccelZ();
+    }
+    
+    public double getZRotation() {
+        return accelerometer.getYaw();
+    }
+    
+    public boolean testForBump() {
+        return getZAccel() > -1;
+    }
+    
+    public boolean isCalibrating() {
+        return accelerometer.isCalibrating();
+    }
+
 
 }
