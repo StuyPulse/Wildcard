@@ -24,13 +24,13 @@ public final class RobotMap {
     /**************************************************************************
      * Drivetrain Motor Ports
      *************************************************************************/
-    public static final int LEFT_FRONT_MOTOR_PORT = 1;
-    public static final int LEFT_MIDDLE_MOTOR_PORT = 2;
-    public static final int LEFT_BOTTOM_MOTOR_PORT = 3;
+    public static final int LEFT_FRONT_MOTOR_PORT = -1;
+    public static final int LEFT_MIDDLE_MOTOR_PORT = -1;
+    public static final int LEFT_BOTTOM_MOTOR_PORT = -1;
 
-    public static final int RIGHT_FRONT_MOTOR_PORT = 4;
-    public static final int RIGHT_MIDDLE_MOTOR_PORT = 5;
-    public static final int RIGHT_REAR_MOTOR_PORT = 6;
+    public static final int RIGHT_FRONT_MOTOR_PORT = -1;
+    public static final int RIGHT_MIDDLE_MOTOR_PORT = -1;
+    public static final int RIGHT_REAR_MOTOR_PORT = -1;
 
     /**************************************************************************
      * Acquirer Motor Ports
@@ -71,18 +71,18 @@ public final class RobotMap {
      *****************************************************************************/
     public static final double DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME = 3;
     public static final double DRIVETRAIN_LINE_SENSOR_THRESHOLD = -1.0;
-    
+
     /******************************************************************************
      * Drivetrain Encoder/Movement Constants
      *****************************************************************************/
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6.0;
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
-    public static final double DRIVETRAIN_ENCODERS_INCHES_PER_PULSE = 1 / (512 / 3);
     public static final double DRIVETRAIN_ENCODERS_FACTOR = 4.0;
     public static final double DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION = Math.PI * DRIVETRAIN_WHEEL_DIAMETER;
+    public static final double DRIVETRAIN_ENCODERS_INCHES_PER_PULSE = DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
     public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_PULSE;
-    
+
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE = DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
     public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
     
@@ -92,10 +92,10 @@ public final class RobotMap {
      * IRSensor Constants
      *****************************************************************************/
     /******************************************************************************
-     * Note that these constants were copied from the RobotMap.java from Rafael. 
-     * These require further testing. 
-     *****************************************************************************/ 
-    
+     * Note that these constants were copied from the RobotMap.java from Rafael.
+     * These require further testing.
+     *****************************************************************************/
+
     public static final int IR_SENSOR_PORT = -1;
     //TODO: Test the IR Sensor Threshold value. Should correspond with how far away the cube is from the IR sensor.
     //Use SmartDashboard, track the IR Sensor Voltage value.
