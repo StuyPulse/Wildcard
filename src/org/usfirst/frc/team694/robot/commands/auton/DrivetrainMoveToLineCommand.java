@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DrivetrainMoveToLineCommand extends Command {
     private boolean isReached = false; 
     private double distance = 0;
-    private double speedNumber = 0;// 0,1, or 2, repesents speeds 0.25,0.5,0.75 respectively.
+    private double speed = 0;// 0,1, or 2, repesents speeds 0.25,0.5,0.75 respectively.
     public DrivetrainMoveToLineCommand(double speed,double distance) {
-        speedNumber =  ((speed / 0.25) - 1);
+        this.speed =  speed;
         this.distance = distance;//repesents length in inches to go, just in case line sensing fails.
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
@@ -27,8 +27,8 @@ public class DrivetrainMoveToLineCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         Robot.drivetrain.updateSensors();
-        Robot.drivetrain.tankDrive((speedNumber + 1) * 0.25, (speedNumber + 1) * 0.25);
-        isReached = Robot.drivetrain.isOnLine((int) speedNumber);
+        Robot.drivetrain.tankDrive(speed,speed);
+        isReached = Robot.drivetrain.isOnLine(1 + (speed / 0.25));
     }
 
     // Make this return true when this Command no longer needs to run execute()
