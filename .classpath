@@ -12,4 +12,4 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="output" path="bin"/>
-<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/></classpath>
+</classpath>
