@@ -2,23 +2,23 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
  *
  */
-public class GrabberToggleCommand extends InstantCommand {
+public class AcquirerLoosenHoldCommand extends InstantCommand {
 
-    public GrabberToggleCommand() {
+    public AcquirerLoosenHoldCommand() {
         super();
-        requires(Robot.grabber);
+        requires(Robot.acquirer);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     protected void initialize() {
-        Robot.grabber.toggle();
+        Robot.acquirer.loosenCubeGrip();
     }
+
 }
