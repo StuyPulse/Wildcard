@@ -14,7 +14,10 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+<<<<<<< HEAD
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+=======
+>>>>>>> master
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -43,7 +46,12 @@ public class Drivetrain extends Subsystem {
 
     private ADXRS450_Gyro gyro;
     
+<<<<<<< HEAD
     private AHRS accelerometer;
+=======
+    public static AHRS accelerometer;
+    
+>>>>>>> master
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
@@ -77,7 +85,7 @@ public class Drivetrain extends Subsystem {
 
         leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
         rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
-
+        
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
@@ -89,6 +97,12 @@ public class Drivetrain extends Subsystem {
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
 
         gyro = new ADXRS450_Gyro();
+<<<<<<< HEAD
+=======
+        
+        // Not sure about this next line: (what is kMXP?)
+        accelerometer = new AHRS(SPI.Port.kMXP);
+>>>>>>> master
     }
 
     public double getLeftSpeed() {
@@ -188,6 +202,7 @@ public class Drivetrain extends Subsystem {
         // TODO Auto-generated method stub
         gyro.reset();
     }
+<<<<<<< HEAD
 
     public void resetAccelerometer() {
         accelerometer.reset();
@@ -218,3 +233,34 @@ public class Drivetrain extends Subsystem {
     }
 
 }
+=======
+    
+    public void resetAccelerometer() {
+        accelerometer.reset();
+    }
+    
+    public double getXAccel() {
+        return accelerometer.getWorldLinearAccelX();
+    }
+    
+    public double getYAccel() {
+        return accelerometer.getWorldLinearAccelY();
+    }
+    
+    public double getZAccel() {
+        return accelerometer.getWorldLinearAccelZ();
+    }
+    
+    public double getZRotation() {
+        return accelerometer.getYaw();
+    }
+    
+    public boolean testForBump() {
+        return getZAccel() > -1;
+    }
+    
+    public boolean isCalibrating() {
+        return accelerometer.isCalibrating();
+    }
+}
+>>>>>>> master
