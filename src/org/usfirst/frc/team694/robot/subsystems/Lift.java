@@ -83,6 +83,11 @@ public class Lift extends Subsystem {
         leftLiftMotor.set(-1);
     }
     
+    public void moveLift(double speed) {
+        leftLiftMotor.set(speed);
+        rightLiftMotor.set(speed);
+    }
+    
     public void stop() {
         leftLiftMotor.set(0);
     }
