@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Acquirer extends Subsystem {
+    //status needs to be renamed
+    public boolean acquirerRunning;
 
     public WPI_VictorSPX leftAcquirerMotor;
     public WPI_VictorSPX rightAcquirerMotor;
@@ -24,6 +26,14 @@ public class Acquirer extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+
+    public boolean isAcquirerRunning() {
+        return acquirerRunning;
+    }
+
+    public void setAcquirerRunning(boolean status) {
+        this.acquirerRunning = status;
     }
 
     public Acquirer() {
@@ -48,5 +58,9 @@ public class Acquirer extends Subsystem {
 
     public void flipDown() {
         acquirerSolenoid.set(false);
+    }
+    
+    public void stop() {
+        acquirerMotors.set(0);
     }
 }
