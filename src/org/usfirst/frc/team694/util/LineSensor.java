@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 
+/**
+ * Class for Line Sensor which detects the lines on the field
+ */
 public class LineSensor {
 	private int framesExsisted = 0;
 	private int ambientLight;

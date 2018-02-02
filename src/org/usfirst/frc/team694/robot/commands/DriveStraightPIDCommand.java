@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Uses PID to drive straight by distance at speed.
  */
 public class DriveStraightPIDCommand extends PIDCommand {
 	double distance;

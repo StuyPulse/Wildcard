@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Rotate the robot to a target rotation using PID
  */
 public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     public double targetAngle;

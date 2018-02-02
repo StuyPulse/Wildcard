@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Acquirer Subsystem - Acquires Power cubes and stores them or ejects (Deacquires) them
  */
 public class Acquirer extends Subsystem {
 

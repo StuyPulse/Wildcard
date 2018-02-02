@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 
+    //Subsystems
     public static Drivetrain drivetrain;
     public static Acquirer acquirer;
     public static CrabArm crabArm;
@@ -42,8 +43,7 @@ public class Robot extends TimedRobot {
     private Command autonCommand; // Selected command run during auton
 
     /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
+     * Called when the robot is initialized, Creates subsystem instances.
      */
     @Override
     public void robotInit() {
@@ -56,30 +56,20 @@ public class Robot extends TimedRobot {
     }
 
     /**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-     * the robot is disabled.
+     * Called when robot is disabled
      */
     @Override
     public void disabledInit() {
 
     }
-
+    
     @Override
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
     }
 
     /**
-     * This autonomous (along with the chooser code above) shows how to select
-     * between different autonomous modes using the dashboard. The sendable
-     * chooser code works with the Java SmartDashboard. If you prefer the
-     * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-     * getString code to get the auto name from the text box below the Gyro
-     *
-     * <p>You can add additional auto modes by adding additional commands to the
-     * chooser code above (like the commented example) or additional comparisons
-     * to the switch structure below with additional strings & commands.
+     * Called when autonomous period begins. Starts the autonomous command
      */
     @Override
     public void autonomousInit() {
@@ -98,7 +88,9 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
     }
-
+    /**
+     * Called when tele-operated period begins. Stops the current autonomous command.
+     */
     @Override
     public void teleopInit() {
         if (autonCommand != null) {

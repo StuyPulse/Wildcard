@@ -7,12 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ *This command moves the robot forward a certain distance by a certain speed
  */
 public class DrivetrainMoveInchesEncoderCommand extends Command {
     public double targetDistance;
     public double driveSpeed;
     
+    /**
+     * Move the robot forward.
+     * @param speed The speed to move at
+     * @param distance Distance to travel
+     */
     public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {
         requires(Robot.drivetrain);
         speed = driveSpeed;

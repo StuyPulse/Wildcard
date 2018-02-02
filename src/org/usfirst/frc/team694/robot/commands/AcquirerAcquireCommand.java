@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turn the Acquirer Motors on, which allows it to acquire powercubes
  */
 public class AcquirerAcquireCommand extends Command {
 

@@ -4,7 +4,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
- *
+ * Open the grabber
  */
 public class GrabberOpenCommand extends InstantCommand {
 

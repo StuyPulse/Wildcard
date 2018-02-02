@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
- *
+ * If the grabber is open, close it and vice versa
  */
 public class GrabberToggleCommand extends InstantCommand {
 

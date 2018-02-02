@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Class for IR Sensor which can detect where cubes are
+ */
 public class IRSensor {
     //Equation numbers
     //Resulted from forming an equation with graph using many coordinates and calculator

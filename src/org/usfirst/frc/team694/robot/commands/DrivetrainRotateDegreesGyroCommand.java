@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Rotates the robot to a target angle
  */
 public class DrivetrainRotateDegreesGyroCommand extends Command {
     public double targetAngle;

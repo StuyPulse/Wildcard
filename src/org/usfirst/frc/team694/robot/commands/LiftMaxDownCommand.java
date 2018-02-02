@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Turns the lift's brake off and makes it go down to minimal height
  */
 public class LiftMaxDownCommand extends Command {
 

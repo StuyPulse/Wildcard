@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
- * An example subsystem. You can replace me with your own Subsystem.
+ * Drivetrain Subsystem - Contains all the motors to the robot's driving system for mobility
  */
 public class Drivetrain extends Subsystem {
     private WPI_VictorSPX leftTopMotor;

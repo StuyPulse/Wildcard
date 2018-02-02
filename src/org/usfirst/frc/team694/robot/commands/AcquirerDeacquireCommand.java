@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Set the Acquirer motors to reverse
  */
 public class AcquirerDeacquireCommand extends Command {
 

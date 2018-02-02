@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
- *
+ * Flips the Acquirer Solenoid up
  */
 public class AcquirerFlipUpCommand extends InstantCommand {
 

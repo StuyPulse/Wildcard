@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Crab Arm Acquire Command
  */
 public class CrabArmAcquireCommand extends Command {
 
