@@ -49,6 +49,5 @@ public class Acquirer extends Subsystem {
 
     public void flipDown() {
         acquirerSolenoid.set(false);
-        Timer.delay(0.5);
     }
 }
