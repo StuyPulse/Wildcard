@@ -13,7 +13,7 @@ public class Grabber extends Subsystem {
     public boolean isOpen;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    
+
     public Grabber() {
         grabberSolenoid = new Solenoid(RobotMap.GRABBER_SOLENOID_PORT);
     }
@@ -22,19 +22,22 @@ public class Grabber extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
+
     public void open() {
-        isOpen = true; 
+        isOpen = true;
         grabberSolenoid.set(isOpen);
     }
+
     public void close() {
-        isOpen = false; 
+        isOpen = false;
         grabberSolenoid.set(isOpen);
     }
+
     public void toggle() {
-       if (isOpen) {
-           close();
-       }else {
-           open();
-       }
+        if (isOpen) {
+            close();
+        } else {
+            open();
+        }
     }
 }

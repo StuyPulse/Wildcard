@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * the PS4 Wireless controller (the PS4 also comes with an extra button and 2
  * extra axis for the bumpers)
  *
- * @author wangmeister Extra contributors:
- * @author Angelina Ballerina, Imperatoras, 3mi1y, and Renee
+ * @author wangmeister
  */
 
 public class Gamepad extends Joystick {
@@ -183,7 +182,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_X:
 				return getRawAxis(2);
 			case PS4:
-			    return getRawAxis(3);
+			    return (getRawAxis(3) + 1) / 2;
 			default:
 				return 0;
 		}
@@ -228,7 +227,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_X:
 				return getRawAxis(3);
 			case PS4:
-			    return getRawAxis(4);
+			    return (getRawAxis(4) + 1) / 2;
 			default:
 				return 0;
 		}
