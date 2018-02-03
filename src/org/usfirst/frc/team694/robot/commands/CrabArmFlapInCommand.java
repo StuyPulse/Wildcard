@@ -7,18 +7,18 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class LiftStopCommand extends InstantCommand {
+public class CrabArmFlapInCommand extends InstantCommand {
 
-    public LiftStopCommand() {
+    public CrabArmFlapInCommand() {
         super();
-        requires(Robot.lift);
+        requires(Robot.crabArm);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called once when the command executes
     protected void initialize() {
-        Robot.lift.stop();
+        Robot.crabArm.flapIn();
     }
 
 }

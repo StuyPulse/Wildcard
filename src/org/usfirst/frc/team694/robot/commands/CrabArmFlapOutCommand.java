@@ -7,17 +7,18 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class AcquirerTightenHoldCommand extends InstantCommand {
+public class CrabArmFlapOutCommand extends InstantCommand {
 
-    public AcquirerTightenHoldCommand() {
+    public CrabArmFlapOutCommand() {
         super();
-        requires(Robot.acquirer);
+        requires(Robot.crabArm);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     protected void initialize() {
-        Robot.acquirer.tightenCubeGrip();
+        Robot.crabArm.flapOut();
     }
+
 }

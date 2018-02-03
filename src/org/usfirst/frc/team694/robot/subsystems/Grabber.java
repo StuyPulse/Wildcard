@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Grabber extends Subsystem {
-    public Solenoid grabberSolenoid;
-    public boolean isOpen;
+    private Solenoid grabberSolenoid;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -24,17 +23,15 @@ public class Grabber extends Subsystem {
     }
 
     public void open() {
-        isOpen = true;
-        grabberSolenoid.set(isOpen);
+        grabberSolenoid.set(true);
     }
 
     public void close() {
-        isOpen = false;
-        grabberSolenoid.set(isOpen);
+        grabberSolenoid.set(false);
     }
 
     public void toggle() {
-        if (isOpen) {
+        if (grabberSolenoid.get()) {
             close();
         } else {
             open();

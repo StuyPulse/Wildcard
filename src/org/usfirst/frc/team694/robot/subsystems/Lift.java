@@ -24,9 +24,8 @@ public class Lift extends Subsystem {
     private WPI_VictorSPX outerLeftLiftMotor;
     private WPI_VictorSPX outerRightLiftMotor;
     
-    private Solenoid liftSolenoid; 
+    private Solenoid brakeSolenoid; 
 
-    private boolean brakeOn; 
   
     public Lift() {
         innerLeftLiftMotor = new WPI_TalonSRX(RobotMap.INNER_LEFT_LIFT_MOTOR_PORT);
@@ -47,8 +46,14 @@ public class Lift extends Subsystem {
         outerLeftLiftMotor.follow(innerLeftLiftMotor);
   
         innerLeftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+<<<<<<< HEAD
+        innerRightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+
+        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
+=======
         
         liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
+>>>>>>> 9c82eec1d04b46197034dbc135258e0520875315
         
         // Configures the limit switches (forward is top, reverse is bottom)
         innerLeftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
@@ -67,8 +72,7 @@ public class Lift extends Subsystem {
     }
 
     public void setBrakeOn() {
-        brakeOn = true;
-        liftSolenoid.set(brakeOn);
+        brakeSolenoid.set(true);
     }
     
     public void goUp() {
@@ -80,12 +84,11 @@ public class Lift extends Subsystem {
     }
 
     public void setBrakeOff() {
-        brakeOn = false;
-        liftSolenoid.set(brakeOn);
+        brakeSolenoid.set(false);
     }
 
     public void toggleBrake() {
-        if (brakeOn) {
+        if (brakeSolenoid.get()) {
             setBrakeOff();
         } else {
             setBrakeOn();
@@ -94,6 +97,7 @@ public class Lift extends Subsystem {
 
     public void stop() {
         innerLeftLiftMotor.set(0);
+        setBrakeOn();
     }
 
     public boolean isAtBottom() {
@@ -114,6 +118,6 @@ public class Lift extends Subsystem {
     }
     
     public double getLiftHeight() {
-        return getMaxLiftEncoderDistance() + RobotMap.MIN_HEIGHT_OF_GRABBER;
+        return getMaxLiftEncoderDistance() + RobotMap.MIN_HEIGHT_OF_LIFT;
     }
 }

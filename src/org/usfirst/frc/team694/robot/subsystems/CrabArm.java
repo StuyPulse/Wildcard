@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class CrabArm extends Subsystem {
-    public Solenoid crabArmDeploySolenoid;
-    public Solenoid crabArmSolenoidPush;
-    public WPI_VictorSPX leftCrabArmMotor;
-    public WPI_VictorSPX rightCrabArmMotor;
-    public SpeedControllerGroup crabArmMotors;
+    private Solenoid deploySolenoid;
+    private Solenoid flapSolenoid;
+    private WPI_VictorSPX leftCrabArmMotor;
+    private WPI_VictorSPX rightCrabArmMotor;
+    private SpeedControllerGroup crabArmMotors;
 
     public CrabArm() {
-        crabArmDeploySolenoid = new Solenoid(RobotMap.CRAB_ARM_SOLENOID_PORT);
+        deploySolenoid = new Solenoid(RobotMap.CRAB_ARM_SOLENOID_PORT);
         leftCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_LEFT_MOTOR_PORT);
         rightCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_RIGHT_MOTOR_PORT);
         leftCrabArmMotor.setNeutralMode(NeutralMode.Coast);
@@ -31,7 +31,7 @@ public class CrabArm extends Subsystem {
     }
 
     public void deploy() {
-        crabArmDeploySolenoid.set(true);
+        deploySolenoid.set(true);
     }
     
     public void acquire() {
@@ -42,6 +42,13 @@ public class CrabArm extends Subsystem {
         crabArmMotors.set(-1);
     }
 
+    public void flapOut() {
+        flapSolenoid.set(true);
+    }
+    
+    public void flapIn() {
+        flapSolenoid.set(false);
+    }
     public void initDefaultCommand() {
     }
 }
