@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lift extends Subsystem {
 
     private WPI_TalonSRX innerLeftLiftMotor;
-    private WPI_TalonSRX innerRightLiftMotor;
+    private WPI_TalonSRX innerRightLiftMotor;//We don't want to use the encoders.
     private WPI_VictorSPX outerLeftLiftMotor;
     private WPI_VictorSPX outerRightLiftMotor;
     
