@@ -33,8 +33,7 @@ public class Robot extends TimedRobot {
     public static Acquirer acquirer;
     public static CrabArm crabArm;
     public static Grabber grabber; 
-    public static IRSensor irsensor;  
-    public static Lift lift;
+        public static Lift lift;
  
     public static OI oi;
    
@@ -97,7 +96,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
+        //SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
     }
 
     @Override
