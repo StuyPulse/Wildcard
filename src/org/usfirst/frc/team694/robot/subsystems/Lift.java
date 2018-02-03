@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lift extends Subsystem {
 
     private WPI_TalonSRX innerLeftLiftMotor;
-    private WPI_TalonSRX innerRightLiftMotor;
+    private WPI_TalonSRX innerRightLiftMotor;//We don't want to use the encoders.
     private WPI_VictorSPX outerLeftLiftMotor;
     private WPI_VictorSPX outerRightLiftMotor;
     
@@ -30,7 +30,7 @@ public class Lift extends Subsystem {
   
     public Lift() {
         innerLeftLiftMotor = new WPI_TalonSRX(RobotMap.INNER_LEFT_LIFT_MOTOR_PORT);
-        innerRightLiftMotor = new WPI_TalonSRX(RobotMap.INNER_RIGHT_LIFT_MOTOR_PORT);
+        innerRightLiftMotor = new WPI_TalonSRX(RobotMap.INNER_RIGHT_LIFT_MOTOR_PORT);//We don't really need to use encoders here.
         
         outerLeftLiftMotor = new WPI_VictorSPX(RobotMap.OUTER_LEFT_LIFT_MOTOR_PORT);
         outerRightLiftMotor = new WPI_VictorSPX(RobotMap.OUTER_RIGHT_LIFT_MOTOR_PORT);
