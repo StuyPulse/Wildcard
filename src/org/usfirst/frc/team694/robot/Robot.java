@@ -37,7 +37,6 @@ public class Robot extends TimedRobot {
     public static Lift lift;
  
     public static OI oi;
-    public static boolean isBITCOINAutomation;
    
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -55,7 +54,6 @@ public class Robot extends TimedRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        isBITCOINAutomation = true;
     }
 
     /**

@@ -22,12 +22,12 @@ public class BITCOINCommand extends CommandGroup {
         }
     
     public void initialize() {
-        startBITCOINAutomation = Robot.isBITCOINAutomation;
+        startBITCOINAutomation = Robot.acquirer.isBITCOINAutomation;
     }
     public boolean isFinished() {
         //if started out in automation mode, 
         //will stop when reset button is pressed to make it not in automation mode
-        if (startBITCOINAutomation && !(Robot.isBITCOINAutomation)) {
+        if (startBITCOINAutomation && !(Robot.acquirer.isBITCOINAutomation)) {
             return true;
         // in all other cases, the command will run until completion
         } else {

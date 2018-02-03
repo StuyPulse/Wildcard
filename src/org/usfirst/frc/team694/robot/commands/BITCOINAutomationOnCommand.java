@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class ToggleBITCOINAutomationCommand extends InstantCommand {
-    public ToggleBITCOINAutomationCommand() {
+public class BITCOINAutomationOnCommand extends InstantCommand {
+    public BITCOINAutomationOnCommand() {
         super();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -16,7 +16,7 @@ public class ToggleBITCOINAutomationCommand extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-        Robot.isBITCOINAutomation = !(Robot.isBITCOINAutomation);
+        Robot.acquirer.isBITCOINAutomation = true;
     }
 
 }
