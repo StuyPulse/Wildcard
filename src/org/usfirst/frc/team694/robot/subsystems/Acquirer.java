@@ -53,7 +53,6 @@ public class Acquirer extends Subsystem {
 
     public void flipDown() {
         acquirerFlipSolenoid.set(false);
-        Timer.delay(0.5);
     }
     
     public void holdCube() {
