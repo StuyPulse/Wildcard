@@ -47,13 +47,12 @@ public class Lift extends Subsystem {
         outerLeftLiftMotor.follow(innerLeftLiftMotor);
   
         innerLeftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        innerRightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-
+        
         liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
         
         // Configures the limit switches (forward is top, reverse is bottom)
-        innerLeftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
-        innerLeftLiftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+        innerLeftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+        innerLeftLiftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
         
         // Line below resets encoders when the bottom limit switch is activated
         innerLeftLiftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
@@ -65,7 +64,6 @@ public class Lift extends Subsystem {
 
     public void resetEncoders() {
         innerLeftLiftMotor.setSelectedSensorPosition(0, 0, 0);
-        innerRightLiftMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
     public void setBrakeOn() {
@@ -110,12 +108,9 @@ public class Lift extends Subsystem {
         return innerLeftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
-    public double getRightLiftEncoderDistance() {
-        return innerRightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
-    }
 
     public double getMaxLiftEncoderDistance() {
-        return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());
+        return getLeftLiftEncoderDistance();
     }
     
     public double getLiftHeight() {
