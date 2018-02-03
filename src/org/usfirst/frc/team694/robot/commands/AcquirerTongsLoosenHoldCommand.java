@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class AcquirerLoosenHoldCommand extends InstantCommand {
+public class AcquirerTongsLoosenHoldCommand extends InstantCommand {
 
-    public AcquirerLoosenHoldCommand() {
+    public AcquirerTongsLoosenHoldCommand() {
         super();
         requires(Robot.acquirer);
         // Use requires() here to declare subsystem dependencies

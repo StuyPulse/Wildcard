@@ -19,7 +19,6 @@ public class LiftStopCommand extends InstantCommand {
     // Called once when the command executes
     protected void initialize() {
         Robot.lift.stop();
-        Robot.lift.setBrakeOn();
     }
 
 }
