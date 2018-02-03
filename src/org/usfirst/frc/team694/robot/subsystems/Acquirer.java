@@ -5,6 +5,7 @@ import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.util.IRSensor;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -21,6 +22,7 @@ public class Acquirer extends Subsystem {
     public WPI_VictorSPX rightAcquirerMotor;
     public Solenoid acquirerFlipSolenoid;
     public Solenoid acquirerSqueezeSolenoid; 
+
     public SpeedControllerGroup acquirerMotors;
     public IRSensor acquirerIRSensor;
     public boolean isBITCOINAutomation;
@@ -36,8 +38,11 @@ public class Acquirer extends Subsystem {
     public Acquirer() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
+        leftAcquirerMotor.setNeutralMode(NeutralMode.Coast);
+        rightAcquirerMotor.setNeutralMode(NeutralMode.Coast);
         acquirerFlipSolenoid = new Solenoid(RobotMap.ACQUIRER_FLIP_SOLENOID_PORT);
         acquirerSqueezeSolenoid = new Solenoid(RobotMap.ACQUIRER_SQUEEZE_SOLENOID_PORT);
+
         acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
         acquirerIRSensor = new IRSensor();
         isBITCOINAutomation = true;
