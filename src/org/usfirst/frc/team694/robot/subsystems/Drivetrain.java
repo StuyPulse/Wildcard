@@ -14,10 +14,7 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-<<<<<<< HEAD
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-=======
->>>>>>> master
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -47,11 +44,13 @@ public class Drivetrain extends Subsystem {
     private ADXRS450_Gyro gyro;
     
     private AHRS accelerometer;
+<<<<<<< HEAD
     
     private double bumpThreshold;
+=======
+>>>>>>> 8e7708d5ca066ca125a2452ec6c19f3622dc7139
 
     public Drivetrain() {
-        //TODO: Remove magic numbers: Add in RobotMap
         leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_FRONT_MOTOR_PORT);
         leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
@@ -93,8 +92,11 @@ public class Drivetrain extends Subsystem {
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
 
         gyro = new ADXRS450_Gyro();
+<<<<<<< HEAD
         
         bumpThreshold = -1;
+=======
+>>>>>>> 8e7708d5ca066ca125a2452ec6c19f3622dc7139
     }
 
     public double getLeftSpeed() {
@@ -194,6 +196,7 @@ public class Drivetrain extends Subsystem {
         // TODO Auto-generated method stub
         gyro.reset();
     }
+<<<<<<< HEAD
     
     public void resetAccelerometer() {
         accelerometer.reset();
@@ -224,3 +227,35 @@ public class Drivetrain extends Subsystem {
     }
 }
 
+=======
+
+    public void resetAccelerometer() {
+        accelerometer.reset();
+    }
+
+    public double getXAccel() {
+        return accelerometer.getWorldLinearAccelX();
+    }
+
+    public double getYAccel() {
+        return accelerometer.getWorldLinearAccelY();
+    }
+
+    public double getZAccel() {
+        return accelerometer.getWorldLinearAccelZ();
+    }
+
+    public double getZRotation() {
+        return accelerometer.getYaw();
+    }
+
+    public boolean testForBump() {
+        return getZAccel() > -1;
+    }
+
+    public boolean isCalibrating() {
+        return accelerometer.isCalibrating();
+    }
+
+}
+>>>>>>> 8e7708d5ca066ca125a2452ec6c19f3622dc7139
