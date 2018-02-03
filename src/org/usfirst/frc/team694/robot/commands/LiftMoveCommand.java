@@ -7,12 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftDownCommand extends Command {
-
-    public LiftDownCommand() {
+public class LiftMoveCommand extends Command {
+    double speed;
+    public LiftMoveCommand(double speed) {
         requires(Robot.lift);
+        this.speed = speed;
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassi
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +23,7 @@ public class LiftDownCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.lift.goDown();
+        Robot.lift.moveLift(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

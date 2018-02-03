@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Acquirer extends Subsystem {
+    //status needs to be renamed
+    public boolean acquirerRunning;
 
     public WPI_VictorSPX leftAcquirerMotor;
     public WPI_VictorSPX rightAcquirerMotor;
@@ -33,6 +35,14 @@ public class Acquirer extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         setDefaultCommand(new BITCOINCheckCommand());
+    }
+
+    public boolean isAcquirerRunning() {
+        return acquirerRunning;
+    }
+
+    public void setAcquirerRunning(boolean status) {
+        this.acquirerRunning = status;
     }
 
     public Acquirer() {
@@ -74,5 +84,9 @@ public class Acquirer extends Subsystem {
     
     public boolean getIsCubeDetected() {
           return (Robot.acquirer.acquirerIRSensor.isCubeDetected());
+    }
+    
+    public void stop() {
+        acquirerMotors.set(0);
     }
 }

@@ -7,8 +7,12 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.AcquirerFlipDownCommand;
+import org.usfirst.frc.team694.robot.commands.AcquirerFlipUpCommand;
+import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
+
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -21,6 +25,10 @@ public class OI {
     public OI() {
          driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
          operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
+         
+         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
+         operatorGamepad.getTopButton().whenPressed(new AcquirerFlipUpCommand());
+         operatorGamepad.getTopButton().whenReleased(new AcquirerFlipDownCommand());
     }
 
 }

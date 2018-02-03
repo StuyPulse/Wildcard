@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.*;
 import org.usfirst.frc.team694.robot.subsystems.Acquirer;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot {
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -113,8 +115,51 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        liftRun();
+        acquirerStatus();
+        dequirerRun();
     }
 
+    private void liftRun() {
+        if(oi.operatorGamepad.getLeftY() > 0.9) {
+            Scheduler.getInstance().add(new LiftMoveCommand(1));     
+        }
+        else if (oi.operatorGamepad.getLeftY() > 0.4) {
+            Scheduler.getInstance().add(new LiftMoveCommand(0.5));  
+        }
+        else if (oi.operatorGamepad.getLeftY() > -0.4) {
+            Scheduler.getInstance().add(new LiftStopCommand());
+        }
+        else if (oi.operatorGamepad.getLeftY() > -0.9) {
+            Scheduler.getInstance().add(new LiftMoveCommand(-0.5));
+        }
+        else {
+            Scheduler.getInstance().add(new LiftMoveCommand(-1));
+        }
+    }
+    private void acquirerStatus() {
+        // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
+        if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
+            Robot.acquirer.setAcquirerRunning(true);
+            Scheduler.getInstance().add(new AcquirerAcquireCommand() );    
+        }
+        else if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
+            Robot.acquirer.setAcquirerRunning(true);
+            Scheduler.getInstance().add(new AcquirerDeacquireCommand());
+        }
+        else {
+            Robot.acquirer.setAcquirerRunning(false);
+        }
+    }
+    
+    private void dequirerRun() {
+     // If statement checks to make sure that the Left Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
+        if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
+            Robot.acquirer.setAcquirerRunning(true);
+            Scheduler.getInstance().add(new AcquirerDeacquireCommand());
+        }
+    }
+    
     /**
      * This function is called periodically during test mode.
      */

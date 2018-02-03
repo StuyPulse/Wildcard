@@ -75,7 +75,6 @@ public class Lift extends Subsystem {
             setBrakeOn();
         }
     }
-
     public void goUp() {
         leftLiftMotor.set(1);
     }
@@ -83,11 +82,15 @@ public class Lift extends Subsystem {
     public void goDown() {
         leftLiftMotor.set(-1);
     }
-
+    
+    public void moveLift(double speed) {
+        leftLiftMotor.set(speed);
+        rightLiftMotor.set(speed);
+    }
+    
     public void stop() {
         leftLiftMotor.set(0);
     }
-
     public boolean isAtBottom() {
         return leftLiftMotor.getSensorCollection().isRevLimitSwitchClosed();
     }
