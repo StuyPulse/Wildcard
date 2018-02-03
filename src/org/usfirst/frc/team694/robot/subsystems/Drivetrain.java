@@ -14,10 +14,10 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
@@ -94,7 +94,6 @@ public class Drivetrain extends Subsystem {
         
         // Not sure about this next line: (what is kMXP?)
         accelerometer = new AHRS(SPI.Port.kMXP);
-
     }
 
     public double getLeftSpeed() {
