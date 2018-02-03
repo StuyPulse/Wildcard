@@ -38,7 +38,7 @@ public class IRSensor {
     private boolean isTimerRunning;
 
     public IRSensor() {
-        cubeSensor = new AnalogInput(RobotMap.IR_SENSOR_PORT);
+        cubeSensor = new AnalogInput(IR_SENSOR_PORT);
         timeSinceEntry = new Timer();
         isTimerRunning = false;
     }
@@ -48,7 +48,7 @@ public class IRSensor {
     }
 
     public static boolean isCubeDetected() {
-        return getSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", RobotMap.IR_SENSOR_THRESHOLD);
+        return getSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", IR_SENSOR_THRESHOLD);
     }
 
     // The use of LEDs for the robot is currently unclear so this needs further detail in the future
