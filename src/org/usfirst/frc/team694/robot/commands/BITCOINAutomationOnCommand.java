@@ -7,16 +7,16 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class CrabArmDeployCommand extends InstantCommand {
-
-    public CrabArmDeployCommand() {
-        requires(Robot.crabArm);
+public class BITCOINAutomationOnCommand extends InstantCommand {
+    public BITCOINAutomationOnCommand() {
+        super();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     protected void initialize() {
-        Robot.crabArm.deploy();
+        Robot.acquirer.isBITCOINAutomation = true;
     }
+
 }
