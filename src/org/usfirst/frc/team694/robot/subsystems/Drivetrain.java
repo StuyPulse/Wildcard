@@ -95,7 +95,10 @@ public class Drivetrain extends Subsystem {
         // Not sure about this next line: (what is kMXP?)
         accelerometer = new AHRS(SPI.Port.kMXP);
     }
-
+    @Override
+    public void periodic(){
+        updateSensors();
+    }
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }

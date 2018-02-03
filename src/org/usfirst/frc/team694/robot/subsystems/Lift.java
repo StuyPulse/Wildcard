@@ -41,8 +41,6 @@ public class Lift extends Subsystem {
         outerLeftLiftMotor.setNeutralMode(NeutralMode.Brake);
         outerRightLiftMotor.setNeutralMode(NeutralMode.Brake);
 
-        innerRightLiftMotor.setInverted(true);
-        outerRightLiftMotor.setInverted(true);
 
         innerRightLiftMotor.follow(innerLeftLiftMotor);
         outerRightLiftMotor.follow(innerLeftLiftMotor);

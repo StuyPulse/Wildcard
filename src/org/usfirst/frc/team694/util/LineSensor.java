@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 public class LineSensor {
-	private int framesExsisted = 0;
-	private int ambientLight;
-    private boolean isChangedBefore = false;
-    private int Max = 0;
+	private int framesExsisted = 0;// frames since beginning of instance
+	private int ambientLight;//Inital reading
+    private boolean isChangedBefore = false;//Used to remove noise.
+    private int Max = 0;///
     private int rawValue;
     private boolean setupDone = false;
     private AnalogInput mySensor;
