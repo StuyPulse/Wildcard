@@ -10,7 +10,25 @@ public class IRSensor {
     //Equation numbers
     //Resulted from forming an equation with graph using many coordinates and calculator
     //Power Regression used
+    /******************************************************************************
+     * IRSensor Constants
+     *****************************************************************************/
+    /******************************************************************************
+     * Note that these constants were copied from the RobotMap.java from Rafael.
+     * These require further testing.
+     *****************************************************************************/
 
+    public static final int IR_SENSOR_PORT = -1;
+    //TODO: Test the IR Sensor Threshold value. Should correspond with how far away the cube is from the IR sensor.
+    //Use SmartDashboard, track the IR Sensor Voltage value.
+    //The current value is accurate for when the cube is about 4 inches away from the IR sensor.
+    public static final double IR_SENSOR_THRESHOLD = 1;
+    public static final double IR_TIME_IN_MECHANISM_THRESHOLD = 1.0;
+
+    public static final double EQUATION_FACTOR = 12.23368994;
+    public static final double EQUATION_EXPONENT = -0.9779601588;
+    public static final double CONVERSION_FACTOR_CM_TO_INCHES = 0.393701;
+    
     private static AnalogInput cubeSensor;
 
     // Create instance of a timer that we can use to keep track of how long the
