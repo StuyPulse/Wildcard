@@ -16,6 +16,7 @@ public final class FieldMap {
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
     public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
     public static final double WIDTH_OF_BOT = 34.5; //
+    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = 2.5;
     public static final int WIDTH_OF_FIELD = 324; //
     public static final double DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP = 66.75; //
     public static final int DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH = 168; //
