@@ -1,6 +1,9 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
+import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
+import org.usfirst.frc.team694.util.IRSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -18,15 +21,18 @@ public class Acquirer extends Subsystem {
     public WPI_VictorSPX leftAcquirerMotor;
     public WPI_VictorSPX rightAcquirerMotor;
     public Solenoid acquirerFlipSolenoid;
-    public Solenoid acquirerHoldSolenoid; 
+    public Solenoid acquirerSqueezeSolenoid; 
+
     public SpeedControllerGroup acquirerMotors;
+    public IRSensor acquirerIRSensor;
+    public boolean isBITCOINAutomation;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new BITCOINCheckCommand());
     }
 
     public Acquirer() {
@@ -35,8 +41,11 @@ public class Acquirer extends Subsystem {
         leftAcquirerMotor.setNeutralMode(NeutralMode.Coast);
         rightAcquirerMotor.setNeutralMode(NeutralMode.Coast);
         acquirerFlipSolenoid = new Solenoid(RobotMap.ACQUIRER_FLIP_SOLENOID_PORT);
-        acquirerHoldSolenoid = new Solenoid(RobotMap.ACQUIRER_HOLD_SOLENOID_PORT);
+        acquirerSqueezeSolenoid = new Solenoid(RobotMap.ACQUIRER_SQUEEZE_SOLENOID_PORT);
+
         acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
+        acquirerIRSensor = new IRSensor();
+        isBITCOINAutomation = true;
     }
 
     public void acquire() {
@@ -55,11 +64,15 @@ public class Acquirer extends Subsystem {
         acquirerFlipSolenoid.set(false);
     }
     
-    public void holdCube() {
-        acquirerHoldSolenoid.set(true);
+    public void tightenCubeGrip() {
+        acquirerSqueezeSolenoid.set(true);
     }
     
-    public void releaseCube() {
-        acquirerHoldSolenoid.set(false);
+    public void loosenCubeGrip() {
+        acquirerSqueezeSolenoid.set(false);
+    }
+    
+    public boolean getIsCubeDetected() {
+          return (Robot.acquirer.acquirerIRSensor.isCubeDetected());
     }
 }

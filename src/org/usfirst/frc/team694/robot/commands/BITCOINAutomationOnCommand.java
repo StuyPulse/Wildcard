@@ -7,18 +7,16 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class AcquirerFlipUpCommand extends InstantCommand {
-
-    public AcquirerFlipUpCommand() {
+public class BITCOINAutomationOnCommand extends InstantCommand {
+    public BITCOINAutomationOnCommand() {
+        super();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        super();
-        requires(Robot.acquirer);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     protected void initialize() {
-        Robot.acquirer.flipUp();
+        Robot.acquirer.isBITCOINAutomation = true;
     }
 
 }
