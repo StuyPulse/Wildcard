@@ -41,13 +41,19 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
-    public static final int LEFT_LIFT_MOTOR_PORT = -1;
-    public static final int RIGHT_LIFT_MOTOR_PORT = -1;
+    public static final int INNER_LEFT_LIFT_MOTOR_PORT = -1;
+    public static final int INNER_RIGHT_LIFT_MOTOR_PORT = -1;
+    public static final int OUTER_LEFT_LIFT_MOTOR_PORT = -1;
+    public static final int OUTER_RIGHT_LIFT_MOTOR_PORT = -1;
 
     /***************************************************************************
      * Lift Constants
      *************************************************************************/
-    public static final double LIFT_ENCODER_RAW_MULTIPLIER = -1;
+    public static final double DIAMETER_OF_ENCODER_SPROCKET = 2.873; 
+    public static final double TOTAL_CARRIAGE_MOVEMENT = 95.25;
+    public static final double LIFT_ENCODER_RAW_MULTIPLIER = DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
+    public static final double MIN_HEIGHT_OF_GRABBER = 23;
+    public static final double MAX_HEIGHT_OF_LIFT = TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_GRABBER;
 
     /****************************************************************************
      * Solenoid Ports
