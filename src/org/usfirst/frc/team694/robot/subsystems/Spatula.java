@@ -1,30 +1,28 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
-import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
-import org.usfirst.frc.team694.util.IRSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Acquirer extends Subsystem {
+public class Spatula extends Subsystem {
 
-    private WPI_VictorSPX leftAcquirerMotor;
-    private WPI_VictorSPX rightAcquirerMotor;
-    private Solenoid acquirerFlipSolenoid;
-    private Solenoid acquirerSqueezeSolenoid; 
+    private WPI_VictorSPX leftSpatulaMotor;
+    private WPI_VictorSPX rightSpatulaMotor;
+    private Solenoid spatulaFlipSolenoid;
+    private Solenoid spatulaTongsSolenoid; 
 
-    private SpeedControllerGroup acquirerMotors;
-    private IRSensor acquirerIRSensor;
+    private SpeedControllerGroup spatulaMotors;
+    private DigitalInput limitSwitch;
     public boolean isBITCOINAutomation;
 
     // Put methods for controlling this subsystem
@@ -35,44 +33,46 @@ public class Acquirer extends Subsystem {
         setDefaultCommand(new BITCOINCheckCommand());
     }
 
-    public Acquirer() {
-        leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
-        rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
-        leftAcquirerMotor.setNeutralMode(NeutralMode.Coast);
-        rightAcquirerMotor.setNeutralMode(NeutralMode.Coast);
-        acquirerFlipSolenoid = new Solenoid(RobotMap.ACQUIRER_FLIP_SOLENOID_PORT);
-        acquirerSqueezeSolenoid = new Solenoid(RobotMap.ACQUIRER_SQUEEZE_SOLENOID_PORT);
+    public Spatula() {
+        leftSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_LEFT_MOTOR_PORT);
+        rightSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_RIGHT_MOTOR_PORT);
+        leftSpatulaMotor.setNeutralMode(NeutralMode.Coast);
+        rightSpatulaMotor.setNeutralMode(NeutralMode.Coast);
+        rightSpatulaMotor.setInverted(true);
+        
+        spatulaFlipSolenoid = new Solenoid(RobotMap.SPATULA_FLIP_SOLENOID_PORT);
+        spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
+        spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
 
-        acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
-        acquirerIRSensor = new IRSensor();
         isBITCOINAutomation = true;
+        limitSwitch = new DigitalInput(1);
     }
 
     public void acquire() {
-        acquirerMotors.set(1);
+        spatulaMotors.set(1);
     }
 
     public void deacquire() {
-        acquirerMotors.set(-1);
+        spatulaMotors.set(-1);
     }
 
     public void flipUp() {
-        acquirerFlipSolenoid.set(true);
+        spatulaFlipSolenoid.set(true);
     }
 
     public void flipDown() {
-        acquirerFlipSolenoid.set(false);
+        spatulaFlipSolenoid.set(false);
     }
     
     public void tightenCubeGrip() {
-        acquirerSqueezeSolenoid.set(true);
+        spatulaTongsSolenoid.set(true);
     }
     
     public void loosenCubeGrip() {
-        acquirerSqueezeSolenoid.set(false);
+        spatulaTongsSolenoid.set(false);
     }
     
-    public boolean getIsCubeDetected() {
-          return acquirerIRSensor.isCubeDetected();
+    public boolean getCurrentStateOfLimitSwitch() {
+        return limitSwitch.get();
     }
 }
