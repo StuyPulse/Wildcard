@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class CrabArmFlapOutCommand extends InstantCommand {
+public class CrabArmStopCommand extends InstantCommand {
 
-    public CrabArmFlapOutCommand() {
+    public CrabArmStopCommand() {
         requires(Robot.crabArm);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.crabArm.flapOut();
+        Robot.crabArm.stop();
     }
 }

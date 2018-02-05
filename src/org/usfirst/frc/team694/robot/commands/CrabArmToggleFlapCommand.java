@@ -7,17 +7,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class CrabArmDeployInitialCommand extends InstantCommand {
+public class CrabArmToggleFlapCommand extends InstantCommand {
 
-    public CrabArmDeployInitialCommand() {
-        super();
+    public CrabArmToggleFlapCommand() {
         requires(Robot.crabArm);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.crabArm.deploy();
+        Robot.crabArm.flapToggle();
     }
 }
