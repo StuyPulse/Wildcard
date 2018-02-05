@@ -29,9 +29,14 @@ public final class RobotMap {
     /**************************************************************************
      * Acquirer Motor Ports
      *************************************************************************/
-    public static final int ACQUIRER_LEFT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_RIGHT_MOTOR_PORT = -1;
+    public static final int SPATULA_LEFT_MOTOR_PORT = -1;
+    public static final int SPATULA_RIGHT_MOTOR_PORT = -1;
 
+    /**************************************************************************
+     * Acquirer Limit Switch
+     *************************************************************************/
+    public static final int ACQUIRER_LIMIT_SWITCH_PORT = -1;
+    
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
@@ -58,9 +63,15 @@ public final class RobotMap {
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     public static final int GRABBER_SOLENOID_PORT = -1;
+
     public static final int LIFT_BRAKE_SOLENOID_CHANNEL = -1;
+    public static final int SPATULA_FLIP_SOLENOID_PORT = -1;
+    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
+
+    public static final int LIFT_BRAKE_SOLENOID_PORT = -1;
     public static final int ACQUIRER_FLIP_SOLENOID_PORT = -1;
     public static final int ACQUIRER_SQUEEZE_SOLENOID_PORT = -1; 
+
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
