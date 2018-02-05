@@ -129,6 +129,9 @@ public class Drivetrain extends Subsystem {
         differentialDrive.arcadeDrive(speed, rotation);
     }
 
+    public void curvatureDrive(double speed, double rotation, boolean turn) {
+        differentialDrive.curvatureDrive(speed, rotation, turn);
+    }
     public void stop() {
         tankDrive(0, 0);
     }
@@ -144,6 +147,10 @@ public class Drivetrain extends Subsystem {
     public void toggleGearShift() {
         boolean m = !(gearShift.get());
         gearShift.set(m);
+    }
+    
+    public void gearShiftInput(boolean isShifted) {
+        gearShift.set(isShifted);
     }
     public void resetLineSensors(){
         leftLineSensor.resetAmbient();
