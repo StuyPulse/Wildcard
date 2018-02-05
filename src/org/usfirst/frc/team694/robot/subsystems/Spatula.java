@@ -4,8 +4,6 @@ import org.usfirst.frc.team694.robot.RobotMap;
 
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 
-import org.usfirst.frc.team694.util.IRSensor;
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
