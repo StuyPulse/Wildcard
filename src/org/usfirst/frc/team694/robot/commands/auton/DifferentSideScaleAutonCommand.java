@@ -3,7 +3,7 @@ package org.usfirst.frc.team694.robot.commands.auton;
 import org.usfirst.frc.team694.robot.FieldMap;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMaxUpCommand;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -13,13 +13,13 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE, speed));
         addSequential(new DrivetrainMoveInchesEncoderCommand(FieldMap.DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE, speed));
         addSequential(new DrivetrainRotateDegreesPIDCommand(90));
-        addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM, speed));
+        addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE, speed));
         addSequential(new DrivetrainMoveToLineCommand(90, speed));
         addSequential(new DrivetrainMoveToLineCommand(90, speed));
         addSequential(new DrivetrainMoveInchesEncoderCommand(17, speed));
         addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
         addSequential(new DrivetrainMoveToLineCommand(52.765, speed));
-        addSequential(new LiftMaxUpCommand());
+        addSequential(new LiftMoveToHeightCommand(FieldMap.HIGHEST_PLATE_HEIGHT_OF_SCALE + 6));
         addSequential(new GrabberOpenCommand());
         /*
             addSequential(new DrivetrainMoveToLineCommand(1, speed));
