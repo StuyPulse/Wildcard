@@ -11,12 +11,8 @@ public final class FieldMap {
     //These distances is us starting on the left side of the field
     //all measurements are in inches or degrees if specified 
     //anything with // could be changed due to the actual field measure 
-    
     //These are the measurements that need to be measured out before match.
-    public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
-    public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
-    public static final double WIDTH_OF_BOT = 34.5; //
-    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = 2.5;
+    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (RobotMap.LENGTH_OF_BOT - RobotMap.WIDTH_OF_BOT) / 2;//
     public static final int WIDTH_OF_FIELD = 324; //
     public static final double DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP = 66.75; //
     public static final int DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH = 168; //
@@ -35,9 +31,9 @@ public final class FieldMap {
     
     //**************************************************************************************************************
     
-    public static final double DIFFERENCE_BETWEEN_LENGTH_AND_WIDTH_OF_BOT = LENGTH_OF_BOT - WIDTH_OF_BOT;
-    public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
-    public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
+    public static final double DIFFERENCE_BETWEEN_LENGTH_AND_WIDTH_OF_BOT = RobotMap.LENGTH_OF_BOT - RobotMap.WIDTH_OF_BOT;
+    public static final double MIDDLE_OF_BOT_WIDTHWISE = RobotMap.WIDTH_OF_BOT / 2;
+    public static final double MIDDLE_OF_BOT_LENGTHWISE = RobotMap.LENGTH_OF_BOT / 2;
     
     public static final int LENGTH_OF_FIELD = WIDTH_OF_FIELD * 2;
     
@@ -60,16 +56,16 @@ public final class FieldMap {
     //**************************************************************************************************************
     //Scale auton where the bot is on the same side as the alliance scale and bot will be in the null territory
     public static final int DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204;
-    public static final double DISTANCE_TO_MOVE_INTO_NULL_BUMP = MIDDLE_OF_BOT_LENGTHWISE - DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
+    public static final double DISTANCE_TO_MOVE_INTO_NULL_BUMP = MIDDLE_OF_BOT_LENGTHWISE - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
     public static final double DISTANCE_TO_TRAVEL_BACKWARDS = DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT - 2.5; 
-    public static final double DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE = DISTANCE_FROM_BORDER_TO_SCALE_EDGE - LENGTH_OF_BOT;
+    public static final double DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE = DISTANCE_FROM_BORDER_TO_SCALE_EDGE - RobotMap.LENGTH_OF_BOT;
     
     //Scale auton where the bot is on the same side as the alliance scale and bot will turn at null territory line
     public static final int DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY = DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY - DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE;
     public static final double DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT = DISTANCE_FROM_BORDER_TO_SCALE_EDGE - DISTANCE_FROM_BORDER_TO_ROBOT_STARTING_POINT;
     public static final double DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT_SQUARED = DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT * DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT;
     public static final double DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY_SQUARED = DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY * DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY;
-    public static final double DISTANCE_TO_MOVE_BACKWARD_BEFORE_TURN = DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
+    public static final double DISTANCE_TO_MOVE_BACKWARD_BEFORE_TURN = RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
     public static final double DISTANCE_TO_TRAVEL_TO_REACH_SCALE_CORNER = Math.sqrt(DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT_SQUARED + DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY_SQUARED);
     public static final double DEGREE_OF_ANGLE_TO_REACH_IDEAL_STARTING_POINT_FROM_NULL_TERRITORY_LINE = -1 * Math.toDegrees(Math.atan(DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT / DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY));
     
@@ -79,7 +75,7 @@ public final class FieldMap {
     public static final double DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED = DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE / 2;
     public static final double DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE = DISTANCE_FROM_AUTO_LINE_TO_FAR_SIDE_OF_SWITCH + DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED + (MIDDLE_OF_BOT_LENGTHWISE - DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT); 
     public static final double DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN = (DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE - (DISTANCE_FROM_BORDER_TO_OTHER_EDGE_OF_ROBOT + 2.5)) + DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
-    public static final double DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE = WIDTH_OF_BOT - DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT; 
+    public static final double DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE = RobotMap.WIDTH_OF_BOT - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT; 
     public static final double DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE = DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_SCALE_SIDE - DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
     
     //**************************************************************************************************************
