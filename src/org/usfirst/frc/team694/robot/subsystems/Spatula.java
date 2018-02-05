@@ -1,7 +1,10 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
+
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
+
+import org.usfirst.frc.team694.util.IRSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -21,11 +24,15 @@ public class Spatula extends Subsystem {
 
     private SpeedControllerGroup spatulaMotors;
     private DigitalInput limitSwitch;
+    
+    private SpeedControllerGroup acquirerMotors;
+    private DigitalInput acquirerLimitSwitch;
+
     public boolean isBITCOINAutomation;
 
     public void initDefaultCommand() {
-        setDefaultCommand(new BITCOINCheckCommand());
-    }
+        // Set the default command for a subsystem here.
+}
 
     public Spatula() {
         leftSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_LEFT_MOTOR_PORT);
@@ -38,6 +45,8 @@ public class Spatula extends Subsystem {
         spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
 
+        acquirerMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
+        acquirerLimitSwitch = new DigitalInput(RobotMap.ACQUIRER_LIMIT_SWITCH_PORT);
         isBITCOINAutomation = true;
         limitSwitch = new DigitalInput(1);
     }
@@ -48,6 +57,10 @@ public class Spatula extends Subsystem {
 
     public void deacquire() {
         spatulaMotors.set(-1);
+    }
+    
+    public void stop() {
+        acquirerMotors.set(0);
     }
 
     public void flipUp() {
@@ -68,5 +81,10 @@ public class Spatula extends Subsystem {
     
     public boolean getCurrentStateOfLimitSwitch() {
         return limitSwitch.get();
+    }
+    
+    public boolean getIsCubeDetected() {
+          return acquirerLimitSwitch.get();
+
     }
 }

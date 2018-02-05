@@ -1,14 +1,15 @@
 package org.usfirst.frc.team694.robot.commands;
 
-import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BITCOINCommand extends CommandGroup {
-    private boolean startBITCOINAutomation; //records initial automation mode
+
+/**
+ *
+ */    
+public class BITCOINManualCommand extends CommandGroup {
     private double height = 2;
-    public BITCOINCommand() {
+    public BITCOINManualCommand() {
         addSequential(new AcquirerTongsTightenHoldCommand());
         addSequential(new CrabArmFlapOutCommand());
         addSequential(new AcquirerFlipUpCommand());
@@ -18,14 +19,7 @@ public class BITCOINCommand extends CommandGroup {
         addSequential(new AcquirerTongsLoosenHoldCommand());
         }
     
-    public void initialize() {
-        startBITCOINAutomation = Robot.spatula.isBITCOINAutomation;
-    }
     public boolean isFinished() {
-        if (startBITCOINAutomation && !(Robot.spatula.isBITCOINAutomation)) {
-            return true;
-        } else {
-            return super.isFinished();
-        }
-    }
+        return false;
+   }
 }
