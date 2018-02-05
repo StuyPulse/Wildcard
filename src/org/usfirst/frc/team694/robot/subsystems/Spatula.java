@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Acquirer extends Subsystem {
+public class Spatula extends Subsystem {
 
     private WPI_VictorSPX leftAcquirerMotor;
     private WPI_VictorSPX rightAcquirerMotor;
@@ -28,7 +28,7 @@ public class Acquirer extends Subsystem {
         setDefaultCommand(new BITCOINCheckCommand());
     }
 
-    public Acquirer() {
+    public Spatula() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
         leftAcquirerMotor.setNeutralMode(NeutralMode.Coast);

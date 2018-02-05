@@ -46,7 +46,7 @@ public class Lift extends Subsystem {
 
         innerRightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
+        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
 
         
         // Configures the limit switches (forward is top, reverse is bottom)
