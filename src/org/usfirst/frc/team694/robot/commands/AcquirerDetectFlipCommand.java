@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AcquirerDetectFlipCommand extends Command {
 
     public AcquirerDetectFlipCommand() {
-        requires(Robot.acquirer);
+        requires(Robot.spatula);
     }
 
     protected void initialize() {
@@ -18,7 +18,7 @@ public class AcquirerDetectFlipCommand extends Command {
 
     protected void execute() {
         if (IRSensor.isCubeDetected()) {
-            Robot.acquirer.flipUp();
+            Robot.spatula.flipUp();
         }
     }
 

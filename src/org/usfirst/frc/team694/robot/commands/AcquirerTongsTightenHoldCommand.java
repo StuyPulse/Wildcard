@@ -8,10 +8,10 @@ public class AcquirerTongsTightenHoldCommand extends InstantCommand {
     
     public AcquirerTongsTightenHoldCommand() {
         super();
-        requires(Robot.acquirer);
+        requires(Robot.spatula);
     }
 
     protected void initialize() {
-        Robot.acquirer.tightenCubeGrip();
+        Robot.spatula.tightenCubeGrip();
     }
 }

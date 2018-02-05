@@ -7,10 +7,10 @@ public class AcquirerFlipDownCommand extends InstantCommand {
 
     public AcquirerFlipDownCommand() {
         super();
-        requires(Robot.acquirer);
+        requires(Robot.spatula);
     }
 
     protected void initialize() {
-        Robot.acquirer.flipDown();
+        Robot.spatula.flipDown();
     }
 }

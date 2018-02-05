@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AcquirerDeacquireCommand extends Command {
 
     public AcquirerDeacquireCommand() {
-        requires(Robot.acquirer);
+        requires(Robot.spatula);
     }
     
     protected void initialize() {
     }
 
     protected void execute() {
-        Robot.acquirer.deacquire();
+        Robot.spatula.deacquire();
     }
 
     protected boolean isFinished() {

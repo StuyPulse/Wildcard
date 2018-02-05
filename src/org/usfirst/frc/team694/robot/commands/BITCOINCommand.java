@@ -19,10 +19,10 @@ public class BITCOINCommand extends CommandGroup {
         }
     
     public void initialize() {
-        startBITCOINAutomation = Robot.acquirer.isBITCOINAutomation;
+        startBITCOINAutomation = Robot.spatula.isBITCOINAutomation;
     }
     public boolean isFinished() {
-        if (startBITCOINAutomation && !(Robot.acquirer.isBITCOINAutomation)) {
+        if (startBITCOINAutomation && !(Robot.spatula.isBITCOINAutomation)) {
             return true;
         } else {
             return super.isFinished();
