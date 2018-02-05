@@ -6,16 +6,16 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BITCOINCommand extends CommandGroup {
-    public boolean startBITCOINAutomation; //records initial automation mode
-    public double height = 2;
+    private boolean startBITCOINAutomation; //records initial automation mode
+    private double height = 2;
     public BITCOINCommand() {
-        addSequential(new AcquirerTightenHoldCommand());
+        addSequential(new AcquirerTongsTightenHoldCommand());
+        addSequential(new CrabArmFlapOutCommand());
         addSequential(new AcquirerFlipUpCommand());
-        addSequential(new LiftMaxDownCommand());
-        //TODO when merge to branch with command, uncomment
-        //addSequential(new LiftMoveUpHeightCommand(height));
-        addSequential(new AcquirerLoosenHoldCommand());
+        addSequential(new LiftMoveToHeightCommand(0));
+        addSequential(new LiftMoveToHeightCommand(height));
         addSequential(new GrabberCloseCommand());
+        addSequential(new AcquirerTongsLoosenHoldCommand());
         }
     
     public void initialize() {

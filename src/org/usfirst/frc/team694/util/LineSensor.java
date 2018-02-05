@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 public class LineSensor {
+    /******************************************************************************
+     * Line Sensor Constants
+     *****************************************************************************/
+    public static final double DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME = 3;
+    public static final double DRIVETRAIN_LINE_SENSOR_THRESHOLD = -1.0;
+    
 	private int framesExsisted = 0;// frames since beginning of instance, as first 5 are used to callibrate.
 	private int ambientLight;//Initial reading of carpet
     private boolean isChangedBefore = false;//Used to remove noise.
@@ -21,7 +27,7 @@ public class LineSensor {
 		return rawValue;
 	}
 	public void initialLoop(){
-	    setupDone = (framesExsisted == RobotMap.DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME);//used the initializing time to get initial readings. If it is passt the time, it's done reading.
+	    setupDone = (framesExsisted == DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME);//used the initializing time to get initial readings. If it is passt the time, it's done reading.
 	    ambientLight = rawValue;//set rug color to reading.
 	}
 	public void mainLoop(){
@@ -41,7 +47,7 @@ public class LineSensor {
 		}
 		System.out.println(Max);
 		boolean temp = isChangedBefore;//used to make sure that the previous deviation and current deviation are different, as it might just be noise from moving the bot.
-		isChangedBefore = ((Math.abs(rawValue - ambientLight)) < RobotMap.DRIVETRAIN_LINE_SENSOR_THRESHOLD);
-		return (!temp) && ((Math.abs(rawValue - ambientLight)) < RobotMap.DRIVETRAIN_LINE_SENSOR_THRESHOLD);
+		isChangedBefore = ((Math.abs(rawValue - ambientLight)) < DRIVETRAIN_LINE_SENSOR_THRESHOLD);
+		return (!temp) && ((Math.abs(rawValue - ambientLight)) < DRIVETRAIN_LINE_SENSOR_THRESHOLD);
 	}
 }

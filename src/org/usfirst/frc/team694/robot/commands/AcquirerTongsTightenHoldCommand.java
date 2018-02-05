@@ -4,9 +4,9 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class AcquirerTightenHoldCommand extends InstantCommand {
-
-    public AcquirerTightenHoldCommand() {
+public class AcquirerTongsTightenHoldCommand extends InstantCommand {
+    
+    public AcquirerTongsTightenHoldCommand() {
         super();
         requires(Robot.acquirer);
     }

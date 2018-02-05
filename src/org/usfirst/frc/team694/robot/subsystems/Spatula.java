@@ -15,13 +15,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Acquirer extends Subsystem {
 
-    public WPI_VictorSPX leftAcquirerMotor;
-    public WPI_VictorSPX rightAcquirerMotor;
-    public Solenoid acquirerFlipSolenoid;
-    public Solenoid acquirerSqueezeSolenoid; 
+    private WPI_VictorSPX leftAcquirerMotor;
+    private WPI_VictorSPX rightAcquirerMotor;
+    private Solenoid acquirerFlipSolenoid;
+    private Solenoid acquirerSqueezeSolenoid; 
 
-    public SpeedControllerGroup acquirerMotors;
-    public IRSensor acquirerIRSensor;
+    private SpeedControllerGroup acquirerMotors;
+    private IRSensor acquirerIRSensor;
     public boolean isBITCOINAutomation;
 
     public void initDefaultCommand() {
@@ -66,6 +66,6 @@ public class Acquirer extends Subsystem {
     }
     
     public boolean getIsCubeDetected() {
-          return (Robot.acquirer.acquirerIRSensor.isCubeDetected());
+          return acquirerIRSensor.isCubeDetected();
     }
 }

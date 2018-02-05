@@ -26,6 +26,5 @@ public class LiftDownCommand extends Command {
     }
 
     protected void interrupted() {
-        Robot.lift.setBrakeOn();
     }
 }
