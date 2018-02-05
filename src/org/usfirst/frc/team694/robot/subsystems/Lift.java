@@ -14,9 +14,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Lift extends Subsystem {
 
     private WPI_TalonSRX innerLeftLiftMotor;
@@ -46,14 +43,11 @@ public class Lift extends Subsystem {
         outerLeftLiftMotor.follow(innerLeftLiftMotor);
   
         innerLeftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-<<<<<<< HEAD
+
         innerRightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
-=======
-        
-        liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
->>>>>>> 9c82eec1d04b46197034dbc135258e0520875315
+
         
         // Configures the limit switches (forward is top, reverse is bottom)
         innerLeftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);

@@ -7,30 +7,24 @@
 
 package org.usfirst.frc.team694.robot;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
 public final class RobotMap {
 
     /**************************************************************************
      * Gamepad Ports
      *************************************************************************/
-    public static final int DRIVER_GAMEPAD_PORT = 1;
+    public static final int DRIVER_GAMEPAD_PORT = 0;
     public static final int OPERATOR_GAMEPAD_PORT = 1;
 
     /**************************************************************************
      * Drivetrain Motor Ports
      *************************************************************************/
-    public static final int LEFT_FRONT_MOTOR_PORT = -1;
+    public static final int LEFT_TOP_MOTOR_PORT = -1;
     public static final int LEFT_MIDDLE_MOTOR_PORT = -1;
     public static final int LEFT_BOTTOM_MOTOR_PORT = -1;
 
-    public static final int RIGHT_FRONT_MOTOR_PORT = -1;
+    public static final int RIGHT_TOP_MOTOR_PORT = -1;
     public static final int RIGHT_MIDDLE_MOTOR_PORT = -1;
-    public static final int RIGHT_REAR_MOTOR_PORT = -1;
+    public static final int RIGHT_BOTTOM_MOTOR_PORT = -1;
 
     /**************************************************************************
      * Acquirer Motor Ports
@@ -59,7 +53,8 @@ public final class RobotMap {
      * Solenoid Ports
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = -1;
-    public static final int CRAB_ARM_SOLENOID_PORT = -1;
+    public static final int CRAB_ARM_DEPLOY_SOLENOID_PORT = -1;
+    public static final int CRAB_ARM_FLAPPER_SOLENOID_PORT = -1;
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     public static final int GRABBER_SOLENOID_PORT = -1;
@@ -80,9 +75,10 @@ public final class RobotMap {
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
     public static final double DRIVETRAIN_ENCODERS_FACTOR = 4.0;
     public static final double DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION = Math.PI * DRIVETRAIN_WHEEL_DIAMETER;
-    public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
-
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE = DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
-    public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE
-            / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
+    
+    /** DRIVETRAIN_RAW_MULTIPLIER: We multiply by 4 because the encoder has 4 Quadrants, and each Quadrant passes 256 pulses. **/
+    public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
+    
+
 }

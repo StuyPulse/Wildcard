@@ -4,25 +4,27 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class LiftUpCommand extends Command {
+public class LiftMaxDownCommand extends Command {
 
-    public LiftUpCommand() {
+    public LiftMaxDownCommand() {
         requires(Robot.lift);
     }
-
+    
     protected void initialize() {
         Robot.lift.setBrakeOff();
     }
 
     protected void execute() {
-        Robot.lift.goUp();
+        Robot.lift.goDown();
     }
 
     protected boolean isFinished() {
-        return false;
+        return Robot.lift.isAtBottom();
     }
 
     protected void end() {
+        Robot.lift.stop();
+        Robot.lift.setBrakeOn();
     }
 
     protected void interrupted() {
