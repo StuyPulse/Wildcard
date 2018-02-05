@@ -24,7 +24,7 @@ public class BITCOINCheckCommand extends ConditionalCommand {
 
     @Override
     protected boolean condition() {
-        if ((Robot.acquirer.isBITCOINAutomation && Robot.acquirer.getIsCubeDetected()) 
+        if ((Robot.spatula.isBITCOINAutomation && Robot.spatula.getIsCubeDetected()) 
                 || (Robot.oi.operatorGamepad.getRawBottomButton())) {
             return true;
         } else {

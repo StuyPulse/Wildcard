@@ -8,10 +8,10 @@ public class AcquirerFlipUpCommand extends InstantCommand {
 
     public AcquirerFlipUpCommand() {
         super();
-        requires(Robot.acquirer);
+        requires(Robot.spatula);
     }
 
     protected void initialize() {
-        Robot.acquirer.flipUp();
+        Robot.spatula.flipUp();
     }
 }

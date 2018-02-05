@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.subsystems.Acquirer;
+import org.usfirst.frc.team694.robot.subsystems.Spatula;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 public class Robot extends IterativeRobot {
 
     public static Drivetrain drivetrain;
-    public static Acquirer acquirer;
+    public static Spatula spatula;
     public static CrabArm crabArm;
     public static Grabber grabber; 
         public static Lift lift;
@@ -35,7 +35,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         drivetrain = new Drivetrain();
-        acquirer = new Acquirer();
+        spatula = new Spatula();
         crabArm = new CrabArm();
         grabber = new Grabber();
         lift = new Lift();
