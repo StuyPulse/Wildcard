@@ -1,16 +1,14 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
-import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.util.IRSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -24,7 +22,7 @@ public class Acquirer extends Subsystem {
     private Solenoid acquirerSqueezeSolenoid; 
 
     private SpeedControllerGroup acquirerMotors;
-    private IRSensor acquirerIRSensor;
+    private DigitalInput acquirerLimitSwitch;
     public boolean isBITCOINAutomation;
 
     // Put methods for controlling this subsystem
@@ -32,7 +30,6 @@ public class Acquirer extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new BITCOINCheckCommand());
     }
 
     public Acquirer() {
@@ -44,7 +41,7 @@ public class Acquirer extends Subsystem {
         acquirerSqueezeSolenoid = new Solenoid(RobotMap.ACQUIRER_SQUEEZE_SOLENOID_PORT);
 
         acquirerMotors = new SpeedControllerGroup(leftAcquirerMotor, rightAcquirerMotor);
-        acquirerIRSensor = new IRSensor();
+        acquirerLimitSwitch = new DigitalInput(RobotMap.ACQUIRER_LIMIT_SWITCH_PORT);
         isBITCOINAutomation = true;
     }
 
@@ -54,6 +51,10 @@ public class Acquirer extends Subsystem {
 
     public void deacquire() {
         acquirerMotors.set(-1);
+    }
+    
+    public void stop() {
+        acquirerMotors.set(0);
     }
 
     public void flipUp() {
@@ -73,6 +74,6 @@ public class Acquirer extends Subsystem {
     }
     
     public boolean getIsCubeDetected() {
-          return acquirerIRSensor.isCubeDetected();
+          return acquirerLimitSwitch.get();
     }
 }

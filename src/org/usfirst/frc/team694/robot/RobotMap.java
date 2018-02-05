@@ -38,6 +38,11 @@ public final class RobotMap {
     public static final int ACQUIRER_LEFT_MOTOR_PORT = -1;
     public static final int ACQUIRER_RIGHT_MOTOR_PORT = -1;
 
+    /**************************************************************************
+     * Acquirer Limit Switch
+     *************************************************************************/
+    public static final int ACQUIRER_LIMIT_SWITCH_PORT = -1;
+    
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
