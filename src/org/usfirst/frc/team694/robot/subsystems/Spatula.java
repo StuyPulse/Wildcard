@@ -11,10 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
-public class Acquirer extends Subsystem {
+public class Spatula extends Subsystem {
 
     private WPI_VictorSPX leftAcquirerMotor;
     private WPI_VictorSPX rightAcquirerMotor;
@@ -25,14 +22,11 @@ public class Acquirer extends Subsystem {
     private DigitalInput acquirerLimitSwitch;
     public boolean isBITCOINAutomation;
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-    }
+}
 
-    public Acquirer() {
+    public Spatula() {
         leftAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_LEFT_MOTOR_PORT);
         rightAcquirerMotor = new WPI_VictorSPX(RobotMap.ACQUIRER_RIGHT_MOTOR_PORT);
         leftAcquirerMotor.setNeutralMode(NeutralMode.Coast);

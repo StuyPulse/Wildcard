@@ -25,9 +25,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-/**
- * An example subsystem. You can replace me with your own Subsystem.
- */
 public class Drivetrain extends Subsystem {
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
@@ -49,16 +46,16 @@ public class Drivetrain extends Subsystem {
 
     public Drivetrain() {
         //TODO: Remove magic numbers: Add in RobotMap
-        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_FRONT_MOTOR_PORT);
+        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_TOP_MOTOR_PORT);
         leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
         //master-follower, leftTopMotor designated master
         leftMiddleMotor.follow(leftBottomMotor);
         leftTopMotor.follow(leftBottomMotor);
 
-        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
+        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_TOP_MOTOR_PORT);
         rightMiddleMotor = new WPI_VictorSPX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
-        rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
+        rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_BOTTOM_MOTOR_PORT);
         //master-follower, rightTopMotor designated master
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
