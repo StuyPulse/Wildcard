@@ -30,7 +30,6 @@ public class LineSensor {
 	  if (!setupDone){
 		  initialLoop();
 	  }
-
 	}
 	public void resetAmbient(){
 	    framesExsisted = 0;

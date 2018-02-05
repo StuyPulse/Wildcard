@@ -14,9 +14,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Lift extends Subsystem {
 
     private WPI_TalonSRX innerLeftLiftMotor;

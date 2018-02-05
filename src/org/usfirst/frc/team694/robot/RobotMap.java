@@ -7,30 +7,24 @@
 
 package org.usfirst.frc.team694.robot;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
 public final class RobotMap {
 
     /**************************************************************************
      * Gamepad Ports
      *************************************************************************/
-    public static final int DRIVER_GAMEPAD_PORT = 1;
+    public static final int DRIVER_GAMEPAD_PORT = 0;
     public static final int OPERATOR_GAMEPAD_PORT = 1;
 
     /**************************************************************************
      * Drivetrain Motor Ports
      *************************************************************************/
-    public static final int LEFT_FRONT_MOTOR_PORT = -1;
+    public static final int LEFT_TOP_MOTOR_PORT = -1;
     public static final int LEFT_MIDDLE_MOTOR_PORT = -1;
     public static final int LEFT_BOTTOM_MOTOR_PORT = -1;
 
-    public static final int RIGHT_FRONT_MOTOR_PORT = -1;
+    public static final int RIGHT_TOP_MOTOR_PORT = -1;
     public static final int RIGHT_MIDDLE_MOTOR_PORT = -1;
-    public static final int RIGHT_REAR_MOTOR_PORT = -1;
+    public static final int RIGHT_BOTTOM_MOTOR_PORT = -1;
 
     /**************************************************************************
      * Acquirer Motor Ports

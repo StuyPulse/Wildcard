@@ -7,9 +7,6 @@ import org.usfirst.frc.team694.robot.commands.LiftMaxUpCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
 public class MiddleScaleAutonCommand extends CommandGroup {
     public double speed = 0.5;
     public MiddleScaleAutonCommand() {

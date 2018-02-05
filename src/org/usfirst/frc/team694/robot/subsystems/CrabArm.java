@@ -10,9 +10,6 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class CrabArm extends Subsystem {
     public Solenoid crabArmDeploySolenoid;
     public Solenoid crabArmSolenoidPush;
