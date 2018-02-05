@@ -13,18 +13,6 @@ public class BITCOINCheckCommand extends ConditionalCommand {
 
     }
 
-    protected void initialize() {
-    }
-    
-    protected void execute() {
-    }
-    
-    @Override
-    protected boolean isFinished() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     @Override
     protected boolean condition() {
         return Robot.spatula.isBITCOINAutomation;
