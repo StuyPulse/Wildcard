@@ -4,17 +4,18 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CrabArmAcquireCommand extends Command {
+public class LiftUpCommand extends Command {
 
-    public CrabArmAcquireCommand() {
-        requires(Robot.crabArm);
+    public LiftUpCommand() {
+        requires(Robot.lift);
     }
 
     protected void initialize() {
+        Robot.lift.setBrakeOff();
     }
 
     protected void execute() {
-        Robot.crabArm.acquire();
+        Robot.lift.goUp();
     }
 
     protected boolean isFinished() {

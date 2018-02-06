@@ -4,14 +4,12 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class GrabberOpenCommand extends InstantCommand {
-
-    public GrabberOpenCommand() {
+public class BITCOINAutomationOnCommand extends InstantCommand {
+    public BITCOINAutomationOnCommand() {
         super();
-        requires(Robot.grabber);
     }
 
     protected void initialize() {
-        Robot.grabber.open();
+        Robot.spatula.isBITCOINAutomation = true;
     }
 }

@@ -4,14 +4,16 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class GrabberOpenCommand extends InstantCommand {
+/**
+ *
+ */
+public class CrabArmFlapInCommand extends InstantCommand {
 
-    public GrabberOpenCommand() {
-        super();
-        requires(Robot.grabber);
+    public CrabArmFlapInCommand() {
+        requires(Robot.crabArm);
     }
 
     protected void initialize() {
-        Robot.grabber.open();
+        Robot.crabArm.flapIn();
     }
 }
