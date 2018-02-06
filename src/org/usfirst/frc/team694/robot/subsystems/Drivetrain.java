@@ -39,13 +39,10 @@ public class Drivetrain extends Subsystem {
     private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
-
-    private ADXRS450_Gyro gyro;
     
-    public static AHRS accelerometer;
+    public static AHRS navX;
 
     public Drivetrain() {
-        //TODO: Remove magic numbers: Add in RobotMap
         leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_TOP_MOTOR_PORT);
         leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
@@ -82,15 +79,10 @@ public class Drivetrain extends Subsystem {
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
-        // Not sure about this next line: (what is kMXP?)
-        accelerometer = new AHRS(SPI.Port.kMXP);
-
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
-
-        gyro = new ADXRS450_Gyro();
         
-        // Not sure about this next line: (what is kMXP?)
-        accelerometer = new AHRS(SPI.Port.kMXP);
+        // the navX is plugged into the kMXP port on the roboRIO
+        navX = new AHRS(SPI.Port.kMXP);
     }
     @Override
     public void periodic(){
@@ -164,7 +156,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getGyroAngle() {
-        return gyro.getAngle();
+        return navX.getAngle();
     }
 
     public void updateSensors() {
@@ -190,32 +182,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
-        // TODO Auto-generated method stub
-        gyro.reset();
-    }
-    
-    public void resetAccelerometer() {
-        accelerometer.reset();
-    }
-    
-    public double getXAccel() {
-        return accelerometer.getWorldLinearAccelX();
-    }
-    
-    public double getYAccel() {
-        return accelerometer.getWorldLinearAccelY();
-    }
-    
-    public double getZAccel() {
-        return accelerometer.getWorldLinearAccelZ();
-    }
-    
-    public double getZRotation() {
-        return accelerometer.getYaw();
-    }
-    
-    public boolean testForBump() {
-        return getZAccel() > -1;
+        navX.reset();
     }
     
 }
