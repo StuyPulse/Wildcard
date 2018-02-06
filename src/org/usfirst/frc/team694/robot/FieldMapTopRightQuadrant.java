@@ -5,8 +5,80 @@ package org.usfirst.frc.team694.robot;
  * All of our autons should be based on the field so that if our measurements 
  * change, we can adapt quickly. All measurements are in inches for encoder purposes.
  */
-public final class FieldMapTopRightQuadrant {
+public final class FieldMapTopRightQuadrant implements FieldMapInterface{
+  //Scale Auton where the bot is on the same side as the scoring scale and will turn on the null territory line
+    @Override
+    public double getDistanceFromFrontOfRobotToAutoLine() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_FROM_FRONT_OF_ROBOT_TO_AUTO_LINE;
+    }
 
+    @Override
+    public double getDistanceFromAutoLineToNullTerritory() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY;
+    }
+
+    @Override
+    public double getDistanceToMoveBackwardBeforeTurn() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TRAVEL_BACKWARDS;
+    }
+
+    @Override
+    public double getDegreeOfAngleToReachIdealStartingPointFromNullTerritoryLine() {
+        return TOP_RIGHT_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_IN_NULL_TERRITORY;
+    }
+
+    @Override
+    public double getDistanceToTravelToReachScaleCorner() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_CORNER;
+    }
+    
+    //**************************************************************************************************************
+    
+    //Scale Auton where the bot is on the opposite side of the scoring scale
+    
+    /*    
+    public double getDistanceFromFrontOfRobotToAutoLine() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_FROM_FRONT_OF_ROBOT_TO_AUTO_LINE;
+    }
+    */
+    
+    @Override
+    public double getDistanceToTravelBeforeFirstTurn() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE;
+    }
+
+    @Override
+    public double getDegreeOfAngleToTurnToReachPlatformZone() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE;
+    }
+
+    @Override
+    public double getDistanceToTravelToReachPlatformZoneAfterTurn() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN;
+    }
+
+    @Override
+    public double getDistanceToTravelToReachOtherPlatformZoneEdge() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_OTHER_PLATFORM_ZONE_EDGE;
+    }
+
+    @Override
+    public double getDistanceToDriveOutAfterPlatformZoneEdge() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE;
+    }
+
+    @Override
+    public double getDegreeOfAngleToTurnToReachScaleSide() {
+        return TOP_RIGHT_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_TO_REACH_SCALE_SIDE;
+    }
+
+    @Override
+    public double getDistanceToTravelToReachScaleSide() {
+        return TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE;
+    }
+
+    //**************************************************************************************************************
+    
 /* Given FRC Manual Measurements*/
     //These distances is us starting on the left side of the field
     //all measurements are in inches or degrees if specified 
@@ -52,6 +124,7 @@ public final class FieldMapTopRightQuadrant {
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT = FieldMapTopMiddleQuadrant.TOP_MIDDLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SCALE_EDGE - TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_ROBOT_STARTING_POINT;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT_SQUARED = TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT * TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY_SQUARED = TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY * TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY;
+    public static final double TOP_RIGHT_QUADRANT_DISTANCE_TRAVEL_BACKWARDS = RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_CORNER = Math.sqrt(TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT_SQUARED + TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY_SQUARED);
     public static final double TOP_RIGHT_QUADRANT_DEGREE_OF_ANGLE_TO_REACH_IDEAL_STARTING_POdouble_FROM_NULL_TERRITORY_LINE = -1 * Math.toDegrees(Math.atan(TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT / TOP_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY));
     
@@ -60,6 +133,7 @@ public final class FieldMapTopRightQuadrant {
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE = TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_PLATFORM_EDGE - TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_FAR_SIDE_OF_SWITCH;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED = TOP_RIGHT_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE / 2;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE = TOP_RIGHT_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_FAR_SIDE_OF_SWITCH + TOP_RIGHT_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED + (FieldMap.MIDDLE_OF_BOT_LENGTHWISE - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT); 
+    public static final double TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_OTHER_PLATFORM_ZONE_EDGE = TOP_RIGHT_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP + FieldMapBottomRightQuadrant.BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP;
     public static final int TOP_RIGHT_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_TO_REACH_PLATFORM_ZONE = -90;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN = (TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE - (TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_OTHER_EDGE_OF_ROBOT + FieldMap.DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN)) + RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_OTHER = TOP_RIGHT_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP + FieldMapBottomRightQuadrant.BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP;
