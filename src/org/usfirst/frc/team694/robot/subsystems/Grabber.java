@@ -18,15 +18,15 @@ public class Grabber extends Subsystem {
     }
 
     public void open() {
-        tongsSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void close() {
         tongsSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
+    public void close() {
+        tongsSolenoid.set(DoubleSolenoid.Value.kForward);
+    }
+
     public void toggle() {
-        if (tongsSolenoid.get() == DoubleSolenoid.Value.kForward) {
+        if (tongsSolenoid.get() == DoubleSolenoid.Value.kReverse) {
             close();
         } else {
             open();

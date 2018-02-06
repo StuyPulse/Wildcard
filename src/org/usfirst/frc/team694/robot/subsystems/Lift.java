@@ -69,16 +69,16 @@ public class Lift extends Subsystem {
         brakeSolenoid.set(true);
     }
     
+    public void setBrakeOff() {
+        brakeSolenoid.set(false);
+    }
+
     public void goUp() {
         innerLeftMotor.set(1);
     }
     
     public void goDown() {
         innerLeftMotor.set(-1);
-    }
-
-    public void setBrakeOff() {
-        brakeSolenoid.set(false);
     }
 
     public void toggleBrake() {

@@ -59,11 +59,11 @@ public class Spatula extends Subsystem {
     }
 
     public void flipUp() {
-        spatulaFlipSolenoid.set(true);
+        spatulaFlipSolenoid.set(false);
     }
 
     public void flipDown() {
-        spatulaFlipSolenoid.set(false);
+        spatulaFlipSolenoid.set(true);
     }
     
     public void tightenCubeGrip() {
