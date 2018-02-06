@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
     public static Lift lift;
  
     public static OI oi;
+   
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton

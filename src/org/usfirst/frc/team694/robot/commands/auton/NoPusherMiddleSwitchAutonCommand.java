@@ -5,11 +5,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class DrivetrainMobilityAutonCommand extends CommandGroup {
+public class NoPusherMiddleSwitchAutonCommand extends CommandGroup {
 
-    public DrivetrainMobilityAutonCommand() {
+    public NoPusherMiddleSwitchAutonCommand() {
+        addSequential(new DrivetrainMoveInchesEncoderCommand(FieldMap, ,))
         // Add Commands here:
-        addSequential(new DrivetrainMoveToLineCommand(60.0,0.25));
+        // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
 

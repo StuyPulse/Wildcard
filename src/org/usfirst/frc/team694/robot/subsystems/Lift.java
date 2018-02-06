@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import com.ctre.phoenix.ParamEnum;
@@ -8,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,36 +19,46 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Lift extends Subsystem {
 
-    private WPI_TalonSRX leftLiftMotor;
-    private WPI_TalonSRX rightLiftMotor; 
+    private WPI_TalonSRX innerLeftLiftMotor;
+    private WPI_TalonSRX innerRightLiftMotor;
+    private WPI_VictorSPX outerLeftLiftMotor;
+    private WPI_VictorSPX outerRightLiftMotor;
     
     private Solenoid liftSolenoid; 
 
     private boolean brakeOn; 
   
     public Lift() {
+        innerLeftLiftMotor = new WPI_TalonSRX(RobotMap.INNER_LEFT_LIFT_MOTOR_PORT);
+        innerRightLiftMotor = new WPI_TalonSRX(RobotMap.INNER_RIGHT_LIFT_MOTOR_PORT);
+        
+        outerLeftLiftMotor = new WPI_VictorSPX(RobotMap.OUTER_LEFT_LIFT_MOTOR_PORT);
+        outerRightLiftMotor = new WPI_VictorSPX(RobotMap.OUTER_RIGHT_LIFT_MOTOR_PORT);
 
-        leftLiftMotor = new WPI_TalonSRX(RobotMap.LEFT_LIFT_MOTOR_PORT);
-        rightLiftMotor = new WPI_TalonSRX(RobotMap.RIGHT_LIFT_MOTOR_PORT);
+        innerLeftLiftMotor.setNeutralMode(NeutralMode.Brake);
+        innerRightLiftMotor.setNeutralMode(NeutralMode.Brake);
+        
+        outerLeftLiftMotor.setNeutralMode(NeutralMode.Brake);
+        outerRightLiftMotor.setNeutralMode(NeutralMode.Brake);
 
-        leftLiftMotor.setNeutralMode(NeutralMode.Brake);
-        rightLiftMotor.setNeutralMode(NeutralMode.Brake);
+        innerRightLiftMotor.setInverted(true);
+        outerRightLiftMotor.setInverted(true);
 
-        rightLiftMotor.setInverted(true);
-
-        rightLiftMotor.follow(leftLiftMotor);
+        innerRightLiftMotor.follow(innerLeftLiftMotor);
+        outerRightLiftMotor.follow(innerLeftLiftMotor);
+        outerLeftLiftMotor.follow(innerLeftLiftMotor);
   
-        leftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        rightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        innerLeftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        innerRightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
         
         // Configures the limit switches (forward is top, reverse is bottom)
-        leftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
-        leftLiftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+        innerLeftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
+        innerLeftLiftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
         
         // Line below resets encoders when the bottom limit switch is activated
-        leftLiftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
+        innerLeftLiftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
         
     }
 
@@ -54,13 +66,21 @@ public class Lift extends Subsystem {
     }
 
     public void resetEncoders() {
-        leftLiftMotor.setSelectedSensorPosition(0, 0, 0);
-        rightLiftMotor.setSelectedSensorPosition(0, 0, 0);
+        innerLeftLiftMotor.setSelectedSensorPosition(0, 0, 0);
+        innerRightLiftMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
     public void setBrakeOn() {
         brakeOn = true;
         liftSolenoid.set(brakeOn);
+    }
+    
+    public void goUp() {
+        innerLeftLiftMotor.set(1);
+    }
+    
+    public void goDown() {
+        innerLeftLiftMotor.set(-1);
     }
 
     public void setBrakeOff() {
@@ -76,35 +96,31 @@ public class Lift extends Subsystem {
         }
     }
 
-    public void goUp() {
-        leftLiftMotor.set(1);
-    }
-
-    public void goDown() {
-        leftLiftMotor.set(-1);
-    }
-
     public void stop() {
-        leftLiftMotor.set(0);
+        innerLeftLiftMotor.set(0);
     }
 
     public boolean isAtBottom() {
-        return leftLiftMotor.getSensorCollection().isRevLimitSwitchClosed();
+        return innerLeftLiftMotor.getSensorCollection().isRevLimitSwitchClosed();
     }
 
     public boolean isAtTop() { 
-       return leftLiftMotor.getSensorCollection().isFwdLimitSwitchClosed();
+       return innerLeftLiftMotor.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
     public double getLeftLiftEncoderDistance() {
-        return leftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
+        return innerLeftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getRightLiftEncoderDistance() {
-        return rightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_RAW_MULTIPLIER;
+        return innerRightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getMaxLiftEncoderDistance() {
         return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());
+    }
+    
+    public double getLiftHeight() {
+        return getMaxLiftEncoderDistance() + RobotMap.MIN_HEIGHT_OF_GRABBER;
     }
 }
