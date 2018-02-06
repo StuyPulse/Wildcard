@@ -8,14 +8,13 @@ public class BITCOINCheckCommand extends ConditionalCommand {
     public BITCOINCheckCommand() {
 
         super(new BITCOINAutoCommand(), new BITCOINManualCommand());
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
 
     }
 
     @Override
     protected boolean condition() {
         return Robot.spatula.isBITCOINAutomation;
-
+        // if true, will run BITCOINAutoCommand, which includes the acquirer limit switch
+        // if false, will run the BITCOINManualCommand, in which the acquirer has already stopped
     }
 }
