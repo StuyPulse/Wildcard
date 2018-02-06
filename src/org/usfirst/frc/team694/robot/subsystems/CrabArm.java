@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CrabArm extends Subsystem {
-    private Solenoid crabArmDeploySolenoid;
     private Solenoid crabArmFlapperSolenoid;
     private WPI_VictorSPX leftCrabArmMotor;
     private WPI_VictorSPX rightCrabArmMotor;
@@ -19,7 +18,6 @@ public class CrabArm extends Subsystem {
     private boolean isOpen;
 
     public CrabArm() {
-        crabArmDeploySolenoid = new Solenoid(RobotMap.CRAB_ARM_DEPLOY_SOLENOID_PORT);
         crabArmFlapperSolenoid = new Solenoid(RobotMap.CRAB_ARM_FLAPPER_SOLENOID_PORT);
         leftCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_LEFT_MOTOR_PORT);
         rightCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_RIGHT_MOTOR_PORT);
@@ -27,10 +25,6 @@ public class CrabArm extends Subsystem {
         rightCrabArmMotor.setNeutralMode(NeutralMode.Coast);
         leftCrabArmMotor.setInverted(true);
         crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
-    }
-
-    public void deploy() {
-        crabArmDeploySolenoid.set(true);
     }
     
     public void acquire() {
