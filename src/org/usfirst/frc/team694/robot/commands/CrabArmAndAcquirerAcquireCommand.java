@@ -6,6 +6,6 @@ public class CrabArmAndAcquirerAcquireCommand extends CommandGroup {
 
     public CrabArmAndAcquirerAcquireCommand() {
         addParallel(new CrabArmAcquireCommand());
-        addSequential(new AcquirerAcquireCommand());
+        addSequential(new SpatulaAcquireCommand());
     }
 }

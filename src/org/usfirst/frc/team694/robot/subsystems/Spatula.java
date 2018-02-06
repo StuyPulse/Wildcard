@@ -2,8 +2,6 @@ package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 
-import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
-
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -24,7 +22,6 @@ public class Spatula extends Subsystem {
     private DigitalInput limitSwitch;
     
     private SpeedControllerGroup acquirerMotors;
-    private DigitalInput acquirerLimitSwitch;
 
     public boolean isBITCOINAutomation;
 
@@ -44,9 +41,9 @@ public class Spatula extends Subsystem {
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
 
         acquirerMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
-        acquirerLimitSwitch = new DigitalInput(RobotMap.ACQUIRER_LIMIT_SWITCH_PORT);
+
         isBITCOINAutomation = true;
-        limitSwitch = new DigitalInput(1);
+        limitSwitch = new DigitalInput(RobotMap.ACQUIRER_LIMIT_SWITCH_PORT);
     }
 
     public void acquire() {
@@ -79,10 +76,5 @@ public class Spatula extends Subsystem {
     
     public boolean getCurrentStateOfLimitSwitch() {
         return limitSwitch.get();
-    }
-    
-    public boolean getIsCubeDetected() {
-          return acquirerLimitSwitch.get();
-
     }
 }

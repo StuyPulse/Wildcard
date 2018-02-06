@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
     public static Spatula spatula;
     public static CrabArm crabArm;
     public static Grabber grabber; 
-        public static Lift lift;
+    public static Lift lift;
  
     public static OI oi;
    

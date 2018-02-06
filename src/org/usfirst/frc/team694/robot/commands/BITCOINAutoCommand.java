@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BITCOINAutoCommand extends CommandGroup {
 
     public BITCOINAutoCommand() {
-        addSequential(new AcquirerAcquireUntilAcquiredCommand());
+        addSequential(new SpatulaAcquireUntilAcquiredCommand());
         addSequential(new BITCOINManualCommand());
         // Add Commands here:
         // e.g. addSequential(new Command1());

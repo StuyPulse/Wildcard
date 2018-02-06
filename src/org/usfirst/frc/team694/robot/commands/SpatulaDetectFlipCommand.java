@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *This will flip the cube when the IR sensor detects that the cube is not upright, and leave it when it detects the cube is upright
  */
-public class AcquirerDetectFlipCommand extends Command {
+public class SpatulaDetectFlipCommand extends Command {
 
-    public AcquirerDetectFlipCommand() {
+    public SpatulaDetectFlipCommand() {
         requires(Robot.spatula);
     }
 
@@ -27,8 +27,5 @@ public class AcquirerDetectFlipCommand extends Command {
     }
 
     protected void end() {
-    }
-
-    protected void interrupted() {
     }
 }

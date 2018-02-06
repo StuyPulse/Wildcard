@@ -4,14 +4,14 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class AcquirerFlipUpCommand extends InstantCommand {
-
-    public AcquirerFlipUpCommand() {
+public class SpatulaTongsTightenHoldCommand extends InstantCommand {
+    
+    public SpatulaTongsTightenHoldCommand() {
         super();
         requires(Robot.spatula);
     }
 
     protected void initialize() {
-        Robot.spatula.flipUp();
+        Robot.spatula.tightenCubeGrip();
     }
 }

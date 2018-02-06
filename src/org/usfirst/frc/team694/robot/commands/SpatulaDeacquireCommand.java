@@ -4,9 +4,9 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AcquirerDeacquireCommand extends Command {
+public class SpatulaDeacquireCommand extends Command {
 
-    public AcquirerDeacquireCommand() {
+    public SpatulaDeacquireCommand() {
         requires(Robot.spatula);
     }
     
@@ -22,8 +22,5 @@ public class AcquirerDeacquireCommand extends Command {
     }
 
     protected void end() {
-    }
-
-    protected void interrupted() {
     }
 }
