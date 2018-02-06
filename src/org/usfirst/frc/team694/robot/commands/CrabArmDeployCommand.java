@@ -13,7 +13,6 @@ public class CrabArmDeployCommand extends Command {
         requires(Robot.crabArm);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
         //TODO: Figure out how long we want to run the acquirer
         setTimeout(4);

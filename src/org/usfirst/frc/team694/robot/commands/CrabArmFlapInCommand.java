@@ -13,7 +13,6 @@ public class CrabArmFlapInCommand extends InstantCommand {
         requires(Robot.crabArm);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
         Robot.crabArm.flapIn();
     }
