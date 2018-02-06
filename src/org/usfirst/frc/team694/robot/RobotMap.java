@@ -18,13 +18,13 @@ public final class RobotMap {
     /**************************************************************************
      * Drivetrain Motor Ports
      *************************************************************************/
-    public static final int LEFT_TOP_MOTOR_PORT = -1;
-    public static final int LEFT_MIDDLE_MOTOR_PORT = -1;
-    public static final int LEFT_BOTTOM_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_LEFT_TOP_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT = -1;
 
-    public static final int RIGHT_TOP_MOTOR_PORT = -1;
-    public static final int RIGHT_MIDDLE_MOTOR_PORT = -1;
-    public static final int RIGHT_BOTTOM_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT = -1;
 
     /**************************************************************************
      * Spatula Motor Ports
@@ -40,19 +40,19 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
-    public static final int INNER_LEFT_LIFT_MOTOR_PORT = -1;
-    public static final int INNER_RIGHT_LIFT_MOTOR_PORT = -1;
-    public static final int OUTER_LEFT_LIFT_MOTOR_PORT = -1;
-    public static final int OUTER_RIGHT_LIFT_MOTOR_PORT = -1;
+    public static final int LIFT_INNER_LEFT_MOTOR_PORT = -1;
+    public static final int LIFT_INNER_RIGHT_MOTOR_PORT = -1;
+    public static final int LIFT_OUTER_LEFT_MOTOR_PORT = -1;
+    public static final int LIFT_OUTER_RIGHT_MOTOR_PORT = -1;
 
     /***************************************************************************
      * Lift Constants
      *************************************************************************/
-    public static final double DIAMETER_OF_ENCODER_SPROCKET = 2.873; 
-    public static final double TOTAL_CARRIAGE_MOVEMENT = 95.25;
-    public static final double LIFT_ENCODER_RAW_MULTIPLIER = DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
+    public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873; 
+    public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 95.25;
+    public static final double LIFT_ENCODER_RAW_MULTIPLIER = LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
     public static final double MIN_HEIGHT_OF_LIFT = 23;
-    public static final double MAX_HEIGHT_OF_LIFT = TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
+    public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
 
     /***************************************************************************
      * Lift Limit Switch
@@ -64,20 +64,19 @@ public final class RobotMap {
      * Solenoid Ports
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = -1;
+    
     public static final int CRAB_ARM_DEPLOY_SOLENOID_PORT = -1;
     public static final int CRAB_ARM_FLAPPER_SOLENOID_PORT = -1;
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
+    
     public static final int GRABBER_SOLENOID_OPEN = -1;
     public static final int GRABBER_SOLENOID_CLOSE = -1;
-
-    public static final int LIFT_BRAKE_SOLENOID_CHANNEL = -1;
+    
     public static final int SPATULA_FLIP_SOLENOID_PORT = -1;
     public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
 
     public static final int LIFT_BRAKE_SOLENOID_PORT = -1;
-    public static final int ACQUIRER_FLIP_SOLENOID_PORT = -1;
-    public static final int ACQUIRER_SQUEEZE_SOLENOID_PORT = -1; 
 
     /*****************************************************************************
      * Analog Ports

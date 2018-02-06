@@ -40,16 +40,16 @@ public class Drivetrain extends Subsystem {
     public static AHRS navX;
 
     public Drivetrain() {
-        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_TOP_MOTOR_PORT);
-        leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
-        leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
+        leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
+        leftMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT);
+        leftBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT);
         //master-follower, leftTopMotor designated master
         leftMiddleMotor.follow(leftBottomMotor);
         leftTopMotor.follow(leftBottomMotor);
 
-        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_TOP_MOTOR_PORT);
-        rightMiddleMotor = new WPI_VictorSPX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
-        rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_BOTTOM_MOTOR_PORT);
+        rightTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP_MOTOR_PORT);
+        rightMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT);
+        rightBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT);
         //master-follower, rightTopMotor designated master
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
