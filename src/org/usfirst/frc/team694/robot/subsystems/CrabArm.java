@@ -23,7 +23,9 @@ public class CrabArm extends Subsystem {
         rightCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_RIGHT_MOTOR_PORT);
         leftCrabArmMotor.setNeutralMode(NeutralMode.Coast);
         rightCrabArmMotor.setNeutralMode(NeutralMode.Coast);
+        
         leftCrabArmMotor.setInverted(true);
+        
         crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
     

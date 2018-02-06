@@ -27,15 +27,15 @@ public final class RobotMap {
     public static final int RIGHT_BOTTOM_MOTOR_PORT = -1;
 
     /**************************************************************************
-     * Acquirer Motor Ports
+     * Spatula Motor Ports
      *************************************************************************/
     public static final int SPATULA_LEFT_MOTOR_PORT = -1;
     public static final int SPATULA_RIGHT_MOTOR_PORT = -1;
 
     /**************************************************************************
-     * Acquirer Limit Switch
+     * Spatula Limit Switch
      *************************************************************************/
-    public static final int ACQUIRER_LIMIT_SWITCH_PORT = -1;
+    public static final int SPATULA_LIMIT_SWITCH_PORT = -1;
     
     /***************************************************************************
      * Lift Motor Ports
@@ -54,6 +54,12 @@ public final class RobotMap {
     public static final double MIN_HEIGHT_OF_LIFT = 23;
     public static final double MAX_HEIGHT_OF_LIFT = TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
 
+    /***************************************************************************
+     * Lift Limit Switch
+     *************************************************************************/
+    public static final int LIFT_TOP_LIMIT_SWITCH_PORT = -1;
+    public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = -1;
+    
     /****************************************************************************
      * Solenoid Ports
      *************************************************************************/

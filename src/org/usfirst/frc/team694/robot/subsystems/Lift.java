@@ -4,12 +4,11 @@ import org.usfirst.frc.team694.robot.RobotMap;
 
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -22,7 +21,9 @@ public class Lift extends Subsystem {
     
     private Solenoid brakeSolenoid; 
 
-  
+    private DigitalInput topLimitSwitch;
+    private DigitalInput bottomLimitSwitch;
+    
     public Lift() {
         innerLeftMotor = new WPI_TalonSRX(RobotMap.INNER_LEFT_LIFT_MOTOR_PORT);
         innerRightMotor = new WPI_TalonSRX(RobotMap.INNER_RIGHT_LIFT_MOTOR_PORT);
@@ -48,10 +49,8 @@ public class Lift extends Subsystem {
         
         brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_PORT);
 
-        
-        // Configures the limit switches (forward is top, reverse is bottom)
-        innerLeftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
-        innerLeftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 0);
+        topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
+        bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
         
         // Line below resets encoders when the bottom limit switch is activated
         innerLeftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
@@ -99,11 +98,11 @@ public class Lift extends Subsystem {
     }
 
     public boolean isAtBottom() {
-        return innerLeftMotor.getSensorCollection().isRevLimitSwitchClosed();
+        return bottomLimitSwitch.get();
     }
 
     public boolean isAtTop() { 
-       return innerLeftMotor.getSensorCollection().isFwdLimitSwitchClosed();
+       return topLimitSwitch.get();
     }
 
     public double getEncoderDistance() {

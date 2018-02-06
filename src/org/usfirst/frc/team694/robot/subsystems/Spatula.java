@@ -34,6 +34,7 @@ public class Spatula extends Subsystem {
         rightSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_RIGHT_MOTOR_PORT);
         leftSpatulaMotor.setNeutralMode(NeutralMode.Coast);
         rightSpatulaMotor.setNeutralMode(NeutralMode.Coast);
+        
         rightSpatulaMotor.setInverted(true);
         
         spatulaFlipSolenoid = new Solenoid(RobotMap.SPATULA_FLIP_SOLENOID_PORT);
@@ -43,7 +44,8 @@ public class Spatula extends Subsystem {
         acquirerMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
 
         isBITCOINAutomation = true;
-        limitSwitch = new DigitalInput(RobotMap.ACQUIRER_LIMIT_SWITCH_PORT);
+        
+        limitSwitch = new DigitalInput(RobotMap.SPATULA_LIMIT_SWITCH_PORT);
     }
 
     public void acquire() {
