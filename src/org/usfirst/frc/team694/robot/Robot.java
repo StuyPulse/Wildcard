@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.*;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
@@ -31,6 +32,7 @@ public class Robot extends IterativeRobot {
 
     private SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand;
+
 
     @Override
     public void robotInit() {
@@ -77,8 +79,54 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        liftRun();
+        acquirerStatus();
+        dequirerRun();
     }
 
+    private void liftRun() {
+        if(oi.operatorGamepad.getLeftY() > 0.9) {
+            Scheduler.getInstance().add(new LiftMoveCommand(1));     
+        }
+        else if (oi.operatorGamepad.getLeftY() > 0.4) {
+            Scheduler.getInstance().add(new LiftMoveCommand(0.5));  
+        }
+        else if (oi.operatorGamepad.getLeftY() > -0.4) {
+            Scheduler.getInstance().add(new LiftStopCommand());
+        }
+        else if (oi.operatorGamepad.getLeftY() > -0.9) {
+            Scheduler.getInstance().add(new LiftMoveCommand(-0.5));
+        }
+        else {
+            Scheduler.getInstance().add(new LiftMoveCommand(-1));
+        }
+    }
+    private void acquirerStatus() {
+        // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
+        if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
+            Robot.spatula.setSpatulaRunning(true);
+            Scheduler.getInstance().add(new SpatulaAcquireCommand() );    
+        }
+        else if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
+            Robot.spatula.setSpatulaRunning(true);
+            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
+        }
+        else {
+            Robot.spatula.setSpatulaRunning(false);
+        }
+    }
+    
+    private void dequirerRun() {
+     // If statement checks to make sure that the Left Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
+        if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
+            Robot.spatula.setSpatulaRunning(true);
+            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
+        }
+    }
+    
+    /**
+     * This function is called periodically during test mode.
+     */
     @Override
     public void testPeriodic() {
     }

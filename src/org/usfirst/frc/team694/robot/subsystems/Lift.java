@@ -87,7 +87,12 @@ public class Lift extends Subsystem {
             setBrakeOn();
         }
     }
-
+    
+    public void moveLift(double speed) {
+        innerLeftMotor.set(speed);
+        innerRightMotor.set(speed);
+    }
+    
     public void stop() {
         innerLeftMotor.set(0);
         setBrakeOn();
@@ -96,7 +101,6 @@ public class Lift extends Subsystem {
     public boolean getBrakeStatus() {
         return brakeSolenoid.get();
     }
-
     public boolean isAtBottom() {
         return bottomLimitSwitch.get();
     }

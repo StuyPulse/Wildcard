@@ -24,6 +24,17 @@ public class Spatula extends Subsystem {
     private SpeedControllerGroup acquirerMotors;
 
     public boolean isBITCOINAutomation;
+    
+    public boolean spatulaRunning;
+    
+    public boolean isSpatulaRunning() {
+        return spatulaRunning;
+    }
+
+    public void setSpatulaRunning(boolean status) {
+        this.spatulaRunning = status;
+    }
+
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
