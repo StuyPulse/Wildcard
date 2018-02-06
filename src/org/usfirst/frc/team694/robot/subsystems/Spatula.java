@@ -74,7 +74,7 @@ public class Spatula extends Subsystem {
         spatulaTongsSolenoid.set(false);
     }
     
-    public boolean getCurrentStateOfLimitSwitch() {
+    public boolean isCubeDetected() {
         return limitSwitch.get();
     }
 }
