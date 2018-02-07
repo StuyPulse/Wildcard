@@ -42,8 +42,6 @@ public class DrivetrainDriveSystemCommand extends Command {
         double rightJoystickY = Robot.oi.driverGamepad.getRightY();
         double leftJoystickY = Robot.oi.driverGamepad.getLeftY();
         
-        boolean isGearShifted = Robot.oi.driverGamepad.getRawBottomButton();    
-        
         if(Robot.oi.driverGamepad.getRawTopButton() && !driveModeToggleButtonWasPressed) {
             tankDrive = !tankDrive;
         }
@@ -58,8 +56,6 @@ public class DrivetrainDriveSystemCommand extends Command {
         if(tankDrive) {
             Robot.drivetrain.tankDrive(leftJoystickY, rightJoystickY);
         }
-        
-        Robot.drivetrain.gearShiftInput(!isGearShifted);
     }
 
     // Make this return true when this Command no longer needs to run execute()

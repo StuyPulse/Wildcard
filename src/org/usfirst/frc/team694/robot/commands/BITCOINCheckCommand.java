@@ -24,7 +24,6 @@ public class BITCOINCheckCommand extends Command {
         if ((Robot.acquirer.isBITCOINAutomation && Robot.acquirer.getIsCubeDetected()) 
                 || (Robot.oi.operatorGamepad.getRawBottomButton())) {
                 BITCOINCommand.start();
-            }
         }
     }
 
