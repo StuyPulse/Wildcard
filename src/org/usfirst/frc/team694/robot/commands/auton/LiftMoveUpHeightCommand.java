@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,7 +20,7 @@ public class LiftMoveUpHeightCommand extends Command {
     }
 
     protected void execute() {
-        Robot.lift.goUp();
+        Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED);
     }
 
     protected boolean isFinished() {

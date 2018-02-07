@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -21,9 +22,9 @@ public class LiftMoveToHeightCommand extends Command {
 
     protected void execute() {
         if (startHeight > height) {
-            Robot.lift.goDown();
+            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED * -1);
         } else if (startHeight < height) {
-            Robot.lift.goUp();
+            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED);
         }
     }
 

@@ -79,28 +79,11 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        liftRun();
         acquirerStatus();
         dequirerRun();
     }
 
-    private void liftRun() {
-        if(oi.operatorGamepad.getLeftY() > 0.9) {
-            Scheduler.getInstance().add(new LiftMoveCommand(1));     
-        }
-        else if (oi.operatorGamepad.getLeftY() > 0.4) {
-            Scheduler.getInstance().add(new LiftMoveCommand(0.5));  
-        }
-        else if (oi.operatorGamepad.getLeftY() > -0.4) {
-            Scheduler.getInstance().add(new LiftStopCommand());
-        }
-        else if (oi.operatorGamepad.getLeftY() > -0.9) {
-            Scheduler.getInstance().add(new LiftMoveCommand(-0.5));
-        }
-        else {
-            Scheduler.getInstance().add(new LiftMoveCommand(-1));
-        }
-    }
+    
     private void acquirerStatus() {
         // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
         if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
