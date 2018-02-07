@@ -66,7 +66,6 @@ public final class RobotMap {
     public static final int GEAR_SHIFT_CHANNEL = -1;
     
     public static final int CRAB_ARM_DEPLOY_SOLENOID_PORT = -1;
-    public static final int CRAB_ARM_FLAPPER_SOLENOID_PORT = -1;
     public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
     public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
     
