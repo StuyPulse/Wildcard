@@ -12,7 +12,6 @@ import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
-import org.usfirst.frc.team694.robot.subsystems.TestDrivetrain;
 import org.usfirst.frc.team694.util.IRSensor;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -31,7 +30,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 
     public static Drivetrain drivetrain;
-    public static TestDrivetrain test;
     public static Acquirer acquirer;
     public static CrabArm crabArm;
     public static Grabber grabber; 
@@ -51,7 +49,6 @@ public class Robot extends TimedRobot {
     @Override
     public void robotInit() {
         drivetrain = new Drivetrain();
-        test = new TestDrivetrain();
         acquirer = new Acquirer();
         crabArm = new CrabArm();
         grabber = new Grabber();
