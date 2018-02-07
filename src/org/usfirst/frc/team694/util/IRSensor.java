@@ -1,7 +1,5 @@
 package org.usfirst.frc.team694.util;
 
-import org.usfirst.frc.team694.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

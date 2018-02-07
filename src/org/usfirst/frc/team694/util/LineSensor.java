@@ -1,8 +1,5 @@
 package org.usfirst.frc.team694.util;
 import edu.wpi.first.wpilibj.AnalogInput;
-import java.util.ArrayList;
-
-import org.usfirst.frc.team694.robot.RobotMap;
 
 public class LineSensor {
     /******************************************************************************
