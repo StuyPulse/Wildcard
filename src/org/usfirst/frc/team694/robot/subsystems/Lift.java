@@ -1,126 +1,120 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
-import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
+import org.usfirst.frc.team694.robot.commands.LiftMoveCommand;
 
 import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Lift extends Subsystem {
 
-    private WPI_TalonSRX innerLeftLiftMotor;
-    private WPI_TalonSRX innerRightLiftMotor;
-    private WPI_VictorSPX outerLeftLiftMotor;
-    private WPI_VictorSPX outerRightLiftMotor;
-    
-    private Solenoid liftSolenoid; 
+    private WPI_TalonSRX innerLeftMotor;
+    private WPI_TalonSRX innerRightMotor;//We don't want to use the encoders.
+    private WPI_VictorSPX outerLeftMotor;
+    private WPI_VictorSPX outerRightMotor;
 
-    private boolean brakeOn; 
-  
+    private Solenoid brakeSolenoid;
+
+    private DigitalInput topLimitSwitch;
+    private DigitalInput bottomLimitSwitch;
+
     public Lift() {
-        innerLeftLiftMotor = new WPI_TalonSRX(RobotMap.INNER_LEFT_LIFT_MOTOR_PORT);
-        innerRightLiftMotor = new WPI_TalonSRX(RobotMap.INNER_RIGHT_LIFT_MOTOR_PORT);
-        
-        outerLeftLiftMotor = new WPI_VictorSPX(RobotMap.OUTER_LEFT_LIFT_MOTOR_PORT);
-        outerRightLiftMotor = new WPI_VictorSPX(RobotMap.OUTER_RIGHT_LIFT_MOTOR_PORT);
+        innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
+        innerRightMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
+        //We will be using encoder data from the left motor only, and leaving it as a TalonSRX.
 
-        innerLeftLiftMotor.setNeutralMode(NeutralMode.Brake);
-        innerRightLiftMotor.setNeutralMode(NeutralMode.Brake);
-        
-        outerLeftLiftMotor.setNeutralMode(NeutralMode.Brake);
-        outerRightLiftMotor.setNeutralMode(NeutralMode.Brake);
+        outerLeftMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_LEFT_MOTOR_PORT);
+        outerRightMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_RIGHT_MOTOR_PORT);
 
-        innerRightLiftMotor.setInverted(true);
-        outerRightLiftMotor.setInverted(true);
+        innerLeftMotor.setNeutralMode(NeutralMode.Brake);
+        innerRightMotor.setNeutralMode(NeutralMode.Brake);
 
-        innerRightLiftMotor.follow(innerLeftLiftMotor);
-        outerRightLiftMotor.follow(innerLeftLiftMotor);
-        outerLeftLiftMotor.follow(innerLeftLiftMotor);
-  
-        innerLeftLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        innerRightLiftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        outerLeftMotor.setNeutralMode(NeutralMode.Brake);
+        outerRightMotor.setNeutralMode(NeutralMode.Brake);
 
-        liftSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_CHANNEL);
-        
-        // Configures the limit switches (forward is top, reverse is bottom)
-        innerLeftLiftMotor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
-        innerLeftLiftMotor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, 10);
-        
+        innerRightMotor.follow(innerLeftMotor);
+        outerRightMotor.follow(innerLeftMotor);
+        outerLeftMotor.follow(innerLeftMotor);
+
+        innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+
+        //innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        //We will only be using an encoder on the left motor.
+
+        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_PORT);
+
+        topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
+        bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
+
         // Line below resets encoders when the bottom limit switch is activated
-        innerLeftLiftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
-        
+        innerLeftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
+
     }
 
     public void initDefaultCommand() {
+        setDefaultCommand(new LiftMoveCommand());
     }
 
     public void resetEncoders() {
-        innerLeftLiftMotor.setSelectedSensorPosition(0, 0, 0);
-        innerRightLiftMotor.setSelectedSensorPosition(0, 0, 0);
+        innerLeftMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
     public void setBrakeOn() {
-        brakeOn = true;
-        liftSolenoid.set(brakeOn);
-    }
-    
-    public void goUp() {
-        innerLeftLiftMotor.set(1);
-    }
-    
-    public void goDown() {
-        innerLeftLiftMotor.set(-1);
+        brakeSolenoid.set(true);
     }
 
     public void setBrakeOff() {
-        brakeOn = false;
-        liftSolenoid.set(brakeOn);
+        brakeSolenoid.set(false);
     }
 
     public void toggleBrake() {
-        if (brakeOn) {
+        if (brakeSolenoid.get()) {
             setBrakeOff();
         } else {
             setBrakeOn();
         }
     }
 
+    public void moveLift(double speed) {
+        setBrakeOff();
+        if (!(isAtTop() && speed > 0)) {
+            innerLeftMotor.set(speed);
+        } else if (!(isAtBottom() && speed < 0)) {
+            innerLeftMotor.set(speed);
+        } else {
+            stop();
+        }
+    }
+
     public void stop() {
-        innerLeftLiftMotor.set(0);
+        innerLeftMotor.set(0);
+        setBrakeOn();
+    }
+
+    public boolean getBrakeStatus() {
+        return brakeSolenoid.get();
     }
 
     public boolean isAtBottom() {
-        return innerLeftLiftMotor.getSensorCollection().isRevLimitSwitchClosed();
+        return bottomLimitSwitch.get();
     }
 
-    public boolean isAtTop() { 
-       return innerLeftLiftMotor.getSensorCollection().isFwdLimitSwitchClosed();
+    public boolean isAtTop() {
+        return topLimitSwitch.get();
     }
 
-    public double getLeftLiftEncoderDistance() {
-        return innerLeftLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+    public double getEncoderDistance() {
+        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
-    public double getRightLiftEncoderDistance() {
-        return innerRightLiftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
-    }
-
-    public double getMaxLiftEncoderDistance() {
-        return Math.max(getLeftLiftEncoderDistance(), getRightLiftEncoderDistance());
-    }
-    
     public double getLiftHeight() {
-        return getMaxLiftEncoderDistance() + RobotMap.MIN_HEIGHT_OF_GRABBER;
+        return getEncoderDistance() + RobotMap.MIN_HEIGHT_OF_LIFT;
     }
 }
