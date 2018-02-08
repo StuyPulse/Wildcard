@@ -127,6 +127,10 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.setSelectedSensorPosition(0, 0, 0);
         rightBottomMotor.setSelectedSensorPosition(0, 0, 0);
     }
+    public void setEncoders(double inches){
+        leftBottomMotor.setSelectedSensorPosition((int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
+        rightBottomMotor.setSelectedSensorPosition((int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
+    }
 
     public void tankDrive(double left, double right) {
         differentialDrive.tankDrive(left, right);
@@ -167,8 +171,13 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.mainLoop();
     }
 
+
     public boolean isOnLine(int mode) {
         return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
+    }
+    public boolean isOnLine(double mode){
+        return leftLineSensor.basicFind((int) mode) || rightLineSensor.basicFind((int) mode);
+
     }
 
     public boolean rightIsOnLine(int mode) {

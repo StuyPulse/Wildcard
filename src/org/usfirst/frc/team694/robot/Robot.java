@@ -14,6 +14,8 @@ import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.util.IRSensor;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,7 +40,13 @@ public class Robot extends TimedRobot {
  
     public static OI oi;
 
-    private SendableChooser<Command> autonChooser = new SendableChooser<>();
+    public static FieldMapTopLeftQuadrant TopLeftQuad;
+    public static FieldMapTopRightQuadrant TopRightQuad;
+    public static FieldMapBottomLeftQuadrant BottomLeftQuad;
+    public static FieldMapBottomRightQuadrant BottomRightQuad;
+    
+    static boolean isRobotAtBottom;
+    private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
     /**
@@ -53,6 +61,8 @@ public class Robot extends TimedRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
+        
+       
     }
 
     /**
@@ -97,6 +107,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
         SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
+        isRobotAtBottom = SmartDashboard.putBoolean("Donde es nuestro robot? Wo men de ji chi ren zai nar?", false);
     }
 
     @Override
@@ -119,5 +130,18 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+    }
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotAtBottom) {
+                return BottomLeftQuad;
+            }
+            return TopLeftQuad;       
+        }
+        if(isRobotAtBottom) {
+            return BottomRightQuad;
+        }
+        return TopRightQuad;
     }
 }
