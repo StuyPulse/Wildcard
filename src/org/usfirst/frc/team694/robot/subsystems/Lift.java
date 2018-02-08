@@ -53,13 +53,16 @@ public class Lift extends Subsystem {
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
 
-        // Line below resets encoders when the bottom limit switch is activated
-        innerLeftMotor.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, 0);
-
     }
 
     public void initDefaultCommand() {
         setDefaultCommand(new LiftMoveCommand());
+    }
+    
+    public void periodic() {
+        if (isAtBottom() || isAtTop()) {
+            resetEncoders();
+        }
     }
 
     public void resetEncoders() {
