@@ -16,8 +16,6 @@ public class LiftMoveToHeightCommand extends Command {
 
     protected void initialize() {
         startHeight = Robot.lift.getLiftHeight();
-        Robot.lift.resetEncoders();
-        Robot.lift.setBrakeOff();
     }
 
     protected void execute() {
@@ -29,7 +27,7 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return (Robot.lift.getLiftHeight() == height);
+        return (Math.abs(Robot.lift.getLiftHeight() - height) < .25);
     }
 
     protected void end() {
