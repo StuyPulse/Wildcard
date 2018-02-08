@@ -7,13 +7,12 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaFlipDownCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaFlipUpCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {
     public Gamepad driverGamepad;
     public Gamepad operatorGamepad;
@@ -21,6 +20,9 @@ public class OI {
     public OI() {
          driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
          operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
+         
+         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
+         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipUpCommand());
+         operatorGamepad.getTopButton().whenReleased(new SpatulaFlipDownCommand());
     }
-
 }

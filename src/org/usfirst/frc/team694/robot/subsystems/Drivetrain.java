@@ -14,20 +14,14 @@ import org.usfirst.frc.team694.util.LineSensor;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-/**
- * An example subsystem. You can replace me with your own Subsystem.
- */
 public class Drivetrain extends Subsystem {
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
@@ -42,37 +36,34 @@ public class Drivetrain extends Subsystem {
     private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
-
-    private ADXRS450_Gyro gyro;
     
-    public static AHRS accelerometer;
+    public static AHRS navX;
 
     public Drivetrain() {
-        //TODO: Remove magic numbers: Add in RobotMap
-        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_FRONT_MOTOR_PORT);
-        leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
-        leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
+        leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
+        leftMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT);
+        leftBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT);
         //master-follower, leftTopMotor designated master
-        leftMiddleMotor.follow(leftTopMotor);
-        leftBottomMotor.follow(leftTopMotor);
+        leftMiddleMotor.follow(leftBottomMotor);
+        leftTopMotor.follow(leftBottomMotor);
 
-        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
-        rightMiddleMotor = new WPI_VictorSPX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
-        rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
+        rightTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP_MOTOR_PORT);
+        rightMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT);
+        rightBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT);
         //master-follower, rightTopMotor designated master
-        rightMiddleMotor.follow(rightTopMotor);
-        rightBottomMotor.follow(rightTopMotor);
+        rightMiddleMotor.follow(rightBottomMotor);
+        rightTopMotor.follow(rightBottomMotor);
 
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
 
-        leftTopMotor.setNeutralMode(NeutralMode.Coast);
-        leftMiddleMotor.setNeutralMode(NeutralMode.Coast);
-        leftBottomMotor.setNeutralMode(NeutralMode.Coast);
-        rightTopMotor.setNeutralMode(NeutralMode.Coast);
-        rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
-        rightBottomMotor.setNeutralMode(NeutralMode.Coast);
+        leftTopMotor.setNeutralMode(NeutralMode.Brake);
+        leftMiddleMotor.setNeutralMode(NeutralMode.Brake);
+        leftBottomMotor.setNeutralMode(NeutralMode.Brake);
+        rightTopMotor.setNeutralMode(NeutralMode.Brake);
+        rightMiddleMotor.setNeutralMode(NeutralMode.Brake);
+        rightBottomMotor.setNeutralMode(NeutralMode.Brake);
 
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -85,17 +76,15 @@ public class Drivetrain extends Subsystem {
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
-        // Not sure about this next line: (what is kMXP?)
-        accelerometer = new AHRS(SPI.Port.kMXP);
-
         differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
-
-        gyro = new ADXRS450_Gyro();
         
-        // Not sure about this next line: (what is kMXP?)
-        accelerometer = new AHRS(SPI.Port.kMXP);
+        // the navX is plugged into the kMXP port on the roboRIO
+        navX = new AHRS(SPI.Port.kMXP);
     }
-
+    @Override
+    public void periodic(){
+        updateSensors();
+    }
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }
@@ -169,7 +158,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getGyroAngle() {
-        return gyro.getAngle();
+        return navX.getAngle();
     }
 
     public void updateSensors() {
@@ -177,16 +166,16 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.mainLoop();
     }
 
-    public boolean isOnLine(int mode) {
-        return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
+    public boolean isOnLine(int mode) {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
+        return leftIsOnLine(mode) || rightIsOnLine(mode);
     }
 
     public boolean rightIsOnLine(int mode) {
-        return rightLineSensor.basicFind(mode);
+        return rightLineSensor.basicFind();
     }
 
     public boolean leftIsOnLine(int mode) {
-        return leftLineSensor.basicFind(mode);
+        return leftLineSensor.basicFind();
     }
 
     public void initDefaultCommand() {
@@ -195,35 +184,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
-        // TODO Auto-generated method stub
-        gyro.reset();
+        navX.reset();
     }
     
-    public void resetAccelerometer() {
-        accelerometer.reset();
-    }
-    
-    public double getXAccel() {
-        return accelerometer.getWorldLinearAccelX();
-    }
-    
-    public double getYAccel() {
-        return accelerometer.getWorldLinearAccelY();
-    }
-    
-    public double getZAccel() {
-        return accelerometer.getWorldLinearAccelZ();
-    }
-    
-    public double getZRotation() {
-        return accelerometer.getYaw();
-    }
-    
-    public boolean testForBump() {
-        return getZAccel() > -1;
-    }
-    
-    public boolean isCalibrating() {
-        return accelerometer.isCalibrating();
-    }
 }

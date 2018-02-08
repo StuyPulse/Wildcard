@@ -4,17 +4,17 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CrabArmAcquireCommand extends Command {
+public class SpatulaAcquireCommand extends Command {
 
-    public CrabArmAcquireCommand() {
-        requires(Robot.crabArm);
+    public SpatulaAcquireCommand() {
+        requires(Robot.spatula);
     }
-
+    
     protected void initialize() {
     }
 
     protected void execute() {
-        Robot.crabArm.acquire();
+        Robot.spatula.acquire();
     }
 
     protected boolean isFinished() {
@@ -22,8 +22,5 @@ public class CrabArmAcquireCommand extends Command {
     }
 
     protected void end() {
-    }
-
-    protected void interrupted() {
     }
 }

@@ -4,14 +4,14 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class GrabberCloseCommand extends InstantCommand {
+public class SpatulaTongsLoosenHoldCommand extends InstantCommand {
 
-    public GrabberCloseCommand() {
+    public SpatulaTongsLoosenHoldCommand() {
         super();
-        requires(Robot.grabber);
+        requires(Robot.spatula);
     }
 
     protected void initialize() {
-        Robot.grabber.close();
+        Robot.spatula.loosenCubeGrip();
     }
 }
