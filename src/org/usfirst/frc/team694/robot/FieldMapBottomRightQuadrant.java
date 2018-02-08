@@ -8,8 +8,8 @@ package org.usfirst.frc.team694.robot;
 public final class FieldMapBottomRightQuadrant implements FieldMapInterface{
   //Scale Auton where the bot is on the same side as the scoring scale and will turn on the null territory line
     @Override
-    public double getDistanceFromFrontOfRobotToAutoLine() {
-        return BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_FRONT_OF_ROBOT_TO_AUTO_LINE;
+    public double getDistanceFromLineSensorToAutoLine() {
+        return BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE;
     }
 
     @Override
@@ -37,8 +37,8 @@ public final class FieldMapBottomRightQuadrant implements FieldMapInterface{
     //Scale Auton where the bot is on the opposite side of the scoring scale
     
     /*    
-    public double getDistanceFromFrontOfRobotToAutoLine() {
-        return BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_FRONT_OF_ROBOT_TO_AUTO_LINE;
+    public double getDistanceFromLineSensorToAutoLine() {
+        return BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE;
     }
     */
     
@@ -120,7 +120,6 @@ public final class FieldMapBottomRightQuadrant implements FieldMapInterface{
     private static final double BOTTOM_RIGHT_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE = FieldMapBottomMiddleQuadrant.BOTTOM_MIDDLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SCALE_EDGE - RobotMap.LENGTH_OF_BOT;
     
     //Scale auton where the bot is on the same side as the alliance scale and bot will turn at null territory line
-    private static final double BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_FRONT_OF_ROBOT_TO_AUTO_LINE = BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE - RobotMap.LENGTH_OF_BOT;
     private static final double BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY = BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY - BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE;
     private static final double BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT = FieldMapBottomMiddleQuadrant.BOTTOM_MIDDLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SCALE_EDGE - BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_ROBOT_STARTING_POINT;
     private static final double BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT_SQUARED = BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT * BOTTOM_RIGHT_QUADRANT_DISTANCE_FROM_SCALE_EDGE_TO_MIDDLE_OF_ROBOT;
