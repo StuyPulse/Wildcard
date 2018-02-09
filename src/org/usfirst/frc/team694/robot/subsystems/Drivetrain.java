@@ -9,7 +9,7 @@ package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
-import org.usfirst.frc.team694.util.LineSensor;
+import org.usfirst.frc.team694.util.LineSensorSystem;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -18,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -36,8 +37,9 @@ public class Drivetrain extends Subsystem {
 
     private DifferentialDrive differentialDrive;
 
-    private LineSensor leftLineSensor;
-    private LineSensor rightLineSensor;
+    private DigitalInput leftLineSensor;
+    private DigitalInput rightLineSensor;
+    private LineSensorSystem lineSensorSystem;
 
     private Solenoid gearShift;
 
@@ -75,8 +77,8 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
-        rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        leftLineSensor = new DigitalInput(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new DigitalInput(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
@@ -153,31 +155,18 @@ public class Drivetrain extends Subsystem {
         gearShift.set(m);
     }
 
-    public void resetLineSensors() {
-        leftLineSensor.resetAmbient();
-        rightLineSensor.resetAmbient();
-    }
-
     public double getGyroAngle() {
         return gyro.getAngle();
     }
 
     public void updateSensors() {
-        rightLineSensor.mainLoop();
-        leftLineSensor.mainLoop();
+        lineSensorSystem.mainLoop();
     }
 
-    public boolean isOnLine(int mode) {
-        return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
+    public boolean isOnLine() {
+        return lineSensorSystem.basicFind();
     }
 
-    public boolean rightIsOnLine(int mode) {
-        return rightLineSensor.basicFind(mode);
-    }
-
-    public boolean leftIsOnLine(int mode) {
-        return leftLineSensor.basicFind(mode);
-    }
 
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
