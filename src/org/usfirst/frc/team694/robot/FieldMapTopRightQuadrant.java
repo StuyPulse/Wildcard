@@ -85,17 +85,12 @@ public final class FieldMapTopRightQuadrant implements FieldMapInterface{
     //anything with // could be changed due to the actual field measure 
     
     //These are the measurements that need to be measured out before match.
-    private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_MIDDLE_OF_FIELD = 162.0; //
     public static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP = 66.75; //
-    private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH = 168.0; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY = 288.0; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE = 120.0; //
-    private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH = 140.0; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_FAR_SIDE_OF_SWITCH = 196.0; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_PLATFORM_EDGE = 261.47; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
-    private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_NULL_TERRITORY_TO_NULL_BUMP = 36.0; //
-    private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_SWITCH_EDGE = 85.25; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
     private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
   //private static final double TOP_RIGHT_QUADRANT_DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204.0; //
