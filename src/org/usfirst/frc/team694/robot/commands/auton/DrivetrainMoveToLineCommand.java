@@ -4,45 +4,34 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class DrivetrainMoveToLineCommand extends Command {
     private boolean isReached = false; 
     private double distance = 0;
-    private double speedMode = 0;
+    private double speed = 1;
     public DrivetrainMoveToLineCommand(double distance,double speed) {
-        speedMode =  ((speed / 0.25) - 1);
-        this.distance = distance;
-        // Use requires() here to declare subsystem dependencies
+        this.distance = distance;//represents length in inches to go, just in case line sensing fails.
         requires(Robot.drivetrain);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
         Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetLineSensors();
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         Robot.drivetrain.updateSensors();
-        Robot.drivetrain.tankDrive((speedMode + 1) * 0.25, (speedMode + 1) * 0.25);
-        isReached = Robot.drivetrain.isOnLine((int) speedMode);
+        Robot.drivetrain.tankDrive(speed, speed);
+        isReached = Robot.drivetrain.isOnLine((int) speed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isReached || (Math.max(Robot.drivetrain.getRightEncoderDistance(),Robot.drivetrain.getLeftEncoderDistance()) > (distance + 5));
+        return isReached || (Robot.drivetrain.getEncoderDistance() > distance);
     }
 
-    // Called once after isFinished returns true
     protected void end() {
         Robot.drivetrain.resetEncoders();
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 }

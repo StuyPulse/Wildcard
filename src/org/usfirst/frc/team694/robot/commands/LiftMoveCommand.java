@@ -1,18 +1,16 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */
-public class LiftDownCommand extends Command {
+public class LiftMoveCommand extends Command {
 
-    public LiftDownCommand() {
+    public LiftMoveCommand() {
         requires(Robot.lift);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassi
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +20,17 @@ public class LiftDownCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.lift.goDown();
+        if (Robot.oi.operatorGamepad.getLeftY() > 0.9) {
+            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED);
+        } else if (Robot.oi.operatorGamepad.getLeftY() > 0.4) {
+            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED / 2);
+        } else if (Robot.oi.operatorGamepad.getLeftY() > -0.4) {
+            Robot.lift.stop();
+        } else if (Robot.oi.operatorGamepad.getLeftY() > -0.9) {
+            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED / 2 * -1);
+        } else {
+            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED * -1);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
