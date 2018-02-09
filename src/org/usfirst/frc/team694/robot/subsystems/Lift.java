@@ -85,7 +85,7 @@ public class Lift extends Subsystem {
         }
     }
 
-    public void moveLift(double speed) {
+    private void moveLift(double speed) {
         setBrakeOff();
         if (!(isAtTop() && speed > 0)) {
             innerLeftMotor.set(speed);
@@ -96,6 +96,21 @@ public class Lift extends Subsystem {
         }
     }
 
+    public void move(double maxSpeed) {
+        double currentHeight = getLiftHeight();
+        double speed = maxSpeed;
+        if (maxSpeed < 0) {
+            if (currentHeight < RobotMap.LIFT_HEIGHT_THRESHOLD) {
+                speed = -RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED;
+            }
+        } else {
+            if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_HEIGHT_THRESHOLD) {
+                speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
+            }
+        }
+        moveLift(speed);
+    }
+    
     public void stop() {
         innerLeftMotor.set(0);
         setBrakeOn();
@@ -113,11 +128,7 @@ public class Lift extends Subsystem {
         return topLimitSwitch.get();
     }
 
-    public double getEncoderDistance() {
-        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
-    }
-
     public double getLiftHeight() {
-        return getEncoderDistance() + RobotMap.MIN_HEIGHT_OF_LIFT;
+        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 }
