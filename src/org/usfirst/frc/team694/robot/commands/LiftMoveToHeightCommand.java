@@ -13,9 +13,6 @@ public class LiftMoveToHeightCommand extends Command {
         this.targetHeight = height;
     }
 
-    protected void initialize() {
-    }
-
     protected void execute() {
         double currentHeight = Robot.lift.getLiftHeight();
         if (currentHeight > targetHeight) {
@@ -30,8 +27,6 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected void end() {
-    }
-
-    protected void interrupted() {
+        Robot.lift.stop();
     }
 }
