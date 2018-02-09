@@ -7,17 +7,18 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class AcquirerFlipDownCommand extends InstantCommand {
+public class DrivetrainHighGearCommand extends InstantCommand {
 
-    public AcquirerFlipDownCommand() {
+    public DrivetrainHighGearCommand() {
+        super();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-        super();
-        requires(Robot.acquirer);
+        requires(Robot.drivetrain);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     protected void initialize() {
-        Robot.acquirer.flipDown();
+        Robot.drivetrain.highGearShift();
     }
+
 }

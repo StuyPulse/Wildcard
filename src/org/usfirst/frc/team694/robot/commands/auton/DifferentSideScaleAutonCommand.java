@@ -4,14 +4,14 @@ import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMaxUpCommand;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-
 
 public class DifferentSideScaleAutonCommand extends CommandGroup {
     public static FieldMapInterface Quad = Robot.getRobotQuadrant();
     public double speed = 0.5;
+
     public DifferentSideScaleAutonCommand() {  
         addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceFromLineSensorToAutoLine()));
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToTravelBeforeFirstTurn()));
@@ -20,7 +20,7 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachOtherPlatformZoneEdge()));
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToDriveOutAfterPlatformZoneEdge()));
         addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachScaleSide()));
-        addSequential(new LiftMaxUpCommand());
+        addSequential(new LiftMoveToHeightCommand(84)); //Unsure about this height
         addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachScaleSide()));
         addSequential(new GrabberOpenCommand());
     }
