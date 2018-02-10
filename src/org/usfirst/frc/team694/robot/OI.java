@@ -12,6 +12,8 @@ import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINManualCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
+import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
+import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.ToggleCrabArmFlapOutAndSpatulaFlipCommand;
@@ -36,6 +38,9 @@ public class OI {
          
          operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
          operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());
+         
+         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
+         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
          
          //Lift command is inside the LiftMoveCommand
     }
