@@ -8,25 +8,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Grabber extends Subsystem {
 
-    private DoubleSolenoid tongsSolenoid;
+    private DoubleSolenoid grabberSolenoid;
 
     public Grabber() {
-        tongsSolenoid = new DoubleSolenoid(RobotMap.GRABBER_SOLENOID_OPEN, RobotMap.GRABBER_SOLENOID_CLOSE);
+        grabberSolenoid = new DoubleSolenoid(RobotMap.GRABBER_SOLENOID_OPEN_PORT, RobotMap.GRABBER_SOLENOID_CLOSE_PORT);
     }
 
     public void initDefaultCommand() {
     }
 
     public void open() {
-        tongsSolenoid.set(DoubleSolenoid.Value.kReverse);
+        grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void close() {
-        tongsSolenoid.set(DoubleSolenoid.Value.kForward);
+        grabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void toggle() {
-        if (tongsSolenoid.get() == DoubleSolenoid.Value.kReverse) {
+        if (grabberSolenoid.get() == DoubleSolenoid.Value.kReverse) {
             close();
         } else {
             open();

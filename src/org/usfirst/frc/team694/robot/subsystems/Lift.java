@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Lift extends Subsystem {
 
     private WPI_TalonSRX innerLeftMotor;
-    private WPI_TalonSRX innerRightMotor;//We don't want to use the encoders.
+    private WPI_TalonSRX innerRightMotor;
     private WPI_VictorSPX outerLeftMotor;
     private WPI_VictorSPX outerRightMotor;
 
@@ -59,7 +59,7 @@ public class Lift extends Subsystem {
     }
     
     public void periodic() {
-        if (isAtBottom() || isAtTop()) {
+        if (isAtBottom()) {
             resetEncoders();
         }
     }

@@ -66,7 +66,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        //SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
     }
 
     @Override
