@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.DrivetrainDriveSystemCommand;
 import org.usfirst.frc.team694.util.LineSensor;
@@ -67,7 +68,12 @@ public class Drivetrain extends Subsystem {
 
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-
+        
+        leftTopMotor.configOpenloopRamp(0, 0);
+        rightTopMotor.configOpenloopRamp(0, 0);
+        leftBottomMotor.configOpenloopRamp(0, 0);
+        rightBottomMotor.configOpenloopRamp(0, 0);
+        
         leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
         rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
@@ -177,7 +183,14 @@ public class Drivetrain extends Subsystem {
     public boolean leftIsOnLine(int mode) {
         return leftLineSensor.basicFind();
     }
-
+    
+    public void setRamp(double rampSeconds) {
+        leftTopMotor.configOpenloopRamp(rampSeconds, 0);
+        rightTopMotor.configOpenloopRamp(rampSeconds, 0);
+        leftBottomMotor.configOpenloopRamp(rampSeconds, 0);
+        rightBottomMotor.configOpenloopRamp(rampSeconds, 0);
+    }
+    
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
         setDefaultCommand(new DrivetrainDriveSystemCommand());
