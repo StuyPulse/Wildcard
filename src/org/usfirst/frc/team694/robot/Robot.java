@@ -9,6 +9,10 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+<<<<<<< HEAD
+=======
+import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
+>>>>>>> master
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -20,6 +24,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -52,7 +57,13 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
         
+<<<<<<< HEAD
        
+=======
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        SmartDashboard.putData("Autonomous", autonChooser);
+>>>>>>> master
     }
 
     @Override
@@ -77,7 +88,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        isRobotAtBottom = SmartDashboard.putBoolean("Donde es nuestro robot? Wo men de ji chi ren zai nar?", false);
     }
 
     @Override
@@ -90,33 +100,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        acquirerStatus();
-        dequirerRun();
     }
 
-    
-    private void acquirerStatus() {
-        // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaAcquireCommand() );    
-        }
-        else if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
-        }
-        else {
-            Robot.spatula.setSpatulaRunning(false);
-        }
-    }
-    
-    private void dequirerRun() {
-     // If statement checks to make sure that the Left Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
-        }
-    }
     
     /**
      * This function is called periodically during test mode.

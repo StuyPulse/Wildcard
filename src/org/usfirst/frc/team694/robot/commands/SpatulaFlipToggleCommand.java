@@ -4,15 +4,17 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class SpatulaFlipUpCommand extends InstantCommand {
+/**
+ *
+ */
+public class SpatulaFlipToggleCommand extends InstantCommand {
 
-    public SpatulaFlipUpCommand() {
+    public SpatulaFlipToggleCommand() {
         super();
         requires(Robot.spatula);
     }
-
+    
     protected void initialize() {
-        Robot.spatula.flipUp();
+        Robot.spatula.toggle();
     }
 }
-//Should Probably not run this on its own, the crabarms have to move out of the way first
