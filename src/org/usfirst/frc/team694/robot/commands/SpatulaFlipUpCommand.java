@@ -15,3 +15,4 @@ public class SpatulaFlipUpCommand extends InstantCommand {
         Robot.spatula.flipUp();
     }
 }
+//Should Probably not run this on its own, the crabarms have to move out of the way first

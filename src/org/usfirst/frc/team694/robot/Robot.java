@@ -22,6 +22,9 @@ import org.usfirst.frc.team694.robot.commands.SpatulaFlipUpCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaStopCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaTongsLoosenHoldCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaTongsTightenHoldCommand;
+
+import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
+
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -30,6 +33,7 @@ import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -85,6 +89,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
         SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
+        
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        SmartDashboard.putData("Autonomous", autonChooser);
     }
 
     @Override
@@ -109,7 +117,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        //SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
     }
 
     @Override
@@ -122,24 +129,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        acquirerStatus();
     }
 
-    
-    private void acquirerStatus() {
-        // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaAcquireCommand() );    
-        }
-        else if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
-        }
-        else {
-            Robot.spatula.setSpatulaRunning(false);
-        }
-    }
     
     /**
      * This function is called periodically during test mode.

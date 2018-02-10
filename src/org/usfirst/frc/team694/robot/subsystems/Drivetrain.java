@@ -8,7 +8,7 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
+import org.usfirst.frc.team694.robot.commands.DrivetrainDriveSystemCommand;
 import org.usfirst.frc.team694.util.LineSensor;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -43,14 +43,14 @@ public class Drivetrain extends Subsystem {
         leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
         leftMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT);
-        //master-follower, leftTopMotor designated master
+        //master-follower, leftBottomMotor designated master
         leftMiddleMotor.follow(leftBottomMotor);
         leftTopMotor.follow(leftBottomMotor);
 
         rightTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP_MOTOR_PORT);
         rightMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT);
-        //master-follower, rightTopMotor designated master
+        //master-follower, rightBottomMotor designated master
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
 
@@ -68,15 +68,15 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        leftLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
-        rightLineSensor = new LineSensor(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
 
-        differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
+        differentialDrive = new DifferentialDrive(leftBottomMotor, rightBottomMotor);
         
         // the navX is plugged into the kMXP port on the roboRIO
         navX = new AHRS(SPI.Port.kMXP);
@@ -97,6 +97,10 @@ public class Drivetrain extends Subsystem {
         return Math.max(Math.abs(getLeftSpeed()), Math.abs(getRightSpeed()));
     }
 
+    public double getRawEncoderDistance() {
+        return Math.abs(Math.max(getLeftRawEncoderDistance(), getRightRawEncoderDistance()));
+    }
+    
     public double getEncoderDistance() {
         return Math.abs(Math.max(getLeftEncoderDistance(), getRightEncoderDistance()));
     }
@@ -194,7 +198,7 @@ public class Drivetrain extends Subsystem {
 
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
-        setDefaultCommand(new DrivetrainPiotrDriveCommand());
+        setDefaultCommand(new DrivetrainDriveSystemCommand());
     }
 
     public void resetGyro() {

@@ -14,7 +14,7 @@ public class CrabArmDeployCommand extends Command {
     }
 
     protected void initialize() {
-        //TODO: Figure out how long we want to run the acquirer
+        //TODO: Figure out how long we want to run the spatula
         setTimeout(4);
     }
 
