@@ -35,7 +35,7 @@ public class Drivetrain extends Subsystem {
     /*private LineSensor leftLineSensor;
     private LineSensor rightLineSensor;*/
 
-    private Solenoid gearShift;
+    //private Solenoid gearShift;
     
     public static AHRS navX;
 
@@ -71,7 +71,7 @@ public class Drivetrain extends Subsystem {
         //leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
         //rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
-        gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
+        //gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
         //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
         //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
@@ -142,24 +142,24 @@ public class Drivetrain extends Subsystem {
     }
 
     public void highGearShift() {
-        gearShift.set(false);
+        //gearShift.set(false);
     }
 
     public void lowGearShift() {
-        gearShift.set(true);
+        //gearShift.set(true);
     }
 
     public void toggleGearShift() {
-        boolean m = !(gearShift.get());
-        gearShift.set(m);
+      //boolean m = !(gearShift.get());
+      //gearShift.set(m);
     }
     
     public void gearShiftInput(boolean isShifted) {
-        gearShift.set(isShifted);
+       // gearShift.set(isShifted);
     }
     
     public boolean isGearShift() {
-        return gearShift.get();
+        return false; //gearShift.get();
     }
     
     /*public void resetLineSensors(){

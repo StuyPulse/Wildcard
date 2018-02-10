@@ -19,10 +19,10 @@ public class Lift extends Subsystem {
     private WPI_VictorSPX outerLeftMotor;
     private WPI_VictorSPX outerRightMotor;
 
-    private Solenoid brakeSolenoid;
+//    private Solenoid brakeSolenoid;
 
-    private DigitalInput topLimitSwitch;
-    private DigitalInput bottomLimitSwitch;
+//    private DigitalInput topLimitSwitch;
+//    private DigitalInput bottomLimitSwitch;
 
     public Lift() {
         innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -48,10 +48,10 @@ public class Lift extends Subsystem {
         //innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         //We will only be using an encoder on the left motor.
 
-        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_PORT);
+//        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_PORT);
 
-        topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
-        bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
+//        topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
+//        bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
 
     }
 
@@ -71,19 +71,19 @@ public class Lift extends Subsystem {
     }
 
     public void setBrakeOn() {
-        brakeSolenoid.set(true);
+//        brakeSolenoid.set(true);
     }
 
     public void setBrakeOff() {
-        brakeSolenoid.set(false);
+//        brakeSolenoid.set(false);
     }
 
     public void toggleBrake() {
-        if (brakeSolenoid.get()) {
-            setBrakeOff();
-        } else {
-            setBrakeOn();
-        }
+//        if (brakeSolenoid.get()) {
+//            setBrakeOff();
+//        } else {
+//            setBrakeOn();
+//        }
     }
 
     private void moveLift(double speed) {
@@ -100,15 +100,15 @@ public class Lift extends Subsystem {
     public void move(double maxSpeed) {
         double currentHeight = getLiftHeight();
         double speed = maxSpeed;
-        if (maxSpeed < 0) {
-            if (currentHeight < RobotMap.LIFT_HEIGHT_THRESHOLD) {
-                speed = -RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED;
-            }
-        } else {
-            if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_HEIGHT_THRESHOLD) {
-                speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
-            }
-        }
+//        if (maxSpeed < 0) {
+//            if (currentHeight < RobotMap.LIFT_HEIGHT_THRESHOLD) {
+//                speed = -RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED;
+//            }
+//        } else {
+//            if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_HEIGHT_THRESHOLD) {
+//                speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
+//            }
+//        }
         moveLift(speed);
     }
     
@@ -118,15 +118,18 @@ public class Lift extends Subsystem {
     }
 
     public boolean getBrakeStatus() {
-        return brakeSolenoid.get();
+        return false;
+//        return brakeSolenoid.get();
     }
 
     public boolean isAtBottom() {
-        return bottomLimitSwitch.get();
+        return false;
+//        return bottomLimitSwitch.get();
     }
 
     public boolean isAtTop() {
-        return topLimitSwitch.get();
+        return false;
+//        return topLimitSwitch.get();
     }
 
     public double getLeftRawEncoderDistance() {
