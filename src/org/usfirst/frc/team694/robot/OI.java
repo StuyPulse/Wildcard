@@ -11,6 +11,7 @@ import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOffCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINManualCommand;
+import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
@@ -25,7 +26,7 @@ public class OI {
          driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
          operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_D);
          
-         //operatorGamepad.getLeftButton().whenPressed(new ); put command to move crabarm out of the way
+         //operatorGamepad.getLeftButton().whenPressed(new ());
          operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
          operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
          operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
@@ -33,5 +34,7 @@ public class OI {
          operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
          operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
          operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());
+         
+         //Lift command is inside the LiftMoveCommand
     }
 }

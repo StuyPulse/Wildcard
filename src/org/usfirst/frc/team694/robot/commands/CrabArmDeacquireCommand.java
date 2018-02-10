@@ -14,7 +14,7 @@ public class CrabArmDeacquireCommand extends Command {
     }
 
     protected void execute() {
-        Robot.crabArm.deacquire();
+        Robot.crabArm.flapOut();
     }
 
     protected boolean isFinished() {

@@ -29,7 +29,7 @@ public class CrabArm extends Subsystem {
         crabArmMotors.set(1);
     }
 
-    public void deacquire() {
+    public void flapOut() {
         crabArmMotors.set(-1);
     }
 
