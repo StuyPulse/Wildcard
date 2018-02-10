@@ -74,7 +74,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        //SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
     }
 
     @Override
@@ -87,33 +86,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        acquirerStatus();
-        dequirerRun();
     }
 
-    
-    private void acquirerStatus() {
-        // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaAcquireCommand() );    
-        }
-        else if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
-        }
-        else {
-            Robot.spatula.setSpatulaRunning(false);
-        }
-    }
-    
-    private void dequirerRun() {
-     // If statement checks to make sure that the Left Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
-        }
-    }
     
     /**
      * This function is called periodically during test mode.
