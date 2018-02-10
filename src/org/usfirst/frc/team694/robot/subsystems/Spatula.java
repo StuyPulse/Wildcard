@@ -17,12 +17,10 @@ public class Spatula extends Subsystem {
     private WPI_VictorSPX leftSpatulaMotor;
     private WPI_VictorSPX rightSpatulaMotor;
     private Solenoid spatulaFlipSolenoid;
-    private Solenoid spatulaTongsSolenoid; 
+    //private Solenoid spatulaTongsSolenoid; 
 
     private SpeedControllerGroup spatulaMotors;
-    private DigitalInput limitSwitch;
-    
-    private SpeedControllerGroup acquirerMotors;
+    private DigitalInput spatulaLimitSwitch;
 
     public boolean isBITCOINAutomation;
     
@@ -50,14 +48,11 @@ public class Spatula extends Subsystem {
         rightSpatulaMotor.setInverted(true);
         
         spatulaFlipSolenoid = new Solenoid(RobotMap.SPATULA_FLIP_SOLENOID_PORT);
-        spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
+        //spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
-
-        acquirerMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
-
         isBITCOINAutomation = true;
         
-        limitSwitch = new DigitalInput(RobotMap.SPATULA_LIMIT_SWITCH_PORT);
+        spatulaLimitSwitch = new DigitalInput(RobotMap.SPATULA_LIMIT_SWITCH_PORT);
     }
 
     public void acquire() {
@@ -69,7 +64,7 @@ public class Spatula extends Subsystem {
     }
     
     public void stop() {
-        acquirerMotors.set(0);
+        spatulaMotors.set(0);
     }
 
     public void flipUp() {
@@ -81,14 +76,14 @@ public class Spatula extends Subsystem {
     }
     
     public void tightenCubeGrip() {
-        spatulaTongsSolenoid.set(true);
+        //spatulaTongsSolenoid.set(true);
     }
     
     public void loosenCubeGrip() {
-        spatulaTongsSolenoid.set(false);
+        //spatulaTongsSolenoid.set(false);
     }
     
     public boolean isCubeDetected() {
-        return limitSwitch.get();
+        return spatulaLimitSwitch.get();
     }
 }
