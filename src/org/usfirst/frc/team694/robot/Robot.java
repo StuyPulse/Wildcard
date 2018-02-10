@@ -16,11 +16,8 @@ import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
-<<<<<<< HEAD
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
-=======
->>>>>>> ebc416b81bcbc18d57c63b609ffc01bacb482cf4
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -80,11 +77,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-
-        SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
         isRobotAtBottom = SmartDashboard.putBoolean("Donde es nuestro robot? Wo men de ji chi ren zai nar?", false);
-        //SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
-
     }
 
     @Override
