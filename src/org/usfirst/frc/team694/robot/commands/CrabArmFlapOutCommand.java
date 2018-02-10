@@ -13,20 +13,11 @@ public class CrabArmFlapOutCommand extends Command {
         requires(Robot.crabArm);
     }
 
-    protected void initialize() {
-        //TODO: Figure out how long we want to run the spatula
-        setTimeout(1);
-    }
-
     protected void execute() {
         Robot.crabArm.flapOut();
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
-    }
-
-    protected void end() {
-        Robot.crabArm.stop();
+        return false;
     }
 }
