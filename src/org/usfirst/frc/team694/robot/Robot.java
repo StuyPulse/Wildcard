@@ -79,24 +79,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        acquirerStatus();
     }
 
-    
-    private void acquirerStatus() {
-        // If statement checks to make sure that the Right Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if(oi.operatorGamepad.getRawRightTriggerAxis() > 0.5 && oi.operatorGamepad.getRawLeftTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaAcquireCommand() );    
-        }
-        else if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
-        }
-        else {
-            Robot.spatula.setSpatulaRunning(false);
-        }
-    }
     
     /**
      * This function is called periodically during test mode.
