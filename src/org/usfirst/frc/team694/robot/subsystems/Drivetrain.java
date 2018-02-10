@@ -149,9 +149,15 @@ public class Drivetrain extends Subsystem {
         boolean m = !(gearShift.get());
         gearShift.set(m);
     }
+    
     public void gearShiftInput(boolean isShifted) {
         gearShift.set(isShifted);
     }
+    
+    public boolean isGearShift() {
+        return gearShift.get();
+    }
+    
     public void resetLineSensors(){
         leftLineSensor.resetAmbient();
         rightLineSensor.resetAmbient();
@@ -176,6 +182,14 @@ public class Drivetrain extends Subsystem {
 
     public boolean leftIsOnLine(int mode) {
         return leftLineSensor.basicFind();
+    }
+    
+    public double getRawLeftLineSensor() {
+        return leftLineSensor.getRawData();
+    }
+    
+    public double getRawRightLineSensor() {
+        return rightLineSensor.getRawData();
     }
 
     public void initDefaultCommand() {

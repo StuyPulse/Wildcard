@@ -43,6 +43,7 @@ public class Lift extends Subsystem {
         outerLeftMotor.follow(innerLeftMotor);
 
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         //innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         //We will only be using an encoder on the left motor.
@@ -66,6 +67,7 @@ public class Lift extends Subsystem {
 
     public void resetEncoders() {
         innerLeftMotor.setSelectedSensorPosition(0, 0, 0);
+        innerRightMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
     public void setBrakeOn() {
@@ -127,7 +129,22 @@ public class Lift extends Subsystem {
         return topLimitSwitch.get();
     }
 
-    public double getLiftHeight() {
+    public double getLeftRawEncoderDistance() {
+        return innerLeftMotor.getSelectedSensorPosition(0);
+    }
+    
+    public double getRightRawEncoderDistance() {
+        return innerRightMotor.getSelectedSensorPosition(0);
+    }
+    
+    public double getLeftEncoderDistance() {
         return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+    }
+    public double getRightEncoderDistance() {
+        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+    }
+    
+    public double getLiftHeight() {
+        return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
     }
 }

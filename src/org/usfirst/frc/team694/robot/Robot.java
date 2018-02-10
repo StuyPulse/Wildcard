@@ -72,6 +72,19 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Spatula: Stop", new SpatulaStopCommand());
         SmartDashboard.putData("Spatula: Loosen Hold", new SpatulaTongsLoosenHoldCommand());
         SmartDashboard.putData("Spatula: Tighten Hold", new SpatulaTongsTightenHoldCommand());
+        SmartDashboard.putBoolean("Drivetrain: Gear Shift", Robot.drivetrain.isGearShift());
+        SmartDashboard.putNumber("Drivetrain: Left Encoder Values", Robot.drivetrain.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
+        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine(0));
+        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
+        SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
+        SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
+        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
+        SmartDashboard.putBoolean("Lift: Bottom Limit Switch", Robot.lift.isAtBottom());
+        SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
+        SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
     }
 
     @Override
