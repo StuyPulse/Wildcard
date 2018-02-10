@@ -43,7 +43,7 @@ public final class RobotMap {
     /**************************************************************************
      * Spatula Limit Switch
      *************************************************************************/
-    public static final int SPATULA_LIMIT_SWITCH_PORT = -1;
+    public static final int SPATULA_LIMIT_SWITCH_PORT = 0;
     
     /***************************************************************************
      * Lift Motor Ports
