@@ -9,6 +9,7 @@ public class LiftMoveToHeightCommand extends Command {
     private double height;
     private double startHeight;
 
+    //It's in inches
     public LiftMoveToHeightCommand(double height) {
         this.height = height;
         requires(Robot.lift);

@@ -22,7 +22,8 @@ public class OI {
          operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
          
          operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
-         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipUpCommand());
+         operatorGamepad.getTopButton().whileHeld(new SpatulaFlipUpCommand());
          operatorGamepad.getTopButton().whenReleased(new SpatulaFlipDownCommand());
+         operatorGamepad.getLeft
     }
 }

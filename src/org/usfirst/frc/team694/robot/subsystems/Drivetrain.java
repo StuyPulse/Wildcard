@@ -170,14 +170,8 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.mainLoop();
     }
 
-
-    public boolean isOnLine(int mode) {
-        return leftLineSensor.basicFind(mode) || rightLineSensor.basicFind(mode);
-
-    }
-    public boolean isOnLine(double mode){
-        return leftLineSensor.basicFind((int) mode) || rightLineSensor.basicFind((int) mode);
-
+    public boolean isOnLine(){
+        return leftLineSensor.basicFind() || rightLineSensor.basicFind();
     }
 
     public boolean rightIsOnLine(int mode) {

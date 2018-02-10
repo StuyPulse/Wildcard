@@ -13,6 +13,7 @@ public class DrivetrainMoveToLineCommand extends Command {
         this.distance = distance;//represents length in inches to go, just in case line sensing fails.
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
+
     }
 
     protected void initialize() {
@@ -23,7 +24,7 @@ public class DrivetrainMoveToLineCommand extends Command {
     protected void execute() {
         Robot.drivetrain.updateSensors();
         Robot.drivetrain.tankDrive(speed,speed);
-        isReached = Robot.drivetrain.isOnLine(1 + (speed / 0.25));
+        isReached = Robot.drivetrain.isOnLine();
 
     }
 

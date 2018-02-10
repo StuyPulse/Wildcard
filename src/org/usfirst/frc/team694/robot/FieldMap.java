@@ -12,7 +12,6 @@ public final class FieldMap {
     //all measurements are in inches or degrees if specified 
     //anything with // could be changed due to the actual field measure 
     //These are the measurements that need to be measured out before match.
-    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (RobotMap.LENGTH_OF_BOT - RobotMap.WIDTH_OF_BOT) / 2;//
     public static final int WIDTH_OF_FIELD = 324; //
     public static final double DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP = 66.75; //
     public static final int DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH = 168; //
@@ -32,6 +31,7 @@ public final class FieldMap {
     //**************************************************************************************************************
     
     public static final double DIFFERENCE_BETWEEN_LENGTH_AND_WIDTH_OF_BOT = RobotMap.LENGTH_OF_BOT - RobotMap.WIDTH_OF_BOT;
+    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (DIFFERENCE_BETWEEN_LENGTH_AND_WIDTH_OF_BOT) / 2;//
     public static final double MIDDLE_OF_BOT_WIDTHWISE = RobotMap.WIDTH_OF_BOT / 2;
     public static final double MIDDLE_OF_BOT_LENGTHWISE = RobotMap.LENGTH_OF_BOT / 2;
     

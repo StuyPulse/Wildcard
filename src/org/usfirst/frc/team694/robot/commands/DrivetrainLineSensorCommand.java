@@ -27,7 +27,7 @@ public class DrivetrainLineSensorCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.drivetrain.isOnLine((int) Math.round(speed / 0.25) + 1);
+        return Robot.drivetrain.isOnLine();
     }
 
     // Called once after isFinished returns true

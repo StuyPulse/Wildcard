@@ -18,7 +18,7 @@ public class SameSideRightAngleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, FieldMap.DISTANCE_TO_MOVE_INTO_NULL_BUMP));
         addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
         addSequential(new DrivetrainMoveInchesEncoderCommand(-1 * speed, FieldMap.DISTANCE_TO_TRAVEL_BACKWARDS));
-        addSequential(new LiftMoveToHeightCommand(84));
+        addSequential(new LiftMoveToHeightCommand(84)); //unsure about this height
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, FieldMap.DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE));
         addSequential(new GrabberOpenCommand());
     }
