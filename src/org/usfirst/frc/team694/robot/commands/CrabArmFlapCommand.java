@@ -7,20 +7,19 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CrabArmDeployCommand extends Command {
+public class CrabArmFlapCommand extends Command {
 
-    public CrabArmDeployCommand() {
+    public CrabArmFlapCommand() {
         requires(Robot.crabArm);
     }
 
     protected void initialize() {
         //TODO: Figure out how long we want to run the spatula
-        setTimeout(4);
+        setTimeout(1);
     }
 
     protected void execute() {
-        //TODO: Figure out what direction the crabArms should run to deploy
-        Robot.crabArm.acquire();
+        Robot.crabArm.deacquire();
     }
 
     protected boolean isFinished() {
@@ -29,8 +28,5 @@ public class CrabArmDeployCommand extends Command {
 
     protected void end() {
         Robot.crabArm.stop();
-    }
-
-    protected void interrupted() {
     }
 }
