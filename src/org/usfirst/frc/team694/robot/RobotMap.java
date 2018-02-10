@@ -49,12 +49,17 @@ public final class RobotMap {
      * Lift Constants
      *************************************************************************/
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873; 
-    public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 95.25;
+    public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
     public static final double LIFT_ENCODER_RAW_MULTIPLIER = LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
     public static final double MIN_HEIGHT_OF_LIFT = 23;
     public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
     public static final double LIFT_MAX_SPEED = 1;
 
+    public static final double LIFT_MIN_SPEED = 0.25;
+    public static final double LIFT_HEIGHT_THRESHOLD = 20.0;
+    public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_HEIGHT_THRESHOLD;
+    public static final double LIFT_HEIGHT_TOLERANCE = 1.0;
+    
     /***************************************************************************
      * Lift Limit Switch
      *************************************************************************/

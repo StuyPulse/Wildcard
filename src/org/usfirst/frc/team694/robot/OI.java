@@ -7,9 +7,13 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOffCommand;
+import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
+import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
+import org.usfirst.frc.team694.robot.commands.BITCOINManualCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaFlipDownCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaFlipUpCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -19,10 +23,15 @@ public class OI {
 
     public OI() {
          driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
-         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
+         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_D);
          
+         //operatorGamepad.getLeftButton().whenPressed(new ); put command to move crabarm out of the way
          operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
-         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipUpCommand());
-         operatorGamepad.getTopButton().whenReleased(new SpatulaFlipDownCommand());
+         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
+         operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
+         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
+         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
+         operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
+         operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());
     }
 }

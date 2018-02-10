@@ -79,7 +79,6 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         acquirerStatus();
-        dequirerRun();
     }
 
     
@@ -95,14 +94,6 @@ public class Robot extends IterativeRobot {
         }
         else {
             Robot.spatula.setSpatulaRunning(false);
-        }
-    }
-    
-    private void dequirerRun() {
-     // If statement checks to make sure that the Left Trigger is the only trigger pressed to prevent both triggers from being pressed at the same time
-        if (oi.operatorGamepad.getRawLeftTriggerAxis() > 0.5 && oi.operatorGamepad.getRawRightTriggerAxis() < 0.5) {
-            Robot.spatula.setSpatulaRunning(true);
-            Scheduler.getInstance().add(new SpatulaDeacquireCommand());
         }
     }
     

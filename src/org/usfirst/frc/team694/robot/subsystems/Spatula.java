@@ -86,4 +86,11 @@ public class Spatula extends Subsystem {
     public boolean isCubeDetected() {
         return spatulaLimitSwitch.get();
     }
+    public void toggle() {
+        if (spatulaFlipSolenoid.get() == true) {
+            flipUp();
+        } else {
+            flipDown();
+        }
+    }
 }
