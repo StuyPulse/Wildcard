@@ -25,7 +25,13 @@ public final class RobotMap {
     public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = -1;
     public static final int DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT = -1;
     public static final int DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT = -1;
-
+    
+    /**************************************************************************
+     * Spatula and CrabArm Constants         //All times are in seconds
+     *************************************************************************/
+    public static final double PRE_FLIP_WAIT_TIME = 2;
+    public static final double POST_FLIP_WAIT_TIME = 2;
+    public static final double FLAP_OUT_SPEED = -0.5;
     /**************************************************************************
      * Spatula Motor Ports
      *************************************************************************/
