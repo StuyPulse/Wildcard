@@ -32,8 +32,8 @@ public class Drivetrain extends Subsystem {
 
     private DifferentialDrive differentialDrive;
 
-    private LineSensor leftLineSensor;
-    private LineSensor rightLineSensor;
+    /*private LineSensor leftLineSensor;
+    private LineSensor rightLineSensor;*/
 
     private Solenoid gearShift;
     
@@ -68,8 +68,8 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
-        rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        //leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
+        //rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
         
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
@@ -81,10 +81,10 @@ public class Drivetrain extends Subsystem {
         // the navX is plugged into the kMXP port on the roboRIO
         navX = new AHRS(SPI.Port.kMXP);
     }
-    @Override
-    public void periodic(){
+    //@Override
+    /*public void periodic(){
         updateSensors();
-    }
+    }*/
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }
@@ -162,25 +162,25 @@ public class Drivetrain extends Subsystem {
         return gearShift.get();
     }
     
-    public void resetLineSensors(){
+    /*public void resetLineSensors(){
         leftLineSensor.resetAmbient();
         rightLineSensor.resetAmbient();
-    }
+    }*/
 
     public double getGyroAngle() {
         return navX.getAngle();
     }
 
-    public void updateSensors() {
+    /*public void updateSensors() {
         rightLineSensor.mainLoop();
         leftLineSensor.mainLoop();
-    }
+    }*/
 
-    public boolean isOnLine(int mode) {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
+    /*public boolean isOnLine(int mode) {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
         return leftIsOnLine(mode) || rightIsOnLine(mode);
-    }
+    }*/
 
-    public boolean rightIsOnLine(int mode) {
+    /*public boolean rightIsOnLine(int mode) {
         return rightLineSensor.basicFind();
     }
 
@@ -194,7 +194,7 @@ public class Drivetrain extends Subsystem {
     
     public double getRawRightLineSensor() {
         return rightLineSensor.getRawData();
-    }
+    }*/
 
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());

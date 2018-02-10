@@ -15,13 +15,13 @@ public class DrivetrainMoveToLineCommand extends Command {
 
     protected void initialize() {
         Robot.drivetrain.resetEncoders();
-        Robot.drivetrain.resetLineSensors();
+        //Robot.drivetrain.resetLineSensors();
     }
 
     protected void execute() {
-        Robot.drivetrain.updateSensors();
+        //Robot.drivetrain.updateSensors();
         Robot.drivetrain.tankDrive(speed, speed);
-        isReached = Robot.drivetrain.isOnLine((int) speed);
+        //isReached = Robot.drivetrain.isOnLine((int) speed);
     }
 
     protected boolean isFinished() {
