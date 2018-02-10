@@ -7,17 +7,32 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.*;
-import org.usfirst.frc.team694.robot.subsystems.Spatula;
+import org.usfirst.frc.team694.robot.commands.CrabArmAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.CrabArmDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.CrabArmStopCommand;
+import org.usfirst.frc.team694.robot.commands.GrabberCloseCommand;
+import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDetectFlipCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaFlipDownCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaFlipUpCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaStopCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaTongsLoosenHoldCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaTongsTightenHoldCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
+import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
@@ -42,6 +57,21 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
+        SmartDashboard.putData("CrabArms: Acquire", new CrabArmAcquireCommand());
+        SmartDashboard.putData("CrabArms: Deacquire", new CrabArmDeacquireCommand());
+        SmartDashboard.putData("CrabArms: Stop", new CrabArmStopCommand());
+        SmartDashboard.putData("Grabber: Open", new GrabberOpenCommand());
+        SmartDashboard.putData("Grabber: Close", new GrabberCloseCommand());
+        SmartDashboard.putData("Grabber: Toggle", new GrabberToggleCommand());
+        SmartDashboard.putData("Spatula: Acquire", new SpatulaAcquireCommand());
+        SmartDashboard.putData("Spatula: Deacquire", new SpatulaDeacquireCommand());
+        SmartDashboard.putData("Spatula: Detect Flip", new SpatulaDetectFlipCommand());
+        SmartDashboard.putData("Spatula: Flip Up", new SpatulaFlipUpCommand());
+        SmartDashboard.putData("Spatula: Toggle Flip", new SpatulaFlipToggleCommand());
+        SmartDashboard.putData("Spatula: Flip Down", new SpatulaFlipDownCommand());
+        SmartDashboard.putData("Spatula: Stop", new SpatulaStopCommand());
+        SmartDashboard.putData("Spatula: Loosen Hold", new SpatulaTongsLoosenHoldCommand());
+        SmartDashboard.putData("Spatula: Tighten Hold", new SpatulaTongsTightenHoldCommand());
     }
 
     @Override
