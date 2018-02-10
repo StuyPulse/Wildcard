@@ -59,6 +59,7 @@ public final class FieldMap {
     //**************************************************************************************************************
     //Scale auton where the bot is on the same side as the alliance scale and bot will be in the null territory
     public static final int DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204;
+    public static final double DISTANCE_FROM_NULL_TERRITORY_TO_AUTO_LINE = DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY - DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE;
     public static final double DISTANCE_TO_MOVE_INTO_NULL_BUMP = MIDDLE_OF_BOT_LENGTHWISE - DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
     public static final double DISTANCE_TO_TRAVEL_BACKWARDS = DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT - 2.5; 
     public static final double DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE = DISTANCE_FROM_BORDER_TO_SCALE_EDGE - LENGTH_OF_BOT;
