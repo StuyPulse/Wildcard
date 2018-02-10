@@ -13,38 +13,25 @@ public class LiftMoveCommand extends Command {
         requires(Robot.lift);
     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-        Robot.lift.setBrakeOff();
-    }
-
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         if (Robot.oi.operatorGamepad.getLeftY() > 0.9) {
-            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED);
+            Robot.lift.move(RobotMap.LIFT_MAX_SPEED);
         } else if (Robot.oi.operatorGamepad.getLeftY() > 0.4) {
-            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED / 2);
+            Robot.lift.move(RobotMap.LIFT_MAX_SPEED / 2);
         } else if (Robot.oi.operatorGamepad.getLeftY() > -0.4) {
             Robot.lift.stop();
         } else if (Robot.oi.operatorGamepad.getLeftY() > -0.9) {
-            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED / 2 * -1);
+            Robot.lift.move(RobotMap.LIFT_MAX_SPEED / 2 * -1);
         } else {
-            Robot.lift.moveLift(RobotMap.LIFT_MAX_SPEED * -1);
+            Robot.lift.move(RobotMap.LIFT_MAX_SPEED * -1);
         }
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
-    }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-        Robot.lift.setBrakeOn();
+        Robot.lift.stop();
     }
 }
