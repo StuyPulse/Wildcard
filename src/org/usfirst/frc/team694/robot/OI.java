@@ -11,7 +11,7 @@ import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOffCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINManualCommand;
-import org.usfirst.frc.team694.robot.commands.CrabArmFlapCommand;
+import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
@@ -26,7 +26,7 @@ public class OI {
          driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
          operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_D);
          
-         operatorGamepad.getLeftButton().whenPressed(new CrabArmFlapCommand());
+         operatorGamepad.getLeftButton().whenPressed(new CrabArmFlapOutCommand());
          operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
          operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
          operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());

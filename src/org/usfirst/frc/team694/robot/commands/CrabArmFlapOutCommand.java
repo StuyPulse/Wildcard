@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class CrabArmFlapCommand extends Command {
+public class CrabArmFlapOutCommand extends Command {
 
-    public CrabArmFlapCommand() {
+    public CrabArmFlapOutCommand() {
         requires(Robot.crabArm);
     }
 
@@ -19,7 +19,7 @@ public class CrabArmFlapCommand extends Command {
     }
 
     protected void execute() {
-        Robot.crabArm.deacquire();
+        Robot.crabArm.flapOut();
     }
 
     protected boolean isFinished() {
