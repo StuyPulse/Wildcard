@@ -7,12 +7,14 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.*;
-import org.usfirst.frc.team694.robot.subsystems.Spatula;
+import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
+import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -42,6 +44,9 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
+        
+        autonChooser.addDefault("Do Nothing", null);
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
     }
 
     @Override
