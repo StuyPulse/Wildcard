@@ -30,7 +30,7 @@ public class CrabArm extends Subsystem {
     }
 
     public void flapOut() {
-        crabArmMotors.set(-1);
+        crabArmMotors.set(-1 * RobotMap.FLAP_OUT_SPEED);
     }
 
     public void stop() {
