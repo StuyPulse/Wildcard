@@ -9,10 +9,8 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
->>>>>>> master
+
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -34,16 +32,16 @@ public class Robot extends IterativeRobot {
     public static Drivetrain drivetrain;
     public static Spatula spatula;
     public static CrabArm crabArm;
-    public static Grabber grabber; 
+    public static Grabber grabber;
     public static Lift lift;
- 
+
     public static OI oi;
-   
+
     public static FieldMapTopLeftQuadrant TopLeftQuad;
     public static FieldMapTopRightQuadrant TopRightQuad;
     public static FieldMapBottomLeftQuadrant BottomLeftQuad;
     public static FieldMapBottomRightQuadrant BottomRightQuad;
-    
+
     static boolean isRobotAtBottom;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
@@ -56,14 +54,10 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        
-<<<<<<< HEAD
-       
-=======
+
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
->>>>>>> master
     }
 
     @Override
@@ -92,6 +86,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+        SmartDashboard.putNumber("Lift Control Power Value", 1);
         if (autonCommand != null) {
             autonCommand.cancel();
         }
@@ -102,7 +97,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 
-    
+
     /**
      * This function is called periodically during test mode.
      */
@@ -115,7 +110,7 @@ public class Robot extends IterativeRobot {
             if(isRobotAtBottom) {
                 return BottomLeftQuad;
             }
-            return TopLeftQuad;       
+            return TopLeftQuad;
         }
         if(isRobotAtBottom) {
             return BottomRightQuad;

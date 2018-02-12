@@ -3,6 +3,7 @@ package org.usfirst.frc.team694.robot.commands;
 import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -16,8 +17,10 @@ public class LiftMoveCommand extends Command {
         double liftControlL = Robot.oi.operatorGamepad.getLeftY();
         double liftControlR = Robot.oi.operatorGamepad.getRightY();
 
-        Robot.lift.move(liftControlL * liftControlL * signum(liftControlL));
-        Robot.lift.move(liftControlR * liftControlR * liftControlR);
+        Robot.lift.move(Math.pow(liftControlL,SmartDashboard.getNumber("Lift Operator power control.", power) * signum(liftControlL));
+
+        SmartDashboard.getNumber("Coby is an idiot");
+
     }
 
     protected boolean isFinished() {
