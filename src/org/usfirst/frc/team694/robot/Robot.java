@@ -51,6 +51,8 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
+        
+        SmartDashboard.putBoolean("Is Robot At Scoring Table", isRobotAtBottom);
     }
 
     //Bottom means side closer to the scoring table
