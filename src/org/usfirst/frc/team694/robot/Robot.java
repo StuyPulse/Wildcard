@@ -7,12 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
->>>>>>> master
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -20,8 +15,6 @@ import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -39,10 +32,7 @@ public class Robot extends IterativeRobot {
  
     public static OI oi;
    
-    public static FieldMapTopLeftQuadrant TopLeftQuad;
-    public static FieldMapTopRightQuadrant TopRightQuad;
-    public static FieldMapBottomLeftQuadrant BottomLeftQuad;
-    public static FieldMapBottomRightQuadrant BottomRightQuad;
+    public static FieldMapInterface currentQuad;
     
     static boolean isRobotAtBottom;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -56,16 +46,27 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        
-<<<<<<< HEAD
-       
-=======
+        currentQuad = getRobotQuadrant();
+
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
->>>>>>> master
     }
 
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotAtBottom) {
+                return new FieldMapBottomLeftQuadrant();
+            }
+            return new FieldMapTopLeftQuadrant();       
+        }
+        if(isRobotAtBottom) {
+            return new FieldMapBottomRightQuadrant();
+        }
+        return new FieldMapTopRightQuadrant();
+    }
+    
     @Override
     public void disabledInit() {
 
@@ -109,17 +110,5 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
-    //Bottom means side closer to the scoring table
-    public static FieldMapInterface getRobotQuadrant() {
-        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            if(isRobotAtBottom) {
-                return BottomLeftQuad;
-            }
-            return TopLeftQuad;       
-        }
-        if(isRobotAtBottom) {
-            return BottomRightQuad;
-        }
-        return TopRightQuad;
-    }
+
 }
