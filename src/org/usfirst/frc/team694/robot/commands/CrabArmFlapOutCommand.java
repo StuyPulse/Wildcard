@@ -4,9 +4,9 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CrabArmDeacquireCommand extends Command {
+public class CrabArmFlapOutCommand extends Command {
 
-    public CrabArmDeacquireCommand() {
+    public CrabArmFlapOutCommand() {
         requires(Robot.crabArm);
     }
 
@@ -22,8 +22,5 @@ public class CrabArmDeacquireCommand extends Command {
     }
 
     protected void end() {
-    }
-
-    protected void interrupted() {
     }
 }

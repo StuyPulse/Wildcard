@@ -93,4 +93,7 @@ public class Spatula extends Subsystem {
             flipDown();
         }
     }
+    public boolean isSpatulaUp() {
+        return !spatulaFlipSolenoid.get();
+    }
 }
