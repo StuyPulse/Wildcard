@@ -1,9 +1,9 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
@@ -14,17 +14,13 @@ public class LiftMoveCommand extends Command {
     }
 
     protected void execute() {
-        if (Robot.oi.operatorGamepad.getLeftY() > 0.9) {
-            Robot.lift.move(RobotMap.LIFT_MAX_SPEED);
-        } else if (Robot.oi.operatorGamepad.getLeftY() > 0.4) {
-            Robot.lift.move(RobotMap.LIFT_MAX_SPEED / 2);
-        } else if (Robot.oi.operatorGamepad.getLeftY() > -0.4) {
-            Robot.lift.stop();
-        } else if (Robot.oi.operatorGamepad.getLeftY() > -0.9) {
-            Robot.lift.move(RobotMap.LIFT_MAX_SPEED / 2 * -1);
-        } else {
-            Robot.lift.move(RobotMap.LIFT_MAX_SPEED * -1);
-        }
+        double liftControlL = Robot.oi.operatorGamepad.getLeftY();
+        double liftControlR = Robot.oi.operatorGamepad.getRightY();
+
+        Robot.lift.move(Math.pow(liftControlL,SmartDashboard.getNumber("Lift Operator power control.", power) * signum(liftControlL));
+
+        SmartDashboard.getNumber("Coby is an idiot");
+
     }
 
     protected boolean isFinished() {
