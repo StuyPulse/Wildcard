@@ -117,5 +117,9 @@ public final class RobotMap {
     /** DRIVETRAIN_RAW_MULTIPLIER: We multiply by 4 because the encoder has 4 Quadrants, and each Quadrant passes 256 pulses. **/
     public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
     
-
+    /******************************************************************************
+     * Crab Arm Flap Constants
+     ******************************************************************************/
+    public static final double CRAB_ARM_COAST_POWER = 0.5; // Needs to be tested out
+    public static final double CRAB_ARM_PUSH_POWER = 0.5; // Needs to be tested out
 }
