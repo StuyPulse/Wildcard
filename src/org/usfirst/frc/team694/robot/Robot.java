@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
@@ -16,6 +14,7 @@ import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,10 +32,11 @@ public class Robot extends IterativeRobot {
  
     public static OI oi;
    
-
-    private SendableChooser<Command> autonChooser = new SendableChooser<>();
-    private Command autonCommand;
-
+    public static FieldMapInterface currentQuad;
+    
+    static boolean isRobotAtBottom;
+    private static SendableChooser<Command> autonChooser = new SendableChooser<>();
+    private Command autonCommand; // Selected command run during auton
 
     @Override
     public void robotInit() {
@@ -46,12 +46,27 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        
+        currentQuad = getRobotQuadrant();
+
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
     }
 
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotAtBottom) {
+                return new FieldMapBottomLeftQuadrant();
+            }
+            return new FieldMapTopLeftQuadrant();       
+        }
+        if(isRobotAtBottom) {
+            return new FieldMapBottomRightQuadrant();
+        }
+        return new FieldMapTopRightQuadrant();
+    }
+    
     @Override
     public void disabledInit() {
 
@@ -95,4 +110,5 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
+
 }

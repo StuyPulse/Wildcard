@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LiftMoveToHeightCommand extends Command {
     private double targetHeight;
 
+    //It's in inches
     public LiftMoveToHeightCommand(double height) {
         requires(Robot.lift);
         this.targetHeight = height;

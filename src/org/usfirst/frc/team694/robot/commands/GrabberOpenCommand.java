@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class GrabberOpenCommand extends InstantCommand {
 
     public GrabberOpenCommand() {
-        super();
         requires(Robot.grabber);
     }
 
