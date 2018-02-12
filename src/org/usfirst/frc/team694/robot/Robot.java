@@ -57,14 +57,14 @@ public class Robot extends IterativeRobot {
     public static FieldMapInterface getRobotQuadrant() {
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
             if(isRobotAtBottom) {
-                return new FieldMapBottomLeftQuadrant();
+                return new FieldMapSideFurthestFromScoringTableBlueQuadrant();
             }
-            return new FieldMapTopLeftQuadrant();       
+            return new FieldMapSideClosestToScoringTableBlueQuadrant();       
         }
         if(isRobotAtBottom) {
-            return new FieldMapBottomRightQuadrant();
+            return new FieldMapSideFurthestFromScoringTableRedQuadrant();
         }
-        return new FieldMapTopRightQuadrant();
+        return new FieldMapSideClosestToScoringTableRedQuadrant();
     }
     
     @Override
