@@ -15,13 +15,9 @@ public class LiftMoveCommand extends Command {
     protected void execute() {
         double liftControlL = Robot.oi.operatorGamepad.getLeftY();
         double liftControlR = Robot.oi.operatorGamepad.getRightY();
-        if (liftControlL < 0) {
-            Robot.lift.move((liftControlL * liftControlL * -1) / 2);
-        }
-        if (liftControlL >= 0) {
-            Robot.lift.move((liftControlL * liftControlL) / 2);
-        }
-        Robot.lift.move((liftControlR * liftControlR * liftControlR) / 2);
+
+        Robot.lift.move(liftControlL * liftControlL * signum(liftControlL));
+        Robot.lift.move(liftControlR * liftControlR * liftControlR);
     }
 
     protected boolean isFinished() {
