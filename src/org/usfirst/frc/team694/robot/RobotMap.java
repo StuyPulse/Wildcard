@@ -53,10 +53,10 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
-    public static final int LIFT_INNER_LEFT_MOTOR_PORT = 8;
-    public static final int LIFT_INNER_RIGHT_MOTOR_PORT = 10;
-    public static final int LIFT_OUTER_LEFT_MOTOR_PORT = 9;
-    public static final int LIFT_OUTER_RIGHT_MOTOR_PORT = 11;
+    public static final int LIFT_INNER_LEFT_MOTOR_PORT = 7;
+    public static final int LIFT_INNER_RIGHT_MOTOR_PORT = 9;
+    public static final int LIFT_OUTER_LEFT_MOTOR_PORT = 8;
+    public static final int LIFT_OUTER_RIGHT_MOTOR_PORT = 10;
 
     /***************************************************************************
      * Lift Constants
