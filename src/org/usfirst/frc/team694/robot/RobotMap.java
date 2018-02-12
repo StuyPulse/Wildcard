@@ -8,7 +8,12 @@
 package org.usfirst.frc.team694.robot;
 
 public final class RobotMap {
-
+    /**************************************************************************
+     * Robot Dimensions
+     */
+    public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
+    public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
+    public static final double WIDTH_OF_BOT = 34.5; //
     /**************************************************************************
      * Gamepad Ports
      *************************************************************************/

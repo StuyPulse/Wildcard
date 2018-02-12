@@ -9,13 +9,19 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+<<<<<<< HEAD
+=======
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
+>>>>>>> master
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,10 +39,14 @@ public class Robot extends IterativeRobot {
  
     public static OI oi;
    
-
-    private SendableChooser<Command> autonChooser = new SendableChooser<>();
-    private Command autonCommand;
-
+    public static FieldMapTopLeftQuadrant TopLeftQuad;
+    public static FieldMapTopRightQuadrant TopRightQuad;
+    public static FieldMapBottomLeftQuadrant BottomLeftQuad;
+    public static FieldMapBottomRightQuadrant BottomRightQuad;
+    
+    static boolean isRobotAtBottom;
+    private static SendableChooser<Command> autonChooser = new SendableChooser<>();
+    private Command autonCommand; // Selected command run during auton
 
     @Override
     public void robotInit() {
@@ -47,9 +57,13 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
         
+<<<<<<< HEAD
+       
+=======
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
+>>>>>>> master
     }
 
     @Override
@@ -94,5 +108,18 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void testPeriodic() {
+    }
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotAtBottom) {
+                return BottomLeftQuad;
+            }
+            return TopLeftQuad;       
+        }
+        if(isRobotAtBottom) {
+            return BottomRightQuad;
+        }
+        return TopRightQuad;
     }
 }

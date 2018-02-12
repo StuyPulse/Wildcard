@@ -125,6 +125,10 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.setSelectedSensorPosition(0, 0, 0);
         rightBottomMotor.setSelectedSensorPosition(0, 0, 0);
     }
+    public void setEncoders(double inches){
+        leftBottomMotor.setSelectedSensorPosition((int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
+        rightBottomMotor.setSelectedSensorPosition((int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
+    }
 
     public void tankDrive(double left, double right) {
         differentialDrive.tankDrive(left, right);
@@ -166,8 +170,8 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.mainLoop();
     }
 
-    public boolean isOnLine(int mode) {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
-        return leftIsOnLine(mode) || rightIsOnLine(mode);
+    public boolean isOnLine(){
+        return leftLineSensor.basicFind() || rightLineSensor.basicFind();
     }
 
     public boolean rightIsOnLine(int mode) {
