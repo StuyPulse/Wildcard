@@ -40,7 +40,7 @@ public class DrivetrainDriveSystemCommand extends Command {
         double rightJoystickY = Robot.oi.driverGamepad.getRightY();
         double leftJoystickY = Robot.oi.driverGamepad.getLeftY();
         
-        if(Robot.oi.driverGamepad.getRawButton(10) && !driveModeToggleButtonWasPressed) {
+        if(Robot.oi.driverGamepad.getRawOptionButton() && !driveModeToggleButtonWasPressed) {
             tankDrive = !tankDrive;
         }
         

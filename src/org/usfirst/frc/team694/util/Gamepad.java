@@ -474,7 +474,18 @@ public class Gamepad extends Joystick {
 				return null;
 		}
 	}
-
+	
+	public boolean getRawOptionButton() {
+	    switch(switchMode) {
+	        case PS4:
+	            return getRawButton(10);
+	        case SWITCH_D:
+	        case SWITCH_X:
+	        default:
+	            return false;
+	    }
+	}
+	
 	public static class DPadButton extends Button {
 		public static enum Direction {
 			UP, DOWN, LEFT, RIGHT
@@ -504,5 +515,4 @@ public class Gamepad extends Joystick {
 			}
 		}
 	}
-
 }
