@@ -28,21 +28,19 @@ public class DrivetrainDriveSystemCommand extends Command {
     protected void execute() {
         
         //Preliminary Values from the triggers used for Curvature Drive
-        double rightTrigger = (Robot.oi.driverGamepad.getRawRightTriggerAxis() + 1) / 2;
-        double leftTrigger = (Robot.oi.driverGamepad.getRawLeftTriggerAxis() + 1) / 2;
-        //The PS4 Controller Triggers go from -1 to 1, unlike the Logitech Gamepad Triggers.
-        //The following math removes that problem.
+        double rightTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
+        double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
         
         //Values Used for Curvature Drive
-        double rightTriggerSquared = Math.pow(rightTrigger, 2);
-        double leftTriggerSquared = Math.pow(leftTrigger, 2);
+        double rightTriggerSquared = Math.pow(rightTrigger, 3);
+        double leftTriggerSquared = Math.pow(leftTrigger, 3);
         double leftJoystickX = Robot.oi.driverGamepad.getLeftX();
         
         //Values used for Tank Drive
         double rightJoystickY = Robot.oi.driverGamepad.getRightY();
         double leftJoystickY = Robot.oi.driverGamepad.getLeftY();
         
-        if(Robot.oi.driverGamepad.getRawTopButton() && !driveModeToggleButtonWasPressed) {
+        if(Robot.oi.driverGamepad.getRawButton(10) && !driveModeToggleButtonWasPressed) {
             tankDrive = !tankDrive;
         }
         
