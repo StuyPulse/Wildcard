@@ -7,12 +7,6 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-<<<<<<< HEAD
-=======
-import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
->>>>>>> master
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -20,14 +14,10 @@ import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
@@ -56,14 +46,6 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        
-<<<<<<< HEAD
-       
-=======
-        autonChooser.addDefault("Do Nothing", new CommandGroup());
-        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
-        SmartDashboard.putData("Autonomous", autonChooser);
->>>>>>> master
     }
 
     @Override
