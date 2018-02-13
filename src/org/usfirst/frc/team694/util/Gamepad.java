@@ -253,7 +253,7 @@ public class Gamepad extends Joystick {
 	public JoystickButton getRightTrigger() {
 		switch (switchMode) {
 			case SWITCH_D:
-				return new JoystickButton(this, 7);
+				return new JoystickButton(this, 8);
 			default:
 				return null;
 		}
