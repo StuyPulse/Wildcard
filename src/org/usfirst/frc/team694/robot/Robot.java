@@ -55,38 +55,39 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
-//        drivetrain = new Drivetrain();
+        drivetrain = new Drivetrain();
 //        spatula = new Spatula();
 //        crabArm = new CrabArm();
 //        grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        /*SmartDashboard.putData("CrabArms: Acquire", new CrabArmAcquireCommand());
-        SmartDashboard.putData("CrabArms: Deacquire", new CrabArmDeacquireCommand());
-        SmartDashboard.putData("CrabArms: Stop", new CrabArmStopCommand());
-        SmartDashboard.putData("Grabber: Open", new GrabberOpenCommand());
-        SmartDashboard.putData("Grabber: Close", new GrabberCloseCommand());
-        SmartDashboard.putData("Grabber: Toggle", new GrabberToggleCommand());
-        SmartDashboard.putData("Spatula: Acquire", new SpatulaAcquireCommand());
-        SmartDashboard.putData("Spatula: Deacquire", new SpatulaDeacquireCommand());
-        SmartDashboard.putData("Spatula: Detect Flip", new SpatulaDetectFlipCommand());
-        SmartDashboard.putData("Spatula: Flip Up", new SpatulaFlipUpCommand());
-        SmartDashboard.putData("Spatula: Toggle Flip", new SpatulaFlipToggleCommand());
-        SmartDashboard.putData("Spatula: Flip Down", new SpatulaFlipDownCommand());
-        SmartDashboard.putData("Spatula: Stop", new SpatulaStopCommand());
-        SmartDashboard.putData("Spatula: Loosen Hold", new SpatulaTongsLoosenHoldCommand());
-        SmartDashboard.putData("Spatula: Tighten Hold", new SpatulaTongsTightenHoldCommand());
-        */
-//        SmartDashboard.putBoolean("Drivetrain: Gear Shift", Robot.drivetrain.isGearShift());
-//        SmartDashboard.putNumber("Drivetrain: Left Encoder Values", Robot.drivetrain.getLeftEncoderDistance());
-//        SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
-//        SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
+//        SmartDashboard.putData("CrabArms: Acquire", new CrabArmAcquireCommand());
+//        SmartDashboard.putData("CrabArms: Deacquire", new CrabArmDeacquireCommand());
+//        SmartDashboard.putData("CrabArms: Stop", new CrabArmStopCommand());
+//        SmartDashboard.putData("Grabber: Open", new GrabberOpenCommand());
+//        SmartDashboard.putData("Grabber: Close", new GrabberCloseCommand());
+//        SmartDashboard.putData("Grabber: Toggle", new GrabberToggleCommand());
+        
+//        SmartDashboard.putData("Spatula: Acquire", new SpatulaAcquireCommand());
+//        SmartDashboard.putData("Spatula: Deacquire", new SpatulaDeacquireCommand());
+//        SmartDashboard.putData("Spatula: Detect Flip", new SpatulaDetectFlipCommand());
+//        SmartDashboard.putData("Spatula: Flip Up", new SpatulaFlipUpCommand());
+//        SmartDashboard.putData("Spatula: Toggle Flip", new SpatulaFlipToggleCommand());
+//        SmartDashboard.putData("Spatula: Flip Down", new SpatulaFlipDownCommand());
+//        SmartDashboard.putData("Spatula: Stop", new SpatulaStopCommand());
+//        SmartDashboard.putData("Spatula: Loosen Hold", new SpatulaTongsLoosenHoldCommand());
+//        SmartDashboard.putData("Spatula: Tighten Hold", new SpatulaTongsTightenHoldCommand());
+//        
+        SmartDashboard.putBoolean("Drivetrain: Gear Shift", Robot.drivetrain.isGearShift());
+        SmartDashboard.putNumber("Drivetrain: Left Encoder Values", Robot.drivetrain.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
 //        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine(0));
 //        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
 //        SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
 //        SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
 //        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
-        SmartDashboard.putBoolean("Lift: Bottom Limit Switch", Robot.lift.isAtBottom());
+       
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
         SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
@@ -130,10 +131,12 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putBoolean("Lift: Bottom Limit Switch", Robot.lift.isAtBottom());
+        SmartDashboard.putNumber("Lift Speed", Robot.lift.getSpeed());
     }
 
     
-    /**
+    /**S
      * This function is called periodically during test mode.
      */
     @Override

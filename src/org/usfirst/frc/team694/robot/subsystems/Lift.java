@@ -21,8 +21,8 @@ public class Lift extends Subsystem {
 
 //    private Solenoid brakeSolenoid;
 
-//    private DigitalInput topLimitSwitch;
-//    private DigitalInput bottomLimitSwitch;
+   //private DigitalInput topLimitSwitch;
+    private DigitalInput bottomLimitSwitch;
 
     public Lift() {
         innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -50,8 +50,8 @@ public class Lift extends Subsystem {
 
 //        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_PORT);
 
-//        topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
-//        bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
+        //topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
+        bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
 
     }
 
@@ -88,12 +88,19 @@ public class Lift extends Subsystem {
 
     private void moveLift(double speed) {
         setBrakeOff();
-        if (!(isAtTop() && speed > 0)) {
-            innerLeftMotor.set(speed);
-        } else if (!(isAtBottom() && speed < 0)) {
-            innerLeftMotor.set(speed);
-        } else {
+//TODO: Conjoin if statements
+//        if (!(isAtTop() && speed > 0)) {
+//            innerLeftMotor.set(speed);
+//        } else if (!(isAtBottom() && speed < 0)) {
+//            innerLeftMotor.set(speed);
+//        } else {
+//            stop();
+//        }
+
+        if(isAtBottom()) {
             stop();
+        } else {
+            innerLeftMotor.set(speed);
         }
     }
 
@@ -112,6 +119,10 @@ public class Lift extends Subsystem {
         moveLift(speed);
     }
     
+    public double getSpeed() {
+        return innerLeftMotor.get();
+    }
+
     public void stop() {
         innerLeftMotor.set(0);
         setBrakeOn();
@@ -123,13 +134,11 @@ public class Lift extends Subsystem {
     }
 
     public boolean isAtBottom() {
-        return false;
-//        return bottomLimitSwitch.get();
+        return !bottomLimitSwitch.get();
     }
 
     public boolean isAtTop() {
-        return false;
-//        return topLimitSwitch.get();
+        return false; //topLimitSwitch.get();
     }
 
     public double getLeftRawEncoderDistance() {

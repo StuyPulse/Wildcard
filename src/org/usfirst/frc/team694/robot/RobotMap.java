@@ -35,7 +35,8 @@ public final class RobotMap {
     /**************************************************************************
      * Spatula Limit Switch
      *************************************************************************/
-    public static final int SPATULA_LIMIT_SWITCH_PORT = -1;
+    //TODO: get real port number
+    public static final int SPATULA_LIMIT_SWITCH_PORT = 10;
     
     /***************************************************************************
      * Lift Motor Ports
@@ -64,7 +65,7 @@ public final class RobotMap {
      * Lift Limit Switch
      *************************************************************************/
     public static final int LIFT_TOP_LIMIT_SWITCH_PORT = -1;
-    public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = -1;
+    public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = 0;
     
     /****************************************************************************
      * CrabArm Ports
@@ -76,13 +77,13 @@ public final class RobotMap {
     /****************************************************************************
      * Solenoid Ports
      *************************************************************************/
-    public static final int GEAR_SHIFT_CHANNEL = -1;
+    public static final int GEAR_SHIFT_CHANNEL = 7;
 
     public static final int GRABBER_SOLENOID_OPEN_PORT = -1;
     public static final int GRABBER_SOLENOID_CLOSE_PORT = -1;
 
-    public static final int SPATULA_FLIP_SOLENOID_PORT = -1;
-    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
+    public static final int SPATULA_FLIP_SOLENOID_PORT = 6;
+//    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
 
     public static final int LIFT_BRAKE_SOLENOID_PORT = -1;
 

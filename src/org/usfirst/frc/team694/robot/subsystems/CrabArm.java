@@ -20,7 +20,8 @@ public class CrabArm extends Subsystem {
         leftCrabArmMotor.setNeutralMode(NeutralMode.Coast);
         rightCrabArmMotor.setNeutralMode(NeutralMode.Coast);
         
-        leftCrabArmMotor.setInverted(true);
+        rightCrabArmMotor.setInverted(true);
+        
         
         crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
