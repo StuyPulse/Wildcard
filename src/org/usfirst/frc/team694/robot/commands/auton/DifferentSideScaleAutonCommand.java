@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
-import org.usfirst.frc.team694.robot.FieldMap;
+import org.usfirst.frc.team694.robot.FieldMapInterface;
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
@@ -8,26 +9,19 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DifferentSideScaleAutonCommand extends CommandGroup {
+    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
     public double speed = 0.5;
-    public DifferentSideScaleAutonCommand() {
-        addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE, speed));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(FieldMap.DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE, speed));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(90));
-        addSequential(new DrivetrainMoveToLineCommand(FieldMap.DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE, speed));
-        addSequential(new DrivetrainMoveToLineCommand(90, speed));
-        addSequential(new DrivetrainMoveToLineCommand(90, speed));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(17, speed));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
-        addSequential(new DrivetrainMoveToLineCommand(52.765, speed));
-        addSequential(new LiftMoveToHeightCommand(FieldMap.HIGHEST_PLATE_HEIGHT_OF_SCALE + 6));
+
+    public DifferentSideScaleAutonCommand() {  
+        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceFromLineSensorToAutoLine()));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToTravelBeforeFirstTurn()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachPlatformZoneAfterTurn()));
+        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachOtherPlatformZoneEdge()));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToDriveOutAfterPlatformZoneEdge()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachScaleSide()));
+
+        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachScaleSide()));
         addSequential(new GrabberOpenCommand());
-        /*
-            addSequential(new DrivetrainMoveToLineCommand(1, speed));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(FieldMap.DISTANCE_FROM_NULL_TERRITORY_TO_NULL_BUMP, speed));
-            addParallel(new LiftMaxUpCommand());
-            addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(FieldMap.DISTANCE_FROM_BORDER_TO_SCALE_EDGE/2, speed));
-            addSequential(new GrabberOpenCommand());
-       */     
     }
 }

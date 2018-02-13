@@ -22,8 +22,7 @@ public class CrabArmAcquireCommand extends Command {
     }
 
     protected void end() {
+        Robot.crabArm.stop();
     }
 
-    protected void interrupted() {
-    }
 }

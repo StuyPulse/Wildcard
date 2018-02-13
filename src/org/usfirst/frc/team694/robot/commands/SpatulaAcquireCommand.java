@@ -22,5 +22,6 @@ public class SpatulaAcquireCommand extends Command {
     }
 
     protected void end() {
+        Robot.spatula.stop();
     }
 }

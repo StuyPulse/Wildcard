@@ -4,6 +4,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 /**
  *
  */
@@ -27,8 +28,14 @@ public class LiftMoveCommand extends Command {
 //        }
         double leftYAxis = Robot.oi.operatorGamepad.getRightY();
         double rightYAxis = Robot.oi.operatorGamepad.getLeftY();
-        Robot.lift.move(Math.abs(Math.pow(leftYAxis, 2)) * Math.signum(leftYAxis));
-        Robot.lift.move(Math.abs(Math.pow(rightYAxis, 3)) * Math.signum(rightYAxis));
+        if (Math.abs(leftYAxis) > 0.05) {
+            Robot.lift.move(Math.abs(Math.pow(leftYAxis, 2)) * Math.signum(leftYAxis));
+        } else if (Math.abs(rightYAxis) > 0.05) {
+            Robot.lift.move(Math.abs(Math.pow(rightYAxis, 3)) * Math.signum(rightYAxis));
+        } else {
+            Robot.lift.stop();
+        }
+        
     }
 
     protected boolean isFinished() {

@@ -6,7 +6,8 @@ public class CrabArrowAcquireCommand extends CommandGroup {
     //CrabArrow = CrabArms and Spatula
 
     public CrabArrowAcquireCommand() {
+        addParallel(new SpatulaFlipDownIfUpCommand());
         addParallel(new CrabArmAcquireCommand());
-        addSequential(new SpatulaAcquireCommand());
+        addParallel(new SpatulaAcquireCommand());
     }
 }

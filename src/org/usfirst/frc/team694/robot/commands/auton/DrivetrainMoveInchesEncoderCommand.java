@@ -23,7 +23,7 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return Robot.drivetrain.getEncoderDistance() >= targetDistance;
+        return Math.abs(Robot.drivetrain.getEncoderDistance()) >= targetDistance;
     }
 
     protected void end() {
