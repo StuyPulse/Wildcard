@@ -9,10 +9,7 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
->>>>>>> master
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -56,14 +53,9 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        
-<<<<<<< HEAD
-       
-=======
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
->>>>>>> master
     }
 
     @Override
