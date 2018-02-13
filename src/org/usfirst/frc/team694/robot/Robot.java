@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
    
     public static FieldMapInterface currentQuad;
     
-    static boolean isRobotAtRightSideOfDriver;
+    public static boolean isRobotAtRightSideOfDriver;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
@@ -53,6 +53,14 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Autonomous", autonChooser);
         
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        if(isRobotAtRightSideOfDriver == true) {
+             
+        }
+    }
+    
+    public enum whereTheBotIsInReferenceToDriver{
+        RIGHT_SIDE_OF_DRIVER,
+        LEFT_SIDE_OF_DRIVER
     }
 
     //Bottom means side closer to the scoring table
