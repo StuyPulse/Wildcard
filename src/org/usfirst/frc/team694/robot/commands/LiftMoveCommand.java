@@ -8,19 +8,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class LiftMoveCommand extends Command {
-
+    double power = -1; //TODO: Figure out what power should be set to
     public LiftMoveCommand() {
         requires(Robot.lift);
     }
 
     protected void execute() {
         double liftControlL = Robot.oi.operatorGamepad.getLeftY();
-        double liftControlR = Robot.oi.operatorGamepad.getRightY();
 
-        Robot.lift.move(Math.pow(liftControlL,SmartDashboard.getNumber("Lift Operator power control.", power) * signum(liftControlL));
+        Robot.lift.move(Math.pow(liftControlL,SmartDashboard.getNumber("Lift Operator power control.", power)) * Math.signum(liftControlL));
 
-        SmartDashboard.getNumber("Coby is an idiot");
-
+        SmartDashboard.getNumber("Lift Operator power control", power);
     }
 
     protected boolean isFinished() {
