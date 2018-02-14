@@ -34,7 +34,7 @@ public class Robot extends IterativeRobot {
    
     public static FieldMapInterface currentQuad;
     
-    static boolean isRobotAtBottom;
+    public static boolean isRobotAtRightSideOfDriver;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
@@ -51,20 +51,31 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
+        
+        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        if(isRobotAtRightSideOfDriver == true) {
+             
+        }
+    }
+    
+    public enum whereTheBotIsInReferenceToDriver{
+        RIGHT_SIDE_OF_DRIVER,
+        LEFT_SIDE_OF_DRIVER
     }
 
     //Bottom means side closer to the scoring table
     public static FieldMapInterface getRobotQuadrant() {
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            if(isRobotAtBottom) {
-                return new FieldMapSideFurthestFromScoringTableBlueQuadrant();
+            if(isRobotAtRightSideOfDriver) {
+                return new FieldMapSideFurthestFromScoringTableRedQuadrant(); 
             }
-            return new FieldMapSideClosestToScoringTableBlueQuadrant();       
+            return new FieldMapSideFurthestFromScoringTableRedQuadrant();      
         }
-        if(isRobotAtBottom) {
-            return new FieldMapSideFurthestFromScoringTableRedQuadrant();
+        if(isRobotAtRightSideOfDriver) {
+            return new FieldMapSideClosestToScoringTableBlueQuadrant();
         }
-        return new FieldMapSideClosestToScoringTableRedQuadrant();
+        return new FieldMapSideClosestToScoringTableBlueQuadrant();
+
     }
     
     @Override
