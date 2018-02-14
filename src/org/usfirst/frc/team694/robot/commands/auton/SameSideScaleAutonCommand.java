@@ -14,7 +14,7 @@ public class SameSideScaleAutonCommand extends CommandGroup {
     public SameSideScaleAutonCommand() {
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getTotalDistanceToTravelToReachNullLine()));
         //add line system code using this value: Quad.getDistanceFromLineSensorToAutoLine()
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToReachIdealStartingPointFromNullTerritoryLine()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToReachIdealStartingPointFromNullTerritoryLine()));
         addSequential(new LiftMoveToHeightCommand(84)); //unsure about height
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToTravelToReachScaleCorner()));
         addSequential(new GrabberOpenCommand());

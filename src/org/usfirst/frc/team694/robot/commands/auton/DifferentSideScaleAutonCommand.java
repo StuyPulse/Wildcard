@@ -15,11 +15,11 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
     public DifferentSideScaleAutonCommand() {  
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getTotalDistanceToTravelBeforeTurn()));
         //add line system code using this value: Quad.getDistanceFromLineSensorToAutoLine()
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToTurnToReachPlatformZone()));
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()));
         //add line system code using this value: Quad.getDistanceToTravelToReachPlatformZone()
         //add line system code using this value: Quad.getDistanceFromStartingPointToOtherPlatformZoneEdge()
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngletoTurnToReachScaleSide()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToTurnToReachScaleSide()));
         addSequential(new LiftMoveToHeightCommand(84));//unsure about height
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getTotalDistanceToTravelToReachScaleSide()));
         //add line system code using this value: Quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()
