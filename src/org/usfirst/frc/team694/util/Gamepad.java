@@ -70,7 +70,7 @@ public class Gamepad extends Joystick {
 			case PS4:
 			    return getRawAxis(2);
 			default:
-				return 0;
+				return 0;	
 		}
 	}
 

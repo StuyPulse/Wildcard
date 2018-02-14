@@ -5,7 +5,7 @@ package org.usfirst.frc.team694.robot;
  * All of our autons should be based on the field so that if our measurements 
  * change, we can adapt quickly. All measurements are in inches for encoder purposes.
  */
-public final class FieldMapBottomMiddleQuadrant {
+public final class FieldMapSideFurthestFromScoringTableMiddleQuadrant {
 
 /* Given FRC Manual Measurements*/
     //These distances is us starting on the left side of the field
@@ -13,6 +13,6 @@ public final class FieldMapBottomMiddleQuadrant {
     //anything with // could be changed due to the actual field measure  
     //These are the measurements that need to be measured out before match.
 
-    public static final int BOTTOM_MIDDLE_QUADRANT_DISTANCE_FROM_NULL_TERRITORY_TO_NULL_BUMP = 36; //
-    public static final double BOTTOM_MIDDLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SCALE_EDGE = 71.57; //
+    public static final int SIDE_FURTHEST_FROM_SCORING_TABLE_MIDDLE_QUADRANT_DISTANCE_FROM_NULL_TERRITORY_TO_NULL_BUMP = 36; //
+    public static final double SIDE_FURTHEST_FROM_SCORING_TABLE_MIDDLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SCALE_EDGE = 71.57; //
 }

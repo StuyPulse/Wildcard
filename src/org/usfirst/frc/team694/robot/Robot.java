@@ -7,12 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
->>>>>>> master
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -20,8 +15,6 @@ import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -39,12 +32,9 @@ public class Robot extends IterativeRobot {
  
     public static OI oi;
    
-    public static FieldMapTopLeftQuadrant TopLeftQuad;
-    public static FieldMapTopRightQuadrant TopRightQuad;
-    public static FieldMapBottomLeftQuadrant BottomLeftQuad;
-    public static FieldMapBottomRightQuadrant BottomRightQuad;
+    public static FieldMapInterface currentQuad;
     
-    static boolean isRobotAtBottom;
+    public static boolean isRobotAtRightSideOfDriver;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
@@ -56,16 +46,38 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        
-<<<<<<< HEAD
-       
-=======
+        currentQuad = getRobotQuadrant();
+
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
->>>>>>> master
+        
+        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        if(isRobotAtRightSideOfDriver == true) {
+             
+        }
+    }
+    
+    public enum whereTheBotIsInReferenceToDriver{
+        RIGHT_SIDE_OF_DRIVER,
+        LEFT_SIDE_OF_DRIVER
     }
 
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotAtRightSideOfDriver) {
+                return new FieldMapSideFurthestFromScoringTableRedQuadrant(); 
+            }
+            return new FieldMapSideFurthestFromScoringTableRedQuadrant();      
+        }
+        if(isRobotAtRightSideOfDriver) {
+            return new FieldMapSideClosestToScoringTableBlueQuadrant();
+        }
+        return new FieldMapSideClosestToScoringTableBlueQuadrant();
+
+    }
+    
     @Override
     public void disabledInit() {
 
@@ -109,17 +121,5 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
-    //Bottom means side closer to the scoring table
-    public static FieldMapInterface getRobotQuadrant() {
-        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            if(isRobotAtBottom) {
-                return BottomLeftQuad;
-            }
-            return TopLeftQuad;       
-        }
-        if(isRobotAtBottom) {
-            return BottomRightQuad;
-        }
-        return TopRightQuad;
-    }
+
 }
