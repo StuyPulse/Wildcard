@@ -1,12 +1,11 @@
 package org.usfirst.frc.team694.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class BITCOINManualCommand extends CommandGroup {
-    private double height = 2;
-    public BITCOINManualCommand() {
+public class BITCOINCommand extends CommandGroup {
+
+    public BITCOINCommand() {
         addSequential(new LiftMoveToHeightCommand(0));
         addSequential(new FlapAndFlipUpCommand());
-        addSequential(new LiftMoveToHeightCommand(height));
         addSequential(new GrabberCloseCommand());
         }
     
