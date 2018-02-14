@@ -121,7 +121,9 @@ public final class RobotMap {
     /******************************************************************************
      * Crab Arm Flap Constants
      ******************************************************************************/
-    public static final double CRAB_ARM_COAST_POWER = 0.5; // Needs to be tested out
-    public static final double CRAB_ARM_PUSH_POWER = 0.5; // Needs to be tested out
+    public static final double CRAB_ARM_COAST_POWER = 0.5; 
+    // Needs to be tested out, coast should exert less power than push, has to be enough to keep crab arms open but not overextending
+    public static final double CRAB_ARM_PUSH_POWER = 0.5; 
+    // Needs to be tested out, should be more than coast, the power to push the crab arm back initially before it stays open
 }
 
