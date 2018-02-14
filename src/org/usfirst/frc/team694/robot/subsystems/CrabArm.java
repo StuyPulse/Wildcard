@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class CrabArm extends Subsystem {
     private WPI_VictorSPX leftCrabArmMotor;
     private WPI_VictorSPX rightCrabArmMotor;
-    private static SpeedControllerGroup crabArmMotors;
+    private SpeedControllerGroup crabArmMotors;
 
     public CrabArm() {
         leftCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_LEFT_MOTOR_PORT);
