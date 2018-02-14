@@ -6,20 +6,10 @@ package org.usfirst.frc.team694.robot;
  * change, we can adapt quickly. All measurements are in inches for encoder purposes.
  */
 public final class FieldMapSideFurthestFromScoringTableBlueQuadrant implements FieldMapInterface{
-  //Scale Auton where the bot is on the same side as the scoring scale and will turn on the null territory line
+    //Scale auton where the bot and the scoring scale are on the same side
     @Override
-    public double getDistanceFromLineSensorToAutoLine() {
-        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE;
-    }
-
-    @Override
-    public double getDistanceFromAutoLineToNullTerritory() {
-        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY;
-    }
-
-    @Override
-    public double getDistanceToMoveBackwardBeforeTurn() {
-        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TRAVEL_BACKWARDS;
+    public double getTotalDistanceToTravelToReachNullLine() {
+        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_TO_REACH_NULL_TERRITORY_LINE;
     }
 
     @Override
@@ -31,20 +21,16 @@ public final class FieldMapSideFurthestFromScoringTableBlueQuadrant implements F
     public double getDistanceToTravelToReachScaleCorner() {
         return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_CORNER;
     }
-    
-    //**************************************************************************************************************
-    
-    //Scale Auton where the bot is on the opposite side of the scoring scale
-    
-    /*    
+
+    //Scale auton where the bot and the scoring scale are on different sides
+    @Override
+    public double getTotalDistanceToTravelBeforeTurn() {
+        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN;
+    }
+
+    @Override
     public double getDistanceFromLineSensorToAutoLine() {
         return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE;
-    }
-    */
-    
-    @Override
-    public double getDistanceToTravelBeforeFirstTurn() {
-        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE;
     }
 
     @Override
@@ -53,30 +39,34 @@ public final class FieldMapSideFurthestFromScoringTableBlueQuadrant implements F
     }
 
     @Override
-    public double getDistanceToTravelToReachPlatformZoneAfterTurn() {
+    public double getTotalDistanceToTravelToReachOtherSideOfPlatformZone() {
+        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_ACROSS_PLATFORM_ZONE;
+    }
+
+    @Override
+    public double getDistanceToTravelToReachPlatformZone() {
         return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN;
     }
 
     @Override
-    public double getDistanceToTravelToReachOtherPlatformZoneEdge() {
-        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_OTHER;
+    public double getDistanceFromStartingPointToOtherPlatformZoneEdge() {
+        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_STARTING_POINT_TO_OTHER_PLATFORM_ZONE_EDGE;
     }
 
     @Override
-    public double getDistanceToDriveOutAfterPlatformZoneEdge() {
-        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE;
-    }
-
-    @Override
-    public double getDegreeOfAngleToTurnToReachScaleSide() {
+    public double getDegreeOfAngletoTurnToReachScaleSide() {
         return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_TO_REACH_SCALE_SIDE;
     }
 
     @Override
-    public double getDistanceToTravelToReachScaleSide() {
+    public double getTotalDistanceToTravelToReachScaleSide() {
         return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE;
     }
 
+    @Override
+    public double getDistanceFromRobotAfterTwoTurnsToNullTerritory() {
+        return SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_NULL_LINE;
+    }
     //**************************************************************************************************************
     
 /* Given FRC Manual Measurements*/
@@ -134,5 +124,23 @@ public final class FieldMapSideFurthestFromScoringTableBlueQuadrant implements F
     private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE = RobotMap.WIDTH_OF_BOT - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT; 
     private static final int SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_TO_REACH_SCALE_SIDE = -90;
     private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE = FieldMapSideClosestToScoringTableBlueQuadrant.SIDE_CLOSEST_TO_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_SCALE_SIDE - FieldMapSideClosestToScoringTableBlueQuadrant.SIDE_CLOSEST_TO_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
-    }
+
+  //**************************************************************************************************************
+
+  //Measurements for line system
+    //Use the constants these constants are set to to use for reset encoders
+    //Different side scale auton
+    //Reset encoders 3 times
+    private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN = SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE + SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE;
+    private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_ACROSS_PLATFORM_ZONE = SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN + SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_OTHER + SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_DRIVE_OUT_AFTER_PLATFORM_ZONE;
+    private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_STARTING_POINT_TO_OTHER_PLATFORM_ZONE_EDGE = SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN + SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_OTHER;
+    //private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE = FieldMapSideFurthestFromScoringTableBlueQuadrant.SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_SCALE_SIDE - FieldMapSideFurthestFromScoringTableBlueQuadrant.SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
+    private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_NULL_LINE = SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE - SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_SCALE_SIDE_TO_NULL_TERRITORY;
+    
+    //Same side scale auton
+    //Reset encoders once
+    private static final double SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_TO_REACH_NULL_TERRITORY_LINE = SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE + SIDE_FURTHEST_FROM_SCORING_TABLE_BLUE_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
+    //**************************************************************************************************************
+
+}
 
