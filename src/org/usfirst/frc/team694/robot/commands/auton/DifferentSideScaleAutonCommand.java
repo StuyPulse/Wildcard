@@ -13,19 +13,6 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
     public double speed = 0.5;
 
     public DifferentSideScaleAutonCommand() {  
-        /*
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToTravelBeforeFirstTurn()));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachPlatformZone()));
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachPlatformZoneAfterTurn()));
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachOtherPlatformZoneEdge()));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToDriveOutAfterPlatformZoneEdge()));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachScaleSide()));
-
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachScaleSide()));
-        addSequential(new GrabberOpenCommand());
-        */
-        
         addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getTotalDistanceToTravelBeforeTurn()));
         //add line system code using this value: Quad.getDistanceFromLineSensorToAutoLine()
         addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachPlatformZone()));
