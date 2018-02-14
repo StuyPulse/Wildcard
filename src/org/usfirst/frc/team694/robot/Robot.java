@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
