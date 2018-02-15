@@ -144,5 +144,9 @@ public class Lift extends Subsystem {
         return innerLeftMotor.getSelectedSensorVelocity(0);
     }
     
+    public void temporarySetkP(double kP) {
+        innerLeftMotor.config_kP(0, kP, 0);
+    }
+    
    
 }

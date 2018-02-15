@@ -13,6 +13,7 @@ public class LiftMoveToHeightCommand extends Command {
     public LiftMoveToHeightCommand(double height) {
         requires(Robot.lift);
         this.targetHeight = height;
+        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
     
     protected void initialize() {
