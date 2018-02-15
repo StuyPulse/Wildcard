@@ -105,7 +105,6 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        SmartDashboard.putNumber("Lift Control Power Value", 1);
         if (autonCommand != null) {
             autonCommand.cancel();
         }
