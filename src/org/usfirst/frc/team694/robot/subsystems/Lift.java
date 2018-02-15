@@ -21,7 +21,7 @@ public class Lift extends Subsystem {
 
     //    private Solenoid brakeSolenoid;
 
-    //private DigitalInput topLimitSwitch;
+    private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
 
     public Lift() {
@@ -45,12 +45,10 @@ public class Lift extends Subsystem {
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        //innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        //We will only be using an encoder on the left motor.
+        innerLeftMotor.setSensorPhase(true);
+        innerRightMotor.setSensorPhase(true);
 
-        //        brakeSolenoid = new Solenoid(RobotMap.LIFT_BRAKE_SOLENOID_PORT);
-
-        //topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
+        topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
 
     }
@@ -88,8 +86,6 @@ public class Lift extends Subsystem {
 
     private void moveLift(double speed) {
         setBrakeOff();
-        //TODO: Conjoin if statements
-        
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
@@ -136,7 +132,7 @@ public class Lift extends Subsystem {
     }
 
     public boolean isAtTop() {
-        return false; //topLimitSwitch.get();
+        return !topLimitSwitch.get();
     }
 
     public double getLeftRawEncoderDistance() {
@@ -148,11 +144,11 @@ public class Lift extends Subsystem {
     }
 
     public double getLeftEncoderDistance() {
-        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER / 4.4;
     }
 
     public double getRightEncoderDistance() {
-        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER / 4.4;
     }
 
     public double getLiftHeight() {

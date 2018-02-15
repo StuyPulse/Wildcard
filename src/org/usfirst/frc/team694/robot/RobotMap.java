@@ -63,6 +63,7 @@ public final class RobotMap {
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
     public static final double LIFT_ENCODER_RAW_MULTIPLIER = LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
+    
     public static final double MIN_HEIGHT_OF_LIFT = 23;
     public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
     public static final double LIFT_MAX_SPEED = 1;
@@ -75,7 +76,7 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Limit Switch
      *************************************************************************/
-    public static final int LIFT_TOP_LIMIT_SWITCH_PORT = -1;
+    public static final int LIFT_TOP_LIMIT_SWITCH_PORT = 2;
     public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = 0;
 
     /****************************************************************************
@@ -97,13 +98,11 @@ public final class RobotMap {
     public static final int SPATULA_FLIP_DOWN_PORT = 5;
     //    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
 
-    public static final int LIFT_BRAKE_SOLENOID_PORT = -1;
-
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
-    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = -1;
-    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = -1;
+//    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = -1;
+//    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = -1;
 
     /******************************************************************************
      * Drivetrain Encoder/Movement Constants
