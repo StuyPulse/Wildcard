@@ -22,4 +22,7 @@ public interface FieldMapInterface {
     
     public double getTotalDistanceToTravelToReachScaleSide();
     public double getDistanceFromRobotAfterTwoTurnsToNullTerritory();
+    
+    public double getDistanceFromBorderToScaleEdge();
+
 }
