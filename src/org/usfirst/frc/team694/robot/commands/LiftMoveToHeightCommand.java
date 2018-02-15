@@ -13,7 +13,6 @@ public class LiftMoveToHeightCommand extends Command {
     public LiftMoveToHeightCommand(double height) {
         requires(Robot.lift);
         this.targetHeight = height;
-        SmartDashboard.putNumber("Lift P", 0);
     }
     
     protected void initialize() {
@@ -24,7 +23,9 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD) || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 1);
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD) 
+                || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
+                || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
     }
 
     protected void end() {

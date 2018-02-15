@@ -17,8 +17,7 @@ public class LiftMoveCommand extends Command {
 
     protected void execute() {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
-        
-        
+          
         if (Math.abs(liftControl) > RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD ) {
             Robot.lift.move(Math.pow(liftControl, 2) * Math.signum(liftControl));
             currentHeight = Robot.lift.getLiftHeight();
