@@ -4,12 +4,11 @@ import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DifferentSideScaleAutonCommand extends CommandGroup {
-    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
+    public static FieldMapInterface Quad = Robot.currentQuad;
     public double speed = 0.5;
 
     public DifferentSideScaleAutonCommand() {  
