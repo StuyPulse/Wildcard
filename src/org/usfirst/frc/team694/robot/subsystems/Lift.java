@@ -19,8 +19,6 @@ public class Lift extends Subsystem {
     private WPI_VictorSPX outerLeftMotor;
     private WPI_VictorSPX outerRightMotor;
 
-    //    private Solenoid brakeSolenoid;
-
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
 

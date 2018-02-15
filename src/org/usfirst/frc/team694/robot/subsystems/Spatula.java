@@ -40,8 +40,8 @@ public class Spatula extends Subsystem {
     public Spatula() {
         leftSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_LEFT_MOTOR_PORT);
         rightSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_RIGHT_MOTOR_PORT);
-        leftSpatulaMotor.setNeutralMode(NeutralMode.Coast);
-        rightSpatulaMotor.setNeutralMode(NeutralMode.Coast);
+        leftSpatulaMotor.setNeutralMode(NeutralMode.Brake);
+        rightSpatulaMotor.setNeutralMode(NeutralMode.Brake);
 
         rightSpatulaMotor.setInverted(true);
 
@@ -62,6 +62,18 @@ public class Spatula extends Subsystem {
         spatulaMotors.set(-1);
     }
 
+    //left spatula deacquires and the right acquires. This comment is used to avoid long method names
+    public void leftSpatulaDeacquire() {
+        leftSpatulaMotor.set(-1);
+        rightSpatulaMotor.set(1);
+    }
+
+    //right spatula deacquires and the left acquires. This comment is used to avoid long method names
+    public void rightSpatulaDeacquire() {
+        leftSpatulaMotor.set(1);
+        rightSpatulaMotor.set(-1);
+    }
+
     public void stop() {
         spatulaMotors.set(0);
     }
@@ -72,14 +84,6 @@ public class Spatula extends Subsystem {
 
     public void flipDown() {
         spatulaFlipSolenoid.set(DoubleSolenoid.Value.kForward);
-    }
-
-    public void tightenCubeGrip() {
-        //spatulaTongsSolenoid.set(true);
-    }
-
-    public void loosenCubeGrip() {
-        //spatulaTongsSolenoid.set(false);
     }
 
     public boolean isCubeDetected() {

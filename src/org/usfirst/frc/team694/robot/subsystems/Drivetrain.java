@@ -110,7 +110,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getRightEncoderDistance() {
-        return rightBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
+        return -1 * rightBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
 
     public double getLeftRawEncoderDistance() {
@@ -118,7 +118,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getRightRawEncoderDistance() {
-        return rightBottomMotor.getSelectedSensorPosition(0);
+        return -1 * rightBottomMotor.getSelectedSensorPosition(0);
     }
 
     public void resetEncoders() {
