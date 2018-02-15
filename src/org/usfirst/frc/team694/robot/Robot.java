@@ -31,8 +31,6 @@ public class Robot extends IterativeRobot {
     public static Lift lift;
 
     public static OI oi;
-   
-    public static FieldMapInterface currentQuad;
     
     public static boolean isRobotAtRightSideOfDriver;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
@@ -46,8 +44,6 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-
-        currentQuad = getRobotQuadrant();
 
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
@@ -68,14 +64,14 @@ public class Robot extends IterativeRobot {
     public static FieldMapInterface getRobotQuadrant() {
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
             if(isRobotAtRightSideOfDriver) {
-                return new FieldMapSideFurthestFromScoringTableRedQuadrant(); 
+                return new FieldMapRedFarFromScoringTableQuadrant(); 
             }
-            return new FieldMapSideFurthestFromScoringTableRedQuadrant();      
+            return new FieldMapRedFarFromScoringTableQuadrant();      
         }
         if(isRobotAtRightSideOfDriver) {
-            return new FieldMapSideClosestToScoringTableBlueQuadrant();
+            return new FieldMapBlueNearScoringTableQuadrant();
         }
-        return new FieldMapSideClosestToScoringTableBlueQuadrant();
+        return new FieldMapBlueNearScoringTableQuadrant();
 
     }
     
