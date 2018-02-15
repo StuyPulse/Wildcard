@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.SpatulaAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
@@ -29,9 +27,9 @@ public class Robot extends IterativeRobot {
     public static Drivetrain drivetrain;
     public static Spatula spatula;
     public static CrabArm crabArm;
-    public static Grabber grabber; 
+    public static Grabber grabber;
     public static Lift lift;
- 
+
     public static OI oi;
     
     public static boolean isRobotAtRightSideOfDriver;
@@ -113,7 +111,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 
-    
+
     /**
      * This function is called periodically during test mode.
      */
