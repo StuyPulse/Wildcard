@@ -4,6 +4,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LiftMoveToHeightCommand extends Command {
     private double targetHeight;
@@ -12,19 +13,20 @@ public class LiftMoveToHeightCommand extends Command {
     public LiftMoveToHeightCommand(double height) {
         requires(Robot.lift);
         this.targetHeight = height;
+        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
+    }
+    
+    protected void initialize() {
     }
 
     protected void execute() {
-        double currentHeight = Robot.lift.getLiftHeight();
-        if (currentHeight > targetHeight) {
-            Robot.lift.move(RobotMap.LIFT_MAX_SPEED *  -1);
-        } else {
-            Robot.lift.move(RobotMap.LIFT_MAX_SPEED);
-        }
+        Robot.lift.setHeight(targetHeight);
     }
 
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_HEIGHT_TOLERANCE);
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD) 
+                || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
+                || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
     }
 
     protected void end() {

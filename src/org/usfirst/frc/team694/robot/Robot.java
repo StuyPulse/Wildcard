@@ -32,12 +32,9 @@ public class Robot extends IterativeRobot {
 
     public static OI oi;
 
-//    public static FieldMapTopLeftQuadrant TopLeftQuad;
-//    public static FieldMapTopRightQuadrant TopRightQuad;
-//    public static FieldMapBottomLeftQuadrant BottomLeftQuad;
-//    public static FieldMapBottomRightQuadrant BottomRightQuad;
-
     static boolean isRobotAtBottom;
+    
+    public static boolean isRobotAtRightSideOfDriver;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
@@ -49,27 +46,38 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-        //        SmartDashboard.putData("CrabArms: Acquire", new CrabArmAcquireCommand());
-        //        SmartDashboard.putData("CrabArms: Deacquire", new CrabArmDeacquireCommand());
-        //        SmartDashboard.putData("CrabArms: Stop", new CrabArmStopCommand());
-        //        SmartDashboard.putData("Grabber: Open", new GrabberOpenCommand());
-        //        SmartDashboard.putData("Grabber: Close", new GrabberCloseCommand());
-        //        SmartDashboard.putData("Grabber: Toggle", new GrabberToggleCommand());
-
-        //        SmartDashboard.putData("Spatula: Acquire", new SpatulaAcquireCommand());
-        //        SmartDashboard.putData("Spatula: Deacquire", new SpatulaDeacquireCommand());
-        //        SmartDashboard.putData("Spatula: Detect Flip", new SpatulaDetectFlipCommand());
-        //        SmartDashboard.putData("Spatula: Flip Up", new SpatulaFlipUpCommand());
-        //        SmartDashboard.putData("Spatula: Toggle Flip", new SpatulaFlipToggleCommand());
-        //        SmartDashboard.putData("Spatula: Flip Down", new SpatulaFlipDownCommand());
-        //        SmartDashboard.putData("Spatula: Stop", new SpatulaStopCommand());
-        //        SmartDashboard.putData("Spatula: Loosen Hold", new SpatulaTongsLoosenHoldCommand());
-        //        SmartDashboard.putData("Spatula: Tighten Hold", new SpatulaTongsTightenHoldCommand());        
 
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
         Robot.drivetrain.resetEncoders();
+
+        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        
+        SmartDashboard.putNumber("Lift P", 0);
+        
+        if(isRobotAtRightSideOfDriver == true) {
+             
+        }
+    }
+    
+    public enum whereTheBotIsInReferenceToDriver{
+        RIGHT_SIDE_OF_DRIVER,
+        LEFT_SIDE_OF_DRIVER
+    }
+
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotAtRightSideOfDriver) {
+                return new FieldMapRedFarFromScoringTableQuadrant(); 
+            }
+            return new FieldMapRedFarFromScoringTableQuadrant();      
+        }
+        if(isRobotAtRightSideOfDriver) {
+            return new FieldMapBlueNearScoringTableQuadrant();
+        }
+        return new FieldMapBlueNearScoringTableQuadrant();
 
     }
 
@@ -134,17 +142,4 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     }
 
-    //Bottom means side closer to the scoring table
-//    public static FieldMapInterface getRobotQuadrant() {
-//        if (DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-//            if (isRobotAtBottom) {
-//                return BottomLeftQuad;
-//            }
-//            return TopLeftQuad;
-//        }
-//        if (isRobotAtBottom) {
-//            return BottomRightQuad;
-//        }
-//        return TopRightQuad;
-//    }
 }

@@ -14,6 +14,9 @@ public final class RobotMap {
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
     public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
     public static final double WIDTH_OF_BOT = 34.5; //
+    public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
+    public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
+    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (LENGTH_OF_BOT / WIDTH_OF_BOT) / 2;
     /**************************************************************************
      * Gamepad Ports
      *************************************************************************/
@@ -71,7 +74,7 @@ public final class RobotMap {
     public static final double LIFT_MIN_SPEED = 0.25;
     public static final double LIFT_HEIGHT_THRESHOLD = 20.0;
     public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_HEIGHT_THRESHOLD;
-    public static final double LIFT_HEIGHT_TOLERANCE = 1.0;
+    public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
 
     /***************************************************************************
      * Lift Limit Switch

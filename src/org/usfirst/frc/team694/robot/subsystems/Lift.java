@@ -3,6 +3,7 @@ package org.usfirst.frc.team694.robot.subsystems;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.LiftMoveCommand;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -11,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift extends Subsystem {
 
@@ -42,6 +44,9 @@ public class Lift extends Subsystem {
 
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        
+        
+        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0), 0);
 
         innerLeftMotor.setSensorPhase(true);
         innerRightMotor.setSensorPhase(true);
@@ -152,4 +157,18 @@ public class Lift extends Subsystem {
     public double getLiftHeight() {
         return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
     }
+    
+    public void setHeight(double height) {
+        innerLeftMotor.set(ControlMode.Position, height);   
+    }
+    
+    public double getMotorVelocity() {
+        return innerLeftMotor.getSelectedSensorVelocity(0);
+    }
+    
+    public void temporarySetkP(double kP) {
+        innerLeftMotor.config_kP(0, kP, 0);
+    }
+    
+   
 }
