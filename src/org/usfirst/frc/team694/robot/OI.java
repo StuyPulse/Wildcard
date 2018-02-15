@@ -10,7 +10,7 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOffCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
-import org.usfirst.frc.team694.robot.commands.BITCOINManualCommand;
+import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
@@ -31,7 +31,7 @@ public class OI {
          operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
          operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
          operatorGamepad.getTopButton().whenPressed(new ToggleCrabArmFlapOutAndSpatulaFlipCommand());
-         operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
+         operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
          
          operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
          operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
