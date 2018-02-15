@@ -24,7 +24,7 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_HEIGHT_TOLERANCE) || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 1);
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD) || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 1);
     }
 
     protected void end() {
