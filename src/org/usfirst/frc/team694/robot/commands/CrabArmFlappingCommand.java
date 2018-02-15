@@ -26,10 +26,10 @@ public class CrabArmFlappingCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        CrabArm.flapPush();
+        Robot.crabArm.flapPush();
         startTime = Timer.getFPGATimestamp();
         if (Timer.getFPGATimestamp() - startTime > seconds) {
-            CrabArm.flapCoast();
+            Robot.crabArm.flapCoast();
             startTime = Timer.getFPGATimestamp();
         }
     }

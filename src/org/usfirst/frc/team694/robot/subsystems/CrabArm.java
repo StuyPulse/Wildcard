@@ -33,11 +33,11 @@ public class CrabArm extends Subsystem {
         crabArmMotors.set(-1 * RobotMap.FLAP_OUT_SPEED);
     }
     
-    public static void flapPush() {
+    public void flapPush() {
         crabArmMotors.set(-1 * RobotMap.CRAB_ARM_PUSH_POWER);
     }
     
-    public static void flapCoast() {
+    public void flapCoast() {
         crabArmMotors.set(-1 * RobotMap.CRAB_ARM_COAST_POWER);
     }
     

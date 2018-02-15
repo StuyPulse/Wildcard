@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,7 +16,7 @@ public class Spatula extends Subsystem {
 
     private WPI_VictorSPX leftSpatulaMotor;
     private WPI_VictorSPX rightSpatulaMotor;
-    private Solenoid spatulaFlipSolenoid;
+    private DoubleSolenoid spatulaFlipSolenoid;
     //private Solenoid spatulaTongsSolenoid; 
 
     private SpeedControllerGroup spatulaMotors;
@@ -47,7 +47,7 @@ public class Spatula extends Subsystem {
         
         rightSpatulaMotor.setInverted(true);
         
-        spatulaFlipSolenoid = new Solenoid(RobotMap.SPATULA_FLIP_SOLENOID_PORT);
+        spatulaFlipSolenoid = new DoubleSolenoid(RobotMap.SPATULA_FLIP_UP_PORT, RobotMap.SPATULA_FLIP_DOWN_PORT);
         //spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
         isBITCOINAutomation = true;
@@ -68,11 +68,11 @@ public class Spatula extends Subsystem {
     }
 
     public void flipUp() {
-        spatulaFlipSolenoid.set(false);
+        spatulaFlipSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public void flipDown() {
-        spatulaFlipSolenoid.set(true);
+        spatulaFlipSolenoid.set(DoubleSolenoid.Value.kForward);
     }
     
     public void tightenCubeGrip() {
@@ -87,13 +87,13 @@ public class Spatula extends Subsystem {
         return spatulaLimitSwitch.get();
     }
     public void toggle() {
-        if (spatulaFlipSolenoid.get() == true) {
+        if (spatulaFlipSolenoid.get() == DoubleSolenoid.Value.kForward) {
             flipUp();
         } else {
             flipDown();
         }
     }
     public boolean isSpatulaUp() {
-        return !spatulaFlipSolenoid.get();
+        return spatulaFlipSolenoid.get() == DoubleSolenoid.Value.kReverse;
     }
 }
