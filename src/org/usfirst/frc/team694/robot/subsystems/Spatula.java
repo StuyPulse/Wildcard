@@ -47,7 +47,7 @@ public class Spatula extends Subsystem {
         
         rightSpatulaMotor.setInverted(true);
         
-        spatulaFlipSolenoid = new Solenoid(RobotMap.SPATULA_FLIP_SOLENOID_PORT);
+        spatulaFlipSolenoid = new DoubleSolenoid(RobotMap.SPATULA_FLIP_SOLENOID_PORT);
         //spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
         isBITCOINAutomation = true;
