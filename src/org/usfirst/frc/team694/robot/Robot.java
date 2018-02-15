@@ -27,9 +27,9 @@ public class Robot extends IterativeRobot {
     public static Drivetrain drivetrain;
     public static Spatula spatula;
     public static CrabArm crabArm;
-    public static Grabber grabber; 
+    public static Grabber grabber;
     public static Lift lift;
- 
+
     public static OI oi;
    
     public static FieldMapInterface currentQuad;
@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
+
         currentQuad = getRobotQuadrant();
 
         autonChooser.addDefault("Do Nothing", new CommandGroup());
@@ -114,7 +115,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
     }
 
-    
+
     /**
      * This function is called periodically during test mode.
      */
