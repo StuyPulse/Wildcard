@@ -8,10 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DrivetrainLineSensorCommand extends Command {
-    double speed = 0.25;
-    double offset = 0;
-    public DrivetrainLineSensorCommand(double speed, double offset) {
-        this.speed = speed;
+    private double offset;
+
+    public DrivetrainLineSensorCommand(double offset) {
         this.offset = offset;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
