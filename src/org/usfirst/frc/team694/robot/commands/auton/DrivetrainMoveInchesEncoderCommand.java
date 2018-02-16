@@ -5,13 +5,13 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DrivetrainMoveInchesEncoderCommand extends Command {
-    public double targetDistance;
-    public double driveSpeed;
-    
+    public double distance;
+    public double speed;
+
     public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {
         requires(Robot.drivetrain);
-        speed = driveSpeed;
-        distance = targetDistance;
+        this.speed = speed;
+        this.distance = distance;
     }
 
     protected void initialize() {
@@ -19,18 +19,14 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
     }
 
     protected void execute() {
-        Robot.drivetrain.tankDrive(driveSpeed, driveSpeed);
+        Robot.drivetrain.tankDrive(speed, speed);
     }
 
     protected boolean isFinished() {
-        return Math.abs(Robot.drivetrain.getEncoderDistance()) >= targetDistance;
+        return Math.abs(Robot.drivetrain.getEncoderDistance()) >= distance;
     }
 
     protected void end() {
-        Robot.drivetrain.resetEncoders();
-      
-    }
-
-    protected void interrupted() {
+        Robot.drivetrain.stop();
     }
 }

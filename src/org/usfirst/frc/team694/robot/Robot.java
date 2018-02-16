@@ -47,20 +47,15 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
 
-        autonChooser.addDefault("Do Nothing", new CommandGroup());
-        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
-        SmartDashboard.putData("Autonomous", autonChooser);
         Robot.drivetrain.resetEncoders();
 
-        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
-        
-        SmartDashboard.putNumber("Lift P", 0);
-        
+        initSmartDashboard();
+
         if(isRobotAtRightSideOfDriver == true) {
              
         }
     }
-    
+
     public enum whereTheBotIsInReferenceToDriver{
         RIGHT_SIDE_OF_DRIVER,
         LEFT_SIDE_OF_DRIVER
@@ -93,6 +88,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        Robot.drivetrain.resetEncoders(); // TEST
         autonCommand = autonChooser.getSelected();
 
         if (autonCommand != null) {
@@ -103,10 +99,12 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        updateSmartDashboard();
     }
 
     @Override
     public void teleopInit() {
+        Robot.drivetrain.resetEncoders(); // TEST
         if (autonCommand != null) {
             autonCommand.cancel();
         }
@@ -116,6 +114,26 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        updateSmartDashboard();
+    }
+
+    private void initSmartDashboard() {
+
+        // AUTON CHOOSER
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        SmartDashboard.putData("Autonomous", autonChooser);
+
+        // Drive Straight rotate PID
+        SmartDashboard.putNumber("DriveStraightPID P", 0); 
+        SmartDashboard.putNumber("DriveStraightPID I", 0); 
+        SmartDashboard.putNumber("DriveStraightPID D", 0);
+
+        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        //SmartDashboard.putNumber("Lift P", 0);
+    }
+    
+    private void updateSmartDashboard() {
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
         SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
@@ -132,7 +150,7 @@ public class Robot extends IterativeRobot {
         //        SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
         //        SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
         SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
-
+        
     }
 
     /**
