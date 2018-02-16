@@ -52,6 +52,16 @@ public class Robot extends IterativeRobot {
         
         SmartDashboard.putNumber("Lift P", 0);
         
+        SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
+
+        SmartDashboard.putNumber("RampSeconds", 2.5);
+        
         if(isRobotAtRightSideOfDriver == true) {
              
         }
