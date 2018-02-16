@@ -19,6 +19,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -39,11 +40,12 @@ public class OI {
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
-        operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
+        operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new CrabArrowAcquireCommand());
         
-        operatorGamepad.getLeftBumper().whileHeld(new SpatulaLeftDeacquireCommand());
+        operatorGamepad.getLeftBumper().whileHeld(new SpatulaRightDeacquireCommand());
+        operatorGamepad.getRightBumper().whileHeld(new SpatulaLeftDeacquireCommand());
         
         //this speed lets the robot "brake" when it's at its desired height
 //        operatorGamepad.getDPadUp().whileHeld(new LiftMoveSpeedCommand(0.16667));

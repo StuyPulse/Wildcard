@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
+@Deprecated
 public class SameSideBottomAngledSwitchCommand extends CommandGroup {
     private FieldMapInterface Quad = Robot.getRobotQuadrant();
     private double speed = 0.5;

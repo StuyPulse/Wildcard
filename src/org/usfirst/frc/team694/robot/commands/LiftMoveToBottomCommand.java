@@ -29,6 +29,7 @@ public class LiftMoveToBottomCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("[LiftMoveToBottom] DONE");
         Robot.lift.stop();
     }
 

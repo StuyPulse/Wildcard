@@ -33,8 +33,8 @@ public final class RobotMap {
     /**************************************************************************
      * Spatula and CrabArm Constants //All times are in seconds
      *************************************************************************/
-    public static final double PRE_FLIP_WAIT_TIME = 2;
-    public static final double POST_FLIP_WAIT_TIME = 2;
+    public static final double PRE_FLIP_WAIT_TIME = 0.25;
+    public static final double POST_FLIP_WAIT_TIME = 0.25;
     public static final double FLAP_OUT_SPEED = 1;
 
     public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = 6;

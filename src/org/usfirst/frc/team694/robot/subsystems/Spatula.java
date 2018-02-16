@@ -59,17 +59,22 @@ public class Spatula extends Subsystem {
     public void deacquire() {
         spatulaMotors.set(-1);
     }
+    
+    // TESTING
+    public void acquireSpeed(double speed) {
+        spatulaMotors.set(speed);
+    }
 
     //left spatula deacquires and the right acquires. This comment is used to avoid long method names
     public void leftSpatulaDeacquire() {
-        leftSpatulaMotor.set(-1);
-        rightSpatulaMotor.set(1);
+        leftSpatulaMotor.set(1);
+        rightSpatulaMotor.set(-1);
     }
 
     //right spatula deacquires and the left acquires. This comment is used to avoid long method names
     public void rightSpatulaDeacquire() {
-        leftSpatulaMotor.set(1);
-        rightSpatulaMotor.set(-1);
+        leftSpatulaMotor.set(-1);
+        rightSpatulaMotor.set(1);
     }
 
     public void stop() {
@@ -77,11 +82,11 @@ public class Spatula extends Subsystem {
     }
 
     public void flipUp() {
-        spatulaFlipSolenoid.set(DoubleSolenoid.Value.kReverse);
+        spatulaFlipSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void flipDown() {
-        spatulaFlipSolenoid.set(DoubleSolenoid.Value.kForward);
+        spatulaFlipSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
     public boolean isCubeDetected() {
@@ -89,7 +94,7 @@ public class Spatula extends Subsystem {
     }
 
     public void toggle() {
-        if (spatulaFlipSolenoid.get() == DoubleSolenoid.Value.kForward) {
+        if (spatulaFlipSolenoid.get() == DoubleSolenoid.Value.kReverse) {
             flipUp();
         } else {
             flipDown();
@@ -97,6 +102,7 @@ public class Spatula extends Subsystem {
     }
 
     public boolean isSpatulaUp() {
-        return spatulaFlipSolenoid.get() == DoubleSolenoid.Value.kReverse;
+        DoubleSolenoid.Value val = spatulaFlipSolenoid.get();
+        return val == DoubleSolenoid.Value.kForward || val == DoubleSolenoid.Value.kOff;
     }
 }

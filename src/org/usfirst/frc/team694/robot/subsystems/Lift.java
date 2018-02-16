@@ -92,22 +92,24 @@ public class Lift extends Subsystem {
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
-            innerLeftMotor.set(speed);
+            innerLeftMotor.set(speed); 
         }
     }
 
     public void move(double maxSpeed) {
         double currentHeight = getLiftHeight();
         double speed = maxSpeed;
-        //        if (maxSpeed < 0) {
-        //            if (currentHeight < RobotMap.LIFT_HEIGHT_THRESHOLD) {
-        //                speed = -RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED;
-        //            }
-        //        } else {
-        //            if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_HEIGHT_THRESHOLD) {
-        //                speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
-        //            }
-        //        }
+                if (maxSpeed < 0) {
+                    if (currentHeight < RobotMap.LIFT_HEIGHT_THRESHOLD) {
+                        speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
+                        speed = Math.max(speed, maxSpeed);
+                    }
+                } else {
+                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_HEIGHT_THRESHOLD) {
+                        speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
+                        speed = Math.min(speed, maxSpeed);
+                    }
+                }
         moveLift(speed);
     }
 
@@ -154,7 +156,7 @@ public class Lift extends Subsystem {
     }
     
     public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height);   
+        innerLeftMotor.set(ControlMode.Position, height);
     }
     
     public double getMotorVelocity() {
