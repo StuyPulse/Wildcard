@@ -11,9 +11,9 @@ public class BITCOINCommand extends CommandGroup {
 
     public BITCOINCommand() {
         // Get the cube in the grabber
-        addParallel(new GrabberOpenCommand());
         addSequential(new LiftMoveToBottomCommand());
-        
+        addSequential(new GrabberOpenCommand());
+
         addParallel(new SpatulaAcquireCommand(), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME);
         addSequential(new FlapAndFlipUpCommand());
 
@@ -24,7 +24,7 @@ public class BITCOINCommand extends CommandGroup {
         addSequential(new WaitCommand(0.5));
 
         // Move the cube up a little to get it out of the spatula
-        addParallel(new SpatulaMoveSpeedCommand(0.4 / 5.0), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);
+        addParallel(new SpatulaMoveSpeedCommand(-0.4 / 5.0), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);
         addSequential(new LiftMoveSpeedCommand(0.4), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);
     }
     

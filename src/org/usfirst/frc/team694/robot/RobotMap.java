@@ -34,7 +34,7 @@ public final class RobotMap {
      * Spatula and CrabArm Constants //All times are in seconds
      *************************************************************************/
     public static final double PRE_FLIP_WAIT_TIME = 0.25;
-    public static final double POST_FLIP_WAIT_TIME = 0.25;
+    public static final double POST_FLIP_WAIT_TIME = 0.5;
     public static final double FLAP_OUT_SPEED = 1;
 
     public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = 6;
@@ -114,7 +114,7 @@ public final class RobotMap {
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6.0;
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
-    public static final double DRIVETRAIN_ENCODERS_FACTOR = 4.0;
+    public static final int DRIVETRAIN_ENCODERS_FACTOR = 4;
     public static final double DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION = Math.PI * DRIVETRAIN_WHEEL_DIAMETER;
 
     /**
@@ -122,8 +122,8 @@ public final class RobotMap {
      * Quadrants, and each Quadrant passes 256 pulses.
      **/
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
-            DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
-            / (DRIVETRAIN_ENCODERS_FACTOR * DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION);
+            (161.5 / 1210.0) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
 
     /******************************************************************************
