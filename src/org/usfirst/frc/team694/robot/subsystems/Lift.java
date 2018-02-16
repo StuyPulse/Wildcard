@@ -94,11 +94,6 @@ public class Lift extends Subsystem {
         } else {
             innerLeftMotor.set(speed);
         }
-        //        if(isAtBottom()) {
-        //            stop();
-        //        } else {
-        //            innerLeftMotor.set(speed);
-        //        }
     }
 
     public void move(double maxSpeed) {
