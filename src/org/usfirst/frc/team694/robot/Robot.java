@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
 
         initSmartDashboard();
 
+        
         if(isRobotAtRightSideOfDriver == true) {
              
         }
@@ -131,6 +132,17 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
         //SmartDashboard.putNumber("Lift P", 0);
+
+        /*SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+
+        SmartDashboard.putNumber("RampSeconds", 2.5);
+        */
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
+
     }
     
     private void updateSmartDashboard() {
