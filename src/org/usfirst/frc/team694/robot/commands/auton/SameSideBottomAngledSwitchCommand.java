@@ -15,8 +15,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class SameSideBottomAngledSwitchCommand extends CommandGroup {
     private FieldMapInterface Quad = Robot.getRobotQuadrant();
     private double speed = 0.5;
+
     public SameSideBottomAngledSwitchCommand() {
-        addSequential(new DrivetrainMoveToLineCommand(Quad.getDistanceFromLineSensorToAutoLine(), speed));
+        //addSequential(new DrivetrainMoveToLineCommand(Quad.getDistanceFromLineSensorToAutoLine(), speed));
+        //addSequential(new DrivetrainMoveToLineCommand(Quad.getDistanceFromLineSensorToAutoLine(), speed));
         addSequential(new CrabArmDeployCommand());
         //TODO: Create constant/method and fix problems with constants
         //addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceFromAutoLineToMiddelOfSwitch));

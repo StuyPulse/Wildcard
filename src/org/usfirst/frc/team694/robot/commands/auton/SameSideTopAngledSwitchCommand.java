@@ -16,8 +16,8 @@ public class SameSideTopAngledSwitchCommand extends CommandGroup {
     private FieldMapInterface Quad = Robot.getRobotQuadrant();
     private double speed = 0.5;
     public SameSideTopAngledSwitchCommand() {
-        addSequential(new DrivetrainMoveToLineCommand(Quad.getDistanceFromLineSensorToAutoLine(), speed));
-        addSequential(new CrabArmDeployCommand());
+//        addSequential(new DrivetrainMoveToLineCommand(Quad.getDistanceFromLineSensorToAutoLine(), speed));
+//        addSequential(new CrabArmDeployCommand());
         //TODO: Create constants and fix problems with constants
         //addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceFromAutoLineToMiddleOfSwitch));
         //TODO: Not sure if the angle degree should be a constant in field map or not
