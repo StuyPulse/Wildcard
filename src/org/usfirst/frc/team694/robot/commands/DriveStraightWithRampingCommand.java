@@ -66,8 +66,6 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     protected void execute() {
         //System.out.println("[DriveDistanceEncodersCommand] distance left:" + (targetDistance - Robot.drivetrain.getEncoderDistance()));
         //System.out.println("hey exec");
-        SmartDashboard.putNumber("Right Distance", Robot.drivetrain.getRightEncoderDistance());
-        SmartDashboard.putNumber("Left Distance", Robot.drivetrain.getLeftEncoderDistance());
         //SmartDashboard.putNumber("Velocity", Robot.drivetrain.getEncoderVelocity());
         SmartDashboard.putNumber("Output", output);
         SmartDashboard.putNumber("Angle", Robot.drivetrain.getGyroAngle());
