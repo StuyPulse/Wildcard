@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SameSideTopAngledSwitchCommand extends CommandGroup {
-    private FieldMapInterface Quad = Robot.currentQuad;
+    private FieldMapInterface Quad = Robot.getRobotQuadrant();
     private double speed = 0.5;
     public SameSideTopAngledSwitchCommand() {
         addSequential(new DrivetrainMoveToLineCommand(Quad.getDistanceFromLineSensorToAutoLine(), speed));
