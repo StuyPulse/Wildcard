@@ -2,6 +2,7 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.commands.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
@@ -13,15 +14,23 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
     public double speed = 0.5;
 
     public DifferentSideScaleAutonCommand() {  
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToTravelBeforeFirstTurn()));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachPlatformZone()));
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachPlatformZoneAfterTurn()));
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachOtherPlatformZoneEdge()));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, Quad.getDistanceToDriveOutAfterPlatformZoneEdge()));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDegreeOfAngleToTurnToReachScaleSide()));
+        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceToTravelBeforeTurn()));
+        //add line system code using this value: Quad.getDistanceFromLineSensorToAutoLine()
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToTurnToReachPlatformZone()));
+        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()));
 
-        addSequential(new DrivetrainMoveToLineCommand(speed, Quad.getDistanceToTravelToReachScaleSide()));
+        //add line system code using this value: Quad.getDistanceToTravelToReachPlatformZone()
+
+        //add line system code using this value: Quad.getDistanceFromStartingPointToOtherPlatformZoneEdge()
+
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToTurnToReachScaleSide()));
+
+        addSequential(new LiftMoveToHeightCommand(84));//unsure about height
+
+        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceToTravelToReachScaleSide()));
+
+        //add line system code using this value: Quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()
+
         addSequential(new GrabberOpenCommand());
     }
 }

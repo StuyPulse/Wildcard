@@ -50,6 +50,16 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
+        
+        SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+        
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
+        
+        SmartDashboard.putNumber("RampSeconds", 2.5);
     }
 
     @Override
