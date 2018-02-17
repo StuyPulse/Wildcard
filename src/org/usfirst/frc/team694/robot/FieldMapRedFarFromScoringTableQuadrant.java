@@ -98,6 +98,12 @@ public final class FieldMapRedFarFromScoringTableQuadrant extends FieldMapMiddle
     public double getDistanceToReachScaleEdge() {
         return RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE;
     }
+    
+    //Switch auton where the bot and the scoring switch are on the same side
+    @Override
+    public double getDistanceToDriveForwardToReachSwitch() {
+        return RED_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE;
+    }
     //**************************************************************************************************************
     
 /* Given FRC Manual Measurements*/
@@ -114,8 +120,8 @@ public final class FieldMapRedFarFromScoringTableQuadrant extends FieldMapMiddle
     private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
     private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
     private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
-  //private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204.0; //
-    
+    private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE = 140.0; //
+
     //**************************************************************************************************************
     
     private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_OTHER_EDGE_OF_ROBOT = RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT + RobotMap.WIDTH_OF_BOT;
@@ -156,6 +162,11 @@ public final class FieldMapRedFarFromScoringTableQuadrant extends FieldMapMiddle
     private static final int RED_FAR_FROM_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_TO_REACH_SCALE_SIDE = -90;
     private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE = FieldMapRedNearScoringTableQuadrant.RED_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_SCALE_SIDE - FieldMapRedNearScoringTableQuadrant.RED_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
 
+  //**************************************************************************************************************
+
+    //Switch auton where the bot is on the same side as the scoring switch
+    private static final double RED_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE = RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE - RobotMap.LENGTH_OF_BOT;
+    
   //**************************************************************************************************************
 
   //Measurements for line system
