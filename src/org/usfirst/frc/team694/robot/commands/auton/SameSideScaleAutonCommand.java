@@ -2,8 +2,6 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.commands.DriveStraightWithRampingCommand;
-import org.usfirst.frc.team694.robot.commands.DrivetrainLineSensorCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
