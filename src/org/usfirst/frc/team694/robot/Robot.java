@@ -130,7 +130,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
 
         SmartDashboard.putNumber("DriveStraight RampSeconds", 2.5);
-        
+
         // Drive Straight Distance PID
         SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
         SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
