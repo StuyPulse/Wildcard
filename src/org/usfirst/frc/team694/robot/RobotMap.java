@@ -73,9 +73,11 @@ public final class RobotMap {
     public static final double LIFT_BRAKE_SPEED = 0.16667;
 
     public static final double LIFT_MIN_SPEED = 0.25;
-    public static final double LIFT_HEIGHT_THRESHOLD = 20.0;
-    public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_HEIGHT_THRESHOLD;
+    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 20.0;
+    public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_RAMP_HEIGHT_THRESHOLD;
     public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
+    public static final double LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD = 2;
+
 
     /***************************************************************************
      * Lift Limit Switch

@@ -100,12 +100,12 @@ public class Lift extends Subsystem {
         double currentHeight = getLiftHeight();
         double speed = maxSpeed;
                 if (maxSpeed < 0) {
-                    if (currentHeight < RobotMap.LIFT_HEIGHT_THRESHOLD) {
+                    if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
                         speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
                         speed = Math.max(speed, maxSpeed);
                     }
                 } else {
-                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_HEIGHT_THRESHOLD) {
+                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
                         speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
                         speed = Math.min(speed, maxSpeed);
                     }
