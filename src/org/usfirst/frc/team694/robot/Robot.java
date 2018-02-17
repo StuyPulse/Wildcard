@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
 
     public static OI oi;
     
-    public static boolean isRobotAtRightSideOfDriver;
+    public static boolean isRobotOnRight;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
@@ -74,17 +74,17 @@ public class Robot extends IterativeRobot {
 
     //Bottom means side closer to the scoring table
     public static FieldMapInterface getRobotQuadrant() {
-        boolean isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
+        isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
             if(isRobotOnRight) {
                 return new FieldMapRedFarFromScoringTableQuadrant(); 
             }
-            return new FieldMapRedFarFromScoringTableQuadrant();      
+            return new FieldMapRedNearScoringTableQuadrant();      
         }
         if(isRobotOnRight) {
             return new FieldMapBlueNearScoringTableQuadrant();
         }
-        return new FieldMapBlueNearScoringTableQuadrant();
+        return new FieldMapBlueFarFromScoringTableQuadrant();
 
     }
     
