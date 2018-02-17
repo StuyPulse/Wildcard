@@ -14,16 +14,16 @@ public class LiftMoveCommand extends Command {
 
     public LiftMoveCommand() {
         requires(Robot.lift);
-        requires(Robot.spatula);
+        //requires(Robot.spatula);
     }
 
     protected void execute() {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
         
-        if(Robot.spatula.isSpatulaUp()) {
-            Robot.spatula.acquireSpeed(-liftSquared * 0.2);
-        }
+       // if(Robot.spatula.isSpatulaUp()) {
+         //   Robot.spatula.acquireSpeed(-liftSquared * 0.2);
+        //}
         
         if (Math.abs(liftControl) > RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD ) {
             Robot.lift.move(liftSquared);
