@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
     public static boolean isRobotAtRightSideOfDriver;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
+    private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
 
     @Override
     public void robotInit() {
@@ -50,6 +51,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Autonomous", autonChooser);
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
         
+        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+        SmartDashboard.putData("Where is the robot starting?", sideChooser);
+        
         SmartDashboard.putNumber("Lift P", 0);
         
         SmartDashboard.putNumber("RotateDegreesPID P", 0);
@@ -61,26 +66,23 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
 
         SmartDashboard.putNumber("RampSeconds", 2.5);
-        
-        if(isRobotAtRightSideOfDriver == true) {
-             
-        }
     }
     
-    public enum whereTheBotIsInReferenceToDriver{
+    public enum WhereTheBotIsInReferenceToDriver {
         RIGHT_SIDE_OF_DRIVER,
         LEFT_SIDE_OF_DRIVER
     }
 
     //Bottom means side closer to the scoring table
     public static FieldMapInterface getRobotQuadrant() {
+        boolean isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            if(isRobotAtRightSideOfDriver) {
+            if(isRobotOnRight) {
                 return new FieldMapRedFarFromScoringTableQuadrant(); 
             }
             return new FieldMapRedFarFromScoringTableQuadrant();      
         }
-        if(isRobotAtRightSideOfDriver) {
+        if(isRobotOnRight) {
             return new FieldMapBlueNearScoringTableQuadrant();
         }
         return new FieldMapBlueNearScoringTableQuadrant();
