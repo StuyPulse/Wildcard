@@ -17,16 +17,16 @@ public class SameSideRightAngleAutonCommand extends CommandGroup {
 
     public SameSideRightAngleAutonCommand() {
         addParallel(new DrivetrainLineSensorReachNullCommand());
-        addSequential(new DriveStraightWithRampingCommand(324));//TODO: Make magic number for distance from starting point to null bump
+        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceFromFrontOfBotToNullBump()));
       
         addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
         
-        addSequential(new DriveStraightWithRampingCommand(46.94)); //TODO: Make magic number for distance to travel backward to reach wall
+        addSequential(new DriveStraightWithRampingCommand(Quad.getDistanceToMoveBackward()));
         
         addSequential(new LiftMoveToHeightCommand(84)); //Unsure about height
         
-        addSequential(new DriveStraightWithRampingCommand(Quad.getDistanceFromBorderToScaleEdge())); //TODO: Make ANOTHER magic number because life is hard </3
-
+        addSequential(new DriveStraightWithRampingCommand(Quad.getDistanceToReachScaleEdge())); 
+        
         addSequential(new GrabberOpenCommand());
     }
 }

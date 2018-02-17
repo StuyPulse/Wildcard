@@ -26,4 +26,14 @@ public interface FieldMapInterface {
     
     public double getDistanceFromBorderToScaleEdge();
 
+    //Scale auton where the bot is on the same side as the scoring scale (backup)
+    public double getTotalDistanceFromFrontOfBotToNullBump();
+  //public double getDistanceFromLineSensorToAutoLine();
+    public double getDistanceFromLineSensorToNullTerritoryLine();
+    
+    public double getAngleToTurnToReachScaleEdge();
+    
+    public double getDistanceToMoveBackward();
+    
+    public double getDistanceToReachScaleEdge();
 }
