@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SameSideSwitchAutonCommand extends CommandGroup {
-    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
-    public double speed = 0.75;
+    private static FieldMapInterface Quad = Robot.getRobotQuadrant();
+    private double speed = 0.75;
     
     public SameSideSwitchAutonCommand() {
         //TODO replace 150 with field map variable, 150 is the length of the alliance station to the same side switch + 10
