@@ -5,7 +5,7 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DrivetrainLineSensorPlatformZoneCommand extends CommandGroup {
-    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
+    public FieldMapInterface Quad = Robot.getRobotQuadrant();
 
     public DrivetrainLineSensorPlatformZoneCommand() {
         addSequential(new DrivetrainLineSensorCommand(Quad.getDistanceToTravelToReachPlatformZone())); 

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class SameSideScaleAutonCommand extends CommandGroup {
     public double speed = 0.5;
-    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
+    public FieldMapInterface Quad = Robot.getRobotQuadrant();
     
     public SameSideScaleAutonCommand() {
         addParallel(new DrivetrainLineSensorCommand(Quad.getDistanceFromLineSensorToAutoLine()));

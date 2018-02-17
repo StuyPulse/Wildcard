@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SameSideSwitchAutonCommand extends CommandGroup {
-    private static FieldMapInterface Quad = Robot.getRobotQuadrant();
+    private FieldMapInterface Quad = Robot.getRobotQuadrant();
     private double speed = 0.75;
     
     public SameSideSwitchAutonCommand() {
