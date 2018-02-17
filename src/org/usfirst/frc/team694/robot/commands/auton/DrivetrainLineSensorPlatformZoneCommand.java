@@ -1,4 +1,4 @@
-package org.usfirst.frc.team694.robot.commands;
+package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
