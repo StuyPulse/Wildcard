@@ -51,6 +51,10 @@ public class Robot extends IterativeRobot {
 
         initSmartDashboard();
 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> b0d5f37d987b2cf75ca54b3a2c525ded786c7e54
         if(isRobotAtRightSideOfDriver == true) {
              
         }
@@ -129,16 +133,31 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveStraightPID I", 0); 
         SmartDashboard.putNumber("DriveStraightPID D", 0);
 
+<<<<<<< HEAD
 //        SmartDashboard.putNumber("Lift P", 0);
 
+=======
+        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        //SmartDashboard.putNumber("Lift P", 0);
+
+        /*SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+
+        SmartDashboard.putNumber("RampSeconds", 2.5);
+        */
+>>>>>>> b0d5f37d987b2cf75ca54b3a2c525ded786c7e54
         SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
         SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
 
+<<<<<<< HEAD
         SmartDashboard.putNumber("RampSeconds", 2.5);
         
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
         //SmartDashboard.putNumber("Lift P", 0);
+=======
+>>>>>>> b0d5f37d987b2cf75ca54b3a2c525ded786c7e54
     }
     
     private void updateSmartDashboard() {

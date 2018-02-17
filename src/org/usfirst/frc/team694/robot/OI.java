@@ -12,7 +12,7 @@ import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.DriveStraightPIDCommand;
+import org.usfirst.frc.team694.robot.commands.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
@@ -38,6 +38,7 @@ public class OI {
         // TESTING ONLY
         //driverGamepad.getDPadUp().whenPressed(new DriveStraightPIDCommand(100, 0.75));
         //driverGamepad.getDPadUp().whenPressed(new );
+        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(100));
 
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //        operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
