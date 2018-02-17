@@ -148,10 +148,10 @@ public class Robot extends IterativeRobot {
     }
 
     public static boolean getSwitchLocation() {
-        return isAllianceSwitchRight;
+        return (isAllianceSwitchRight && isRobotOnRight) || !(isAllianceSwitchRight && isRobotOnRight);
     }
     
     public static boolean getScaleLocation() {
-        return isScaleRight;
+        return (isScaleRight && isRobotOnRight) || !(isAllianceSwitchRight && isRobotOnRight);
     }
 }
