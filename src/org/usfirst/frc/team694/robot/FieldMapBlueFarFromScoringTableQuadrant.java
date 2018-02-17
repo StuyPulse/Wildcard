@@ -101,7 +101,7 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     
     //Switch auton where the bot and the scoring switch are on the same side
     @Override
-    public double getDistanceToDriveForwardToReachSwitch() {
+    public double getDistanceToDriveForwardToReachSwitchSide() {
         return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE;
     }
     //**************************************************************************************************************
