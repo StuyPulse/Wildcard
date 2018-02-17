@@ -33,6 +33,11 @@ public class Robot extends IterativeRobot {
     public static OI oi;
     
     public static boolean isRobotAtRightSideOfDriver;
+    
+    private String gameData;
+    private static boolean isAllianceSwitchRight; 
+    private static boolean isScaleRight; 
+    
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
 
@@ -99,7 +104,15 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        autonCommand = autonChooser.getSelected();
+        gameData = DriverStation.getInstance().getGameSpecificMessage();
+        if(gameData == null) {//If there is no field data run mobility
+            autonCommand = new MobilityAutonUsingEncodersCommand();
+            System.out.println("******* Field Data problem");
+        }else {
+            isAllianceSwitchRight = gameData.charAt(0) == 'R';
+            isScaleRight = gameData.charAt(1) == 'R';
+            autonCommand = autonChooser.getSelected();
+        }
 
         if (autonCommand != null) {
             autonCommand.start();
@@ -131,4 +144,11 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     }
 
+    public static boolean getSwitchLocation() {
+        return isAllianceSwitchRight;
+    }
+    
+    public static boolean getScaleLocation() {
+        return isScaleRight;
+    }
 }
