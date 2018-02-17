@@ -124,25 +124,22 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
-        // Drive Straight rotate PID
-        SmartDashboard.putNumber("DriveStraightPID P", 0); 
-        SmartDashboard.putNumber("DriveStraightPID I", 0); 
-        SmartDashboard.putNumber("DriveStraightPID D", 0);
 
 //        SmartDashboard.putNumber("Lift P", 0);
 
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
-        //SmartDashboard.putNumber("Lift P", 0);
 
-        /*SmartDashboard.putNumber("RotateDegreesPID P", 0);
-        SmartDashboard.putNumber("RotateDegreesPID I", 0);
-        SmartDashboard.putNumber("RotateDegreesPID D", 0);
-
-        SmartDashboard.putNumber("RampSeconds", 2.5);
-        */
+        SmartDashboard.putNumber("DriveStraight RampSeconds", 2.5);
+        
+        // Drive Straight Distance PID
         SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
         SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
+
+        // Drive Straight Rotation PID
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0); 
+        SmartDashboard.putNumber("DriveStraightGyroPID I", 0); 
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0);
 
     }
     
