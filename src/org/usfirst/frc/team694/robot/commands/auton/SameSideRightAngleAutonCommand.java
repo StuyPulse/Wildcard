@@ -12,20 +12,19 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class SameSideRightAngleAutonCommand extends CommandGroup {
-    public FieldMapInterface Quad = Robot.getRobotQuadrant();
-    public double speed = 0.5;
+    private FieldMapInterface quad = Robot.getRobotQuadrant();
 
     public SameSideRightAngleAutonCommand() {
         addParallel(new DrivetrainLineSensorReachNullCommand());
-        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceFromFrontOfBotToNullBump()));
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceFromFrontOfBotToNullBump()));
       
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
         
-        addSequential(new DriveStraightWithRampingCommand(Quad.getDistanceToMoveBackward()));
+        addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToMoveBackward()));
         
         addSequential(new LiftMoveToHeightCommand(84)); //Unsure about height
         
-        addSequential(new DriveStraightWithRampingCommand(Quad.getDistanceToReachScaleEdge())); 
+        addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToReachScaleEdge())); 
         
         addSequential(new GrabberOpenCommand());
     }

@@ -4,12 +4,13 @@ import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+
 public class DrivetrainLineSensorPlatformZoneCommand extends CommandGroup {
-    public FieldMapInterface Quad = Robot.getRobotQuadrant();
+    private FieldMapInterface quad = Robot.getRobotQuadrant();
 
     public DrivetrainLineSensorPlatformZoneCommand() {
-        addSequential(new DrivetrainLineSensorCommand(Quad.getDistanceToTravelToReachPlatformZone())); 
-        addSequential(new DrivetrainLineSensorCommand(Quad.getDistanceFromEdgeOfPlatformZoneToBump()));
-        addSequential(new DrivetrainLineSensorCommand(Quad.getDistanceFromStartingPointToOtherPlatformZoneEdge()));
+        addSequential(new DrivetrainLineSensorCommand(quad.getDistanceToTravelToReachPlatformZone())); 
+        addSequential(new DrivetrainLineSensorCommand(quad.getDistanceFromEdgeOfPlatformZoneToBump()));
+        addSequential(new DrivetrainLineSensorCommand(quad.getDistanceFromStartingPointToOtherPlatformZoneEdge()));
     }
 }
