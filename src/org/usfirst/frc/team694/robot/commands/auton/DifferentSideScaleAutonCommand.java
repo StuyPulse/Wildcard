@@ -9,24 +9,23 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DifferentSideScaleAutonCommand extends CommandGroup {
-    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
-    public double speed = 0.5;
+    private FieldMapInterface quad = Robot.getRobotQuadrant();
 
     public DifferentSideScaleAutonCommand() {  
-        addParallel(new DrivetrainLineSensorCommand(Quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceToTravelBeforeTurn()));
+        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn()));
         
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachPlatformZone()));
 
         addParallel(new DrivetrainLineSensorPlatformZoneCommand());
-        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()));
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()));
         
-        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getAngleToTurnToReachScaleSide()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleSide()));
 
         addSequential(new LiftMoveToHeightCommand(84));//unsure about height
 
-        addParallel(new DrivetrainLineSensorCommand(Quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
-        addSequential(new DriveStraightWithRampingCommand(Quad.getTotalDistanceToTravelToReachScaleSide()));
+        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachScaleSide()));
 
         addSequential(new GrabberOpenCommand());
 

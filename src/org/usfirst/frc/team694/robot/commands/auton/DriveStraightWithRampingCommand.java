@@ -67,10 +67,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         //System.out.println("[DriveDistanceEncodersCommand] distance left:" + (targetDistance - Robot.drivetrain.getEncoderDistance()));
         //System.out.println("hey exec");
         //SmartDashboard.putNumber("Velocity", Robot.drivetrain.getEncoderVelocity());
-        SmartDashboard.putNumber("Output", output);
-        SmartDashboard.putNumber("Angle", Robot.drivetrain.getGyroAngle());
-        SmartDashboard.putNumber("Angle Output", angleOutput);
-        SmartDashboard.putNumber("StartEncoderValue", startEncoderValue);
+
         //System.out.println(angleOutput);
     }
 
@@ -84,7 +81,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         } else {
             isSet = false;
         }
-        return this.getPIDController().onTarget() && Timer.getFPGATimestamp() - timeFirstInRange > 2;
+        return this.getPIDController().onTarget() && Math.abs(Timer.getFPGATimestamp() - timeFirstInRange) < 2;
     }
 
     // Called once after isFinished returns true
@@ -137,6 +134,5 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 }
 
-//Values: For a distance of 170, a P of 0.016, and a D of 0.03
-//For a distance of 290, a P of 0.016 and a D of 0.03
+// P of 0.006, and a D of 0.03
 //For turning, make it 0.04

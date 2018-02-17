@@ -99,6 +99,12 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
     public double getDistanceToReachScaleEdge() {
         return BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE;
     }
+    
+    //Switch auton where the bot and the scoring switch are on the same side
+    @Override
+    public double getDistanceToDriveForwardToReachSwitchSide() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE;
+    }
     //**************************************************************************************************************
     
 /* Given FRC Manual Measurements*/
@@ -115,8 +121,8 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
-  //private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204.0; //
-    
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE = 140.0; //
+
     //**************************************************************************************************************
     
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_OTHER_EDGE_OF_ROBOT = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT + RobotMap.WIDTH_OF_BOT;
@@ -133,7 +139,7 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY_LINE = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY - BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE;
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FRONT_OF_BOT_TO_AUTO_LINE = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE - RobotMap.LENGTH_OF_BOT;
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_ROBOT_STARTING_POINT_TO_NULL_BUMP = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FRONT_OF_BOT_TO_AUTO_LINE + RobotMap.MIDDLE_OF_BOT_LENGTHWISE;
-    private static final int BLUE_NEAR_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_IN_NULL_TERRITORY = 90;
+    private static final int BLUE_NEAR_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_IN_NULL_TERRITORY = -90;
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_BACKWARDS = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT - RobotMap.DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN; 
     private final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE = getDistanceFromBorderToScaleEdge() - RobotMap.LENGTH_OF_BOT;
     
@@ -159,6 +165,10 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
 
     //**************************************************************************************************************
 
+    //Switch auton where the bot is on the same side as the scoring switch
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE - RobotMap.LENGTH_OF_BOT;
+    
+  //**************************************************************************************************************
     //Measurements for line system
     //Use the constants these constants are set to to use for reset encoders
     //Different side scale auton
