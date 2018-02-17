@@ -47,7 +47,12 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     public double getDistanceToTravelToReachPlatformZone() {
         return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN;
     }
-
+    
+    @Override
+    public double getDistanceFromEdgeOfPlatformZoneToBump() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP;
+    }
+    
     @Override
     public double getDistanceFromStartingPointToOtherPlatformZoneEdge() {
         return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_STARTING_POINT_TO_OTHER_PLATFORM_ZONE_EDGE;
@@ -67,6 +72,38 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     public double getDistanceFromRobotAfterTwoTurnsToNullTerritory() {
         return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_NULL_LINE;
     }
+    
+    //Scale auton where the bot and the scoring scale are on the same side (backup)
+    @Override
+    public double getTotalDistanceFromFrontOfBotToNullBump() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_ROBOT_STARTING_POINT_TO_NULL_BUMP;
+    }
+
+    @Override
+    public double getDistanceFromLineSensorToNullTerritoryLine() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_NULL_TERRITORY_LINE;
+    }
+
+    @Override
+    public double getAngleToTurnToReachScaleEdge() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_IN_NULL_TERRITORY;
+    }
+
+    @Override
+    public double getDistanceToMoveBackward() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_BACKWARDS;
+    }
+
+    @Override
+    public double getDistanceToReachScaleEdge() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE;
+    }
+    
+    //Switch auton where the bot and the scoring switch are on the same side
+    @Override
+    public double getDistanceToDriveForwardToReachSwitchSide() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE;
+    }
     //**************************************************************************************************************
     
 /* Given FRC Manual Measurements*/
@@ -83,8 +120,7 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
-  //private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204.0; //
-    
+    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE = 140.0; //
     //**************************************************************************************************************
     
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_OTHER_EDGE_OF_ROBOT = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT + RobotMap.WIDTH_OF_BOT;
@@ -98,8 +134,9 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     //**************************************************************************************************************
     //Scale auton where the bot is on the same side as the alliance scale and bot will be in the null territory
     //Keep in case the other scale auton doesn't work
-    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE = 204.0; //
-    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_MOVE_INTO_NULL_BUMP = RobotMap.MIDDLE_OF_BOT_LENGTHWISE - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
+    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY_LINE = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY - BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE;
+    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FRONT_OF_BOT_TO_AUTO_LINE = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE - RobotMap.LENGTH_OF_BOT;
+    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_ROBOT_STARTING_POINT_TO_NULL_BUMP = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FRONT_OF_BOT_TO_AUTO_LINE + RobotMap.MIDDLE_OF_BOT_LENGTHWISE;
     private static final int BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_TURN_IN_NULL_TERRITORY = 90;
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_BACKWARDS = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT - RobotMap.DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN; 
     private final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE = getDistanceFromBorderToScaleEdge() - RobotMap.LENGTH_OF_BOT;
@@ -125,9 +162,14 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE = FieldMapBlueNearScoringTableQuadrant.BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_SCALE_SIDE - FieldMapBlueNearScoringTableQuadrant.BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
 
   //**************************************************************************************************************
-
+    
+    //Switch auton where the bot is on the same side as the scoring switch
+    private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE - RobotMap.LENGTH_OF_BOT;
+    
+  //**************************************************************************************************************
   //Measurements for line system
     //Use the constants these constants are set to to use for reset encoders
+    
     //Different side scale auton
     //Reset encoders 3 times
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE + BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_BEFORE_FIRST_TURN_FROM_AUTO_LINE;
@@ -139,7 +181,9 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     //Same side scale auton
     //Reset encoders once
     private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_TO_REACH_NULL_TERRITORY_LINE = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE + BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
+    
+        //Backup
+        private static final double BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_NULL_TERRITORY_LINE = BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_AUTO_LINE_TO_NULL_TERRITORY_LINE + BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE;
     //**************************************************************************************************************
-
 }
 
