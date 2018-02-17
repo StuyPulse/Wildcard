@@ -71,20 +71,24 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         SmartDashboard.putNumber("Angle", Robot.drivetrain.getGyroAngle());
         SmartDashboard.putNumber("Angle Output", angleOutput);
         SmartDashboard.putNumber("StartEncoderValue", startEncoderValue);
+
+        SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
         //System.out.println(angleOutput);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 
+        boolean inRange = Math.abs(Robot.drivetrain.getRightEncoderDistance() - targetDistance) <= 1;
         //return (Robot.drivetrain.getRightEncoderDistance() > targetDistance && Math.abs(output) < PID_CLOSE_ENOUGH_THRESHOLD);
-        if(Math.abs(Robot.drivetrain.getRightEncoderDistance() - targetDistance) <= 1 && !isSet) {
+        if(inRange && !isSet) {
+            System.out.println("[DriveStraight] SET!");
             timeFirstInRange = Timer.getFPGATimestamp();
             isSet = true;
-        } else {
+        } else if(!inRange){
             isSet = false;
         }
-        return this.getPIDController().onTarget() && Timer.getFPGATimestamp() - timeFirstInRange > 2;
+        return inRange && Timer.getFPGATimestamp() - timeFirstInRange > 2;
     }
 
     // Called once after isFinished returns true

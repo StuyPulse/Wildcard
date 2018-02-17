@@ -41,7 +41,7 @@ public class OI {
         //driverGamepad.getDPadUp().whenPressed(new );
 
         // Distance to our auto line (not accurate to REAL field)
-        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(123));
+        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(288));
 
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
