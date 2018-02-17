@@ -14,7 +14,7 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
     public double speed = 0.75;
     
     public SameSideSwitchAutonCommand() {
-        addSequential(new DriveStraightPIDCommand());
+        addSequential(new DriveStraightPIDCommand(150));
 
     }
 }
