@@ -22,7 +22,7 @@ public class LiftMoveCommand extends Command {
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
         
         if(Robot.spatula.isSpatulaUp()) {
-            Robot.spatula.acquireSpeed(-liftSquared * 1/5);
+            Robot.spatula.acquireSpeed(-liftSquared * 0.2);
         }
         
         if (Math.abs(liftControl) > RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD ) {

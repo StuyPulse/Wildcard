@@ -21,7 +21,7 @@ public class BITCOINCommand extends CommandGroup {
 
         addSequential(new GrabberCloseCommand());
 
-        addSequential(new WaitCommand(0.5));
+        //addSequential(new WaitCommand(0.5));
 
         // Move the cube up a little to get it out of the spatula (not supposed to be used anymore)
         //addParallel(new SpatulaMoveSpeedCommand(-0.4 / 5.0), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);

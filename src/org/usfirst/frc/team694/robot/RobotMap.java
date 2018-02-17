@@ -107,8 +107,9 @@ public final class RobotMap {
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
-//    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = -1;
-//    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = -1;
+    
+    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = 1;
+    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = 2;
 
     /******************************************************************************
      * Drivetrain Encoder/Movement Constants

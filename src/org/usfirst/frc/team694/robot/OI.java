@@ -9,6 +9,7 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOffCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
+import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
@@ -41,14 +42,14 @@ public class OI {
         driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(100));
 
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
-        //        operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
-
+        operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
+        
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
         operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
-        operatorGamepad.getRightTrigger().whileHeld(new CrabArrowAcquireCommand());
+        //operatorGamepad.getRightTrigger().whileHeld(new CrabArrowAcquireCommand());
         
         operatorGamepad.getLeftBumper().whileHeld(new SpatulaRightDeacquireCommand());
         operatorGamepad.getRightBumper().whileHeld(new SpatulaLeftDeacquireCommand());

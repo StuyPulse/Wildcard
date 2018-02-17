@@ -140,7 +140,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveStraightGyroPID P", 0); 
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0); 
         SmartDashboard.putNumber("DriveStraightGyroPID D", 0);
-
+        
     }
     
     private void updateSmartDashboard() {
@@ -155,10 +155,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
         SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
 
-        //        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine(0));
-        //        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
-        //        SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
-        //        SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
+        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine(0));
+        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
+        SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
+        SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
+        
         SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
         
     }
