@@ -16,6 +16,7 @@ public interface FieldMapInterface {
     
     public double getTotalDistanceToTravelToReachOtherSideOfPlatformZone();
     public double getDistanceToTravelToReachPlatformZone();
+    public double getDistanceFromEdgeOfPlatformZoneToBump();
     public double getDistanceFromStartingPointToOtherPlatformZoneEdge();
     
     public double getAngleToTurnToReachScaleSide();

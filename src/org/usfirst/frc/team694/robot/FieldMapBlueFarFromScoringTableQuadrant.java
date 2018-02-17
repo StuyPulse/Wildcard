@@ -47,7 +47,12 @@ public final class FieldMapBlueFarFromScoringTableQuadrant extends FieldMapMiddl
     public double getDistanceToTravelToReachPlatformZone() {
         return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN;
     }
-
+    
+    @Override
+    public double getDistanceFromEdgeOfPlatformZoneToBump() {
+        return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP;
+    }
+    
     @Override
     public double getDistanceFromStartingPointToOtherPlatformZoneEdge() {
         return BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_STARTING_POINT_TO_OTHER_PLATFORM_ZONE_EDGE;

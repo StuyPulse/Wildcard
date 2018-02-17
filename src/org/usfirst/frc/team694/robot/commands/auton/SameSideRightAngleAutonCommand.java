@@ -1,32 +1,32 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
+
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
+import org.usfirst.frc.team694.robot.commands.DriveStraightWithRampingCommand;
+import org.usfirst.frc.team694.robot.commands.DrivetrainLineSensorReachNullCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
-
-@Deprecated
 public class SameSideRightAngleAutonCommand extends CommandGroup {
     public static FieldMapInterface Quad = Robot.getRobotQuadrant();
     public double speed = 0.5;
+
     public SameSideRightAngleAutonCommand() {
+        addParallel(new DrivetrainLineSensorReachNullCommand());
+        addSequential(new DriveStraightWithRampingCommand(324));//TODO: Make magic number for distance from starting point to null bump
+      
+        addSequential(new DrivetrainRotateDegreesPIDCommand(Quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        
+        addSequential(new DriveStraightWithRampingCommand(46.94)); //TODO: Make magic number for distance to travel backward to reach wall
+        
+        addSequential(new LiftMoveToHeightCommand(84)); //Unsure about height
+        
+        addSequential(new DriveStraightWithRampingCommand(Quad.getDistanceFromBorderToScaleEdge())); //TODO: Make ANOTHER magic number because life is hard </3
 
-
-//        addSequential(new DrivetrainMoveToLineCommand(speed, FieldMapInterface.DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE));
-//        addSequential(new DrivetrainMoveToLineCommand(speed, FieldMap.DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, FieldMapInterface.DISTANCE_TO_MOVE_INTO_NULL_BUMP));
-//        addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(-1 * speed, FieldMap.DISTANCE_TO_TRAVEL_BACKWARDS));
-//        addSequential(new LiftMoveToHeightCommand(84)); //unsure about this height
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, FieldMap.DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE));
-//        addSequential(new GrabberOpenCommand());
+        addSequential(new GrabberOpenCommand());
     }
 }

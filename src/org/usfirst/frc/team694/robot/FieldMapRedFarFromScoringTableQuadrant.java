@@ -49,6 +49,11 @@ public final class FieldMapRedFarFromScoringTableQuadrant extends FieldMapMiddle
     }
 
     @Override
+    public double getDistanceFromEdgeOfPlatformZoneToBump() {
+        return RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP ;
+    }
+    
+    @Override
     public double getDistanceFromStartingPointToOtherPlatformZoneEdge() {
         return RED_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_STARTING_POINT_TO_OTHER_PLATFORM_ZONE_EDGE;
     }
