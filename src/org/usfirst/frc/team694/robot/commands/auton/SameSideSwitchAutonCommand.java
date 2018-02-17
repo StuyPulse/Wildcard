@@ -14,7 +14,8 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
     public double speed = 0.75;
     
     public SameSideSwitchAutonCommand() {
-        addSequential(new DriveStraightPIDCommand(150));
+        //TODO replace 150 with field map variable, 150 is the length of the alliance station to the same side switch + 10
+        addSequential(new DriveStraightPIDCommand(150, speed));
 
     }
 }
