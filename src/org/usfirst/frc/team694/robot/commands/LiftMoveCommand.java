@@ -13,14 +13,20 @@ public class LiftMoveCommand extends Command {
     private double currentHeight;
 
     public LiftMoveCommand() {
-        requires(Robot.lift);          
+        requires(Robot.lift);
+        requires(Robot.spatula);
     }
 
     protected void execute() {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
-          
+        double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
+        
+        if(Robot.spatula.isSpatulaUp()) {
+            Robot.spatula.acquireSpeed(-liftSquared * 1/5);
+        }
+        
         if (Math.abs(liftControl) > RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD ) {
-            Robot.lift.move(Math.pow(liftControl, 2) * Math.signum(liftControl));
+            Robot.lift.move(liftSquared);
             currentHeight = Robot.lift.getLiftHeight();
             //TODO: see whether Coby wants cubed or squared inputs on the lift.
         } else {
