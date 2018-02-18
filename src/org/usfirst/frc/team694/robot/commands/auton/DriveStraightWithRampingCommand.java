@@ -92,7 +92,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         SmartDashboard.putNumber("DriveStraight FINAL Left Distance", Robot.drivetrain.getLeftEncoderDistance());
         this.getPIDController().setPID(0, 0, 0);
         gyroControl.setPID(0, 0, 0);
-        System.out.println("[DriveStraight] END");
+        System.out.println("[DriveStraight] END: " + Robot.drivetrain.getEncoderDistance());
         Robot.drivetrain.setRamp(0);
     }
 

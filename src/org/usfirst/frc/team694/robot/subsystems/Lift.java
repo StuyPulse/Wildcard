@@ -110,7 +110,6 @@ public class Lift extends Subsystem {
                         speed = Math.min(speed, maxSpeed);
                     }
                 }
-        System.out.println("Given value: " + maxSpeed + " actual: " + speed);
         moveLift(speed);
     }
 
