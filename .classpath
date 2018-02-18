@@ -10,5 +10,15 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/opencv.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/WPILib.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/ntcore-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/wpiutil-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/ntcore.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/WPILib-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/wpiutil.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/cscore.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/cscore-sources.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/opencv-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
