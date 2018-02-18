@@ -105,6 +105,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        Robot.drivetrain.resetEncoders();
         double timestamp = Timer.getFPGATimestamp();
         while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
             gameData = DriverStation.getInstance().getGameSpecificMessage();
