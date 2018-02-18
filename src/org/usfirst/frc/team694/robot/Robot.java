@@ -8,6 +8,7 @@
 package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -16,6 +17,7 @@ import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,6 +40,8 @@ public class Robot extends IterativeRobot {
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
+    
+    private PowerDistributionPanel pdppanel;
 
     @Override
     public void robotInit() {
@@ -48,19 +52,21 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
 
-        autonChooser.addDefault("Do Nothing", new CommandGroup());
-        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
-        SmartDashboard.putData("Autonomous", autonChooser);
-        
-        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
-        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
-        SmartDashboard.putData("Where is the robot starting?", sideChooser);
-        
-        SmartDashboard.putNumber("Lift P", 0);
-        
-        SmartDashboard.putNumber("RotateDegreesPID P", 0);
-        SmartDashboard.putNumber("RotateDegreesPID I", 0);
-        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+//        pdppanel = new PowerDistributionPanel();
+
+//        autonChooser.addDefault("Do Nothing", new CommandGroup());
+//        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+//        SmartDashboard.putData("Autonomous", autonChooser);
+//        
+//        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+//        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+//        SmartDashboard.putData("Where is the robot starting?", sideChooser);
+//        
+//        SmartDashboard.putNumber("Lift P", 0);
+//        
+//        SmartDashboard.putNumber("RotateDegreesPID P", 0);
+//        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+//        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
 
@@ -134,7 +140,11 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
+        
+        // PDP Panel
+//        SmartDashboard.putData("PDP", pdppanel);
 
         SmartDashboard.putNumber("Lift P", 0);
 
@@ -143,20 +153,28 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveStraight RampSeconds", 0.8);
 
         // Drive Straight Distance PID
-        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0.011);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0.00325);
         SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
-        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.013);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.0);
 
         // Drive Straight Rotation PID
-        SmartDashboard.putNumber("DriveStraightGyroPID P", 0); 
-        SmartDashboard.putNumber("DriveStraightGyroPID I", 0); 
-        SmartDashboard.putNumber("DriveStraightGyroPID D", 0);
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.03); 
+        SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.06);
+
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.0);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0.0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0.0);
+        
 
         SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
         
     }
     
     private void updateSmartDashboard() {
+        
+        //SmartDashboard.putData(pdppanel);
+        
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
         SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());

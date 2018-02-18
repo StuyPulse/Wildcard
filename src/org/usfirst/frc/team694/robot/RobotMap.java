@@ -12,7 +12,7 @@ public final class RobotMap {
      * Robot Dimensions
      */
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
-    public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
+    public static final double LENGTH_OF_BOT = 38; // (not including grabber)
     public static final double WIDTH_OF_BOT = 34.5; //
     public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
     public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
@@ -125,7 +125,8 @@ public final class RobotMap {
      * Quadrants, and each Quadrant passes 256 pulses.
      **/
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
-            (161.5 / 1210.0) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            /*(127.0 / 121.0) * (161.5 / 1210.0) * */
+            (296.0 / 2171.0) *DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
 

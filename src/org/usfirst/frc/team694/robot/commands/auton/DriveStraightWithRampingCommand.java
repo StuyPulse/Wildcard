@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraightWithRampingCommand extends PIDCommand {
     
-    protected static final double DRIVE_DISTANCE_THRESHOLD = 1;
+    private static final double DRIVE_DISTANCE_THRESHOLD = 1;
 
     protected double output;
     protected double targetDistance;
@@ -72,10 +73,10 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 
-        boolean inRange = Math.abs(Robot.drivetrain.getRightEncoderDistance() - targetDistance) <= 1;
+        boolean inRange = isOnTarget();
         //return (Robot.drivetrain.getRightEncoderDistance() > targetDistance && Math.abs(output) < PID_CLOSE_ENOUGH_THRESHOLD);
         if(inRange && !isSet) {
-            System.out.println("[DriveStraight] SET!");
+            System.out.println("[DriveStraight] SET! " + Robot.drivetrain.getEncoderDistance());
             timeFirstInRange = Timer.getFPGATimestamp();
             isSet = true;
         } else if(!inRange){
@@ -99,7 +100,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     @Override
     protected double returnPIDInput() {
         //return Robot.drivetrain.getRightEncoderDistance() + startEncoderValue;
-        return Robot.drivetrain.getRightEncoderDistance();
+        return Robot.drivetrain.getEncoderDistance();
     }
     protected double returnPIDInputGyro() {
         return Robot.drivetrain.getGyroAngle();
@@ -107,10 +108,21 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     @Override
     protected void usePIDOutput(double output) {
         //if (!isFinished()) {
-            Robot.drivetrain.tankDrive(output + DriveStraightWithRampingCommand.angleOutput, output - DriveStraightWithRampingCommand.angleOutput);
-            this.output = output;
+        if (Math.abs(output) < 0.2) {
+            if (isOnTarget())
+                output = 0;
+            else
+                output = 0.2 * Math.signum(output);
+        }
+        Robot.drivetrain.tankDrive(output + DriveStraightWithRampingCommand.angleOutput, output - DriveStraightWithRampingCommand.angleOutput);
+        this.output = output;
         //}
     }
+
+    private boolean isOnTarget() {
+        return Math.abs(Robot.drivetrain.getEncoderDistance() - targetDistance) <= 1;
+    }
+    
     protected class Source implements PIDSource {
         @Override
         public void setPIDSourceType(PIDSourceType pidSource) {

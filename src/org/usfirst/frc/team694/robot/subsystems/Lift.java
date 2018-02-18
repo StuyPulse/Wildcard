@@ -96,20 +96,37 @@ public class Lift extends Subsystem {
         }
     }
 
-    public void move(double maxSpeed) {
+    public void move(double currentSpeed) {
         double currentHeight = getLiftHeight();
-        double speed = maxSpeed;
-                if (maxSpeed < 0) {
-                    if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
-                        speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
-                        speed = Math.max(speed, maxSpeed);
-                    }
-                } else {
-                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
-                        speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
-                        speed = Math.min(speed, maxSpeed);
-                    }
-                }
+//<<<<<<< HEAD
+//        double speed = maxSpeed;
+//                if (maxSpeed < 0) {
+//                    if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
+//                        speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
+//                        speed = Math.max(speed, maxSpeed);
+//                    }
+//                } else {
+//                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
+//                        speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
+//                        speed = Math.min(speed, maxSpeed);
+//                    }
+//                }
+//=======
+        double speed = currentSpeed;
+        if (currentHeight < 0) {
+            speed = Math.max(-RobotMap.LIFT_MIN_SPEED,speed);
+        } else if (currentSpeed < 0) {
+            if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
+                speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
+                speed = Math.max(speed, currentSpeed);
+            }
+        } else {
+            if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
+                speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
+                speed = Math.min(speed, currentSpeed);
+            }
+        }
+//        System.out.println("Given: " + currentSpeed + ", Actual: " + speed);
         moveLift(speed);
     }
 
@@ -166,6 +183,5 @@ public class Lift extends Subsystem {
     public void temporarySetkP(double kP) {
         innerLeftMotor.config_kP(0, kP, 0);
     }
-    
    
 }

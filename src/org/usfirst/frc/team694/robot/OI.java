@@ -21,6 +21,7 @@ import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -40,7 +41,8 @@ public class OI {
         //driverGamepad.getDPadUp().whenPressed(new );
 
         // Distance to our auto line (not accurate to REAL field)
-        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(288));
+//        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(125));
+      driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
 
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
