@@ -124,7 +124,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
-//        SmartDashboard.putNumber("Lift P", 0);
+        SmartDashboard.putNumber("Lift P", 0);
 
         SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
 
