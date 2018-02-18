@@ -10,6 +10,7 @@ public class SpatulaFlipDownIfUpCommand extends ConditionalCommand {
 
     public SpatulaFlipDownIfUpCommand() {
         super(new FlapAndFlipDownCommand());
+        //setInterruptible(false);
     }
 
     @Override

@@ -32,6 +32,8 @@ public class Robot extends IterativeRobot {
     public static Lift lift;
 
     public static OI oi;
+
+    static boolean isRobotAtBottom;
     
     public static boolean isRobotAtRightSideOfDriver;
     
@@ -68,14 +70,12 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RotateDegreesPID I", 0);
         SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
-        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0);
-        SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
-        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0);
+        initSmartDashboard();
 
-        SmartDashboard.putNumber("RampSeconds", 2.5);
     }
     
     public enum WhereTheBotIsInReferenceToDriver {
+
         RIGHT_SIDE_OF_DRIVER,
         LEFT_SIDE_OF_DRIVER
     }
@@ -95,7 +95,7 @@ public class Robot extends IterativeRobot {
         return new FieldMapBlueFarFromScoringTableQuadrant();
 
     }
-    
+
     @Override
     public void disabledInit() {
 
@@ -128,23 +128,74 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        updateSmartDashboard();
     }
 
     @Override
     public void teleopInit() {
+        Robot.drivetrain.resetEncoders(); // TEST
         if (autonCommand != null) {
             autonCommand.cancel();
         }
+
     }
 
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        updateSmartDashboard();
     }
 
+    private void initSmartDashboard() {
+
+        // AUTON CHOOSER
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        SmartDashboard.putData("Autonomous", autonChooser);
+
+        SmartDashboard.putNumber("Lift P", 0);
+
+        SmartDashboard.putBoolean("Is Robot At the Right?", false);
+
+        SmartDashboard.putNumber("DriveStraight RampSeconds", 0.8);
+
+        // Drive Straight Distance PID
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0.011);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.013);
+
+        // Drive Straight Rotation PID
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0); 
+        SmartDashboard.putNumber("DriveStraightGyroPID I", 0); 
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0);
+
+        SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
+        
+    }
+    
+    private void updateSmartDashboard() {
+        SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
+        SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
+        SmartDashboard.putBoolean("Lift: Bottom Limit Switch", Robot.lift.isAtBottom());
+        SmartDashboard.putNumber("Lift Speed", Robot.lift.getSpeed());
+
+        SmartDashboard.putBoolean("Drivetrain: Gear Shift", Robot.drivetrain.isGearShift());
+        SmartDashboard.putNumber("Drivetrain: Left Encoder Values", Robot.drivetrain.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
+
+        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine(0));
+        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
+        SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
+        SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
+        
+        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
+        
+    }
 
     /**
-     * This function is called periodically during test mode.
+     * S This function is called periodically during test mode.
      */
     @Override
     public void testPeriodic() {

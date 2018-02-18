@@ -8,7 +8,7 @@ public class SpatulaFlipUpCommand extends InstantCommand {
 
     public SpatulaFlipUpCommand() {
         super();
-        requires(Robot.spatula);
+        //TESTING: requires(Robot.spatula);
     }
 
     protected void initialize() {

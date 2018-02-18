@@ -42,7 +42,7 @@ public class LineSensor {
 		if ((Math.abs(rawValue - ambientLight)) > Max){//if difference from rug color > maximum deviation, set maximum deviation to current deviation.
 			Max = (Math.abs(rawValue - ambientLight));
 		}
-		System.out.println(Max);
+		//System.out.println(Max);
 		boolean temp = isChangedBefore;//used to make sure that the previous deviation and current deviation are different, as it might just be noise from moving the bot.
 		isChangedBefore = ((Math.abs(rawValue - ambientLight)) < DRIVETRAIN_LINE_SENSOR_THRESHOLD);
 		return (!temp) && ((Math.abs(rawValue - ambientLight)) < DRIVETRAIN_LINE_SENSOR_THRESHOLD);

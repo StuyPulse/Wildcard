@@ -3,17 +3,16 @@ package org.usfirst.frc.team694.robot.commands;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class TimedSpatulaFlipUpCommand extends CommandGroup {
+public class TimedFlapAndFlipToggleCommand extends CommandGroup {
 
-    public TimedSpatulaFlipUpCommand() {
+    public TimedFlapAndFlipToggleCommand() {
         addSequential(new WaitCommand(RobotMap.PRE_FLIP_WAIT_TIME));
-        addSequential(new SpatulaFlipUpCommand());
+        addSequential(new FlapAndFlipUpCommand());
         addSequential(new WaitCommand(RobotMap.POST_FLIP_WAIT_TIME));
     }
 }

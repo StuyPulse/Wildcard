@@ -33,8 +33,8 @@ public final class RobotMap {
     /**************************************************************************
      * Spatula and CrabArm Constants //All times are in seconds
      *************************************************************************/
-    public static final double PRE_FLIP_WAIT_TIME = 2;
-    public static final double POST_FLIP_WAIT_TIME = 2;
+    public static final double PRE_FLIP_WAIT_TIME = 0.25;
+    public static final double POST_FLIP_WAIT_TIME = 0.5;
     public static final double FLAP_OUT_SPEED = 1;
 
     public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = 6;
@@ -66,19 +66,23 @@ public final class RobotMap {
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
     public static final double LIFT_ENCODER_RAW_MULTIPLIER = LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
+    
     public static final double MIN_HEIGHT_OF_LIFT = 23;
     public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
     public static final double LIFT_MAX_SPEED = 1;
+    public static final double LIFT_BRAKE_SPEED = 0.16667;
 
     public static final double LIFT_MIN_SPEED = 0.25;
-    public static final double LIFT_HEIGHT_THRESHOLD = 20.0;
-    public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_HEIGHT_THRESHOLD;
+    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 20.0;
+    public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_RAMP_HEIGHT_THRESHOLD;
     public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
+    public static final double LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD = 2;
+
 
     /***************************************************************************
      * Lift Limit Switch
      *************************************************************************/
-    public static final int LIFT_TOP_LIMIT_SWITCH_PORT = -1;
+    public static final int LIFT_TOP_LIMIT_SWITCH_PORT = 2;
     public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = 0;
 
     /****************************************************************************
@@ -100,13 +104,12 @@ public final class RobotMap {
     public static final int SPATULA_FLIP_DOWN_PORT = 5;
     //    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
 
-    public static final int LIFT_BRAKE_SOLENOID_PORT = -1;
-
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
-    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = -1;
-    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = -1;
+    
+    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = 1;
+    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = 2;
 
     /******************************************************************************
      * Drivetrain Encoder/Movement Constants
@@ -114,7 +117,7 @@ public final class RobotMap {
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6.0;
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
-    public static final double DRIVETRAIN_ENCODERS_FACTOR = 4.0;
+    public static final int DRIVETRAIN_ENCODERS_FACTOR = 4;
     public static final double DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION = Math.PI * DRIVETRAIN_WHEEL_DIAMETER;
 
     /**
@@ -122,8 +125,9 @@ public final class RobotMap {
      * Quadrants, and each Quadrant passes 256 pulses.
      **/
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
-            DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
-            / (DRIVETRAIN_ENCODERS_FACTOR * DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION);
+            (161.5 / 1210.0) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
+
 
     /******************************************************************************
      * Crab Arm Flap Constants

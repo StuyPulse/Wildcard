@@ -1,10 +1,14 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
+import org.usfirst.frc.team694.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class DrivetrainMobilityAutonCommand extends CommandGroup {
+    // TODO: Incorporate with FieldMapQuadrants
+    private static final double MOBILITY_DISTANCE = 120 + RobotMap.LENGTH_OF_BOT + 10;
 
     public DrivetrainMobilityAutonCommand() {
-        addSequential(new DrivetrainMoveToLineCommand(60.0,0.25));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(0.7, MOBILITY_DISTANCE));
     }
 }

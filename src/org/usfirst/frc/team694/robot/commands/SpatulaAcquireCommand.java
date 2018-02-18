@@ -11,6 +11,7 @@ public class SpatulaAcquireCommand extends Command {
     }
     
     protected void initialize() {
+        System.out.println("[SpatulaAcquireCommand] START!");
     }
 
     protected void execute() {
@@ -22,5 +23,7 @@ public class SpatulaAcquireCommand extends Command {
     }
 
     protected void end() {
+        System.out.println("[SpatulaAcquireCommand] STOP!");
+        Robot.spatula.stop();
     }
 }

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team694.robot.commands;
+package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 
@@ -20,15 +20,14 @@ public class DriveStraightPIDCommand extends PIDCommand {
 		Robot.drivetrain.resetGyro();
 		Robot.drivetrain.resetEncoders();
 		this.getPIDController().setPID(
-				SmartDashboard.getNumber("RotateDegreesPID P", 0), 
-				SmartDashboard.getNumber("RotateDegreesPID I", 0), 
-				SmartDashboard.getNumber("RotateDegreesPID D", 0)
+				SmartDashboard.getNumber("DriveStraightPID P", 0), 
+				SmartDashboard.getNumber("DriveStraightPID I", 0), 
+				SmartDashboard.getNumber("DriveStraightPID D", 0)
 				);
 	}
 
 	protected void execute() {
-		System.out.println("[RotateDegreesPIDCommand] angle:" + returnPIDInput());
-		System.out.println("[RotateDegreesPIDCommand] distance:" + Robot.drivetrain.getEncoderDistance());
+		System.out.println("[DriveStraightPIDCommand] angle:" + returnPIDInput());
 	}
 
 	protected boolean isFinished() {

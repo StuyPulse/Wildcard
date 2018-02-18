@@ -30,7 +30,7 @@ public class DrivetrainDriveSystemCommand extends Command {
         //Preliminary Values from the triggers used for Curvature Drive
         double rightTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
-        
+
         //Values Used for Curvature Drive
         double rightTriggerSquared = Math.pow(rightTrigger, 3);
         double leftTriggerSquared = Math.pow(leftTrigger, 3);

@@ -4,17 +4,24 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CrabArmFlapOutCommand extends Command {
+/**
+ *
+ */
+public class SpatulaMoveSpeedCommand extends Command {
 
-    public CrabArmFlapOutCommand() {
-        requires(Robot.crabArm);
+    private double speed;
+    
+    // TESTING ONLY
+    public SpatulaMoveSpeedCommand(double speed) {
+        this.speed = speed;
+        requires(Robot.spatula);
     }
-
+    
     protected void initialize() {
     }
 
     protected void execute() {
-        Robot.crabArm.flapOut();
+        Robot.spatula.acquireSpeed(speed);
     }
 
     protected boolean isFinished() {
@@ -22,6 +29,6 @@ public class CrabArmFlapOutCommand extends Command {
     }
 
     protected void end() {
-        Robot.crabArm.stop();
+        Robot.spatula.stop();
     }
 }

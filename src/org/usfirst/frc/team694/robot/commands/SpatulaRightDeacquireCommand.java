@@ -7,31 +7,31 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DrivetrainLineSensorCommand extends Command {
-    private double offset;
+public class SpatulaRightDeacquireCommand extends Command {
 
-    public DrivetrainLineSensorCommand(double offset) {
-        this.offset = offset;
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public SpatulaRightDeacquireCommand() {
+        requires(Robot.spatula);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println("SPATULA RIGHT DEACQUIRE START");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        Robot.spatula.rightSpatulaDeacquire();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.drivetrain.isOnLine();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        Robot.drivetrain.setEncoders(offset);
+        Robot.spatula.stop();
+        System.out.println("SPATULA RIGHT DEACQUIRE STOP");
     }
 
     // Called when another command which requires one or more of the same

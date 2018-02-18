@@ -15,7 +15,7 @@ public class LiftMoveToHeightCommand extends Command {
         this.targetHeight = height;
         Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
-    
+
     protected void initialize() {
     }
 
@@ -24,7 +24,7 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD) 
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD) 
                 || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
                 || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
     }

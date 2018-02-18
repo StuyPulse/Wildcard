@@ -7,10 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftMoveToBottomCommand extends Command {
+public class LiftMoveSpeedCommand extends Command {
+    double speed;
 
-    public LiftMoveToBottomCommand() {
+    public LiftMoveSpeedCommand(double speed) {
         requires(Robot.lift);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -19,17 +21,16 @@ public class LiftMoveToBottomCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.lift.move(-1);
+        Robot.lift.move(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.lift.isAtBottom();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        System.out.println("[LiftMoveToBottom] DONE");
         Robot.lift.stop();
     }
 
