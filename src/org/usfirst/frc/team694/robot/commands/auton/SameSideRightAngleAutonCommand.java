@@ -1,31 +1,29 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
+
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *
- */
-
-@Deprecated
 public class SameSideRightAngleAutonCommand extends CommandGroup {
-    public static FieldMapInterface Quad = Robot.getRobotQuadrant();
-    public double speed = 0.5;
-    public SameSideRightAngleAutonCommand() {
+    private FieldMapInterface quad = Robot.getRobotQuadrant();
 
-//        addSequential(new DrivetrainMoveToLineCommand(speed, FieldMapInterface.DISTANCE_FROM_LINE_SENSOR_TO_AUTO_LINE));
-//        addSequential(new DrivetrainMoveToLineCommand(speed, FieldMap.DISTANCE_FROM_NULL_BUMP_TO_AUTO_LINE));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, FieldMapInterface.DISTANCE_TO_MOVE_INTO_NULL_BUMP));
-//        addSequential(new DrivetrainRotateDegreesPIDCommand(-90));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(-1 * speed, FieldMap.DISTANCE_TO_TRAVEL_BACKWARDS));
-//        addSequential(new LiftMoveToHeightCommand(84)); //unsure about this height
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(speed, FieldMap.DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE));
-//        addSequential(new GrabberOpenCommand());
+    public SameSideRightAngleAutonCommand() {
+        addParallel(new DrivetrainLineSensorReachNullCommand());
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceFromFrontOfBotToNullBump()));
+      
+        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        
+        addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToMoveBackward()));
+        
+        addSequential(new LiftMoveToHeightCommand(84)); //Unsure about height
+        
+        addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToReachScaleEdge())); 
+        
+        addSequential(new GrabberOpenCommand());
+
     }
 }
