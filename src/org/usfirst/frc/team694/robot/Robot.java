@@ -80,7 +80,9 @@ public class Robot extends IterativeRobot {
 
     //Bottom means side closer to the scoring table
     public static FieldMapInterface getRobotQuadrant() {
-        isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
+        // TESTING ONLY
+        return new FieldMapRedFarFromScoringTableQuadrant();
+        /*isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
             if(isRobotOnRight) {
                 return new FieldMapRedFarFromScoringTableQuadrant(); 
@@ -91,7 +93,7 @@ public class Robot extends IterativeRobot {
             return new FieldMapBlueNearScoringTableQuadrant();
         }
         return new FieldMapBlueFarFromScoringTableQuadrant();
-
+        */
     }
 
     @Override
@@ -146,7 +148,7 @@ public class Robot extends IterativeRobot {
         // PDP Panel
 //        SmartDashboard.putData("PDP", pdppanel);
 
-        SmartDashboard.putNumber("Lift P", 0);
+        SmartDashboard.putNumber("Lift P", 0.3);
 
         SmartDashboard.putBoolean("Is Robot At the Right?", false);
 
@@ -162,9 +164,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
         SmartDashboard.putNumber("DriveStraightGyroPID D", 0.06);
 
-        SmartDashboard.putNumber("RotateDegreesPID P", 0.06);
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.035);
         SmartDashboard.putNumber("RotateDegreesPID I", 0.01);
-        SmartDashboard.putNumber("RotateDegreesPID D", 0.1);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0.3);
+
+        SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.8);
         
 
         SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
@@ -172,9 +176,9 @@ public class Robot extends IterativeRobot {
     }
     
     private void updateSmartDashboard() {
-        
-        //SmartDashboard.putData(pdppanel);
-        
+
+//        SmartDashboard.putData(pdppanel);
+
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
         SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());

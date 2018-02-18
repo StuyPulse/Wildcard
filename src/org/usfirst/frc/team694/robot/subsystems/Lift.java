@@ -92,7 +92,7 @@ public class Lift extends Subsystem {
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
-            innerLeftMotor.set(speed); 
+            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
         }
     }
 
@@ -135,7 +135,7 @@ public class Lift extends Subsystem {
     }
 
     public void stop() {
-        innerLeftMotor.set(0);
+        innerLeftMotor.set(ControlMode.PercentOutput, 0);
         setBrakeOn();
     }
 
@@ -161,11 +161,11 @@ public class Lift extends Subsystem {
     }
 
     public double getLeftEncoderDistance() {
-        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER / 4.4;
+        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getRightEncoderDistance() {
-        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER / 4.4;
+        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getLiftHeight() {
@@ -173,7 +173,7 @@ public class Lift extends Subsystem {
     }
     
     public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height);
+        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
     
     public double getMotorVelocity() {

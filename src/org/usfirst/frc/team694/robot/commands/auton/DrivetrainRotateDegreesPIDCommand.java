@@ -13,6 +13,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     public double targetAngle;
     private boolean isSet = false;
 
+    private double lastTimeNotOnTarget;
+
     public DrivetrainRotateDegreesPIDCommand(double targetAngle) {
         super(0.008, 0, 0);
         this.targetAngle = targetAngle;
@@ -24,6 +26,9 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     protected void initialize() {
 	    System.out.println("[RotatePID] START");
 		Robot.drivetrain.resetGyro();
+		Robot.drivetrain.lowGearShift();
+		Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
+		lastTimeNotOnTarget = Timer.getFPGATimestamp();
 		this.getPIDController().setPID(
 				SmartDashboard.getNumber("RotateDegreesPID P", 0.03), 
     			0, 
@@ -33,8 +38,7 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        System.out.println("[RotateDegreesPIDCommand] angle:" + returnPIDInput() + " " + isSet);
-        if (Robot.drivetrain.getGyroAngle() >= targetAngle - 5 && !isSet) {
+        if (Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) < 10 && !isSet) {
             isSet = true;
             this.getPIDController().reset();
             this.getPIDController().enable();
@@ -42,25 +46,26 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
                     SmartDashboard.getNumber("RotateDegreesPID I", 0.001),
                     SmartDashboard.getNumber("RotateDegreesPID D", 0.06));
         }
+        if (!onTarget()) {
+            lastTimeNotOnTarget = Timer.getFPGATimestamp();
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) <= (targetAngle * (-1.0 / 180)) + 1.5;
+        return onTarget() && Timer.getFPGATimestamp() - lastTimeNotOnTarget > 1;
     }
 
     // Called once after isFinished returns true
     protected void end() {
         Robot.drivetrain.tankDrive(0, 0);
+        Robot.drivetrain.highGearShift();
+        Robot.drivetrain.setRamp(0);
         System.out.println("[RotatePID] END");
-        Timer.delay(1);
+//        Timer.delay(1);
         System.out.println(Robot.drivetrain.getGyroAngle());
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
 
     @Override
     protected double returnPIDInput() {
@@ -70,7 +75,15 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
+        if (Math.abs(output) < 0.25) {
+            output = 0.25 * Math.signum(output);
+        }
+        System.out.println("out: " + output);
         Robot.drivetrain.tankDrive(output, -output);
+    }
+
+    private boolean onTarget() {
+        return Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) <= (targetAngle * (-1.0 / 180)) + 2.5;
     }
 
 }
