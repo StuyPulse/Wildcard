@@ -16,6 +16,7 @@ import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -107,8 +108,11 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        gameData = DriverStation.getInstance().getGameSpecificMessage();
-        if(gameData == null) {//If there is no field data run mobility
+        double timestamp = Timer.getFPGATimestamp();
+        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+            gameData = DriverStation.getInstance().getGameSpecificMessage();
+        }
+        if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
             autonCommand = new MobilityAutonUsingEncodersCommand();
             System.out.println("******* Field Data problem");
         }else {
@@ -116,7 +120,6 @@ public class Robot extends IterativeRobot {
             isScaleRight = gameData.charAt(1) == 'R';
             autonCommand = autonChooser.getSelected();
         }
-
         if (autonCommand != null) {
             autonCommand.start();
         }
