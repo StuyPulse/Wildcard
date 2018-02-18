@@ -2,25 +2,14 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */
-public class CrabArrowAcquireUntilAcquiredCommand extends Command {
+public class CrabArrowAcquireUntilAcquiredCommand extends CrabArrowAcquireCommand {
 
-    public CrabArrowAcquireUntilAcquiredCommand() {
-    }
-
-    protected void execute() {
-        new CrabArrowAcquireCommand();
-    }
-
+    @Override
     protected boolean isFinished() {
         return Robot.spatula.isCubeDetected();
     }
 
-    protected void end() {
-        new CrabArrowStopCommand();
-    }
 }

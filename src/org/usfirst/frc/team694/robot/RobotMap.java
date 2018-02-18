@@ -70,7 +70,7 @@ public final class RobotMap {
     public static final double MIN_HEIGHT_OF_LIFT = 23;
     public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
     public static final double LIFT_MAX_SPEED = 1;
-    public static final double LIFT_BRAKE_SPEED = 0.16667;
+    public static final double LIFT_BACKDRIVE_SPEED = 0.16667;
 
     public static final double LIFT_MIN_SPEED = 0.25;
     public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 20.0;

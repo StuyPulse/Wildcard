@@ -12,7 +12,6 @@ import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
-import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
@@ -51,20 +50,16 @@ public class OI {
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
         operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
-        operatorGamepad.getRightTrigger().whileHeld(new CrabArrowAcquireCommand());
+        operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
         
         operatorGamepad.getLeftBumper().whileHeld(new SpatulaRightDeacquireCommand());
         operatorGamepad.getRightBumper().whileHeld(new SpatulaLeftDeacquireCommand());
-        
-        //this speed lets the robot "brake" when it's at its desired height
-//        operatorGamepad.getDPadUp().whileHeld(new LiftMoveSpeedCommand(0.16667));
-//        operatorGamepad.getDPadDown().whileHeld(new LiftMoveSpeedCommand(-0.16667));
 
         operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
         operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());
 
         // TODO: This should probably be a separate command
-        operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(RobotMap.LIFT_BRAKE_SPEED));
+        operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
         
     }
 }
