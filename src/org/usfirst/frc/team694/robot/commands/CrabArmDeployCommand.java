@@ -13,24 +13,29 @@ public class CrabArmDeployCommand extends Command {
         requires(Robot.crabArm);
     }
 
+    @Override
     protected void initialize() {
         //TODO: Figure out how long we want to run the spatula
         setTimeout(4);
     }
 
+    @Override
     protected void execute() {
         //TODO: Figure out what direction the crabArms should run to deploy
         Robot.crabArm.acquire();
     }
 
+    @Override
     protected boolean isFinished() {
         return isTimedOut();
     }
 
+    @Override
     protected void end() {
         Robot.crabArm.stop();
     }
 
+    @Override
     protected void interrupted() {
     }
 }

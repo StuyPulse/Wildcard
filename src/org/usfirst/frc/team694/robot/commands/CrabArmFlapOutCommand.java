@@ -10,17 +10,21 @@ public class CrabArmFlapOutCommand extends Command {
         requires(Robot.crabArm);
     }
 
+    @Override
     protected void initialize() {
     }
 
+    @Override
     protected void execute() {
         Robot.crabArm.flapOut();
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
         Robot.crabArm.stop();
     }

@@ -10,6 +10,7 @@ public class BITCOINAutomationOffCommand extends InstantCommand {
         super();
     }
 
+    @Override
     protected void initialize() {
         Robot.spatula.isBITCOINAutomation = false;
     }

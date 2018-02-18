@@ -16,11 +16,13 @@ public class DrivetrainMoveToLineCommandDEP extends Command {
 
     }
 
+    @Override
     protected void initialize() {
         Robot.drivetrain.resetEncoders();
         //Robot.drivetrain.resetLineSensors();
     }
 
+    @Override
     protected void execute() {
         //Robot.drivetrain.updateSensors();
         Robot.drivetrain.tankDrive(speed, speed);
@@ -28,14 +30,17 @@ public class DrivetrainMoveToLineCommandDEP extends Command {
 
     }
 
+    @Override
     protected boolean isFinished() {
         return isReached || (Robot.drivetrain.getEncoderDistance() > distance);
     }
 
+    @Override
     protected void end() {
         Robot.drivetrain.resetEncoders();
     }
 
+    @Override
     protected void interrupted() {
     }
 }

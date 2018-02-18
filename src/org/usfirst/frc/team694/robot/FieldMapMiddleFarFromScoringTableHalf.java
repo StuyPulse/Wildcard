@@ -12,6 +12,7 @@ public abstract class FieldMapMiddleFarFromScoringTableHalf implements FieldMapI
     //all measurements are in inches or degrees if specified 
     //anything with // could be changed due to the actual field measure  
     //These are the measurements that need to be measured out before match.
+    @Override
     public double getDistanceFromBorderToScaleEdge() {
         return MIDDLE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SCALE_EDGE;
     }

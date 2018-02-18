@@ -33,6 +33,7 @@ public class Spatula extends Subsystem {
         this.spatulaRunning = status;
     }
 
+    @Override
     public void initDefaultCommand() {
         setDefaultCommand(new SpatulaStopCommand());
     }

@@ -9,6 +9,7 @@ public class BITCOINAutomationOnCommand extends InstantCommand {
         super();
     }
 
+    @Override
     protected void initialize() {
         Robot.spatula.isBITCOINAutomation = true;
     }

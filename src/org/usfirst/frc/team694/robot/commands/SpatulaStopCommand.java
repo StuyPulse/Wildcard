@@ -14,6 +14,7 @@ public class SpatulaStopCommand extends InstantCommand {
     }
 
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
         Robot.spatula.stop();
     }

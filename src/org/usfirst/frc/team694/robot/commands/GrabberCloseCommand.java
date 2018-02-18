@@ -10,6 +10,7 @@ public class GrabberCloseCommand extends InstantCommand {
         requires(Robot.grabber);
     }
 
+    @Override
     protected void initialize() {
         Robot.grabber.close();
     }

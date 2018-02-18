@@ -11,6 +11,7 @@ public class SpatulaFlipUpCommand extends InstantCommand {
         //TESTING: requires(Robot.spatula);
     }
 
+    @Override
     protected void initialize() {
         Robot.spatula.flipUp();
     }

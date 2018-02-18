@@ -16,19 +16,23 @@ public class LiftMoveToHeightCommand extends Command {
         Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
 
+    @Override
     protected void initialize() {
     }
 
+    @Override
     protected void execute() {
         Robot.lift.setHeight(targetHeight);
     }
 
+    @Override
     protected boolean isFinished() {
         return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD) 
                 || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
                 || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
     }
 
+    @Override
     protected void end() {
         Robot.lift.stop();
     }

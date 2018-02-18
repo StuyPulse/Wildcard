@@ -9,6 +9,7 @@ public class CrabArmStopCommand extends InstantCommand {
         requires(Robot.crabArm);
     }
     
+    @Override
     protected void initialize() {
         Robot.crabArm.stop();
     }
