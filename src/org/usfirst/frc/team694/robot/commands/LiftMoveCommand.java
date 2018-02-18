@@ -11,16 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class LiftMoveCommand extends Command {
 
-    private double currentHeight;
-
     public LiftMoveCommand() {
         requires(Robot.lift);
         //requires(Robot.spatula);
     }
 
     protected void initialize() {
-        // Testing only
-        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
     
     protected void execute() {
@@ -31,14 +27,8 @@ public class LiftMoveCommand extends Command {
          //   Robot.spatula.acquireSpeed(-liftSquared * 0.2);
         //}
         
-        if (Math.abs(liftControl) > RobotMap.LIFT_JOYSTICK_MOVE_THRESHOLD ) {
-            Robot.lift.move(liftSquared);
-            currentHeight = Robot.lift.getLiftHeight();
-            //TODO: see whether Coby wants cubed or squared inputs on the lift.
-        } else {
-            Robot.lift.setHeight(currentHeight);
-        }
-        
+        Robot.lift.move(liftSquared);
+        //TODO: see whether Coby wants cubed or squared inputs on the lift.
     }
 
     protected boolean isFinished() {
