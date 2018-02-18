@@ -18,7 +18,5 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainRotateDegreesPIDCommand(-90)); //TODO: Make another magic number in FieldMap
         
         addSequential(new DriveStraightWithRampingCommand(-46.94)); //TODO: Make yet another magic number in FieldMap
-        
-        
     }
 }
