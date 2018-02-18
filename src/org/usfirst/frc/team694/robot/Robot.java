@@ -16,6 +16,7 @@ import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -34,7 +35,12 @@ public class Robot extends IterativeRobot {
 
     static boolean isRobotAtBottom;
     
+    private String gameData; 
     public static boolean isRobotOnRight;
+    
+    private static boolean isAllianceSwitchRight; 
+    private static boolean isScaleRight; 
+    
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
@@ -63,7 +69,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
-
     }
     
     public enum WhereTheBotIsInReferenceToDriver {
@@ -100,8 +105,18 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        Robot.drivetrain.resetEncoders(); // TEST
-        autonCommand = autonChooser.getSelected();
+        double timestamp = Timer.getFPGATimestamp();
+        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+            gameData = DriverStation.getInstance().getGameSpecificMessage();
+        }
+        if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
+            autonCommand = new MobilityAutonUsingEncodersCommand();
+            System.out.println("******* Field Data problem");
+        }else {
+            isAllianceSwitchRight = gameData.charAt(0) == 'R';
+            isScaleRight = gameData.charAt(1) == 'R';
+            autonCommand = autonChooser.getSelected();
+        }
 
         if (autonCommand != null) {
             autonCommand.start();
@@ -184,4 +199,15 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     }
 
+    public static boolean getSwitchLocation() {
+        return (isAllianceSwitchRight && isRobotOnRight) || (!isAllianceSwitchRight && !isRobotOnRight);
+        //true is switch is close to robot
+        //false is switch is far away robot
+    }
+    
+    public static boolean getScaleLocation() {
+        return (isScaleRight && isRobotOnRight) || (!isScaleRight && !isRobotOnRight);
+        //true is scale is close to robot 
+        //false is scale is far away from robot 
+    }
 }
