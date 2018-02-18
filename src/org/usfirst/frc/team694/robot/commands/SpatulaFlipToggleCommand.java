@@ -15,6 +15,7 @@ public class SpatulaFlipToggleCommand extends InstantCommand {
         
     }
     
+    @Override
     protected void initialize() {
         Robot.spatula.toggle();
     }

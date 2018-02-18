@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -56,10 +55,12 @@ public class Lift extends Subsystem {
 
     }
 
+    @Override
     public void initDefaultCommand() {
         setDefaultCommand(new LiftMoveCommand());
     }
 
+    @Override
     public void periodic() {
         if (isAtBottom()) {
             resetEncoders();

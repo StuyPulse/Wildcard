@@ -12,14 +12,17 @@ public class CrabArrowAcquireUntilAcquiredCommand extends Command {
     public CrabArrowAcquireUntilAcquiredCommand() {
     }
 
+    @Override
     protected void execute() {
         new CrabArrowAcquireCommand();
     }
 
+    @Override
     protected boolean isFinished() {
         return Robot.spatula.isCubeDetected();
     }
 
+    @Override
     protected void end() {
         new CrabArrowStopCommand();
     }

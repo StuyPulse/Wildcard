@@ -29,6 +29,7 @@ public class BITCOINCommand extends CommandGroup {
         //addSequential(new LiftMoveSpeedCommand(0.4), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);
     }
     
+    @Override
     public boolean isFinished() {
         return false;
    }

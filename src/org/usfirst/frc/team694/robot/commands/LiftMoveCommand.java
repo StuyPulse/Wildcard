@@ -1,10 +1,8 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -16,9 +14,11 @@ public class LiftMoveCommand extends Command {
         //requires(Robot.spatula);
     }
 
+    @Override
     protected void initialize() {
     }
     
+    @Override
     protected void execute() {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
@@ -31,10 +31,12 @@ public class LiftMoveCommand extends Command {
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
     }
 }

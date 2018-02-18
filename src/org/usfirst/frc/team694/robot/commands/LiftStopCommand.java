@@ -11,6 +11,7 @@ public class LiftStopCommand extends InstantCommand {
         requires(Robot.lift);
     }
 
+    @Override
     protected void initialize() {
         Robot.lift.stop();
     }

@@ -46,6 +46,7 @@ public class CrabArm extends Subsystem {
         crabArmMotors.set(0);
     }
 
+    @Override
     public void initDefaultCommand() {
         setDefaultCommand(new CrabArmStopCommand());
     }

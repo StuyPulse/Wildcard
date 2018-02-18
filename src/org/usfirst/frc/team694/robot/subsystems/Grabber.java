@@ -3,7 +3,6 @@ package org.usfirst.frc.team694.robot.subsystems;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Grabber extends Subsystem {
@@ -14,6 +13,7 @@ public class Grabber extends Subsystem {
         grabberSolenoid = new DoubleSolenoid(RobotMap.GRABBER_SOLENOID_OPEN_PORT, RobotMap.GRABBER_SOLENOID_CLOSE_PORT);
     }
 
+    @Override
     public void initDefaultCommand() {
     }
 

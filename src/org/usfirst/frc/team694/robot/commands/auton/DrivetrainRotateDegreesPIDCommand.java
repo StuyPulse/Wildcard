@@ -20,7 +20,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 	}
 
 	// Called just before this Command runs the first time
-	protected void initialize() {
+	@Override
+    protected void initialize() {
 		Robot.drivetrain.resetGyro();
 		this.getPIDController().setPID(
 				SmartDashboard.getNumber("RotateDegreesPID P", 0.03), 
@@ -30,7 +31,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
+	@Override
+    protected void execute() {
 		System.out.println("[RotateDegreesPIDCommand] angle:" + returnPIDInput() + " " + isSet);
 		if(Robot.drivetrain.getGyroAngle() >= targetAngle - 5 && !isSet) {
 			isSet = true;
@@ -45,12 +47,14 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() {  
+	@Override
+    protected boolean isFinished() {  
 		return Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) <= (targetAngle * (-1.0/180)) + 1.5;
 	}
 
 	// Called once after isFinished returns true
-	protected void end() {
+	@Override
+    protected void end() {
 		Robot.drivetrain.tankDrive(0, 0);
 		System.out.println("END");
 		Timer.delay(1);
@@ -59,7 +63,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
-	protected void interrupted() {
+	@Override
+    protected void interrupted() {
 	}
 
 	@Override

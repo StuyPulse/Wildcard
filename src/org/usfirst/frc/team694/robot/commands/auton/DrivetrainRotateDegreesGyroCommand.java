@@ -16,11 +16,13 @@ public class DrivetrainRotateDegreesGyroCommand extends Command {
         targetAngle = degrees;
     }
 
+    @Override
     protected void initialize() {
         Robot.drivetrain.resetGyro();
         SmartDashboard.getNumber("Target Angle", 0);
     }
 
+    @Override
     protected void execute() {
         Robot.drivetrain.arcadeDrive(0, Math.signum(gyroAngle) * .5);
         gyroAngle = Robot.drivetrain.getGyroAngle();
@@ -31,14 +33,17 @@ public class DrivetrainRotateDegreesGyroCommand extends Command {
         }
     } 
 
+    @Override
     protected boolean isFinished() {
         return targetReached;
     }
 
+    @Override
     protected void end() {
         Robot.drivetrain.resetGyro();
     }
 
+    @Override
     protected void interrupted() {
     }
 }

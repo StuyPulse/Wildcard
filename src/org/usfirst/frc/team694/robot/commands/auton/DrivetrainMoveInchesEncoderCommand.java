@@ -14,18 +14,22 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
         this.distance = distance;
     }
 
+    @Override
     protected void initialize() {
         Robot.drivetrain.resetEncoders();
     }
 
+    @Override
     protected void execute() {
         Robot.drivetrain.tankDrive(speed, speed);
     }
 
+    @Override
     protected boolean isFinished() {
         return Math.abs(Robot.drivetrain.getEncoderDistance()) >= distance;
     }
 
+    @Override
     protected void end() {
         Robot.drivetrain.stop();
     }

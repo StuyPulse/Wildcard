@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -37,6 +38,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() { 
         Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetGyro();
@@ -63,6 +65,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
         //System.out.println("[DriveDistanceEncodersCommand] distance left:" + (targetDistance - Robot.drivetrain.getEncoderDistance()));
         SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
@@ -70,6 +73,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
 
         boolean inRange = Math.abs(Robot.drivetrain.getRightEncoderDistance() - targetDistance) <= 1;
@@ -85,6 +89,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 
     // Called once after isFinished returns true
+    @Override
     protected void end() {
         Robot.drivetrain.tankDrive(0, 0);
         gyroControl.disable();
