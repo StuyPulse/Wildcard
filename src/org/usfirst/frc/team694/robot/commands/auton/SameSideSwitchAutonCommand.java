@@ -2,6 +2,7 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,5 +16,9 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainRotateDegreesPIDCommand(-90)); //TODO: Make another magic number in FieldMap
         
         addSequential(new DriveStraightWithRampingCommand(-46.94)); //TODO: Make yet another magic number in FieldMap
+        
+        addSequential(new DriveStraightWithRampingCommand(85.25)); //TODO: Another magic number
+        
+        addSequential(new GrabberOpenCommand());
     }
 }
