@@ -34,9 +34,10 @@ public class Robot extends IterativeRobot {
 
     static boolean isRobotAtBottom;
     
-    public static boolean isRobotAtRightSideOfDriver;
+    public static boolean isRobotOnRight;
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
+    private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
 
     @Override
     public void robotInit() {
@@ -47,32 +48,43 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
 
-        Robot.drivetrain.resetEncoders();
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        SmartDashboard.putData("Autonomous", autonChooser);
+        
+        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+        SmartDashboard.putData("Where is the robot starting?", sideChooser);
+        
+        SmartDashboard.putNumber("Lift P", 0);
+        
+        SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
 
-        if(isRobotAtRightSideOfDriver == true) {
-             
-        }
     }
+    
+    public enum WhereTheBotIsInReferenceToDriver {
 
-    public enum whereTheBotIsInReferenceToDriver{
         RIGHT_SIDE_OF_DRIVER,
         LEFT_SIDE_OF_DRIVER
     }
 
     //Bottom means side closer to the scoring table
     public static FieldMapInterface getRobotQuadrant() {
+        isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
         if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            if(isRobotAtRightSideOfDriver) {
+            if(isRobotOnRight) {
                 return new FieldMapRedFarFromScoringTableQuadrant(); 
             }
-            return new FieldMapRedFarFromScoringTableQuadrant();      
+            return new FieldMapRedNearScoringTableQuadrant();      
         }
-        if(isRobotAtRightSideOfDriver) {
+        if(isRobotOnRight) {
             return new FieldMapBlueNearScoringTableQuadrant();
         }
-        return new FieldMapBlueNearScoringTableQuadrant();
+        return new FieldMapBlueFarFromScoringTableQuadrant();
 
     }
 
@@ -124,9 +136,9 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
-//        SmartDashboard.putNumber("Lift P", 0);
+        SmartDashboard.putNumber("Lift P", 0);
 
-        SmartDashboard.putBoolean("Is Robot At the Right?", isRobotAtRightSideOfDriver);
+        SmartDashboard.putBoolean("Is Robot At the Right?", false);
 
         SmartDashboard.putNumber("DriveStraight RampSeconds", 0.8);
 

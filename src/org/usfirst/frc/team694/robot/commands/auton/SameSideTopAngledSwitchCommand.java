@@ -2,7 +2,6 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.commands.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipDownCommand;
 

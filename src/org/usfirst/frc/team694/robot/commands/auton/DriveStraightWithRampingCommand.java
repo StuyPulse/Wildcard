@@ -1,4 +1,4 @@
-package org.usfirst.frc.team694.robot.commands;
+package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.PIDController;
@@ -65,13 +65,6 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         //System.out.println("[DriveDistanceEncodersCommand] distance left:" + (targetDistance - Robot.drivetrain.getEncoderDistance()));
-        //System.out.println("hey exec");
-        //SmartDashboard.putNumber("Velocity", Robot.drivetrain.getEncoderVelocity());
-        SmartDashboard.putNumber("Output", output);
-        SmartDashboard.putNumber("Angle", Robot.drivetrain.getGyroAngle());
-        SmartDashboard.putNumber("Angle Output", angleOutput);
-        SmartDashboard.putNumber("StartEncoderValue", startEncoderValue);
-
         SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
         //System.out.println(angleOutput);
     }
@@ -141,6 +134,5 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 }
 
-//Values: For a distance of 170, a P of 0.016, and a D of 0.03
-//For a distance of 290, a P of 0.016 and a D of 0.03
+// P of 0.006, and a D of 0.03
 //For turning, make it 0.04

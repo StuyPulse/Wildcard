@@ -4,6 +4,7 @@ import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,6 +18,11 @@ public class LiftMoveCommand extends Command {
         //requires(Robot.spatula);
     }
 
+    protected void initialize() {
+        // Testing only
+        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
+    }
+    
     protected void execute() {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);

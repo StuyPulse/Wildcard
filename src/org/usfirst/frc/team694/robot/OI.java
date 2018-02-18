@@ -12,7 +12,6 @@ import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
-import org.usfirst.frc.team694.robot.commands.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
@@ -21,6 +20,7 @@ import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
