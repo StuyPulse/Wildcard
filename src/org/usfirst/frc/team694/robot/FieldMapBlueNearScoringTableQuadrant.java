@@ -120,7 +120,7 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_PLATFORM_EDGE = 261.47; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SCALE_SIDE = 299.65; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE = 95.25; //
-    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69; //
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT = 29.69 + 12.0; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE = 140.0; //
 
     //**************************************************************************************************************

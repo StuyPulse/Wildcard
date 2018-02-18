@@ -11,16 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class LiftMoveCommand extends Command {
 
-    private double currentHeight;
-
     public LiftMoveCommand() {
         requires(Robot.lift);
         //requires(Robot.spatula);
     }
 
     protected void initialize() {
-        // Testing only
-        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
     
     protected void execute() {
