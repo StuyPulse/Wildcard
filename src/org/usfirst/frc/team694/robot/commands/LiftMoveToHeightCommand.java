@@ -4,7 +4,6 @@ import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LiftMoveToHeightCommand extends Command {
     private double targetHeight;
@@ -13,7 +12,6 @@ public class LiftMoveToHeightCommand extends Command {
     public LiftMoveToHeightCommand(double height) {
         requires(Robot.lift);
         this.targetHeight = height;
-        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
 
     protected void initialize() {
