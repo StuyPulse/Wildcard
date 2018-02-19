@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class SameSideScaleAutonCommand extends CommandGroup {
 
-    private static final double DISTANCE_TOTAL = 283;
+    private static final double DISTANCE_TOTAL = 293;
 
     public SameSideScaleAutonCommand() {
         DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
         // Uncomment for no ramp down:
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
 
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -30));
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 80, 0));
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -45));
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 120, 30));
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
         addSequential(rampCommand);
 
