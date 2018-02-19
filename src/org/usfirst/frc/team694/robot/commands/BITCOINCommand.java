@@ -1,4 +1,6 @@
 package org.usfirst.frc.team694.robot.commands;
+
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -8,13 +10,16 @@ public class BITCOINCommand extends CommandGroup {
 
     // Once we get the cube in the grabber, 
     private static final double SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING = 0.6;
+    private boolean initialBITCOINAutomation = Robot.spatula.isBITCOINAutomation;
 
     public BITCOINCommand() {
+        
+        setInterruptible(false);
+        
         // Get the cube in the grabber
         addSequential(new LiftMoveToBottomCommand());
         addSequential(new GrabberOpenCommand());
 
-        
         addParallel(new SpatulaDeacquireCommand(), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME);
         addSequential(new FlapAndFlipUpCommand());
 
@@ -28,8 +33,15 @@ public class BITCOINCommand extends CommandGroup {
         //addParallel(new SpatulaMoveSpeedCommand(-0.4 / 5.0), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);
         //addSequential(new LiftMoveSpeedCommand(0.4), SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING);
     }
-    
+
+    @Override
     public boolean isFinished() {
-        return false;
-   }
+        return Robot.spatula.isBITCOINAutomation != initialBITCOINAutomation ||
+                super.isFinished();
+    }
+
+    @Override
+    public void cancel() {
+        
+    }
 }
