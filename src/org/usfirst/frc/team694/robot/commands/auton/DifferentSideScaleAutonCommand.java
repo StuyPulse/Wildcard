@@ -3,6 +3,7 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
@@ -11,21 +12,28 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DifferentSideScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
-    public DifferentSideScaleAutonCommand() {  
-        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn()));
-        
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachPlatformZone()));
+    public DifferentSideScaleAutonCommand() {
+        //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
+        addParallel(new DrivetrainRampSwerveCommand(
+                quad.getTotalDistanceToTravelBeforeTurn() + quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone() + 15,
+                quad.getTotalDistanceToTravelBeforeTurn(),
+                -90
+                ));
+        /*
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3));
+         
 
-        addParallel(new DrivetrainLineSensorPlatformZoneCommand());
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()));
-        
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleSide()));
+        addSequential(new DrivetrainRotateDegreesPIDCommand(-1 * quad.getAngleToTurnToReachPlatformZone()));
 
-        addSequential(new LiftMoveToHeightCommand(84));//unsure about height
+        //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone() + 15));
+        */
+        addSequential(new DrivetrainRotateDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()));
 
-        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachScaleSide()));
+        addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
+
+        //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        addSequential(new DriveStraightWithRampingCommand(53));//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
 
         addSequential(new GrabberOpenCommand());
 
