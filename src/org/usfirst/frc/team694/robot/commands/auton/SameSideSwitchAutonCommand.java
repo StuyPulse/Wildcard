@@ -12,14 +12,10 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
     
     public SameSideSwitchAutonCommand() {
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToDriveForwardToReachSwitch()));
-        
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleEdge()));
-               
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToDriveForwardToReachSwitch()));        
+        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleEdge()));       
         addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToDriveForwardIntoSwitchEdge()));
-        
         addSequential(new GrabberOpenCommand());
-        
         addSequential(new SpatulaDeacquireCommand());
     }
 }

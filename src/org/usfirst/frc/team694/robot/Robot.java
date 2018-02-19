@@ -69,6 +69,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
+        Robot.drivetrain.resetEncoders();
     }
     
     public enum WhereTheBotIsInReferenceToDriver {
@@ -105,7 +106,6 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        Robot.drivetrain.resetEncoders();
         double timestamp = Timer.getFPGATimestamp();
         while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
             gameData = DriverStation.getInstance().getGameSpecificMessage();
