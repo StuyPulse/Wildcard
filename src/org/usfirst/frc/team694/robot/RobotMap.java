@@ -16,7 +16,7 @@ public final class RobotMap {
     public static final double WIDTH_OF_BOT = 34.5; //
     public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
     public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
-    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (LENGTH_OF_BOT / WIDTH_OF_BOT) / 2;
+    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (LENGTH_OF_BOT - WIDTH_OF_BOT) / 2;
     /**************************************************************************
      * Gamepad Ports
      *************************************************************************/

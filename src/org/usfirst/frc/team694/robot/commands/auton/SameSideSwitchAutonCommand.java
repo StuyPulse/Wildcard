@@ -3,6 +3,7 @@ package org.usfirst.frc.team694.robot.commands.auton;
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -11,14 +12,14 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
     
     public SameSideSwitchAutonCommand() {
         addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DriveStraightWithRampingCommand(164)); //TODO: Make magic number in FieldMap (srry Pak)
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToDriveForwardToReachSwitch()));
         
-        addSequential(new DrivetrainRotateDegreesPIDCommand(-90)); //TODO: Make another magic number in FieldMap
-        
-        addSequential(new DriveStraightWithRampingCommand(-46.94)); //TODO: Make yet another magic number in FieldMap
-        
-        addSequential(new DriveStraightWithRampingCommand(85.25)); //TODO: Another magic number
+        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleEdge()));
+               
+        addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToDriveForwardIntoSwitchEdge()));
         
         addSequential(new GrabberOpenCommand());
+        
+        addSequential(new SpatulaDeacquireCommand());
     }
 }
