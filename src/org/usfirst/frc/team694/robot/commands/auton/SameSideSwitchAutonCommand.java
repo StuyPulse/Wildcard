@@ -11,7 +11,7 @@ public class SameSideSwitchAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
     
     public SameSideSwitchAutonCommand() {
-        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
+        //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToDriveForwardToReachSwitch()));
         
         addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleEdge()));
