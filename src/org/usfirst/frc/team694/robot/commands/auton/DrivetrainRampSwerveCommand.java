@@ -24,6 +24,7 @@ public class DrivetrainRampSwerveCommand extends DriveStraightWithRampingCommand
     protected void execute() {
         super.execute();
         if (!isSet && Robot.drivetrain.getEncoderDistance() > distanceTillSwerve) {
+            System.out.println("[DrivetrainRampSwerve] START TURNING");
             isSet = true;
             gyroControl.setSetpoint(angleToSwerve);
         }

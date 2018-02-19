@@ -15,6 +15,7 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
     }
 
     protected void initialize() {
+        System.out.println("DrivetrainMoveInches] start");
         Robot.drivetrain.resetEncoders();
     }
 
@@ -27,6 +28,7 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
     }
 
     protected void end() {
+        System.out.println("DrivetrainMoveInches] end");
         Robot.drivetrain.stop();
     }
 }
