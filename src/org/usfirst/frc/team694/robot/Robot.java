@@ -10,7 +10,7 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.auton.DifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleCrazyAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -160,7 +160,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
-        autonChooser.addObject("Crazy Same Side Scale Auton", new SameSideScaleCrazyAutonCommand());
+        autonChooser.addObject("Crazy Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 

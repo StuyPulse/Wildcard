@@ -1,13 +1,17 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
-import org.usfirst.frc.team694.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Runs ramping, but changes the angle at a certain point
  */
-public class DrivetrainRampSwerveCommand extends DriveStraightWithRampingCommand {
-    
-    private double distanceTillSwerve;
+@Deprecated
+public class DrivetrainRampSwerveCommand extends CommandGroup {
+
+    public DrivetrainRampSwerveCommand() {
+        //DriveStraightWithRampingCommand command = new DriveStraightWithRampingCommand(targetDistance)
+    }
+/*    private double distanceTillSwerve;
     private double angleToSwerve;
 
     private boolean isSet;
@@ -37,4 +41,5 @@ public class DrivetrainRampSwerveCommand extends DriveStraightWithRampingCommand
             gyroControl.setSetpoint(angleToSwerve);
         }
     }
+    */
 }
