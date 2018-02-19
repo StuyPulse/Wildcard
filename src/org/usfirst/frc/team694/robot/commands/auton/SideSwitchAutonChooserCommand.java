@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 public class SideSwitchAutonChooserCommand extends ConditionalCommand {
 
     public SideSwitchAutonChooserCommand() {
-        super(new SameSideSwitchAutonCommand(), new DifferentSideSwitchAutonCommand()); 
+        super(new SameSideSwitchAutonCommand()/*, new DifferentSideSwitchAutonCommand()*/); 
     }
 
     @Override

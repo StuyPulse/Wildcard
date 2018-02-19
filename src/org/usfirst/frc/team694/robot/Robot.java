@@ -10,13 +10,13 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.auton.DifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
@@ -115,7 +115,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        double timestamp = Timer.getFPGATimestamp();
+        /*double timestamp = Timer.getFPGATimestamp();
         while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
             gameData = DriverStation.getInstance().getGameSpecificMessage();
         }
@@ -126,7 +126,8 @@ public class Robot extends IterativeRobot {
             isAllianceSwitchRight = gameData.charAt(0) == 'R';
             isScaleRight = gameData.charAt(1) == 'R';
             autonCommand = autonChooser.getSelected();
-        }
+        }*/
+        autonCommand = autonChooser.getSelected();
 
         if (autonCommand != null) {
             autonCommand.start();
