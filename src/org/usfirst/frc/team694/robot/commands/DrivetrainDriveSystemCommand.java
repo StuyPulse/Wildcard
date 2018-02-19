@@ -32,8 +32,8 @@ public class DrivetrainDriveSystemCommand extends Command {
         double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
 
         //Values Used for Curvature Drive
-        double rightTriggerSquared = Math.pow(rightTrigger, 3);
-        double leftTriggerSquared = Math.pow(leftTrigger, 3);
+        double rightTriggerSquared = rightTrigger * Math.abs(rightTrigger);
+        double leftTriggerSquared = leftTrigger * Math.abs(leftTrigger);
         double leftJoystickX = Robot.oi.driverGamepad.getLeftX();
         
         //Values used for Tank Drive
