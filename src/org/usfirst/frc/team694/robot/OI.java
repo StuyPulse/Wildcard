@@ -48,7 +48,7 @@ public class OI {
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
-        operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
+        operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new CrabArrowAcquireCommand());
         
