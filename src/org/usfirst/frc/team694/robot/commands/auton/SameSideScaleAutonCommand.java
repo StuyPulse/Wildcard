@@ -16,6 +16,8 @@ public class SameSideScaleAutonCommand extends CommandGroup {
 
     public SameSideScaleAutonCommand() {
         DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
+        // Uncomment for no ramp down:
+//        DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
 
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -30));
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 80, 0));
