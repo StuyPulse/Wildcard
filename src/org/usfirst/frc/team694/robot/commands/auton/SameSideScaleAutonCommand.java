@@ -1,23 +1,36 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
-import org.usfirst.frc.team694.robot.FieldMapInterface;
-import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+/**
+ * Totally tentative swerving command
+ */
 public class SameSideScaleAutonCommand extends CommandGroup {
-    private FieldMapInterface quad = Robot.getRobotQuadrant();
+
+    private static final double DISTANCE_TOTAL = 283;
 
     public SameSideScaleAutonCommand() {
-        //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachNullLine()), 4.25);
+        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
 
-        addParallel(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToReachIdealStartingPointFromNullTerritoryLine() - 30));
-        addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
-        addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToTravelToReachScaleCorner() + 10), 3);
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -30));
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 80, 0));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
+        addSequential(rampCommand);
+
         addSequential(new GrabberOpenCommand());
+        // Move lift when we're kinda close
+//        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
+//        addSequential(new DrivetrainRampSwerveCommand(DISTANCE_TOTAL, DISTANCE_TO_SWERVE, -30));
+
+//        addSequential(new GrabberOpenCommand());
+
+//        addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 10));
+
+//        addSequential(new LiftMoveToBottomCommand());
     }
 }

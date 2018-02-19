@@ -40,7 +40,6 @@ public class OI {
 
         // TESTING ONLY
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(253.75));
-      driverGamepad.getDPadUp().whenPressed(new DrivetrainRampSwerveCommand(200, 50, -90));
 //        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(7 - RobotMap.MIN_HEIGHT_OF_LIFT));
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
