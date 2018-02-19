@@ -9,13 +9,13 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleCrazyAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -143,6 +143,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
+        autonChooser.addObject("Crazy Same Side Scale Auton", new SameSideScaleCrazyAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
         
         // PDP Panel
