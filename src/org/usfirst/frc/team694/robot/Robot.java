@@ -144,7 +144,6 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
-        autonChooser.addObject("Crazy Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
