@@ -19,7 +19,7 @@ public class SameSideScaleCrazyAutonCommand extends CommandGroup {
 
         // Move lift when we're kinda close
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
-        addSequential(new DrivetrainRampSwerveCommand(DISTANCE_TOTAL, DISTANCE_TO_SWERVE, -24));
+        addSequential(new DrivetrainRampSwerveCommand(DISTANCE_TOTAL, DISTANCE_TO_SWERVE, -30));
 
         addSequential(new GrabberOpenCommand());
 

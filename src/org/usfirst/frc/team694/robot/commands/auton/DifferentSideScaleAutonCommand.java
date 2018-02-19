@@ -12,13 +12,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DifferentSideScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
+    private static final double CURVE_1_DISTANCE_TOTAL = 445;
+    private static final double CURVE_1_DISTANCE_TILL_TURN = 70;
+
     public DifferentSideScaleAutonCommand() {
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
-        addParallel(new DrivetrainRampSwerveCommand(
+        /*addParallel(new DrivetrainRampSwerveCommand(
                 quad.getTotalDistanceToTravelBeforeTurn() + quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone() + 15,
                 quad.getTotalDistanceToTravelBeforeTurn(),
                 -90
                 ));
+        */  
+        addSequential(new DrivetrainRampSwerveCommand(
+            CURVE_1_DISTANCE_TOTAL,
+            CURVE_1_DISTANCE_TILL_TURN,
+            -100
+        ));
+
         /*
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3));
          

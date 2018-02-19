@@ -163,9 +163,9 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.04);
 
         // Drive Straight Rotation PID
-        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.015); 
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012); 
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
-        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.05);
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
 
         SmartDashboard.putNumber("RotateDegreesPID P", 0.035);
         SmartDashboard.putNumber("RotateDegreesPID I", 0.01);

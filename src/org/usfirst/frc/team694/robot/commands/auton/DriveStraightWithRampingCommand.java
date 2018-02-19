@@ -58,6 +58,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
                 );
         //targetDistance = SmartDashboard.getNumber("Test Distance", 170);
         this.getPIDController().setSetpoint(targetDistance);
+        gyroControl.setSetpoint(0);
         double rampSeconds = SmartDashboard.getNumber("DriveStraight RampSeconds", 2.5);
         Robot.drivetrain.setRamp(rampSeconds);
         this.getPIDController().setAbsoluteTolerance(DRIVE_DISTANCE_THRESHOLD);
@@ -82,7 +83,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         } else if(!inRange){
             isSet = false;
         }
-        return inRange && Timer.getFPGATimestamp() - timeFirstInRange > 2;
+        return inRange && Timer.getFPGATimestamp() - timeFirstInRange > 0.5;
     }
 
     // Called once after isFinished returns true
@@ -120,7 +121,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     }
 
     private boolean isOnTarget() {
-        return Math.abs(Robot.drivetrain.getEncoderDistance() - targetDistance) <= 1;
+        return Math.abs(Robot.drivetrain.getEncoderDistance() - targetDistance) <= 3;
     }
     
     protected class Source implements PIDSource {
