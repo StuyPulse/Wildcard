@@ -15,7 +15,7 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected void initialize() {
-        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
+//        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
         System.out.println("[LiftMoveToHeight] START");
     }
 

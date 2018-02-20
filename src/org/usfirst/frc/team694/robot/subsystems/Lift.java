@@ -43,9 +43,8 @@ public class Lift extends Subsystem {
 
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        
-        
-        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0), 0);
+
+        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
         innerLeftMotor.setSensorPhase(true);
         innerRightMotor.setSensorPhase(true);
