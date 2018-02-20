@@ -11,7 +11,6 @@ public class SpatulaLeftDeacquireCommand extends Command {
 
     public SpatulaLeftDeacquireCommand() {
         requires(Robot.spatula);
-        requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
