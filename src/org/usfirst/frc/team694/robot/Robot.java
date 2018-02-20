@@ -23,6 +23,7 @@ import org.usfirst.frc.team694.robot.subsystems.Spatula;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -40,17 +41,17 @@ public class Robot extends IterativeRobot {
     public static OI oi;
 
     static boolean isRobotAtBottom;
-    
-    private String gameData; 
+
+    private String gameData;
     public static boolean isRobotOnRight;
-    
-    private static boolean isAllianceSwitchRight; 
-    private static boolean isScaleRight; 
-    
+
+    private static boolean isAllianceSwitchRight;
+    private static boolean isScaleRight;
+
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private Command autonCommand; // Selected command run during auton
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
-    
+
     private PowerDistributionPanel pdppanel;
 
     @Override
@@ -62,30 +63,29 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
 
-//        pdppanel = new PowerDistributionPanel();
+        //        pdppanel = new PowerDistributionPanel();
 
-//        autonChooser.addDefault("Do Nothing", new CommandGroup());
-//        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
-//        SmartDashboard.putData("Autonomous", autonChooser);
-//        
-//        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
-//        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
-//        SmartDashboard.putData("Where is the robot starting?", sideChooser);
-//        
-//        SmartDashboard.putNumber("Lift P", 0);
-//        
-//        SmartDashboard.putNumber("RotateDegreesPID P", 0);
-//        SmartDashboard.putNumber("RotateDegreesPID I", 0);
-//        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+        //        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        //        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        //        SmartDashboard.putData("Autonomous", autonChooser);
+        //        
+        //        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        //        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+        //        SmartDashboard.putData("Where is the robot starting?", sideChooser);
+        //        
+        //        SmartDashboard.putNumber("Lift P", 0);
+        //        
+        //        SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        //        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        //        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
         Robot.drivetrain.resetEncoders();
     }
-    
+
     public enum WhereTheBotIsInReferenceToDriver {
 
-        RIGHT_SIDE_OF_DRIVER,
-        LEFT_SIDE_OF_DRIVER
+        RIGHT_SIDE_OF_DRIVER, LEFT_SIDE_OF_DRIVER
     }
 
     //Bottom means side closer to the scoring table
@@ -118,21 +118,22 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-//        double timestamp = Timer.getFPGATimestamp();
-//        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
-//            gameData = DriverStation.getInstance().getGameSpecificMessage();
-//        }
-//        if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
-//            autonCommand = new MobilityAutonUsingEncodersCommand();
-//            System.out.println("******* Field Data problem");
-//        }else {
-//            isAllianceSwitchRight = gameData.charAt(0) == 'R';
-//            isScaleRight = gameData.charAt(1) == 'R';
-//            autonCommand = autonChooser.getSelected();
-//        }
+                double timestamp = Timer.getFPGATimestamp();
+                while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+                    gameData = DriverStation.getInstance().getGameSpecificMessage();
+                }
+                if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
+                    autonCommand = new MobilityAutonUsingEncodersCommand();
+                    System.err.print("******* Field Data Problem!!!"); 
+                    System.err.println("Please yell at the field management crew to fix this");
+                }else {
+                    isAllianceSwitchRight = gameData.charAt(0) == 'R';
+                    isScaleRight = gameData.charAt(1) == 'R';
+                    autonCommand = autonChooser.getSelected();
+                }
 
         // Delete me when you're done testing!
-        autonCommand = autonChooser.getSelected();
+//        autonCommand = autonChooser.getSelected();
         if (autonCommand != null) {
             autonCommand.start();
         }
@@ -174,7 +175,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // PDP Panel
-//        SmartDashboard.putData("PDP", pdppanel);
+        //        SmartDashboard.putData("PDP", pdppanel);
 
         SmartDashboard.putNumber("Lift P", 0.3);
 
@@ -188,7 +189,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.04);
 
         // Drive Straight Rotation PID
-        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012); 
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012);
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
         SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
 
@@ -197,15 +198,14 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RotateDegreesPID D", 0.3);
 
         SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.8);
-        
 
         SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
-        
+
     }
-    
+
     private void updateSmartDashboard() {
 
-//        SmartDashboard.putData(pdppanel);
+        //        SmartDashboard.putData(pdppanel);
 
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
@@ -222,9 +222,9 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
         SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
         SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
-        
+
         SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
-        
+
     }
 
     /**
@@ -239,7 +239,7 @@ public class Robot extends IterativeRobot {
         //true is switch is close to robot
         //false is switch is far away robot
     }
-    
+
     public static boolean isRobotAndScaleOnSameSide() {
         return (isScaleRight && isRobotOnRight) || (!isScaleRight && !isRobotOnRight);
         //true is scale is close to robot 

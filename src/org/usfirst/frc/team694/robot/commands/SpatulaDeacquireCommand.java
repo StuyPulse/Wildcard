@@ -8,6 +8,7 @@ public class SpatulaDeacquireCommand extends Command {
 
     public SpatulaDeacquireCommand() {
         requires(Robot.spatula);
+        requires(Robot.lift);
     }
     
     protected void initialize() {
