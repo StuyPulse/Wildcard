@@ -85,6 +85,10 @@ public class Drivetrain extends Subsystem {
     /*public void periodic(){
         updateSensors();
     }*/
+    
+    public void resetRamping() {
+        setRamp(0);
+    }
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }
