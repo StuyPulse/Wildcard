@@ -12,19 +12,19 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
     public DifferentSideScaleAutonCommand() {  
-        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
+        //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn()));
-        
+
         addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachPlatformZone()));
 
-        addParallel(new DrivetrainLineSensorPlatformZoneCommand());
+        //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()));
-        
+
         addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachScaleSide()));
 
         addSequential(new LiftMoveToHeightCommand(84));//unsure about height
 
-        addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachScaleSide()));
 
         addSequential(new GrabberOpenCommand());

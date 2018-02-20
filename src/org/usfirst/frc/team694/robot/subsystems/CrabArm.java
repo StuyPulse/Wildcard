@@ -47,6 +47,6 @@ public class CrabArm extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new CrabArmStopCommand());
+        //setDefaultCommand(new CrabArmStopCommand());
     }
 }

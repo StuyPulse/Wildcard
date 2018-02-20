@@ -92,15 +92,29 @@ public class Lift extends Subsystem {
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
-            innerLeftMotor.set(speed); 
+            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
         }
     }
 
     public void move(double currentSpeed) {
         double currentHeight = getLiftHeight();
+//<<<<<<< HEAD
+//        double speed = maxSpeed;
+//                if (maxSpeed < 0) {
+//                    if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
+//                        speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
+//                        speed = Math.max(speed, maxSpeed);
+//                    }
+//                } else {
+//                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
+//                        speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
+//                        speed = Math.min(speed, maxSpeed);
+//                    }
+//                }
+//=======
         double speed = currentSpeed;
         if (currentHeight < 0) {
-            speed = -RobotMap.LIFT_MIN_SPEED;
+            speed = Math.max(-RobotMap.LIFT_MIN_SPEED,speed);
         } else if (currentSpeed < 0) {
             if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
                 speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
@@ -112,7 +126,7 @@ public class Lift extends Subsystem {
                 speed = Math.min(speed, currentSpeed);
             }
         }
-        System.out.println("Given value: " + currentSpeed + " actual: " + speed);
+//        System.out.println("Given: " + currentSpeed + ", Actual: " + speed);
         moveLift(speed);
     }
 
@@ -121,7 +135,7 @@ public class Lift extends Subsystem {
     }
 
     public void stop() {
-        innerLeftMotor.set(0);
+        innerLeftMotor.set(ControlMode.PercentOutput, 0);
         setBrakeOn();
     }
 
@@ -147,11 +161,11 @@ public class Lift extends Subsystem {
     }
 
     public double getLeftEncoderDistance() {
-        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER / 4.4;
+        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getRightEncoderDistance() {
-        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER / 4.4;
+        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getLiftHeight() {
@@ -159,7 +173,7 @@ public class Lift extends Subsystem {
     }
     
     public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height);
+        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
     
     public double getMotorVelocity() {

@@ -12,7 +12,7 @@ public final class RobotMap {
      * Robot Dimensions
      */
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
-    public static final double LENGTH_OF_BOT = 39.5; // (not including grabber)
+    public static final double LENGTH_OF_BOT = 38; // (not including grabber)
     public static final double WIDTH_OF_BOT = 34.5; //
     public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
     public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
@@ -65,12 +65,12 @@ public final class RobotMap {
      *************************************************************************/
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
-    public static final double LIFT_ENCODER_RAW_MULTIPLIER = LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024;
+    public static final double LIFT_ENCODER_RAW_MULTIPLIER = (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) / 4.4;
     
-    public static final double MIN_HEIGHT_OF_LIFT = 23;
+    public static final double MIN_HEIGHT_OF_LIFT = 20.5;
     public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
     public static final double LIFT_MAX_SPEED = 1;
-    public static final double LIFT_BRAKE_SPEED = 0.16667;
+    public static final double LIFT_BACKDRIVE_SPEED = 0.16667;
 
     public static final double LIFT_MIN_SPEED = 0.25;
     public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 20.0;
@@ -125,7 +125,8 @@ public final class RobotMap {
      * Quadrants, and each Quadrant passes 256 pulses.
      **/
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
-            (161.5 / 1210.0) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            /*(127.0 / 121.0) * (161.5 / 1210.0) * */
+            (296.0 / 2171.0) *DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
 

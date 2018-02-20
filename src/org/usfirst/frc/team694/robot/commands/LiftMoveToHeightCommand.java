@@ -13,10 +13,11 @@ public class LiftMoveToHeightCommand extends Command {
     public LiftMoveToHeightCommand(double height) {
         requires(Robot.lift);
         this.targetHeight = height;
-        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
     }
 
     protected void initialize() {
+        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
+        System.out.println("[LiftMoveToHeight] START");
     }
 
     protected void execute() {
@@ -24,12 +25,13 @@ public class LiftMoveToHeightCommand extends Command {
     }
 
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD) 
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
                 || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
                 || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
     }
 
     protected void end() {
+        System.out.println("[LiftMoveToHeight] END");
         Robot.lift.stop();
     }
 }
