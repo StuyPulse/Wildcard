@@ -125,6 +125,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         Robot.drivetrain.resetEncoders(); // TEST
+        Robot.drivetrain.setRamp(0);
         if (autonCommand != null) {
             autonCommand.cancel();
         }
