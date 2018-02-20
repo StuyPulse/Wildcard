@@ -12,17 +12,22 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DifferentSideScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
-    private static final double DISTANCE_TOTAL = 500;
+    private static final double DISTANCE_TOTAL = 410;//450;
 
     public DifferentSideScaleAutonCommand() {
 
-        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
+//        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
         // Uncomment for no ramp down:
-//      DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
+        DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
 
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -90));
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 300, 0));
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 76, -140)); // First turn
+        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand,  76, 0.4));     // Slow down for turn
+        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand,  76 + 100, 1)); // Normal speed after turn
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 76 + 200, -90)); // Realign to prevent overshooting
+        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand,  76 + 200, 0.3)); // Slow speed before last turn
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 76 + 260, 15));  // Final turn // 300
+        //addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 200));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT - 18), DISTANCE_TOTAL - 200));
         addSequential(rampCommand);
 
         addSequential(new GrabberOpenCommand());
@@ -50,6 +55,8 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
         //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone() + 15));
         */
+
+        /*
         addSequential(new DrivetrainRotateDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()));
 
         addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
@@ -58,6 +65,7 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DriveStraightWithRampingCommand(53));//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
 
         addSequential(new GrabberOpenCommand());
+        */
 
     }
 

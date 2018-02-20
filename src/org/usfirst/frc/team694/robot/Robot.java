@@ -8,18 +8,20 @@
 package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.auton.DifferentSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.LeftSideSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
+import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SideScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -115,20 +117,21 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-        /*double timestamp = Timer.getFPGATimestamp();
-        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
-            gameData = DriverStation.getInstance().getGameSpecificMessage();
-        }
-        if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
-            autonCommand = new MobilityAutonUsingEncodersCommand();
-            System.out.println("******* Field Data problem");
-        }else {
-            isAllianceSwitchRight = gameData.charAt(0) == 'R';
-            isScaleRight = gameData.charAt(1) == 'R';
-            autonCommand = autonChooser.getSelected();
-        }*/
-        autonCommand = autonChooser.getSelected();
+//        double timestamp = Timer.getFPGATimestamp();
+//        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+//            gameData = DriverStation.getInstance().getGameSpecificMessage();
+//        }
+//        if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
+//            autonCommand = new MobilityAutonUsingEncodersCommand();
+//            System.out.println("******* Field Data problem");
+//        }else {
+//            isAllianceSwitchRight = gameData.charAt(0) == 'R';
+//            isScaleRight = gameData.charAt(1) == 'R';
+//            autonCommand = autonChooser.getSelected();
+//        }
 
+        // Delete me when you're done testing!
+        autonCommand = autonChooser.getSelected();
         if (autonCommand != null) {
             autonCommand.start();
         }
@@ -162,6 +165,10 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
+        autonChooser.addObject("Right Side Switch Auton", new RightSideSwitchAutonCommand());
+        autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
+        autonChooser.addObject("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
+        autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // PDP Panel

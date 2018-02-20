@@ -125,6 +125,7 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.setSelectedSensorPosition(0, 0, 100);
         rightBottomMotor.setSelectedSensorPosition(0, 0, 100);
     }
+
     public void setEncoders(double inches){
         leftBottomMotor.setSelectedSensorPosition((int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
         rightBottomMotor.setSelectedSensorPosition((int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);

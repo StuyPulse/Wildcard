@@ -20,6 +20,10 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     protected static double angleOutput;
     protected static boolean isSet = false;
     protected static double timeFirstInRange;
+
+    // Multiplies our speed, limiting it
+    private double speedScaleFactor;
+
     PIDController gyroControl;
 
     public DriveStraightWithRampingCommand(double targetDistance) {
@@ -28,13 +32,15 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         gyroControl.setSetpoint(0);
         this.targetDistance = targetDistance;
         requires(Robot.drivetrain);
-
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetGyro();
+
+        speedScaleFactor = 1;
+
         System.out.println("[DriveStraight] Init");
         //startEncoderValue = Robot.drivetrain.getRightEncoderDistance();
         setSetpoint(targetDistance);
@@ -87,6 +93,12 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         System.out.println("[DriveStraight] END: " + Robot.drivetrain.getEncoderDistance());
         Robot.drivetrain.setRamp(0);
     }
+    
+    @Override
+    protected void interrupted() {
+        System.out.println("[DriveStraight] INTERRUPTED");
+        end();
+    }
 
     @Override
     protected double returnPIDInput() {
@@ -107,8 +119,14 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
             else
                 output = 0.2 * Math.signum(output);
         }
-        Robot.drivetrain.tankDrive(output + DriveStraightWithRampingCommand.angleOutput,
-                output - DriveStraightWithRampingCommand.angleOutput);
+
+        output = Math.min(Math.max(-1, output), 1);
+
+        double left = output * speedScaleFactor  + DriveStraightWithRampingCommand.angleOutput;
+        double right = output * speedScaleFactor - DriveStraightWithRampingCommand.angleOutput;
+
+        Robot.drivetrain.tankDrive(left,right);
+
         this.output = output;
         //}
     }
@@ -120,6 +138,10 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     // Sets target angle, for turning (swerving)
     public void setTargetAngle(double angle) {
         gyroControl.setSetpoint(angle);
+    }
+
+    public void setSpeedScale(double speedScaleFactor) {
+        this.speedScaleFactor = speedScaleFactor;
     }
 
     protected class Source implements PIDSource {

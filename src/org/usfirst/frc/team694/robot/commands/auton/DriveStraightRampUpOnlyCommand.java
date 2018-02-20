@@ -19,5 +19,5 @@ public class DriveStraightRampUpOnlyCommand extends DriveStraightWithRampingComm
     protected boolean isFinished() {
         return Robot.drivetrain.getEncoderDistance() > targetDistance;
     }
-    
+
 }
