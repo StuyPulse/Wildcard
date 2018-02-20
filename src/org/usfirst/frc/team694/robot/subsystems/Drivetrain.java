@@ -23,6 +23,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
+
+    private static final int PEAK_LIMIT_AMPS = 4;
+    private static final int PEAK_LIMIT_MILLISECONDS = 250;
+
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
     private WPI_TalonSRX leftBottomMotor;
@@ -67,6 +71,13 @@ public class Drivetrain extends Subsystem {
         rightTopMotor.setNeutralMode(NeutralMode.Brake);
         rightMiddleMotor.setNeutralMode(NeutralMode.Brake);
         rightBottomMotor.setNeutralMode(NeutralMode.Brake);
+
+        leftBottomMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS, 0);
+        rightBottomMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS, 0);
+        leftBottomMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        rightBottomMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        leftBottomMotor.enableCurrentLimit(false);
+        rightBottomMotor.enableCurrentLimit(false);
 
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -222,5 +233,15 @@ public class Drivetrain extends Subsystem {
     public void resetGyro() {
         navX.reset();
     }
-    
+
+    public void enableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
+    }
+
+    public void disableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(false);
+        rightBottomMotor.enableCurrentLimit(false);
+    }
+
 }

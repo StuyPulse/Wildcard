@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class BITCOINCommand extends CommandGroup {
 
     // Once we get the cube in the grabber, 
-    private static final double SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING = 0.6;
-    private boolean initialBITCOINAutomation = Robot.spatula.isBITCOINAutomation;
+//    private static final double SECONDS_TO_MOVE_CUBE_UP_AFTER_GRABBING = 0.6;
+    private boolean initialBITCOINAutomation;
 
     public BITCOINCommand() {
-        
+
         setInterruptible(false);
-        
+
         // Get the cube in the grabber
         addSequential(new LiftMoveToBottomCommand());
         addSequential(new GrabberOpenCommand());
@@ -36,14 +36,28 @@ public class BITCOINCommand extends CommandGroup {
     }
 
     @Override
-    public boolean isFinished() {
-        System.out.println("[BITCOINCommand] super.isFinished() " + super.isFinished());
+    protected void initialize() {
+        initialBITCOINAutomation = Robot.spatula.isBITCOINAutomation;
+    }
+
+    @Override
+    protected boolean isFinished() {
         return Robot.spatula.isBITCOINAutomation != initialBITCOINAutomation ||
                 super.isFinished();
     }
 
     @Override
+    public void interrupted() {
+        System.out.println("[BITCOINCommand] interrupted (NANI???!!)");
+    }
+
+    @Override
+    public void end() {
+        System.out.println("[BITCOINCommand] end");
+    }
+
+    @Override
     public void cancel() {
-        
+        System.out.println("[BITCOINCommand] cancel");
     }
 }

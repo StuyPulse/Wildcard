@@ -75,8 +75,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        if (Math.abs(output) < 0.25) {
-            output = 0.25 * Math.signum(output);
+        if (Math.abs(output) < 0.2) {
+            output = 0.2 * Math.signum(output);
         }
         System.out.println("out: " + output);
         Robot.drivetrain.tankDrive(output, -output);

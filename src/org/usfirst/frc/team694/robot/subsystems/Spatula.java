@@ -94,10 +94,11 @@ public class Spatula extends Subsystem {
     }
 
     public void toggle() {
-        if (spatulaFlipSolenoid.get() == DoubleSolenoid.Value.kReverse) {
-            flipUp();
-        } else {
+        System.out.println("[Spatula] Spatula up? " + isSpatulaUp() + ", Solenoid Value: " + spatulaFlipSolenoid.get());
+        if (isSpatulaUp()) {
             flipDown();
+        } else {
+            flipUp();
         }
     }
 

@@ -202,8 +202,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
         SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
 
-        SmartDashboard.putNumber("RotateDegreesPID P", 0.035);
-        SmartDashboard.putNumber("RotateDegreesPID I", 0.01);
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.029);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0.005);
         SmartDashboard.putNumber("RotateDegreesPID D", 0.3);
 
         SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.8);
