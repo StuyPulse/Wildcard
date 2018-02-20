@@ -37,6 +37,7 @@ public class BITCOINCommand extends CommandGroup {
 
     @Override
     public boolean isFinished() {
+        System.out.println("[BITCOINCommand] super.isFinished() " + super.isFinished());
         return Robot.spatula.isBITCOINAutomation != initialBITCOINAutomation ||
                 super.isFinished();
     }

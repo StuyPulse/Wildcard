@@ -49,9 +49,9 @@ public class DrivetrainDriveSystemCommand extends Command {
                 Robot.drivetrain.highGearShift();
                 Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, false);
             } else {
-                if (Math.abs(leftJoystickX) > 0.05) {
-                    Robot.drivetrain.lowGearShift();
-                }
+//                if (Math.abs(leftJoystickX) > 0.05) {
+//                    Robot.drivetrain.lowGearShift();
+//                }
                 Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, true);
             }   
         }
