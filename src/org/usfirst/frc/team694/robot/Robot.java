@@ -93,8 +93,8 @@ public class Robot extends IterativeRobot {
     public static FieldMapInterface getRobotQuadrant() {
         // TESTING ONLY
         return new FieldMapRedFarFromScoringTableQuadrant();
-        /*isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
-        if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+
+        /*if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
             if(isRobotOnRight) {
                 return new FieldMapRedFarFromScoringTableQuadrant(); 
             }
@@ -128,6 +128,7 @@ public class Robot extends IterativeRobot {
                     System.err.print("******* Field Data Problem!!!"); 
                     System.err.println("Please yell at the field management crew to fix this");
                 }else {
+                    isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
                     isAllianceSwitchRight = gameData.charAt(0) == 'R';
                     isScaleRight = gameData.charAt(1) == 'R';
                     autonCommand = autonChooser.getSelected();
@@ -180,8 +181,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Autonomous", autonChooser);
         
         // SIDE CHOOSER
-        sideChooser.addObject("Right", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
-        sideChooser.addObject("Left", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        sideChooser.addDefault("Right", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        sideChooser.addObject("Left", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
         SmartDashboard.putData("Where is the bot starting?", sideChooser);
 
         // PDP Panel
