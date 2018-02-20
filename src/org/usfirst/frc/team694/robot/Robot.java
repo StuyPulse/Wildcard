@@ -129,7 +129,7 @@ public class Robot extends IterativeRobot {
         if (autonCommand != null) {
             autonCommand.cancel();
         }
-
+        Robot.drivetrain.resetRamping();
     }
 
     @Override
