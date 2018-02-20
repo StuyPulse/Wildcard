@@ -14,6 +14,7 @@ import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SideScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SimpleDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -166,20 +167,27 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        /* Testing autons:
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
         autonChooser.addObject("Right Side Switch Auton", new RightSideSwitchAutonCommand());
         autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
+        */
+
         autonChooser.addObject("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
-        autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
+        autonChooser.addDefault("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
+        autonChooser.addDefault("SIMPLE OTHER SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
+        
+        // SIDE CHOOSER
+        sideChooser.addObject("Right", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+        sideChooser.addObject("Left", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        SmartDashboard.putData("Where is the bot starting?", sideChooser);
 
         // PDP Panel
         //        SmartDashboard.putData("PDP", pdppanel);
 
         SmartDashboard.putNumber("Lift P", 0.3);
-
-        SmartDashboard.putBoolean("Is Robot At the Right?", false);
 
         SmartDashboard.putNumber("DriveStraight RampSeconds", 0.8);
 
