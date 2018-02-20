@@ -20,6 +20,7 @@ import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Command;
@@ -146,6 +147,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         Robot.drivetrain.resetEncoders(); // TEST
+        Robot.drivetrain.setRamp(0.0);
         if (autonCommand != null) {
             autonCommand.cancel();
         }

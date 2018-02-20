@@ -44,4 +44,13 @@ public interface FieldMapInterface {
     public double getTotalDistanceToDriveForwardToReachSwitch();
     
     public double getDistanceToDriveForwardIntoSwitchEdge();
+    
+    //Switch auton where the bot is on the opposite side as the scoring switch
+    public double getTotalDistanceToTravelAcrossPlatformZoneToReachSwitch();
+    
+    public double getAngleToReachSwitch();
+    
+    public double getDistanceToTravelToReachSwitch();
+    
+    public double getAngleToReachSwitchEdge();
 }
