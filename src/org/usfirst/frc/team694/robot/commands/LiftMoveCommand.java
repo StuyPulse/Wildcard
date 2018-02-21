@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class LiftMoveCommand extends Command {
 
+    private static final double DRIVETRAIN_LIMIT_LIFT_THRESHOLD = 0.1;
+
     public LiftMoveCommand() {
         requires(Robot.lift);
         requires(Robot.spatula);
@@ -18,17 +20,23 @@ public class LiftMoveCommand extends Command {
 
     protected void initialize() {
     }
-    
+
     protected void execute() {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
-        
-        if(Robot.spatula.isSpatulaUp()) {
-           Robot.spatula.acquireSpeed(-liftSquared * 0.2);
+
+        if (Robot.spatula.isSpatulaUp()) {
+            Robot.spatula.acquireSpeed(-liftSquared * 0.2);
         }
-        
+
         Robot.lift.move(liftSquared);
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
+
+        if (Math.abs(liftControl) > DRIVETRAIN_LIMIT_LIFT_THRESHOLD) {
+            Robot.drivetrain.enableCurrentLimit();
+        } else {
+            Robot.drivetrain.disableCurrentLimit();
+        }
     }
 
     protected boolean isFinished() {
@@ -36,5 +44,7 @@ public class LiftMoveCommand extends Command {
     }
 
     protected void end() {
+        // In case if we're interrupted mid lift move
+        Robot.drivetrain.disableCurrentLimit();
     }
 }
