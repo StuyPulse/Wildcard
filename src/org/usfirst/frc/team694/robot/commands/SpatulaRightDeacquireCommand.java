@@ -33,9 +33,4 @@ public class SpatulaRightDeacquireCommand extends Command {
         Robot.spatula.stop();
         System.out.println("SPATULA RIGHT DEACQUIRE STOP");
     }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
 }

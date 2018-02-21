@@ -22,6 +22,7 @@ import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRampSwerveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
@@ -39,15 +40,15 @@ public class OI {
 
         // TESTING ONLY
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(253.75));
-        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
+//        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(7 - RobotMap.MIN_HEIGHT_OF_LIFT));
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
-        
+
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
-        operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
+        operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
         

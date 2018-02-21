@@ -85,6 +85,10 @@ public class Drivetrain extends Subsystem {
     /*public void periodic(){
         updateSensors();
     }*/
+    
+    public void resetRamping() {
+        setRamp(0);
+    }
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }
@@ -122,9 +126,10 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetEncoders() {
-        leftBottomMotor.setSelectedSensorPosition(0, 0, 0);
-        rightBottomMotor.setSelectedSensorPosition(0, 0, 0);
+        leftBottomMotor.setSelectedSensorPosition(0, 0, 100);
+        rightBottomMotor.setSelectedSensorPosition(0, 0, 100);
     }
+
     public void setEncoders(double inches){
         leftBottomMotor.setSelectedSensorPosition((int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
         rightBottomMotor.setSelectedSensorPosition((int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
@@ -208,6 +213,8 @@ public class Drivetrain extends Subsystem {
     public void setRamp(double rampSeconds) {
         leftTopMotor.configOpenloopRamp(rampSeconds, 0);
         rightTopMotor.configOpenloopRamp(rampSeconds, 0);
+        leftMiddleMotor.configOpenloopRamp(rampSeconds, 0);
+        rightMiddleMotor.configOpenloopRamp(rampSeconds, 0);
         leftBottomMotor.configOpenloopRamp(rampSeconds, 0);
         rightBottomMotor.configOpenloopRamp(rampSeconds, 0);
     }

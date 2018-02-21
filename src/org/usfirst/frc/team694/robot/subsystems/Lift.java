@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -44,9 +43,8 @@ public class Lift extends Subsystem {
 
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        
-        
-        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0), 0);
+
+        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
         innerLeftMotor.setSensorPhase(true);
         innerRightMotor.setSensorPhase(true);
@@ -71,24 +69,7 @@ public class Lift extends Subsystem {
         innerRightMotor.setSelectedSensorPosition(0, 0, 0);
     }
 
-    public void setBrakeOn() {
-        //        brakeSolenoid.set(true);
-    }
-
-    public void setBrakeOff() {
-        //        brakeSolenoid.set(false);
-    }
-
-    public void toggleBrake() {
-        //        if (brakeSolenoid.get()) {
-        //            setBrakeOff();
-        //        } else {
-        //            setBrakeOn();
-        //        }
-    }
-
     private void moveLift(double speed) {
-        setBrakeOff();
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
@@ -136,7 +117,6 @@ public class Lift extends Subsystem {
 
     public void stop() {
         innerLeftMotor.set(ControlMode.PercentOutput, 0);
-        setBrakeOn();
     }
 
     public boolean getBrakeStatus() {
@@ -179,9 +159,4 @@ public class Lift extends Subsystem {
     public double getMotorVelocity() {
         return innerLeftMotor.getSelectedSensorVelocity(0);
     }
-    
-    public void temporarySetkP(double kP) {
-        innerLeftMotor.config_kP(0, kP, 0);
-    }
-   
 }
