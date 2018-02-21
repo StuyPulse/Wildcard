@@ -53,7 +53,7 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return onTarget() && Timer.getFPGATimestamp() - lastTimeNotOnTarget > 1;
+        return onTarget() && Timer.getFPGATimestamp() - lastTimeNotOnTarget > 0.5;
     }
 
     // Called once after isFinished returns true
@@ -83,7 +83,7 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     }
 
     private boolean onTarget() {
-        return Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) <= (targetAngle * (-1.0 / 180)) + 2.5;
+        return Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) <= 2;
     }
 
 }

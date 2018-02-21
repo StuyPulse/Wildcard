@@ -20,7 +20,7 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
 //        Robot.drivetrain.resetEncoders();
         // no reset encoders. sad reaccs :(
         startDistance = Robot.drivetrain.getEncoderDistance();
-        System.out.println("DrivetrainMoveInches] start");
+        System.out.println("DrivetrainMoveInches] start: " + startDistance);
     }
 
     protected void execute() {
