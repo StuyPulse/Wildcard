@@ -43,11 +43,11 @@ public class OI {
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(7 - RobotMap.MIN_HEIGHT_OF_LIFT));
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
-        
+
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
-        operatorGamepad.getBottomButton().whileHeld(new BITCOINCommand());
+        operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
         

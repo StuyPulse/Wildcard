@@ -100,10 +100,42 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
         return BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_EDGE;
     }
     
-    //Switch auton where the bot and the scoring switch are on the same side
+    //Switch auton where the bot and the scoring switch are on the same side and moving forward
     @Override
     public double getDistanceToDriveForwardToReachSwitchSide() {
         return BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE;
+    }
+    
+    //Switch auton where the bot and the scoring switch are on the same side and turning a right angle
+    @Override
+    public double getTotalDistanceToDriveForwardToReachSwitch() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_MOVE_FORWARD_TO_REACH_MIDDLE_OF_SWITCH;
+    }
+
+    @Override
+    public double getDistanceToDriveForwardIntoSwitchEdge() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_MOVE_TO_REACH_SCALE_EDGE;
+    }
+    
+    //Switch auton where the bot and the scoring switch are on different side  
+    @Override
+    public double getTotalDistanceToTravelAcrossPlatformZoneToReachSwitch() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_ACROSS_PLATFORM_ZONE_TO_SWITCH;
+    }
+
+    @Override
+    public double getAngleToReachSwitch() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_REACH_SWITCH;
+    }
+
+    @Override
+    public double getDistanceToTravelToReachSwitch() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_REACH_SWITCH;
+    }
+
+    @Override
+    public double getAngleToReachSwitchEdge() {
+        return BLUE_NEAR_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_REACH_SWITCH_EDGE;
     }
     //**************************************************************************************************************
     
@@ -113,6 +145,8 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
     //anything with // could be changed due to the actual field measure 
     
     //These are the measurements that need to be measured out before match.
+    private static final double BLUE_NEAR_SCROING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SWITCH_EDGE = 85.25;
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH = 168;
     public static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_BUMP = 66.75; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_NULL_TERRITORY = 288.0; //
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_AUTO_LINE = 120.0; //
@@ -164,11 +198,22 @@ public final class FieldMapBlueNearScoringTableQuadrant extends FieldMapMiddleNe
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_SCALE_SIDE = FieldMapBlueFarFromScoringTableQuadrant.BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_SCALE_SIDE - FieldMapBlueFarFromScoringTableQuadrant.BLUE_FAR_FROM_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
 
     //**************************************************************************************************************
-
-    //Switch auton where the bot is on the same side as the scoring switch
+    
+    //Switch auton where the bot is on the same side as the scoring switch and just moving forward
     private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_FROM_FRONT_OF_BOT_TO_SWITCH_SIDE = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_SWITCH_SIDE - RobotMap.LENGTH_OF_BOT;
     
-  //**************************************************************************************************************
+    //Switch auton where the bot is on the same side as the scoring switch and turning a right angle
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_MOVE_FORWARD_TO_REACH_MIDDLE_OF_SWITCH = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH - RobotMap.MIDDLE_OF_BOT_LENGTHWISE;
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_MOVE_TO_REACH_SCALE_EDGE = BLUE_NEAR_SCROING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_SWITCH_EDGE - BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT - (RobotMap.WIDTH_OF_BOT + RobotMap.DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN);
+    
+  //Switch auton where the bot is on different sides as the scoring switch
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_DRIVE_OUT_TO_REACH_SWITCH = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_PLATFORM_ZONE_EDGE - BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_BORDER_TO_EDGE_OF_ROBOT - RobotMap.DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT;
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_TOTAL_DISTANCE_TO_TRAVEL_ACROSS_PLATFORM_ZONE_TO_SWITCH = BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_TRAVEL_TO_REACH_PLATFORM_ZONE_EDGE_AFTER_TURN + BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_PLATFORM_ZONE_EDGE_TO_OTHER + BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_DRIVE_OUT_TO_REACH_SWITCH + RobotMap.DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN;
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_REACH_SWITCH = -90;
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_TO_REACH_SWITCH = (BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_FAR_SIDE_OF_SWITCH - BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_ALLIANCE_STATION_TO_MIDDLE_OF_SWITCH) + BLUE_NEAR_SCORING_TABLE_QUADRANT_DISTANCE_FROM_FAR_SIDE_OF_SWITCH_TO_PLATFORM_EDGE_HALVED;
+    private static final double BLUE_NEAR_SCORING_TABLE_QUADRANT_DEGREE_OF_ANGLE_TO_REACH_SWITCH_EDGE = -90;
+
+    //**************************************************************************************************************
     //Measurements for line system
     //Use the constants these constants are set to to use for reset encoders
     //Different side scale auton
