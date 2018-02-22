@@ -8,7 +8,7 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.DrivetrainPiotrDriveCommand;
+import org.usfirst.frc.team694.robot.commands.DrivetrainDriveSystemCommand;
 import org.usfirst.frc.team694.util.LineSensorSystem;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -17,17 +17,17 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-/**
- * An example subsystem. You can replace me with your own Subsystem.
- */
 public class Drivetrain extends Subsystem {
+
+    private static final int PEAK_LIMIT_AMPS = 4;
+    private static final int PEAK_LIMIT_MILLISECONDS = 250;
+
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
     private WPI_TalonSRX leftBottomMotor;
@@ -43,54 +43,64 @@ public class Drivetrain extends Subsystem {
 
     private Solenoid gearShift;
 
-    private ADXRS450_Gyro gyro;
-    
-    private AHRS accelerometer;
+    public static AHRS navX;
 
     public Drivetrain() {
-        //TODO: Remove magic numbers: Add in RobotMap
-        leftTopMotor = new WPI_VictorSPX(RobotMap.LEFT_FRONT_MOTOR_PORT);
-        leftMiddleMotor = new WPI_VictorSPX(RobotMap.LEFT_MIDDLE_MOTOR_PORT);
-        leftBottomMotor = new WPI_TalonSRX(RobotMap.LEFT_BOTTOM_MOTOR_PORT);
-        //master-follower, leftTopMotor designated master
-        leftMiddleMotor.follow(leftTopMotor);
-        leftBottomMotor.follow(leftTopMotor);
+        leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
+        leftMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT);
+        leftBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT);
+        //master-follower, leftBottomMotor designated master
+        leftMiddleMotor.follow(leftBottomMotor);
+        leftTopMotor.follow(leftBottomMotor);
 
-        rightTopMotor = new WPI_VictorSPX(RobotMap.RIGHT_FRONT_MOTOR_PORT);
-        rightMiddleMotor = new WPI_VictorSPX(RobotMap.RIGHT_MIDDLE_MOTOR_PORT);
-        rightBottomMotor = new WPI_TalonSRX(RobotMap.RIGHT_REAR_MOTOR_PORT);
-        //master-follower, rightTopMotor designated master
-        rightMiddleMotor.follow(rightTopMotor);
-        rightBottomMotor.follow(rightTopMotor);
+        rightTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP_MOTOR_PORT);
+        rightMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT);
+        rightBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT);
+        //master-follower, rightBottomMotor designated master
+        rightMiddleMotor.follow(rightBottomMotor);
+        rightTopMotor.follow(rightBottomMotor);
 
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
+        leftTopMotor.setInverted(true);
+        leftMiddleMotor.setInverted(true);
+        leftBottomMotor.setInverted(true);
 
-        leftTopMotor.setNeutralMode(NeutralMode.Coast);
-        leftMiddleMotor.setNeutralMode(NeutralMode.Coast);
-        leftBottomMotor.setNeutralMode(NeutralMode.Coast);
-        rightTopMotor.setNeutralMode(NeutralMode.Coast);
-        rightMiddleMotor.setNeutralMode(NeutralMode.Coast);
-        rightBottomMotor.setNeutralMode(NeutralMode.Coast);
+        leftTopMotor.setNeutralMode(NeutralMode.Brake);
+        leftMiddleMotor.setNeutralMode(NeutralMode.Brake);
+        leftBottomMotor.setNeutralMode(NeutralMode.Brake);
+        rightTopMotor.setNeutralMode(NeutralMode.Brake);
+        rightMiddleMotor.setNeutralMode(NeutralMode.Brake);
+        rightBottomMotor.setNeutralMode(NeutralMode.Brake);
+
+        leftBottomMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS, 0);
+        rightBottomMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS, 0);
+        leftBottomMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        rightBottomMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        leftBottomMotor.enableCurrentLimit(false);
+        rightBottomMotor.enableCurrentLimit(false);
 
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        leftLineSensor = new DigitalInput(RobotMap.DRVETRAIN_LINE_SENSOR_LEFT_PORT);
-        rightLineSensor = new DigitalInput(RobotMap.DRVETRAIN_LINE_SENSOR_RIGHT_PORT);
-
+        leftLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        lineSensorSystem = new LineSensorSystem(leftLineSensor,rightLineSensor);
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
-        //leftEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
-        //rightEncoder.setDistancePerPulse(RobotMap.DRIVETRAIN_ENCODER_INCHES_PER_PULSE);
+        differentialDrive = new DifferentialDrive(leftBottomMotor, rightBottomMotor);
 
-        // Not sure about this next line: (what is kMXP?)
-        accelerometer = new AHRS(SPI.Port.kMXP);
+        // the navX is plugged into the kMXP port on the roboRIO
+        navX = new AHRS(SPI.Port.kMXP);
+    }
+    //@Override
+    /*public void periodic(){
+        updateSensors();
+    }*/
 
-        differentialDrive = new DifferentialDrive(leftTopMotor, rightTopMotor);
-
-        gyro = new ADXRS450_Gyro();
+    public void resetRamping() {
+        setRamp(0);
     }
 
     public double getLeftSpeed() {
@@ -105,6 +115,10 @@ public class Drivetrain extends Subsystem {
         return Math.max(Math.abs(getLeftSpeed()), Math.abs(getRightSpeed()));
     }
 
+    public double getRawEncoderDistance() {
+        return Math.abs(Math.max(getLeftRawEncoderDistance(), getRightRawEncoderDistance()));
+    }
+
     public double getEncoderDistance() {
         return Math.abs(Math.max(getLeftEncoderDistance(), getRightEncoderDistance()));
     }
@@ -114,7 +128,7 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getRightEncoderDistance() {
-        return rightBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
+        return -1 * rightBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
     }
 
     public double getLeftRawEncoderDistance() {
@@ -122,20 +136,31 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getRightRawEncoderDistance() {
-        return rightBottomMotor.getSelectedSensorPosition(0);
+        return -1 * rightBottomMotor.getSelectedSensorPosition(0);
     }
 
     public void resetEncoders() {
-        leftBottomMotor.setSelectedSensorPosition(0, 0, 0);
-        rightBottomMotor.setSelectedSensorPosition(0, 0, 0);
+        leftBottomMotor.setSelectedSensorPosition(0, 0, 100);
+        rightBottomMotor.setSelectedSensorPosition(0, 0, 100);
+    }
+
+    public void setEncoders(double inches) {
+        leftBottomMotor.setSelectedSensorPosition(
+                (int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0, 0);
+        rightBottomMotor.setSelectedSensorPosition(
+                (int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0, 0);
     }
 
     public void tankDrive(double left, double right) {
-        differentialDrive.tankDrive(left, right);
+        differentialDrive.tankDrive(left, right, false);
     }
 
     public void arcadeDrive(double speed, double rotation) {
         differentialDrive.arcadeDrive(speed, rotation);
+    }
+
+    public void curvatureDrive(double speed, double rotation, boolean turn) {
+        differentialDrive.curvatureDrive(speed, rotation, turn);
     }
 
     public void stop() {
@@ -155,12 +180,22 @@ public class Drivetrain extends Subsystem {
         gearShift.set(m);
     }
 
+    public void gearShiftInput(boolean isShifted) {
+        gearShift.set(isShifted);
+    }
+
+    public boolean isGearShift() {
+        return gearShift.get();
+    }
+
+
     public double getGyroAngle() {
-        return gyro.getAngle();
+        return navX.getAngle();
     }
 
     public void updateSensors() {
-        lineSensorSystem.mainLoop();
+       lineSensorSystem.mainLoop();
+
     }
 
     public boolean isOnLine() {
@@ -168,42 +203,34 @@ public class Drivetrain extends Subsystem {
     }
 
 
+
+
     public void initDefaultCommand() {
         //setDefaultCommand(new DriveCommand());
-        setDefaultCommand(new DrivetrainPiotrDriveCommand());
+        setDefaultCommand(new DrivetrainDriveSystemCommand());
+    }
+
+    public void setRamp(double rampSeconds) {
+        leftTopMotor.configOpenloopRamp(rampSeconds, 0);
+        rightTopMotor.configOpenloopRamp(rampSeconds, 0);
+        leftMiddleMotor.configOpenloopRamp(rampSeconds, 0);
+        rightMiddleMotor.configOpenloopRamp(rampSeconds, 0);
+        leftBottomMotor.configOpenloopRamp(rampSeconds, 0);
+        rightBottomMotor.configOpenloopRamp(rampSeconds, 0);
     }
 
     public void resetGyro() {
-        // TODO Auto-generated method stub
-        gyro.reset();
+        navX.reset();
     }
 
-    public void resetAccelerometer() {
-        accelerometer.reset();
+    public void enableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
     }
 
-    public double getXAccel() {
-        return accelerometer.getWorldLinearAccelX();
-    }
-
-    public double getYAccel() {
-        return accelerometer.getWorldLinearAccelY();
-    }
-
-    public double getZAccel() {
-        return accelerometer.getWorldLinearAccelZ();
-    }
-
-    public double getZRotation() {
-        return accelerometer.getYaw();
-    }
-
-    public boolean testForBump() {
-        return getZAccel() > -1;
-    }
-
-    public boolean isCalibrating() {
-        return accelerometer.isCalibrating();
+    public void disableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(false);
+        rightBottomMotor.enableCurrentLimit(false);
     }
 
 }

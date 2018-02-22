@@ -7,59 +7,106 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.subsystems.Acquirer;
+import org.usfirst.frc.team694.robot.commands.auton.DifferentSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.LeftSideSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
+import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SideScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SimpleDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
-import org.usfirst.frc.team694.util.IRSensor;
+import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.properties file in the
- * project.
- */
-public class Robot extends TimedRobot {
+public class Robot extends IterativeRobot {
 
     public static Drivetrain drivetrain;
-    public static Acquirer acquirer;
+    public static Spatula spatula;
     public static CrabArm crabArm;
-    public static Grabber grabber; 
-    public static IRSensor irsensor;  
+    public static Grabber grabber;
     public static Lift lift;
- 
+
     public static OI oi;
 
-    private SendableChooser<Command> autonChooser = new SendableChooser<>();
-    private Command autonCommand; // Selected command run during auton
+    static boolean isRobotAtBottom;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
+    private String gameData;
+    public static boolean isRobotOnRight;
+
+    private static boolean isAllianceSwitchRight;
+    private static boolean isScaleRight;
+
+    private static SendableChooser<Command> autonChooser = new SendableChooser<>();
+    private Command autonCommand; // Selected command run during auton
+    private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
+
+    private PowerDistributionPanel pdppanel;
+
     @Override
     public void robotInit() {
         drivetrain = new Drivetrain();
-        acquirer = new Acquirer();
+        spatula = new Spatula();
         crabArm = new CrabArm();
         grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
+
+        //        pdppanel = new PowerDistributionPanel();
+
+        //        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        //        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        //        SmartDashboard.putData("Autonomous", autonChooser);
+        //        
+        //        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        //        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+        //        SmartDashboard.putData("Where is the robot starting?", sideChooser);
+        //        
+        //        SmartDashboard.putNumber("Lift P", 0);
+        //        
+        //        SmartDashboard.putNumber("RotateDegreesPID P", 0);
+        //        SmartDashboard.putNumber("RotateDegreesPID I", 0);
+        //        SmartDashboard.putNumber("RotateDegreesPID D", 0);
+
+        initSmartDashboard();
+        Robot.drivetrain.resetEncoders();
     }
 
-    /**
-     * This function is called once each time the robot enters Disabled mode.
-     * You can use it to reset any subsystem information you want to clear when
-     * the robot is disabled.
-     */
+    public enum WhereTheBotIsInReferenceToDriver {
+
+        RIGHT_SIDE_OF_DRIVER, LEFT_SIDE_OF_DRIVER
+    }
+
+    //Bottom means side closer to the scoring table
+    public static FieldMapInterface getRobotQuadrant() {
+        // TESTING ONLY
+        return new FieldMapRedFarFromScoringTableQuadrant();
+
+        /*if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
+            if(isRobotOnRight) {
+                return new FieldMapRedFarFromScoringTableQuadrant(); 
+            }
+            return new FieldMapRedNearScoringTableQuadrant();      
+        }
+        if(isRobotOnRight) {
+            return new FieldMapBlueNearScoringTableQuadrant();
+        }
+        return new FieldMapBlueFarFromScoringTableQuadrant();
+        */
+    }
+
     @Override
     public void disabledInit() {
 
@@ -70,54 +117,136 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
     }
 
-    /**
-     * This autonomous (along with the chooser code above) shows how to select
-     * between different autonomous modes using the dashboard. The sendable
-     * chooser code works with the Java SmartDashboard. If you prefer the
-     * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-     * getString code to get the auto name from the text box below the Gyro
-     *
-     * <p>You can add additional auto modes by adding additional commands to the
-     * chooser code above (like the commented example) or additional comparisons
-     * to the switch structure below with additional strings & commands.
-     */
     @Override
     public void autonomousInit() {
-        autonCommand = autonChooser.getSelected();
+                double timestamp = Timer.getFPGATimestamp();
+                while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+                    gameData = DriverStation.getInstance().getGameSpecificMessage();
+                }
+                if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
+                    autonCommand = new MobilityAutonUsingEncodersCommand();
+                    System.err.print("******* Field Data Problem!!!"); 
+                    System.err.println("Please yell at the field management crew to fix this");
+                }else {
+                    isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
+                    isAllianceSwitchRight = gameData.charAt(0) == 'R';
+                    isScaleRight = gameData.charAt(1) == 'R';
+                    autonCommand = autonChooser.getSelected();
+                }
 
+        // Delete me when you're done testing!
+//        autonCommand = autonChooser.getSelected();
         if (autonCommand != null) {
             autonCommand.start();
         }
     }
 
-    /**
-     * This function is called periodically during autonomous.
-     */
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        SmartDashboard.getNumber("IR Sensor Voltage", IRSensor.getSensorVoltage());
+        updateSmartDashboard();
     }
 
     @Override
     public void teleopInit() {
+        Robot.drivetrain.resetEncoders(); // TEST
+        Robot.drivetrain.setRamp(0.0);
         if (autonCommand != null) {
             autonCommand.cancel();
         }
+        Robot.drivetrain.resetRamping();
     }
 
-    /**
-     * This function is called periodically during operator control.
-     */
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        updateSmartDashboard();
+    }
+
+    private void initSmartDashboard() {
+
+        // AUTON CHOOSER
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        /* Testing autons:
+        autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
+        autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
+        autonChooser.addObject("Right Side Switch Auton", new RightSideSwitchAutonCommand());
+        autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
+        */
+
+        autonChooser.addObject("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
+        autonChooser.addDefault("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
+        autonChooser.addDefault("SIMPLE OTHER SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
+        SmartDashboard.putData("Autonomous", autonChooser);
+        
+        // SIDE CHOOSER
+        sideChooser.addDefault("Right", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
+        sideChooser.addObject("Left", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
+        SmartDashboard.putData("Where is the bot starting?", sideChooser);
+
+        // PDP Panel
+        //        SmartDashboard.putData("PDP", pdppanel);
+
+        SmartDashboard.putNumber("Lift P", 0.3);
+
+        SmartDashboard.putNumber("DriveStraight RampSeconds", 0.8);
+
+        // Drive Straight Distance PID
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0.004);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.04);
+
+        // Drive Straight Rotation PID
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012);
+        SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
+
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.029);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0.005);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0.3);
+
+        SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.8);
+
+        SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
+
+    }
+
+    private void updateSmartDashboard() {
+
+        //        SmartDashboard.putData(pdppanel);
+
+        SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
+        SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
+        SmartDashboard.putBoolean("Lift: Bottom Limit Switch", Robot.lift.isAtBottom());
+        SmartDashboard.putNumber("Lift Speed", Robot.lift.getSpeed());
+
+        SmartDashboard.putBoolean("Drivetrain: Gear Shift", Robot.drivetrain.isGearShift());
+        SmartDashboard.putNumber("Drivetrain: Left Encoder Values", Robot.drivetrain.getLeftEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
+
+        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
+
     }
 
     /**
-     * This function is called periodically during test mode.
+     * S This function is called periodically during test mode.
      */
     @Override
     public void testPeriodic() {
+    }
+
+    public static boolean isRobotAndSwitchOnSameSide() {
+        return (isAllianceSwitchRight && isRobotOnRight) || (!isAllianceSwitchRight && !isRobotOnRight);
+        //true is switch is close to robot
+        //false is switch is far away robot
+    }
+
+    public static boolean isRobotAndScaleOnSameSide() {
+        return (isScaleRight && isRobotOnRight) || (!isScaleRight && !isRobotOnRight);
+        //true is scale is close to robot 
+        //false is scale is far away from robot 
     }
 }

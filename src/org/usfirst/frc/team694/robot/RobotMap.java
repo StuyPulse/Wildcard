@@ -7,70 +7,109 @@
 
 package org.usfirst.frc.team694.robot;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
 public final class RobotMap {
-
+    /**************************************************************************
+     * Robot Dimensions
+     */
+    public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
+    public static final double LENGTH_OF_BOT = 38; // (not including grabber)
+    public static final double WIDTH_OF_BOT = 34.5; //
+    public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
+    public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
+    public static final double DIFFERENCE_BETWEEN_LENGTH_OF_ROBOT_AND_WIDTH_OF_ROBOT_AFTER_TURN = (LENGTH_OF_BOT - WIDTH_OF_BOT) / 2;
     /**************************************************************************
      * Gamepad Ports
      *************************************************************************/
-    public static final int DRIVER_GAMEPAD_PORT = 1;
+    public static final int DRIVER_GAMEPAD_PORT = 0;
     public static final int OPERATOR_GAMEPAD_PORT = 1;
 
     /**************************************************************************
      * Drivetrain Motor Ports
      *************************************************************************/
-    public static final int LEFT_FRONT_MOTOR_PORT = -1;
-    public static final int LEFT_MIDDLE_MOTOR_PORT = -1;
-    public static final int LEFT_BOTTOM_MOTOR_PORT = -1;
-
-    public static final int RIGHT_FRONT_MOTOR_PORT = -1;
-    public static final int RIGHT_MIDDLE_MOTOR_PORT = -1;
-    public static final int RIGHT_REAR_MOTOR_PORT = -1;
+    public static final int DRIVETRAIN_LEFT_TOP_MOTOR_PORT = 3;
+    public static final int DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT = 2;
+    public static final int DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT = 1;
 
     /**************************************************************************
-     * Acquirer Motor Ports
+     * Spatula and CrabArm Constants //All times are in seconds
      *************************************************************************/
-    public static final int ACQUIRER_LEFT_MOTOR_PORT = -1;
-    public static final int ACQUIRER_RIGHT_MOTOR_PORT = -1;
+    public static final double PRE_FLIP_WAIT_TIME = 0.25;
+    public static final double POST_FLIP_WAIT_TIME = 0.5;
+    public static final double FLAP_OUT_SPEED = 1;
+
+    public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = 6;
+    public static final int DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT = 5;
+    public static final int DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT = 4;
+
+    /**************************************************************************
+     * Spatula Motor Ports
+     *************************************************************************/
+    public static final int SPATULA_LEFT_MOTOR_PORT = 11;
+    public static final int SPATULA_RIGHT_MOTOR_PORT = 12;
+
+    /**************************************************************************
+     * Spatula Limit Switch
+     *************************************************************************/
+    public static final int SPATULA_LIMIT_SWITCH_PORT = 1;
 
     /***************************************************************************
      * Lift Motor Ports
      *************************************************************************/
-    public static final int LEFT_LIFT_MOTOR_PORT = -1;
-    public static final int RIGHT_LIFT_MOTOR_PORT = -1;
+    public static final int LIFT_INNER_LEFT_MOTOR_PORT = 7;
+    public static final int LIFT_INNER_RIGHT_MOTOR_PORT = 9;
+    public static final int LIFT_OUTER_LEFT_MOTOR_PORT = 8;
+    public static final int LIFT_OUTER_RIGHT_MOTOR_PORT = 10;
 
     /***************************************************************************
      * Lift Constants
      *************************************************************************/
-    public static final double LIFT_ENCODER_RAW_MULTIPLIER = -1;
+    public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
+    public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
+    public static final double LIFT_ENCODER_RAW_MULTIPLIER = (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) / 4.4;
+    
+    public static final double MIN_HEIGHT_OF_LIFT = 20.5;
+    public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
+    public static final double LIFT_MAX_SPEED = 1;
+    public static final double LIFT_BACKDRIVE_SPEED = 0.16667;
+
+    public static final double LIFT_MIN_SPEED = 0.25;
+    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 20.0;
+    public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_RAMP_HEIGHT_THRESHOLD;
+    public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
+    public static final double LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD = 2;
+
+
+    /***************************************************************************
+     * Lift Limit Switch
+     *************************************************************************/
+    public static final int LIFT_TOP_LIMIT_SWITCH_PORT = 2;
+    public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = 0;
+
+    /****************************************************************************
+     * CrabArm Ports
+     *************************************************************************/
+
+    public static final int CRAB_ARM_LEFT_MOTOR_PORT = 13;
+    public static final int CRAB_ARM_RIGHT_MOTOR_PORT = 14;
 
     /****************************************************************************
      * Solenoid Ports
      *************************************************************************/
-    public static final int GEAR_SHIFT_CHANNEL = -1;
-    public static final int CRAB_ARM_SOLENOID_PORT = -1;
-    public static final int CRAB_ARM_LEFT_MOTOR_PORT = -1;
-    public static final int CRAB_ARM_RIGHT_MOTOR_PORT = -1;
-    public static final int GRABBER_SOLENOID_PORT = -1;
-    public static final int LIFT_BRAKE_SOLENOID_CHANNEL = -1;
-    public static final int ACQUIRER_SOLENOID_PORT = -1;
+    public static final int GEAR_SHIFT_CHANNEL = 7;
+
+    public static final int GRABBER_SOLENOID_OPEN_PORT = 2;
+    public static final int GRABBER_SOLENOID_CLOSE_PORT = 3;
+
+    public static final int SPATULA_FLIP_UP_PORT = 6;
+    public static final int SPATULA_FLIP_DOWN_PORT = 5;
+    //    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
 
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
-    public static final int DRVETRAIN_LINE_SENSOR_LEFT_PORT = -1;
-    public static final int DRVETRAIN_LINE_SENSOR_RIGHT_PORT = -1;
-
-    /******************************************************************************
-     * Line Sensor Constants
-     *****************************************************************************/
-    public static final double DRIVETRAIN_LINE_SENSOR_INITIALIZE_TIME = 3;
-    public static final double DRIVETRAIN_LINE_SENSOR_THRESHOLD = -1.0;
+    
+    public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = 1;
+    public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = 2;
 
     /******************************************************************************
      * Drivetrain Encoder/Movement Constants
@@ -78,31 +117,25 @@ public final class RobotMap {
 
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6.0;
     public static final int DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION = 256;
-    public static final double DRIVETRAIN_ENCODERS_FACTOR = 4.0;
+    public static final int DRIVETRAIN_ENCODERS_FACTOR = 4;
     public static final double DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION = Math.PI * DRIVETRAIN_WHEEL_DIAMETER;
-    public static final double DRIVETRAIN_ENCODERS_INCHES_PER_PULSE = DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
-    public static final double DRIVETRAIN_RAW_MULTIPLIER = DRIVETRAIN_ENCODERS_INCHES_PER_PULSE;
 
-    public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE = DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
-    public static final double DRIVETRAIN_ENCODER_INCHES_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE
-            / DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION;
+    /**
+     * DRIVETRAIN_RAW_MULTIPLIER: We multiply by 4 because the encoder has 4
+     * Quadrants, and each Quadrant passes 256 pulses.
+     **/
+    public static final double DRIVETRAIN_RAW_MULTIPLIER = 
+            /*(127.0 / 121.0) * (161.5 / 1210.0) * */
+            (296.0 / 2171.0) *DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
+
 
     /******************************************************************************
-     * IRSensor Constants
-     *****************************************************************************/
-    /******************************************************************************
-     * Note that these constants were copied from the RobotMap.java from Rafael.
-     * These require further testing.
-     *****************************************************************************/
-
-    public static final int IR_SENSOR_PORT = -1;
-    //TODO: Test the IR Sensor Threshold value. Should correspond with how far away the cube is from the IR sensor.
-    //Use SmartDashboard, track the IR Sensor Voltage value.
-    //The current value is accurate for when the cube is about 4 inches away from the IR sensor.
-    public static final double IR_SENSOR_THRESHOLD = 1;
-    public static final double IR_TIME_IN_MECHANISM_THRESHOLD = 1.0;
-
-    public static final double EQUATION_FACTOR = 12.23368994;
-    public static final double EQUATION_EXPONENT = -0.9779601588;
-    public static final double CONVERSION_FACTOR_CM_TO_INCHES = 0.393701;
+     * Crab Arm Flap Constants
+     ******************************************************************************/
+    public static final double CRAB_ARM_COAST_POWER = 0.5; 
+    // Needs to be tested out, coast should exert less power than push, has to be enough to keep crab arms open but not overextending
+    public static final double CRAB_ARM_PUSH_POWER = 0.5; 
+    // Needs to be tested out, should be more than coast, the power to push the crab arm back initially before it stays open
 }
+

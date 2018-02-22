@@ -2,21 +2,35 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class CrabArmDeployCommand extends InstantCommand {
+public class CrabArmDeployCommand extends Command {
 
     public CrabArmDeployCommand() {
         requires(Robot.crabArm);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.crabArm.deploy();
+        //TODO: Figure out how long we want to run the spatula
+        setTimeout(4);
+    }
+
+    protected void execute() {
+        //TODO: Figure out what direction the crabArms should run to deploy
+        Robot.crabArm.acquire();
+    }
+
+    protected boolean isFinished() {
+        return isTimedOut();
+    }
+
+    protected void end() {
+        Robot.crabArm.stop();
+    }
+
+    protected void interrupted() {
     }
 }

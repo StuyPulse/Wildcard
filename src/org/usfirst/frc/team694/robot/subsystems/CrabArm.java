@@ -1,42 +1,52 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
+import org.usfirst.frc.team694.robot.commands.CrabArmStopCommand;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class CrabArm extends Subsystem {
-    public Solenoid crabArmSolenoid;
-    public WPI_VictorSPX leftCrabArmMotor;
-    public WPI_VictorSPX rightCrabArmMotor;
-    public SpeedControllerGroup crabArmMotors;
+    private WPI_VictorSPX leftCrabArmMotor;
+    private WPI_VictorSPX rightCrabArmMotor;
+    private SpeedControllerGroup crabArmMotors;
 
     public CrabArm() {
-        crabArmSolenoid = new Solenoid(RobotMap.CRAB_ARM_SOLENOID_PORT);
         leftCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_LEFT_MOTOR_PORT);
         rightCrabArmMotor = new WPI_VictorSPX(RobotMap.CRAB_ARM_RIGHT_MOTOR_PORT);
-        leftCrabArmMotor.setInverted(true);
-        crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
-    }
+        leftCrabArmMotor.setNeutralMode(NeutralMode.Coast);
+        rightCrabArmMotor.setNeutralMode(NeutralMode.Coast);
 
-    public void deploy() {
-        crabArmSolenoid.set(true);
+        rightCrabArmMotor.setInverted(true);
+
+        crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
 
     public void acquire() {
         crabArmMotors.set(1);
     }
 
-    public void deacquire() {
-        crabArmMotors.set(-1);
+    public void flapOut() {
+        crabArmMotors.set(-1 * RobotMap.FLAP_OUT_SPEED);
+    }
+    
+    public void flapPush() {
+        crabArmMotors.set(-1 * RobotMap.CRAB_ARM_PUSH_POWER);
+    }
+    
+    public void flapCoast() {
+        crabArmMotors.set(-1 * RobotMap.CRAB_ARM_COAST_POWER);
+    }
+    
+    
+    public void stop() {
+        crabArmMotors.set(0);
     }
 
     public void initDefaultCommand() {
+        //setDefaultCommand(new CrabArmStopCommand());
     }
 }
