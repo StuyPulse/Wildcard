@@ -67,8 +67,8 @@ public final class RobotMap {
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
     public static final double LIFT_ENCODER_RAW_MULTIPLIER = (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) / 4.4;
     
-    public static final double MIN_HEIGHT_OF_LIFT = 20.5;
-    public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
+    public static final double LIFT_MIN_HEIGHT = 20.5;
+    public static final double LIFT_MAX_HEIGHT = LIFT_TOTAL_CARRIAGE_MOVEMENT + LIFT_MIN_HEIGHT;
     public static final double LIFT_MAX_SPEED = 1;
     public static final double LIFT_BACKDRIVE_SPEED = 0.16667;
 

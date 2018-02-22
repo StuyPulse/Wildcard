@@ -16,7 +16,7 @@ public class SameSideScaleAutonCommand extends CommandGroup {
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachNullLine()), 4.25);
 
         addParallel(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToReachIdealStartingPointFromNullTerritoryLine() - 30));
-        addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
+        addSequential(new LiftMoveToHeightCommand(89 - RobotMap.LIFT_MIN_HEIGHT));
         addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToTravelToReachScaleCorner() + 10), 3);
         addSequential(new GrabberOpenCommand());
     }

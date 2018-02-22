@@ -27,7 +27,7 @@ public class LiftMoveCommand extends Command {
         //   Robot.spatula.acquireSpeed(-liftSquared * 0.2);
         //}
         
-        Robot.lift.move(liftSquared);
+        Robot.lift.moveLiftRamping(liftSquared);
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
     }
 

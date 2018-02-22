@@ -19,7 +19,7 @@ public class LiftMoveToBottomCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        Robot.lift.move(-1);
+        Robot.lift.moveLiftRamping(-1);
     }
 
     // Make this return true when this Command no longer needs to run execute()

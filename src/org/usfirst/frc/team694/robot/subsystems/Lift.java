@@ -24,7 +24,7 @@ public class Lift extends Subsystem {
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
     
-    private boolean wasWildcard = true;
+    //private boolean wasWildcard = true;
 
     public Lift() {
         innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -97,7 +97,7 @@ public class Lift extends Subsystem {
         //        }
     }
 
-    private void moveLift(double speed) {        
+    public void moveLift(double speed) {        
         setBrakeOff();
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
@@ -109,25 +109,13 @@ public class Lift extends Subsystem {
         }
     }
 
-    public void move(double currentSpeed) {
+    public void moveLiftRamping(double currentSpeed) {
         double currentHeight = getLiftHeight();
-//<<<<<<< HEAD
-//        double speed = maxSpeed;
-//                if (maxSpeed < 0) {
-//                    if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
-//                        speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
-//                        speed = Math.max(speed, maxSpeed);
-//                    }
-//                } else {
-//                    if (currentHeight > RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
-//                        speed = RobotMap.LIFT_RAMP_SLOPE * (RobotMap.LIFT_TOTAL_CARRIAGE_MOVEMENT - currentHeight) + RobotMap.LIFT_MIN_SPEED;
-//                        speed = Math.min(speed, maxSpeed);
-//                    }
-//                }
-//=======
         double speed = currentSpeed;
         if (currentHeight < 0) {
             speed = Math.max(-RobotMap.LIFT_MIN_SPEED,speed);
+        } else if  (currentHeight > RobotMap.LIFT_MAX_HEIGHT){
+            speed = Math.min(RobotMap.LIFT_MIN_SPEED, speed);
         } else if (currentSpeed < 0) {
             if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
                 speed = -(RobotMap.LIFT_RAMP_SLOPE * currentHeight + RobotMap.LIFT_MIN_SPEED);
@@ -139,6 +127,7 @@ public class Lift extends Subsystem {
                 speed = Math.min(speed, currentSpeed);
             }
         }
+
 //        System.out.println("Given: " + currentSpeed + ", Actual: " + speed);
         moveLift(speed);
     }
