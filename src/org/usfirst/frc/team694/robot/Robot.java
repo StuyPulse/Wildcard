@@ -54,8 +54,6 @@ public class Robot extends IterativeRobot {
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
 
     private PowerDistributionPanel pdppanel;
-    
-    public static final boolean IS_WILDCARD = false;
 
     @Override
     public void robotInit() {
@@ -122,24 +120,25 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-                double timestamp = Timer.getFPGATimestamp();
-                while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
-                    gameData = DriverStation.getInstance().getGameSpecificMessage();
-                }
-                if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
-                    autonCommand = new MobilityAutonUsingEncodersCommand();
-                    System.err.print("******* Field Data Problem!!!"); 
-                    System.err.println("Please yell at the field management crew to fix this");
-                }else {
-                    isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
-                    isAllianceSwitchRight = gameData.charAt(0) == 'R';
-                    isScaleRight = gameData.charAt(1) == 'R';
-                    autonCommand = autonChooser.getSelected();
-                }
+        double timestamp = Timer.getFPGATimestamp();
+        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+            gameData = DriverStation.getInstance().getGameSpecificMessage();
+        }
+        if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
+            autonCommand = new MobilityAutonUsingEncodersCommand();
+            System.err.print("******* Field Data Problem!!!"); 
+            System.err.println("Please yell at the field management crew to fix this");
+        }else {
+            isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
+            isAllianceSwitchRight = gameData.charAt(0) == 'R';
+            isScaleRight = gameData.charAt(1) == 'R';
+            autonCommand = autonChooser.getSelected();
+        }
 
         // Delete me when you're done testing!
 //        autonCommand = autonChooser.getSelected();
         if (autonCommand != null) {
+            System.out.println("Command chosen: " + autonCommand.getName());
             autonCommand.start();
         }
     }
@@ -169,8 +168,8 @@ public class Robot extends IterativeRobot {
     private void initSmartDashboard() {
 
         // AUTON CHOOSER
-        autonChooser.addDefault("Do Nothing", new CommandGroup());
-        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        autonChooser.addObject("Do Nothing", new CommandGroup());
+        autonChooser.addDefault("Mobility", new MobilityAutonUsingEncodersCommand());
         /* Testing autons:
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
@@ -179,10 +178,11 @@ public class Robot extends IterativeRobot {
         */
 
         autonChooser.addObject("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
-        autonChooser.addDefault("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
-        autonChooser.addDefault("SIMPLE OTHER SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
+        autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
+        autonChooser.addObject("SIMPLE OTHER SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
+        autonChooser.addObject("TEMPORARY switch ALWAYS Right Auton", new RightSideSwitchAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
-        
+
         // SIDE CHOOSER
         sideChooser.addDefault("Right", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
         sideChooser.addObject("Left", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);

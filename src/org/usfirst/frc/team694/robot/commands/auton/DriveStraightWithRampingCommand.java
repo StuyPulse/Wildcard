@@ -14,7 +14,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
 
     private static final double DRIVE_DISTANCE_THRESHOLD = 1;
 
-    protected double output;
+//    protected double output;
     protected double targetDistance;
     protected double startEncoderValue;
     protected static double angleOutput;
@@ -52,6 +52,8 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         gyroControl.setPID(SmartDashboard.getNumber("DriveStraightGyroPID P", 0),
                 SmartDashboard.getNumber("DriveStraightGyroPID I", 0),
                 SmartDashboard.getNumber("DriveStraightGyroPID D", 0));
+        
+        System.out.println("[DriveStraightRamping] p: " + SmartDashboard.getNumber("DriveStraightGyroPID P", 0));
         //targetDistance = SmartDashboard.getNumber("Test Distance", 170);
         this.getPIDController().setSetpoint(targetDistance);
         gyroControl.setSetpoint(0);
@@ -113,6 +115,7 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
     @Override
     protected void usePIDOutput(double output) {
         //if (!isFinished()) {
+        output *= speedScaleFactor;
         if (Math.abs(output) < 0.2) {
             if (isOnTarget())
                 output = 0;
@@ -121,13 +124,13 @@ public class DriveStraightWithRampingCommand extends PIDCommand {
         }
 
         output = Math.min(Math.max(-1, output), 1);
+        System.out.println("[DriveStraightRamping] " + output);
 
-        double left = output * speedScaleFactor  + DriveStraightWithRampingCommand.angleOutput;
-        double right = output * speedScaleFactor - DriveStraightWithRampingCommand.angleOutput;
+        double left = output  + DriveStraightWithRampingCommand.angleOutput;
+        double right = output - DriveStraightWithRampingCommand.angleOutput;
 
         Robot.drivetrain.tankDrive(left,right);
 
-        this.output = output;
         //}
     }
 

@@ -23,7 +23,7 @@ public class Lift extends Subsystem {
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
-    
+
     //private boolean wasWildcard = true;
 
     public Lift() {
@@ -49,8 +49,6 @@ public class Lift extends Subsystem {
 
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
-        innerLeftMotor.setSensorPhase(Robot.IS_WILDCARD);
-        innerRightMotor.setSensorPhase(Robot.IS_WILDCARD);
 
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
@@ -84,9 +82,7 @@ public class Lift extends Subsystem {
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
-            if(!Robot.IS_WILDCARD) {
-                speed = -speed;
-            }
+            speed *= -1; // TODO: Remove when electronic engineering fixes this
             innerLeftMotor.set(ControlMode.PercentOutput,speed); 
         }
     }
@@ -154,9 +150,9 @@ public class Lift extends Subsystem {
     public double getLiftHeight() {
         return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
     }
-    
+
     public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
+//        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
     
     public double getMotorVelocity() {

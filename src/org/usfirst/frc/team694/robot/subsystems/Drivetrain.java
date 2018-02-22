@@ -220,7 +220,7 @@ public class Drivetrain extends Subsystem {
         //setDefaultCommand(new DriveCommand());
         setDefaultCommand(new DrivetrainDriveSystemCommand());
     }
-    
+
     public void setRamp(double rampSeconds) {
         leftTopMotor.configOpenloopRamp(rampSeconds, 0);
         rightTopMotor.configOpenloopRamp(rampSeconds, 0);
@@ -235,13 +235,13 @@ public class Drivetrain extends Subsystem {
     }
 
     public void enableCurrentLimit() {
-        leftBottomMotor.enableCurrentLimit(true);
-        rightBottomMotor.enableCurrentLimit(true);
+//        leftBottomMotor.enableCurrentLimit(true);
+//        rightBottomMotor.enableCurrentLimit(true);
     }
 
     public void disableCurrentLimit() {
-        leftBottomMotor.enableCurrentLimit(false);
-        rightBottomMotor.enableCurrentLimit(false);
+//        leftBottomMotor.enableCurrentLimit(false);
+//        rightBottomMotor.enableCurrentLimit(false);
     }
 
 }

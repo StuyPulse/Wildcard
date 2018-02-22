@@ -36,3 +36,4 @@ public class SameSideScaleAutonCommand extends CommandGroup {
 //        addSequential(new LiftMoveToBottomCommand());
     }
 }
+

@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team694.robot;
 
+import java.lang.invoke.SwitchPoint;
+
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOffCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINAutomationOnCommand;
 import org.usfirst.frc.team694.robot.commands.BITCOINCheckCommand;
@@ -21,8 +23,10 @@ import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SimpleDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -38,11 +42,13 @@ public class OI {
         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
 
         // TESTING ONLY
-//        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(253.75));
-        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
-//        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(7 - RobotMap.MIN_HEIGHT_OF_LIFT));
+//        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(253));
+//        driverGamepad.getDPadLeft().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
+//        driverGamepad.getDPadRight().cancelWhenPressed(new SimpleDifferentSideScaleAutonCommand());
+//        driverGamepad.getSelectButton().whenPressed(new LiftMoveToHeightCommand(7 - RobotMap.LIFT_MIN_HEIGHT));
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
+        driverGamepad.getSelectButton().whenPressed(new RightSideSwitchAutonCommand());
 
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
@@ -50,7 +56,7 @@ public class OI {
         operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
-        
+
         operatorGamepad.getLeftBumper().whileHeld(new SpatulaRightDeacquireCommand());
         operatorGamepad.getRightBumper().whileHeld(new SpatulaLeftDeacquireCommand());
 

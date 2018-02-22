@@ -66,7 +66,6 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
         System.out.println(Robot.drivetrain.getGyroAngle());
     }
 
-
     @Override
     protected double returnPIDInput() {
         // TODO Auto-generated method stub
@@ -75,8 +74,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
     @Override
     protected void usePIDOutput(double output) {
-        if (Math.abs(output) < 0.2) {
-            output = 0.2 * Math.signum(output);
+        if (Math.abs(output) < 0.15) {
+            output = 0.15 * Math.signum(output);
         }
         System.out.println("out: " + output);
         Robot.drivetrain.tankDrive(output, -output);

@@ -11,5 +11,6 @@ public class DriveStraightNoRampingLimitCommand extends DriveStraightWithRamping
     protected void initialize() {
         super.initialize();
         Robot.drivetrain.setRamp(0);
+        System.out.println("[DriveStraightNoRamping] init");
     }
 }

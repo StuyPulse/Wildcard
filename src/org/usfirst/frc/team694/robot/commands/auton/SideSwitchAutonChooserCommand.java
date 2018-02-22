@@ -12,9 +12,16 @@ public class SideSwitchAutonChooserCommand extends ConditionalCommand {
     public SideSwitchAutonChooserCommand() {
         super(new RightSideSwitchAutonCommand(), new LeftSideSwitchAutonCommand()); 
     }
+    
+    @Override
+    protected void initialize() {
+        super.initialize();
+        System.out.println("[SideSwitchChooser] uhhhhh");
+    }
 
     @Override
     protected boolean condition() {
+        System.out.println("[SideSwitchChooser] condition: " + Robot.isRobotAndSwitchOnSameSide());
         return Robot.isRobotAndSwitchOnSameSide();
     }
 }
