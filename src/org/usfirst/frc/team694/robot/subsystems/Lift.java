@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.LiftMoveCommand;
 
@@ -10,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,6 +23,8 @@ public class Lift extends Subsystem {
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
+    
+    private boolean wasWildcard = true;
 
     public Lift() {
         innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -48,8 +50,8 @@ public class Lift extends Subsystem {
         
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0), 0);
 
-        innerLeftMotor.setSensorPhase(true);
-        innerRightMotor.setSensorPhase(true);
+        innerLeftMotor.setSensorPhase(Robot.IS_WILDCARD);
+        innerRightMotor.setSensorPhase(Robot.IS_WILDCARD);
 
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
@@ -64,6 +66,14 @@ public class Lift extends Subsystem {
         if (isAtBottom()) {
             resetEncoders();
         }
+//        if(SmartDashboard.getBoolean("Is Wildcard?", true) != wasWildcard) {
+//            wasWildcard = SmartDashboard.getBoolean("Is Wildcard?", true);
+//            System.out.println("CHANGED "+ wasWildcard);
+//            innerLeftMotor.setInverted(!wasWildcard);
+//            innerRightMotor.setInverted(!wasWildcard);
+//            outerLeftMotor.setInverted(!wasWildcard);
+//            outerLeftMotor.setInverted(!wasWildcard);
+//        }
     }
 
     public void resetEncoders() {
@@ -87,11 +97,14 @@ public class Lift extends Subsystem {
         //        }
     }
 
-    private void moveLift(double speed) {
+    private void moveLift(double speed) {        
         setBrakeOff();
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
+            if(!Robot.IS_WILDCARD) {
+                speed = -speed;
+            }
             innerLeftMotor.set(ControlMode.PercentOutput,speed); 
         }
     }

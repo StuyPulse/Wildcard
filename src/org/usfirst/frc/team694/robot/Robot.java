@@ -42,6 +42,8 @@ public class Robot extends IterativeRobot {
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
     
     private PowerDistributionPanel pdppanel;
+    
+    public static final boolean IS_WILDCARD = false;
 
     @Override
     public void robotInit() {
@@ -69,7 +71,6 @@ public class Robot extends IterativeRobot {
 //        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
-
     }
     
     public enum WhereTheBotIsInReferenceToDriver {
