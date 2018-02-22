@@ -83,10 +83,8 @@ public class Robot extends IterativeRobot {
         //        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
-<<<<<<< HEAD
-=======
         Robot.drivetrain.resetEncoders();
->>>>>>> Testing_Swerve_Scale
+
     }
 
     public enum WhereTheBotIsInReferenceToDriver {
