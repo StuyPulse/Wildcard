@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Spatula extends Subsystem {
 
@@ -47,9 +48,15 @@ public class Spatula extends Subsystem {
         spatulaFlipSolenoid = new DoubleSolenoid(RobotMap.SPATULA_FLIP_UP_PORT, RobotMap.SPATULA_FLIP_DOWN_PORT);
         //spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
-        isBITCOINAutomation = true;
+        isBITCOINAutomation = false;
 
         spatulaLimitSwitch = new DigitalInput(RobotMap.SPATULA_LIMIT_SWITCH_PORT);
+    }
+
+    @Override
+    public void periodic() {
+        super.periodic();
+        SmartDashboard.putString("Spatula Current Command", this.getCurrentCommandName());
     }
 
     public void acquire() {

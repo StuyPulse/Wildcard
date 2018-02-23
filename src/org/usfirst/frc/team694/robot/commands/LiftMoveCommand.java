@@ -15,7 +15,8 @@ public class LiftMoveCommand extends Command {
 
     public LiftMoveCommand() {
         requires(Robot.lift);
-        requires(Robot.spatula);
+        // Problems with default command overriding spatula:
+//        requires(Robot.spatula);
     }
 
     protected void initialize() {
@@ -25,14 +26,14 @@ public class LiftMoveCommand extends Command {
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
 
-        if (Robot.spatula.isSpatulaUp()) {
-            Robot.spatula.acquireSpeed(-liftSquared * 0.2);
-        }
 
         Robot.lift.move(liftSquared);
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
 
         if (Math.abs(liftControl) > DRIVETRAIN_LIMIT_LIFT_THRESHOLD) {
+            if (Robot.spatula.isSpatulaUp()) {
+                Robot.spatula.acquireSpeed(-liftSquared * 0.2);
+            }
             Robot.drivetrain.enableCurrentLimit();
         } else {
             Robot.drivetrain.disableCurrentLimit();

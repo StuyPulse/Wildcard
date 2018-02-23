@@ -50,7 +50,7 @@ public class OI {
         operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
-        
+
         operatorGamepad.getLeftBumper().whileHeld(new SpatulaRightDeacquireCommand());
         operatorGamepad.getRightBumper().whileHeld(new SpatulaLeftDeacquireCommand());
 
