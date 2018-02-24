@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift extends Subsystem {
 
-    private static final int PEAK_LIMIT_AMPS = 4;
+    private static final int PEAK_LIMIT_AMPS = 23; // 26 is max roughly
     private static final int PEAK_LIMIT_MILLISECONDS = 250;
 
     private WPI_TalonSRX innerLeftMotor;
@@ -60,8 +60,8 @@ public class Lift extends Subsystem {
         // Lift P, to ramp up to a height
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
-        innerLeftMotor.setSensorPhase(true);
-        innerRightMotor.setSensorPhase(true);
+//        innerLeftMotor.setSensorPhase(true);
+//        innerRightMotor.setSensorPhase(true);
 
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
@@ -178,5 +178,9 @@ public class Lift extends Subsystem {
     public void disableCurrentLimit() {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
+    }
+    
+    public double getCurrent() {
+        return innerLeftMotor.getOutputCurrent();
     }
 }

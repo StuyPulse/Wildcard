@@ -161,11 +161,13 @@ public class Robot extends IterativeRobot {
 
         // TODO: Test with current limit set 100% of the time to find optimal current limit
         // TODO: Find at what point should the lift be limited
-        if (drivetrain.getMotorAmps() > 40 /* SET ME */) {
-            lift.enableCurrentLimit();
-        } else {
-            lift.disableCurrentLimit();
-        }
+//        if (drivetrain.getMotorAmps() > 40 /* SET ME */) {
+//            lift.enableCurrentLimit();
+//        } else {
+//            lift.disableCurrentLimit();
+//        }
+//        lift.enableCurrentLimit();
+        System.out.println("[Robot] Lift current: " + Robot.lift.getCurrent());
     }
 
     private void initSmartDashboard() {
