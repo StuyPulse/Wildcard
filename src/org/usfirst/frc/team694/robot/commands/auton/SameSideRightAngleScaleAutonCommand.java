@@ -8,11 +8,11 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class SameSideRightAngleAutonCommand extends CommandGroup {
+public class SameSideRightAngleScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
-    public SameSideRightAngleAutonCommand() {
-        addParallel(new DrivetrainLineSensorReachNullCommand());
+    public SameSideRightAngleScaleAutonCommand() {
+//        addParallel(new DrivetrainLineSensorCommand(FILLME));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceFromFrontOfBotToNullBump()));
       
         addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));

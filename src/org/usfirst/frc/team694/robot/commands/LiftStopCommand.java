@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class LiftStopCommand extends InstantCommand {
 
     public LiftStopCommand() {
-        super();
         requires(Robot.lift);
     }
 
+    @Override
     protected void initialize() {
         Robot.lift.stop();
     }

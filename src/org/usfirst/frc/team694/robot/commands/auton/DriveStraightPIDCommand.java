@@ -16,6 +16,7 @@ public class DriveStraightPIDCommand extends PIDCommand {
 		this.speed = speed;
 	}
 
+	@Override
 	protected void initialize() {
 		Robot.drivetrain.resetGyro();
 		Robot.drivetrain.resetEncoders();
@@ -26,19 +27,19 @@ public class DriveStraightPIDCommand extends PIDCommand {
 				);
 	}
 
+    @Override
 	protected void execute() {
 		System.out.println("[DriveStraightPIDCommand] angle:" + returnPIDInput());
 	}
 
+    @Override
 	protected boolean isFinished() {
 		return Robot.drivetrain.getEncoderDistance() >= distance;
 	}
 
+    @Override
 	protected void end() {
 		Robot.drivetrain.tankDrive(0, 0);
-	}
-
-	protected void interrupted() {
 	}
 
 	@Override
