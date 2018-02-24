@@ -163,6 +163,19 @@ public class Robot extends IterativeRobot {
         updateSmartDashboard();
     }
 
+    @Override
+    public void robotPeriodic() {
+        /// Current Limiting
+
+        // TODO: Test with current limit set 100% of the time to find optimal current limit
+        // TODO: Find at what point should the lift be limited
+        if (drivetrain.getMotorAmps() > 40 /* SET ME */) {
+            lift.enableCurrentLimit();
+        } else {
+            lift.disableCurrentLimit();
+        }
+    }
+
     private void initSmartDashboard() {
 
         // AUTON CHOOSER

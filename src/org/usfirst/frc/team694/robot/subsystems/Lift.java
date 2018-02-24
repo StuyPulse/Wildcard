@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift extends Subsystem {
 
+    private static final int PEAK_LIMIT_AMPS = 4;
+    private static final int PEAK_LIMIT_MILLISECONDS = 250;
+
     private WPI_TalonSRX innerLeftMotor;
     private WPI_TalonSRX innerRightMotor;
     private WPI_VictorSPX outerLeftMotor;
@@ -36,6 +39,13 @@ public class Lift extends Subsystem {
 
         outerLeftMotor.setNeutralMode(NeutralMode.Brake);
         outerRightMotor.setNeutralMode(NeutralMode.Brake);
+
+        innerLeftMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS,0);
+        innerRightMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS,0);
+        innerLeftMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        innerRightMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        innerLeftMotor.enableCurrentLimit(false);
+        innerRightMotor.enableCurrentLimit(false);
 
         innerRightMotor.follow(innerLeftMotor);
         outerRightMotor.follow(innerLeftMotor);
@@ -158,5 +168,15 @@ public class Lift extends Subsystem {
     
     public double getMotorVelocity() {
         return innerLeftMotor.getSelectedSensorVelocity(0);
+    }
+
+    public void enableCurrentLimit() {
+        innerLeftMotor.enableCurrentLimit(true);
+        innerRightMotor.enableCurrentLimit(true);
+    }
+
+    public void disableCurrentLimit() {
+        innerLeftMotor.enableCurrentLimit(false);
+        innerRightMotor.enableCurrentLimit(false);
     }
 }

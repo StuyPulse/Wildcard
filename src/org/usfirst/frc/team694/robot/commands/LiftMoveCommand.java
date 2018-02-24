@@ -1,10 +1,8 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,9 +32,6 @@ public class LiftMoveCommand extends Command {
             if (Robot.spatula.isSpatulaUp()) {
                 Robot.spatula.acquireSpeed(-liftSquared * 0.2);
             }
-            Robot.drivetrain.enableCurrentLimit();
-        } else {
-            Robot.drivetrain.disableCurrentLimit();
         }
     }
 
@@ -45,7 +40,5 @@ public class LiftMoveCommand extends Command {
     }
 
     protected void end() {
-        // In case if we're interrupted mid lift move
-        Robot.drivetrain.disableCurrentLimit();
     }
 }
