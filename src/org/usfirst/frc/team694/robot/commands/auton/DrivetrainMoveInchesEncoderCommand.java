@@ -11,28 +11,30 @@ public class DrivetrainMoveInchesEncoderCommand extends Command {
     private double startDistance;
 
     public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {
-        requires(Robot.drivetrain);
         this.speed = speed;
         this.distance = distance;
+        requires(Robot.drivetrain);
     }
 
+    @Override
     protected void initialize() {
-//        Robot.drivetrain.resetEncoders();
-        // no reset encoders. sad reaccs :(
         startDistance = Robot.drivetrain.getEncoderDistance();
-        System.out.println("DrivetrainMoveInches] start: " + startDistance);
+        System.out.println("[DrivetrainMoveInches] start: " + startDistance);
     }
 
+    @Override
     protected void execute() {
         Robot.drivetrain.tankDrive(speed, speed);
     }
 
+    @Override
     protected boolean isFinished() {
         return Math.abs(Robot.drivetrain.getEncoderDistance() - startDistance) >= distance;
     }
 
+    @Override
     protected void end() {
-        System.out.println("[DrivetrainMoveInches] end: " + Robot.drivetrain.getEncoderDistance());
         Robot.drivetrain.stop();
+        System.out.println("[DrivetrainMoveInches] end: " + Robot.drivetrain.getEncoderDistance());
     }
 }

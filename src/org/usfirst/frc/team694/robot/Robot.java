@@ -7,11 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.auton.DifferentSideScaleAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.LeftSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonUsingEncodersCommand;
-import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SideScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SimpleDifferentSideScaleAutonCommand;
@@ -23,7 +19,6 @@ import org.usfirst.frc.team694.robot.subsystems.Spatula;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -53,7 +48,7 @@ public class Robot extends IterativeRobot {
     private Command autonCommand; // Selected command run during auton
     private static SendableChooser<WhereTheBotIsInReferenceToDriver> sideChooser = new SendableChooser<>();
 
-    private PowerDistributionPanel pdppanel;
+//    private PowerDistributionPanel pdppanel;
 
     @Override
     public void robotInit() {
@@ -85,7 +80,6 @@ public class Robot extends IterativeRobot {
     }
 
     public enum WhereTheBotIsInReferenceToDriver {
-
         RIGHT_SIDE_OF_DRIVER, LEFT_SIDE_OF_DRIVER
     }
 
@@ -119,23 +113,21 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
-                double timestamp = Timer.getFPGATimestamp();
-                while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
-                    gameData = DriverStation.getInstance().getGameSpecificMessage();
-                }
-                if(gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
-                    autonCommand = new MobilityAutonUsingEncodersCommand();
-                    System.err.print("******* Field Data Problem!!!"); 
-                    System.err.println("Please yell at the field management crew to fix this");
-                }else {
-                    isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
-                    isAllianceSwitchRight = gameData.charAt(0) == 'R';
-                    isScaleRight = gameData.charAt(1) == 'R';
-                    autonCommand = autonChooser.getSelected();
-                }
+        double timestamp = Timer.getFPGATimestamp();
+        while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
+            gameData = DriverStation.getInstance().getGameSpecificMessage();
+        }
+        if (gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
+            autonCommand = new MobilityAutonCommand();
+            System.err.print("******* Field Data Problem!!!");
+            System.err.println("Please yell at the field management crew to fix this");
+        } else {
+            isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
+            isAllianceSwitchRight = gameData.charAt(0) == 'R';
+            isScaleRight = gameData.charAt(1) == 'R';
+            autonCommand = autonChooser.getSelected();
+        }
 
-        // Delete me when you're done testing!
-//        autonCommand = autonChooser.getSelected();
         if (autonCommand != null) {
             autonCommand.start();
         }
@@ -154,7 +146,7 @@ public class Robot extends IterativeRobot {
         if (autonCommand != null) {
             autonCommand.cancel();
         }
-        Robot.drivetrain.resetRamping();
+        Robot.drivetrain.setRamp(0);
     }
 
     @Override
@@ -167,7 +159,7 @@ public class Robot extends IterativeRobot {
 
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
-        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
+        autonChooser.addObject("Mobility", new MobilityAutonCommand());
         /* Testing autons:
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
@@ -179,7 +171,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
         autonChooser.addDefault("SIMPLE OTHER SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
-        
+
         // SIDE CHOOSER
         sideChooser.addDefault("Right", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
         sideChooser.addObject("Left", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
@@ -227,8 +219,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
         SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
 
-        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine(0));
-        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine(0));
+        SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine());
+        SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine());
         SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
         SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
 

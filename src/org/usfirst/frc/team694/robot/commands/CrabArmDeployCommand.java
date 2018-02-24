@@ -4,9 +4,6 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class CrabArmDeployCommand extends Command {
 
     public CrabArmDeployCommand() {
@@ -19,7 +16,6 @@ public class CrabArmDeployCommand extends Command {
     }
 
     protected void execute() {
-        //TODO: Figure out what direction the crabArms should run to deploy
         Robot.crabArm.acquire();
     }
 
@@ -29,8 +25,5 @@ public class CrabArmDeployCommand extends Command {
 
     protected void end() {
         Robot.crabArm.stop();
-    }
-
-    protected void interrupted() {
     }
 }

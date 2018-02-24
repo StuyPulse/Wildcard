@@ -1,7 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.CrabArmStopCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -25,6 +24,11 @@ public class CrabArm extends Subsystem {
         crabArmMotors = new SpeedControllerGroup(leftCrabArmMotor, rightCrabArmMotor);
     }
 
+    @Override
+    public void initDefaultCommand() {
+        //setDefaultCommand(new CrabArmStopCommand());
+    }
+
     public void acquire() {
         crabArmMotors.set(1);
     }
@@ -46,7 +50,4 @@ public class CrabArm extends Subsystem {
         crabArmMotors.set(0);
     }
 
-    public void initDefaultCommand() {
-        //setDefaultCommand(new CrabArmStopCommand());
-    }
 }

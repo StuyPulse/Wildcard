@@ -37,24 +37,27 @@ public class Drivetrain extends Subsystem {
     private LineSensor rightLineSensor;
 
     private Solenoid gearShift;
-    
+
     public static AHRS navX;
 
     public Drivetrain() {
+        /// Left Motors
         leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
         leftMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT);
-        //master-follower, leftBottomMotor designated master
-        leftMiddleMotor.follow(leftBottomMotor);
-        leftTopMotor.follow(leftBottomMotor);
 
+        /// Right Motors
         rightTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP_MOTOR_PORT);
         rightMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT);
-        //master-follower, rightBottomMotor designated master
+
+        // Followers
+        leftMiddleMotor.follow(leftBottomMotor);
+        leftTopMotor.follow(leftBottomMotor);
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
 
+        /// Inverted
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
@@ -62,6 +65,7 @@ public class Drivetrain extends Subsystem {
         leftMiddleMotor.setInverted(true);
         leftBottomMotor.setInverted(true);
 
+        /// Brake Mode
         leftTopMotor.setNeutralMode(NeutralMode.Brake);
         leftMiddleMotor.setNeutralMode(NeutralMode.Brake);
         leftBottomMotor.setNeutralMode(NeutralMode.Brake);
@@ -69,27 +73,33 @@ public class Drivetrain extends Subsystem {
         rightMiddleMotor.setNeutralMode(NeutralMode.Brake);
         rightBottomMotor.setNeutralMode(NeutralMode.Brake);
 
+        /// Encoders
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
+        differentialDrive = new DifferentialDrive(leftBottomMotor, rightBottomMotor);
+
+        /// Line Sensors
         leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
         rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
-        
+
+        navX = new AHRS(SPI.Port.kMXP);
+
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
 
-        differentialDrive = new DifferentialDrive(leftBottomMotor, rightBottomMotor);
-        
-        // the navX is plugged into the kMXP port on the roboRIO
-        navX = new AHRS(SPI.Port.kMXP);
     }
+
+    @Override
+    public void initDefaultCommand() {
+        //setDefaultCommand(new DriveCommand());
+        setDefaultCommand(new DrivetrainDriveSystemCommand());
+    }
+
     //@Override
     /*public void periodic(){
         updateSensors();
     }*/
-    
-    public void resetRamping() {
-        setRamp(0);
-    }
+
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
     }
@@ -102,12 +112,12 @@ public class Drivetrain extends Subsystem {
         return Math.max(Math.abs(getLeftSpeed()), Math.abs(getRightSpeed()));
     }
 
-    public double getRawEncoderDistance() {
-        return Math.abs(Math.max(getLeftRawEncoderDistance(), getRightRawEncoderDistance()));
-    }
-    
     public double getEncoderDistance() {
         return Math.abs(Math.max(getLeftEncoderDistance(), getRightEncoderDistance()));
+    }
+
+    public double getRawEncoderDistance() {
+        return Math.abs(Math.max(getLeftRawEncoderDistance(), getRightRawEncoderDistance()));
     }
 
     public double getLeftEncoderDistance() {
@@ -131,9 +141,11 @@ public class Drivetrain extends Subsystem {
         rightBottomMotor.setSelectedSensorPosition(0, 0, 100);
     }
 
-    public void setEncoders(double inches){
-        leftBottomMotor.setSelectedSensorPosition((int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
-        rightBottomMotor.setSelectedSensorPosition((int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0,0);
+    public void setEncoders(double inches) {
+        leftBottomMotor.setSelectedSensorPosition(
+                (int) (getLeftRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0, 0);
+        rightBottomMotor.setSelectedSensorPosition(
+                (int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0, 0);
     }
 
     public void tankDrive(double left, double right) {
@@ -147,6 +159,7 @@ public class Drivetrain extends Subsystem {
     public void curvatureDrive(double speed, double rotation, boolean turn) {
         differentialDrive.curvatureDrive(speed, rotation, turn);
     }
+
     public void stop() {
         tankDrive(0, 0);
     }
@@ -163,19 +176,19 @@ public class Drivetrain extends Subsystem {
         boolean m = !(gearShift.get());
         gearShift.set(m);
     }
-    
-    public void gearShiftInput(boolean isShifted) {
+
+    public void setGearShift(boolean isShifted) {
         gearShift.set(isShifted);
     }
-    
+
     public boolean isGearShift() {
         return gearShift.get();
     }
-    
-//    public void resetLineSensors(){
-//        leftLineSensor.resetAmbient();
-//        rightLineSensor.resetAmbient();
-//    }
+
+    //    public void resetLineSensors(){
+    //        leftLineSensor.resetAmbient();
+    //        rightLineSensor.resetAmbient();
+    //    }
 
     public double getGyroAngle() {
         return navX.getAngle();
@@ -186,31 +199,26 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.mainLoop();
     }
 
-    public boolean isOnLine(int mode) {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
-        return leftIsOnLine(mode) || rightIsOnLine(mode);
+    public boolean isOnLine() {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
+        return leftIsOnLine() || rightIsOnLine();
     }
 
-    public boolean rightIsOnLine(int mode) {
+    public boolean rightIsOnLine() {
         return rightLineSensor.basicFind();
     }
 
-    public boolean leftIsOnLine(int mode) {
+    public boolean leftIsOnLine() {
         return leftLineSensor.basicFind();
     }
-    
+
     public double getRawLeftLineSensor() {
         return leftLineSensor.getRawData();
     }
-    
+
     public double getRawRightLineSensor() {
         return rightLineSensor.getRawData();
     }
 
-    public void initDefaultCommand() {
-        //setDefaultCommand(new DriveCommand());
-        setDefaultCommand(new DrivetrainDriveSystemCommand());
-    }
-    
     public void setRamp(double rampSeconds) {
         leftTopMotor.configOpenloopRamp(rampSeconds, 0);
         rightTopMotor.configOpenloopRamp(rampSeconds, 0);
@@ -223,6 +231,5 @@ public class Drivetrain extends Subsystem {
     public void resetGyro() {
         navX.reset();
     }
-
 
 }

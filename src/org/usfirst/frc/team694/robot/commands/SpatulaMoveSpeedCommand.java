@@ -10,24 +10,23 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SpatulaMoveSpeedCommand extends Command {
 
     private double speed;
-    
-    // TESTING ONLY
+
     public SpatulaMoveSpeedCommand(double speed) {
         this.speed = speed;
         requires(Robot.spatula);
     }
-    
-    protected void initialize() {
-    }
 
+    @Override
     protected void execute() {
         Robot.spatula.acquireSpeed(speed);
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
         Robot.spatula.stop();
     }
