@@ -29,13 +29,10 @@ public class LiftMoveCommand extends Command {
             Robot.spatula.acquireSpeed(-liftSquared * 0.2);
         }
 
-        Robot.lift.move(liftSquared);
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
 
         if (Math.abs(liftControl) > DRIVETRAIN_LIMIT_LIFT_THRESHOLD) {
-            Robot.drivetrain.enableCurrentLimit();
-        } else {
-            Robot.drivetrain.disableCurrentLimit();
+            Robot.lift.move(liftSquared);
         }
     }
 
@@ -44,7 +41,5 @@ public class LiftMoveCommand extends Command {
     }
 
     protected void end() {
-        // In case if we're interrupted mid lift move
-        Robot.drivetrain.disableCurrentLimit();
     }
 }
