@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Post-commit hook to amend commit author if author is prog694.
+# Save as .git/hooks/post-commit from repo root.
+#
+# Author: Kevin Wang <kevin@kevinwang.com>
+# Contributor: Adris Jautakas <adrisj7@gmail.com>
+
+
+function prompt_change_author() {
+    name=""
+    while [ -z "$name" ]; do
+        # -e makes the prompt use readline
+        read -p "Enter your full name: " -e name
+    done
+
+    email=""
+    while [ -z "$email" ]; do
+        # -e makes the prompt use readline
+        read -p "Enter your email address: " -e email
+    done
+
+    git commit --amend --no-edit --author="$name <$email>" > /dev/null
+    echo "Author amended to: $name <$email>"
+}
+
+# Force tty input
+exec < /dev/tty
+
+email_log=$(git log -1 HEAD --pretty="format:%ae")
+
+
+if [ "$email_log" == "prog694@gmail.com" ]; then
+    echo "Commit author prog694 detected, please amend."
+    prompt_change_author
+else
+    echo -e -n "Committed as \e[4;1;33m$email_log\e[0m Is this you? [y/N]: " 
+    read answer
+    if [[ $answer =~ ^[nN]$ ]]; then
+        prompt_change_author
+    fi
+fi
