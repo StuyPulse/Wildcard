@@ -79,8 +79,8 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     @Override
     protected void usePIDOutput(double output) {
         // Minimum magnitude of turning
-        if (Math.abs(output) < 0.2) {
-            output = 0.2 * Math.signum(output);
+        if (Math.abs(output) < 0.1) {
+            output = 0.1 * Math.signum(output);
         }
         Robot.drivetrain.tankDrive(output, -output);
 

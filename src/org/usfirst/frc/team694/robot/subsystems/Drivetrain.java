@@ -57,6 +57,12 @@ public class Drivetrain extends Subsystem {
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
 
+        // Current limit
+//        leftBottomMotor.configPeakCurrentLimit(40, 0);
+//        rightBottomMotor.configPeakCurrentLimit(40, 0);
+//        leftBottomMotor.enableCurrentLimit(true);
+//        rightBottomMotor.enableCurrentLimit(true);
+
         /// Inverted
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
