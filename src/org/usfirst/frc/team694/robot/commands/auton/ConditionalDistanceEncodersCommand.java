@@ -16,7 +16,7 @@ public class ConditionalDistanceEncodersCommand extends Command {
 
     @Override
     protected boolean isFinished() {
-        return Robot.drivetrain.getEncoderDistance() > distance;
+        return Math.abs(Robot.drivetrain.getEncoderDistance()) > distance;
     }
 
     @Override
