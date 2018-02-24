@@ -12,7 +12,6 @@ public class ConditionalDistanceEncodersCommand extends Command {
     public ConditionalDistanceEncodersCommand(Command onTrue, double distance) {
         this.onTrue = onTrue;
         this.distance = distance;
-        // TODO Auto-generated constructor stub
     }
 
     @Override

@@ -7,9 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+//TODO: Is this needed?
 public class LiftHoldHeightCommand extends Command {
     private double currentHeight;
-    
+
     public LiftHoldHeightCommand() {
         requires(Robot.lift);
     }

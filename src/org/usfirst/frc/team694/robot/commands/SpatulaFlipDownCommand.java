@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 public class SpatulaFlipDownCommand extends InstantCommand {
 
     public SpatulaFlipDownCommand() {
-        super();
         requires(Robot.spatula);
     }
 
+    @Override
     protected void initialize() {
         Robot.spatula.flipDown();
     }

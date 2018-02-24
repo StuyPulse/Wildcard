@@ -14,6 +14,7 @@ public class Grabber extends Subsystem {
         grabberSolenoid = new DoubleSolenoid(RobotMap.GRABBER_SOLENOID_OPEN_PORT, RobotMap.GRABBER_SOLENOID_CLOSE_PORT);
     }
 
+    @Override
     public void initDefaultCommand() {
     }
 

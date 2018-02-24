@@ -9,21 +9,19 @@ public class SpatulaAcquireCommand extends Command {
     public SpatulaAcquireCommand() {
         requires(Robot.spatula);
     }
-    
-    protected void initialize() {
-//        System.out.println("[SpatulaAcquireCommand] START!");
-    }
 
+    @Override
     protected void execute() {
         Robot.spatula.acquire();
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
-//        System.out.println("[SpatulaAcquireCommand] STOP!");
         Robot.spatula.stop();
     }
 }

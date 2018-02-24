@@ -9,18 +9,18 @@ public class SpatulaDeacquireCommand extends Command {
     public SpatulaDeacquireCommand() {
         requires(Robot.spatula);
     }
-    
-    protected void initialize() {
-    }
 
+    @Override
     protected void execute() {
         Robot.spatula.deacquire();
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
         Robot.spatula.stop();
     }

@@ -10,6 +10,7 @@ public class GrabberToggleCommand extends InstantCommand {
         requires(Robot.grabber);
     }
 
+    @Override
     protected void initialize() {
         Robot.grabber.toggle();
     }

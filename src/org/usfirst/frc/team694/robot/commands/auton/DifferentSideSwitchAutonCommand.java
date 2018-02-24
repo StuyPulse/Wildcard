@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DifferentSideSwitchAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
-    
+
     public DifferentSideSwitchAutonCommand() {
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn())); 

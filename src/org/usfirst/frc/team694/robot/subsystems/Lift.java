@@ -34,11 +34,12 @@ public class Lift extends Subsystem {
         outerLeftMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_LEFT_MOTOR_PORT);
         outerRightMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_RIGHT_MOTOR_PORT);
 
+        /// Brake Mode
         innerLeftMotor.setNeutralMode(NeutralMode.Brake);
         innerRightMotor.setNeutralMode(NeutralMode.Brake);
-
         outerLeftMotor.setNeutralMode(NeutralMode.Brake);
         outerRightMotor.setNeutralMode(NeutralMode.Brake);
+
 
         innerLeftMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS,0);
         innerRightMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS,0);
@@ -47,13 +48,16 @@ public class Lift extends Subsystem {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
 
+        /// Followers
         innerRightMotor.follow(innerLeftMotor);
         outerRightMotor.follow(innerLeftMotor);
         outerLeftMotor.follow(innerLeftMotor);
 
+        /// Encoders
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
+        // Lift P, to ramp up to a height
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
         innerLeftMotor.setSensorPhase(true);
@@ -64,10 +68,12 @@ public class Lift extends Subsystem {
 
     }
 
+    @Override
     public void initDefaultCommand() {
         setDefaultCommand(new LiftMoveCommand());
     }
 
+    @Override
     public void periodic() {
         if (isAtBottom()) {
             resetEncoders();
@@ -89,7 +95,6 @@ public class Lift extends Subsystem {
 
     public void move(double currentSpeed) {
         double currentHeight = getLiftHeight();
-//<<<<<<< HEAD
 //        double speed = maxSpeed;
 //                if (maxSpeed < 0) {
 //                    if (currentHeight < RobotMap.LIFT_RAMP_HEIGHT_THRESHOLD) {
@@ -102,7 +107,6 @@ public class Lift extends Subsystem {
 //                        speed = Math.min(speed, maxSpeed);
 //                    }
 //                }
-//=======
         double speed = currentSpeed;
         if (currentHeight < 0) {
             speed = Math.max(-RobotMap.LIFT_MIN_SPEED,speed);
@@ -121,17 +125,16 @@ public class Lift extends Subsystem {
         moveLift(speed);
     }
 
-    public double getSpeed() {
-        return innerLeftMotor.get();
+    public void setHeight(double height) {
+        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
 
     public void stop() {
         innerLeftMotor.set(ControlMode.PercentOutput, 0);
     }
 
-    public boolean getBrakeStatus() {
-        return false;
-        //        return brakeSolenoid.get();
+    public double getSpeed() {
+        return innerLeftMotor.get();
     }
 
     public boolean isAtBottom() {
@@ -161,11 +164,8 @@ public class Lift extends Subsystem {
     public double getLiftHeight() {
         return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
     }
-    
-    public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
-    }
-    
+
+
     public double getMotorVelocity() {
         return innerLeftMotor.getSelectedSensorVelocity(0);
     }

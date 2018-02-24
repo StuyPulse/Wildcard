@@ -1,7 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.SpatulaStopCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -24,19 +23,7 @@ public class Spatula extends Subsystem {
 
     public boolean isBITCOINAutomation;
 
-    public boolean spatulaRunning;
-
-    public boolean isSpatulaRunning() {
-        return spatulaRunning;
-    }
-
-    public void setSpatulaRunning(boolean status) {
-        this.spatulaRunning = status;
-    }
-
-    public void initDefaultCommand() {
-        //setDefaultCommand(new SpatulaStopCommand());
-    }
+//    public boolean spatulaRunning;
 
     public Spatula() {
         leftSpatulaMotor = new WPI_VictorSPX(RobotMap.SPATULA_LEFT_MOTOR_PORT);
@@ -45,12 +32,18 @@ public class Spatula extends Subsystem {
         rightSpatulaMotor.setNeutralMode(NeutralMode.Brake);
 
         rightSpatulaMotor.setInverted(true);
+
         spatulaFlipSolenoid = new DoubleSolenoid(RobotMap.SPATULA_FLIP_UP_PORT, RobotMap.SPATULA_FLIP_DOWN_PORT);
-        //spatulaTongsSolenoid = new Solenoid(RobotMap.SPATULA_TONGS_SOLENOID_PORT);
         spatulaMotors = new SpeedControllerGroup(leftSpatulaMotor, rightSpatulaMotor);
-        isBITCOINAutomation = false;
 
         spatulaLimitSwitch = new DigitalInput(RobotMap.SPATULA_LIMIT_SWITCH_PORT);
+
+        isBITCOINAutomation = false;
+    }
+
+    @Override
+    public void initDefaultCommand() {
+        //setDefaultCommand(new SpatulaStopCommand());
     }
 
     @Override
@@ -72,13 +65,13 @@ public class Spatula extends Subsystem {
         spatulaMotors.set(speed);
     }
 
-    //left spatula deacquires and the right acquires. This comment is used to avoid long method names
+    //left spatula deacquires and the right acquires, rotating cube clockwise
     public void leftSpatulaDeacquire() {
         leftSpatulaMotor.set(1);
         rightSpatulaMotor.set(-1);
     }
 
-    //right spatula deacquires and the left acquires. This comment is used to avoid long method names
+    //right spatula deacquires and the left acquires, rotating cube counterclockwise
     public void rightSpatulaDeacquire() {
         leftSpatulaMotor.set(-1);
         rightSpatulaMotor.set(1);
@@ -96,11 +89,7 @@ public class Spatula extends Subsystem {
         spatulaFlipSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
-    public boolean isCubeDetected() {
-        return !(spatulaLimitSwitch.get());
-    }
-
-    public void toggle() {
+    public void flipToggle() {
         System.out.println("[Spatula] Spatula up? " + isSpatulaUp() + ", Solenoid Value: " + spatulaFlipSolenoid.get());
         if (isSpatulaUp()) {
             flipDown();
@@ -112,5 +101,9 @@ public class Spatula extends Subsystem {
     public boolean isSpatulaUp() {
         DoubleSolenoid.Value val = spatulaFlipSolenoid.get();
         return val == DoubleSolenoid.Value.kForward || val == DoubleSolenoid.Value.kOff;
+    }
+
+    public boolean isCubeDetected() {
+        return !(spatulaLimitSwitch.get());
     }
 }
