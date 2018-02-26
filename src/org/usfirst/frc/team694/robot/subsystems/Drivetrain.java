@@ -42,6 +42,8 @@ public class Drivetrain extends Subsystem {
     private Solenoid gearShift;
     
     public static AHRS navX;
+    
+    private double absoluteGyro;
 
     public Drivetrain() {
         leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
@@ -91,6 +93,8 @@ public class Drivetrain extends Subsystem {
         
         // the navX is plugged into the kMXP port on the roboRIO
         navX = new AHRS(SPI.Port.kMXP);
+        
+        absoluteGyro = 0;
     }
     //@Override
     /*public void periodic(){
@@ -231,7 +235,12 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
+        absoluteGyro += getGyroAngle();
         navX.reset();
+    }
+    
+    public double getAbsoluteGyro() {
+        return absoluteGyro;
     }
 
     public void enableCurrentLimit() {
