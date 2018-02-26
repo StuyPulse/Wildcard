@@ -107,7 +107,7 @@ public final class RobotMap {
     /*****************************************************************************
      * Analog Ports
      ****************************************************************************/
-    
+
     public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = 1;
     public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = 2;
 
@@ -126,7 +126,8 @@ public final class RobotMap {
      **/
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
             /*(127.0 / 121.0) * (161.5 / 1210.0) * */
-            (296.0 / 2171.0) *DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            // 0.98 scale tested after driving a certain distance
+            0.98 * (296.0 / 2171.0) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
 

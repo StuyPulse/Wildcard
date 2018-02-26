@@ -12,6 +12,7 @@ public class LiftMoveToBottomCommand extends Command {
 
     @Override
     protected void initialize() {
+
     }
 
     @Override

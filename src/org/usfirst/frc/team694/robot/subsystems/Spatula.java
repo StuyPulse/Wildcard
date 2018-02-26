@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Spatula extends Subsystem {
 
@@ -37,12 +38,18 @@ public class Spatula extends Subsystem {
 
         spatulaLimitSwitch = new DigitalInput(RobotMap.SPATULA_LIMIT_SWITCH_PORT);
 
-        isBITCOINAutomation = true;
+        isBITCOINAutomation = false;
     }
 
     @Override
     public void initDefaultCommand() {
         //setDefaultCommand(new SpatulaStopCommand());
+    }
+
+    @Override
+    public void periodic() {
+        super.periodic();
+        SmartDashboard.putString("Spatula Current Command", this.getCurrentCommandName());
     }
 
     public void acquire() {

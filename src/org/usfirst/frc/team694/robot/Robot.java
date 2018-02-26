@@ -182,23 +182,23 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putNumber("Lift P", 0.3);
 
-        SmartDashboard.putNumber("DriveStraight RampSeconds", 0.8);
+        SmartDashboard.putNumber("DriveStraight RampSeconds", 0.0);
 
         // Drive Straight Distance PID
-        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0.004);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID P", 0.01);
         SmartDashboard.putNumber("DriveDistanceEncodersPID I", 0);
-        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.04);
+        SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.08);
 
         // Drive Straight Rotation PID
         SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012);
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
         SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
 
-        SmartDashboard.putNumber("RotateDegreesPID P", 0.029);
-        SmartDashboard.putNumber("RotateDegreesPID I", 0.005);
-        SmartDashboard.putNumber("RotateDegreesPID D", 0.3);
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.037);
+        SmartDashboard.putNumber("RotateDegreesPID I", 0.0);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0.1);
 
-        SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.8);
+        SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.0);
 
         SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
 
@@ -225,6 +225,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
 
         SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
+        SmartDashboard.putBoolean("Spatula: Is up?", Robot.spatula.isSpatulaUp());
 
     }
 
