@@ -40,7 +40,7 @@ public class Drivetrain extends Subsystem {
 
     public static AHRS navX;
     
-    private double absoluteGyro;
+    private double absoluteGyroError;
 
     public Drivetrain() {
         /// Left Motors
@@ -236,11 +236,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
-        absoluteGyro += getGyroAngle();
+        absoluteGyroError += getGyroAngle();
         navX.reset();
     }
     
-    public double getAbsoluteGyro() {
-        return absoluteGyro;
+    public double getAbsoluteGyroAngle() {
+        return absoluteGyroError + getGyroAngle();
     }
 }
