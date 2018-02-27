@@ -13,7 +13,7 @@ public class DrivetrainRotateAbsoluteDegreesPIDCommand extends DrivetrainRotateD
 
     @Override
     protected double getAngle() {
-        return Robot.drivetrain.getGyroAngle() + Robot.drivetrain.getAbsoluteGyro(); // TODO: Get absolute drivetrain angle
+        return Robot.drivetrain.getAbsoluteGyroAngle();
     }
 
 }
