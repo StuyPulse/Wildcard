@@ -1,5 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
+import org.usfirst.frc.team694.robot.Robot;
+
 /**
  *
  */
@@ -11,7 +13,7 @@ public class DrivetrainRotateAbsoluteDegreesPIDCommand extends DrivetrainRotateD
 
     @Override
     protected double getAngle() {
-        return 0; // TODO: Get absolute drivetrain angle
+        return Robot.drivetrain.getAbsoluteGyroAngle();
     }
 
 }

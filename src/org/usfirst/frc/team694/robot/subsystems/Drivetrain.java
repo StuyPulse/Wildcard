@@ -39,6 +39,8 @@ public class Drivetrain extends Subsystem {
     private Solenoid gearShift;
 
     public static AHRS navX;
+    
+    private double absoluteGyroError;
 
     public Drivetrain() {
         /// Left Motors
@@ -92,7 +94,6 @@ public class Drivetrain extends Subsystem {
         navX = new AHRS(SPI.Port.kMXP);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-
     }
 
     @Override
@@ -235,7 +236,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
+        absoluteGyroError += getGyroAngle();
         navX.reset();
     }
-
+    
+    public double getAbsoluteGyroAngle() {
+        return absoluteGyroError + getGyroAngle();
+    }
 }
