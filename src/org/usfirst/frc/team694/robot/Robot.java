@@ -158,16 +158,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotPeriodic() {
         /// Current Limiting
-
-        // TODO: Test with current limit set 100% of the time to find optimal current limit
-        // TODO: Find at what point should the lift be limited
-//        if (drivetrain.getMotorAmps() > 40 /* SET ME */) {
-//            lift.enableCurrentLimit();
-//        } else {
-//            lift.disableCurrentLimit();
-//        }
-//        lift.enableCurrentLimit();
-        System.out.println("[Robot] Lift current: " + Robot.lift.getCurrent());
     }
 
     private void initSmartDashboard() {
@@ -216,7 +206,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.0);
 
         SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
-
     }
 
     private void updateSmartDashboard() {
@@ -241,6 +230,10 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
         SmartDashboard.putBoolean("Spatula: Is up?", Robot.spatula.isSpatulaUp());
+
+        SmartDashboard.putNumber("Lift Current", lift.getCurrent());
+        SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());
+        SmartDashboard.putNumber("Lift + Drivetrain Current", lift.getCurrent() + drivetrain.getCurrent());
 
     }
 

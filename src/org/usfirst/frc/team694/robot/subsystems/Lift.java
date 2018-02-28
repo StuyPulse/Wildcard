@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Lift extends Subsystem {
 
     private static final int PEAK_LIMIT_AMPS = 23; // 26 is max roughly
-    private static final int PEAK_LIMIT_MILLISECONDS = 250;
+//    private static final int PEAK_LIMIT_MILLISECONDS = 250;
 
     private WPI_TalonSRX innerLeftMotor;
     private WPI_TalonSRX innerRightMotor;
@@ -41,10 +41,10 @@ public class Lift extends Subsystem {
         outerRightMotor.setNeutralMode(NeutralMode.Brake);
 
 
-        innerLeftMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS,0);
-        innerRightMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS,0);
-        innerLeftMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
-        innerRightMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+        innerLeftMotor.configContinuousCurrentLimit(PEAK_LIMIT_AMPS,0);
+        innerRightMotor.configContinuousCurrentLimit(PEAK_LIMIT_AMPS,0);
+//        innerLeftMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
+//        innerRightMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
 

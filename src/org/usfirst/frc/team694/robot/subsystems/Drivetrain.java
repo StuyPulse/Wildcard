@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.DrivetrainDriveSystemCommand;
 import org.usfirst.frc.team694.util.LineSensor;
@@ -21,8 +22,13 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
+
+    // TODO: Set
+    private double LIFT_AND_DRIVETRAIN_CURRENT_LIMIT = 999999;
+    private int DRIVETRAIN_CURRENT_LIMIT_LIFT = 10;
 
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
@@ -39,7 +45,7 @@ public class Drivetrain extends Subsystem {
     private Solenoid gearShift;
 
     public static AHRS navX;
-    
+
     private double absoluteGyroError;
 
     public Drivetrain() {
@@ -60,10 +66,14 @@ public class Drivetrain extends Subsystem {
         rightTopMotor.follow(rightBottomMotor);
 
         // Current limit
-//        leftBottomMotor.configPeakCurrentLimit(40, 0);
-//        rightBottomMotor.configPeakCurrentLimit(40, 0);
-//        leftBottomMotor.enableCurrentLimit(true);
-//        rightBottomMotor.enableCurrentLimit(true);
+        leftBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+        rightBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+        leftBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+        rightBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+        leftBottomMotor.configPeakCurrentDuration(1, 0);
+        rightBottomMotor.configPeakCurrentDuration(1, 0);
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
 
         /// Inverted
         rightTopMotor.setInverted(true);
@@ -103,9 +113,18 @@ public class Drivetrain extends Subsystem {
     }
 
     //@Override
-    /*public void periodic(){
-        updateSensors();
-    }*/
+    public void periodic(){
+//        System.out.println("[Drivetrain] LEFT -> mid:" + leftMiddleMotor.getOutputCurrent());
+//        SmartDashboard.putNumber("[Drivetrain] left bottom motor current", leftBottomMotor.getOutputCurrent());
+////        updateSensors();
+//        // TODO: Test with current limit set 100% of the time to find optimal current limit
+//        // TODO: Find at what point should the lift be limited
+//        if (getCurrent() + Robot.lift.getCurrent() > LIFT_AND_DRIVETRAIN_CURRENT_LIMIT /* SET ME */) {
+//            enableCurrentLimit();
+//        } else {
+//            disableCurrentLimit();
+//        }
+    }
 
     public double getLeftSpeed() {
         return leftBottomMotor.getSelectedSensorVelocity(0);
@@ -240,6 +259,17 @@ public class Drivetrain extends Subsystem {
         navX.reset();
     }
 
+    public void enableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
+    }
+
+    public void disableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(false);
+        rightBottomMotor.enableCurrentLimit(false);
+    }
+
+
     public double getCurrent() {
         return leftBottomMotor.getOutputCurrent() 
              + rightBottomMotor.getOutputCurrent()
@@ -249,7 +279,6 @@ public class Drivetrain extends Subsystem {
              + rightTopMotor.getOutputCurrent();
     }
 
-    
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
     }
