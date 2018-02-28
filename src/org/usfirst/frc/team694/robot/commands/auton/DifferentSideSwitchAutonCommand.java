@@ -16,11 +16,11 @@ public class DifferentSideSwitchAutonCommand extends CommandGroup {
     public DifferentSideSwitchAutonCommand() {
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn())); 
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(quad.getAngleToTurnToReachPlatformZone()));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelAcrossPlatformZoneToReachSwitch()));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToReachSwitch()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(quad.getAngleToReachSwitch()));
         addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToTravelToReachSwitch()));
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getAngleToReachSwitchEdge()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(quad.getAngleToReachSwitchEdge()));
         addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToDriveForwardIntoSwitchEdge()));
         addSequential(new GrabberOpenCommand());
         addSequential(new SpatulaDeacquireCommand());

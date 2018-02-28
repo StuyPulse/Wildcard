@@ -2,16 +2,18 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.commands.CrabArmStopCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 
 public class RightSideSwitchAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
     // 114: 2x speed
-    private static final double DISTANCE_TOTAL = 114;
+    private static final double DISTANCE_TOTAL = 153;
 
     public RightSideSwitchAutonCommand() {
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
@@ -22,20 +24,20 @@ public class RightSideSwitchAutonCommand extends CommandGroup {
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
         // Uncomment for no ramp down:
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
+        addSequential(new PrintCommand("[RightSideSwitchAuton] start!"));
         DriveStraightWithRampingCommand rampCommand = new DriveStraightNoRampingLimitCommand(DISTANCE_TOTAL);
 
-        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 3)); // Move at 0.3 speed
+        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 1));
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 0, 70)); // Start turning
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 60, -5)); // Turn back, ish
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(25), 40));
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 65, -5)); // Turn back, ish
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
         // ultra fast and ultra fun but totally illegal
-//        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 80));
-        addSequential(rampCommand);
+        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
+        addSequential(rampCommand, 3);
 
+        addSequential(new CrabArmStopCommand());
 
-        // Fun but illegal deacquire
-        addSequential(new SpatulaDeacquireCommand(), 1);
-        // Boring but legal deacquire
-//        addSequential(new GrabberOpenCommand());
+        addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 40));
+
     }
 }

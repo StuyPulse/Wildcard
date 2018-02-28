@@ -20,6 +20,12 @@ public class FlapAndFlipDownCommand extends CommandGroup {
     }
 
     @Override
+    public void initialize() {
+        super.initialize();
+        System.out.println("[FlapAndFlipDownCommand] Flap+Flip Down!");
+    }
+    
+    @Override
     public void cancel() {
         // Uncancellable!
     }

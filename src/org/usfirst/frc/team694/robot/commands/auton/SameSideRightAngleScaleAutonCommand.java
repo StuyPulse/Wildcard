@@ -15,7 +15,7 @@ public class SameSideRightAngleScaleAutonCommand extends CommandGroup {
 //        addParallel(new DrivetrainLineSensorCommand(FILLME));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceFromFrontOfBotToNullBump()));
       
-        addSequential(new DrivetrainRotateDegreesPIDCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
         
         addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToMoveBackward()));
         

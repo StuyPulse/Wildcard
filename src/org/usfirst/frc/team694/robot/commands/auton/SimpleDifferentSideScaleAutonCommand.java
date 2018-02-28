@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team694.robot.commands.auton;
 
 
@@ -18,22 +19,22 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3 + 3));
 
-
-        addSequential(new DrivetrainRotateDegreesPIDCommand(-1 * quad.getAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachPlatformZone()));
 
         //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone() + 15 + 6));
+        addSequential(new DriveStraightWithRampingCommand(203/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
 
         addParallel(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
-        addSequential(new DrivetrainRotateDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()), 2);
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()), 2);
 
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
 //        addSequential(new DriveStraightWithRampingCommand(53 + 12));//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.6,43), 2.5);//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
 
         addSequential(new GrabberOpenCommand());
-        
-        addSequential(new DrivetrainMoveInchesEncoderCommand(-0.1, 40));
+        addSequential(new ScaleGrabCubeAfterScoringCommand(false));
+        addSequential(new ScaleScoreSecondTimeCommand(false));
+
     }
 
 }

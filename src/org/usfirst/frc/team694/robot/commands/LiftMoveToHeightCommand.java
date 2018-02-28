@@ -15,6 +15,7 @@ public class LiftMoveToHeightCommand extends Command {
 
     @Override
     protected void initialize() {
+        System.out.println("[LiftMoveToHeight] starto!");
     }
 
     @Override
@@ -32,5 +33,6 @@ public class LiftMoveToHeightCommand extends Command {
     @Override
     protected void end() {
         Robot.lift.stop();
+        System.out.println("[LiftMoveToHeight] STOP");
     }
 }

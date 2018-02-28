@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
+public abstract class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     public double targetAngle;
     private boolean isSet = false;
 
@@ -27,7 +27,6 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     protected void initialize() {
         lastTimeNotOnTarget = Timer.getFPGATimestamp();
 
-        Robot.drivetrain.resetGyro();
 		Robot.drivetrain.lowGearShift();
 		Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
 
@@ -42,7 +41,7 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
 
     @Override
     protected void execute() {
-        if (Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) < 10 && !isSet) {
+        if (Math.abs(getAngle() - targetAngle) < 10 && !isSet) {
             isSet = true;
             this.getPIDController().reset();
             this.getPIDController().enable();
@@ -67,20 +66,20 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
         Robot.drivetrain.setRamp(0);
 
         System.out.println("[RotatePID] END");
-        System.out.println(Robot.drivetrain.getGyroAngle());
+        System.out.println(getAngle());
     }
 
 
     @Override
     protected double returnPIDInput() {
-        return Robot.drivetrain.getGyroAngle();
+        return getAngle();
     }
 
     @Override
     protected void usePIDOutput(double output) {
         // Minimum magnitude of turning
-        if (Math.abs(output) < 0.2) {
-            output = 0.2 * Math.signum(output);
+        if (Math.abs(output) < 0.1) {
+            output = 0.1 * Math.signum(output);
         }
         Robot.drivetrain.tankDrive(output, -output);
 
@@ -88,8 +87,10 @@ public class DrivetrainRotateDegreesPIDCommand extends PIDCommand {
     }
 
     private boolean onTarget() {
-        return Math.abs(Robot.drivetrain.getGyroAngle() - targetAngle) <= 2;
+        return Math.abs(getAngle() - targetAngle) <= 2;
     }
+
+    protected abstract double getAngle();
 
 }
 //values for 90 degrees P:0.02645, I:0.004, D:0.06, but takes a while

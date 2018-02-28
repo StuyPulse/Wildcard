@@ -8,6 +8,7 @@ import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 
 public class DifferentSideScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
@@ -18,6 +19,7 @@ public class DifferentSideScaleAutonCommand extends CommandGroup {
 
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
         // Uncomment for no ramp down:
+        addSequential(new PrintCommand("[DifferentSideScale] Different Side!"));
         DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
 
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 76, -140)); // First turn

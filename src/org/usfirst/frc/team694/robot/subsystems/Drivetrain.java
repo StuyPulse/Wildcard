@@ -39,6 +39,8 @@ public class Drivetrain extends Subsystem {
     private Solenoid gearShift;
 
     public static AHRS navX;
+    
+    private double absoluteGyroError;
 
     public Drivetrain() {
         /// Left Motors
@@ -56,6 +58,12 @@ public class Drivetrain extends Subsystem {
         leftTopMotor.follow(leftBottomMotor);
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
+
+        // Current limit
+//        leftBottomMotor.configPeakCurrentLimit(40, 0);
+//        rightBottomMotor.configPeakCurrentLimit(40, 0);
+//        leftBottomMotor.enableCurrentLimit(true);
+//        rightBottomMotor.enableCurrentLimit(true);
 
         /// Inverted
         rightTopMotor.setInverted(true);
@@ -86,7 +94,6 @@ public class Drivetrain extends Subsystem {
         navX = new AHRS(SPI.Port.kMXP);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-
     }
 
     @Override
@@ -229,11 +236,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
+        absoluteGyroError += getGyroAngle();
         navX.reset();
     }
 
-
-    public double getMotorAmps() {
+    public double getCurrent() {
         return leftBottomMotor.getOutputCurrent() 
              + rightBottomMotor.getOutputCurrent()
              + leftMiddleMotor.getOutputCurrent()
@@ -242,5 +249,9 @@ public class Drivetrain extends Subsystem {
              + rightTopMotor.getOutputCurrent();
     }
 
+    
+    public double getAbsoluteGyroAngle() {
+        return absoluteGyroError + getGyroAngle();
+    }
 }
 

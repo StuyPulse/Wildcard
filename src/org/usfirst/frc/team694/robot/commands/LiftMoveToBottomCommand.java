@@ -12,7 +12,7 @@ public class LiftMoveToBottomCommand extends Command {
 
     @Override
     protected void initialize() {
-
+        System.out.println("[LiftMoveToBottom] start!");
     }
 
     @Override
@@ -28,6 +28,7 @@ public class LiftMoveToBottomCommand extends Command {
     @Override
     protected void end() {
         Robot.lift.stop();
+        System.out.println("[LiftMoveToBottom] STOP");
     }
 
 }

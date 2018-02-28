@@ -179,8 +179,12 @@ public class Lift extends Subsystem {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
     }
-    
+
     public double getCurrent() {
-        return innerLeftMotor.getOutputCurrent();
+        System.out.println("[Lift] Left: " + innerLeftMotor.getOutputCurrent() + ", Right: " + innerRightMotor.getOutputCurrent());
+        return innerLeftMotor.getOutputCurrent()
+             + innerRightMotor.getOutputCurrent()
+             + outerLeftMotor.getOutputCurrent()
+             + outerRightMotor.getOutputCurrent();
     }
 }
