@@ -29,15 +29,15 @@ public class SameSideScaleAutonCommand extends CommandGroup {
 
         addSequential(new GrabberOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 10));
-        addSequential(new LiftMoveToBottomCommand());
+//        addSequential(new LiftMoveToBottomCommand());
 
         //        addSequential(new DrivetrainRotateDegreesPIDCommand(-165));
 
 //        addParallel(new CrabArmAcquireCommand());
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(0.5,10));
 
-//        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
-//        addSequential(new ScaleScoreSecondTimeCommand(true));
+        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
+        addSequential(new ScaleScoreSecondTimeCommand(true));
 
         
         // Move lift when we're kinda close
