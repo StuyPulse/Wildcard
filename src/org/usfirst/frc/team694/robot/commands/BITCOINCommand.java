@@ -22,7 +22,9 @@ public class BITCOINCommand extends CommandGroup {
 
         addParallel(new SpatulaAcquireCommand(), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME);
 
-        addSequential(new FlapAndFlipUpCommand());
+        //addSequential(new FlapAndFlipUpCommand());
+        
+        addSequential(new SpatulaFlipUpCommand());
 
         addSequential(new WaitCommand(0.25));
 

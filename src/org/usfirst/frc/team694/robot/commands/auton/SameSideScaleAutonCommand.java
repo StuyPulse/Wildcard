@@ -32,18 +32,15 @@ public class SameSideScaleAutonCommand extends CommandGroup {
 
         addSequential(new GrabberOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 10));
-//        addSequential(new DrivetrainRotateDegreesPIDCommand(-165));
+//        addSequential(new LiftMoveToBottomCommand());
+
+        //        addSequential(new DrivetrainRotateDegreesPIDCommand(-165));
 
 //        addParallel(new CrabArmAcquireCommand());
-//        addParallel(new LiftMoveToBottomCommand());
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(0.5,10));
 
-        // TEMP ADD
-        addSequential(new LiftMoveToBottomCommand());
-        // TEMP COMMENT
-//        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
-//        addSequential(new ScaleScoreSecondTimeCommand(true));
-
+        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
+        addSequential(new ScaleScoreSecondTimeCommand(true));
 
         // Move lift when we're kinda close
 //        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
