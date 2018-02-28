@@ -17,6 +17,6 @@ public class DrivetrainRampingSetTargetAngleAtDistanceCommand extends Conditiona
     @Override
     protected void initialize() {
         super.initialize();
-        System.out.println("[SetTargetAngle]");
+        System.out.println("[SetTargetAngle] Set!");
     }
 }

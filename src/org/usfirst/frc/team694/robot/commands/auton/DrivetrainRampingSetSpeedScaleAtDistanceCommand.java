@@ -27,6 +27,8 @@ public class DrivetrainRampingSetSpeedScaleAtDistanceCommand extends Conditional
         @Override
         protected void initialize() {
             rampCommand.setSpeedScale(speedScaleFactor);
+            
+            System.out.println("[DrivetrainRampSetSpeed] set to " + speedScaleFactor + "!");
         }
     }
 }
