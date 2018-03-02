@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftMoveCommand extends Command {
 
-    private static final double DRIVETRAIN_LIMIT_LIFT_THRESHOLD = 0.1;
+    private static final double GAMEPAD_LIFT_THRESHOLD = 0.1;
 
     public LiftMoveCommand() {
         requires(Robot.lift);
@@ -27,11 +27,15 @@ public class LiftMoveCommand extends Command {
 
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
 
-        if (Math.abs(liftControl) > DRIVETRAIN_LIMIT_LIFT_THRESHOLD) {
+        if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
             if (Robot.spatula.isSpatulaUp()) {
                 Robot.spatula.acquireSpeed(-liftSquared * 0.2);
             }
             Robot.lift.move(liftSquared);
+//            Robot.drivetrain.enableCurrentLimit();
+        } else {
+            Robot.lift.stop();
+//            Robot.drivetrain.disableCurrentLimit();
         }
     }
 
