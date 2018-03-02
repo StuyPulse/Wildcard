@@ -26,9 +26,9 @@ public class BITCOINCommand extends CommandGroup {
         
         addSequential(new SpatulaFlipUpCommand());
 
-        addSequential(new WaitCommand(0.25));
+        //addSequential(new WaitCommand(0.25));
 
-        addSequential(new GrabberCloseCommand());
+        //addSequential(new GrabberCloseCommand());
 
         //addSequential(new WaitCommand(0.5));
 

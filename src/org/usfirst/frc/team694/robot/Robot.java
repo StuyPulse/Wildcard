@@ -164,6 +164,11 @@ public class Robot extends IterativeRobot {
         updateSmartDashboard();
     }
 
+    @Override
+    public void robotPeriodic() {
+        /// Current Limiting
+    }
+
     private void initSmartDashboard() {
 
         // AUTON CHOOSER
@@ -213,7 +218,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.0);
 
         SmartDashboard.putNumber("DriveStraight Encoder Vel", 0);
-
     }
 
     private void updateSmartDashboard() {
@@ -241,6 +245,10 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
         SmartDashboard.putBoolean("Spatula: Is up?", Robot.spatula.isSpatulaUp());
+
+        SmartDashboard.putNumber("Lift Current", lift.getCurrent());
+        SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());
+        SmartDashboard.putNumber("Lift + Drivetrain Current", lift.getCurrent() + drivetrain.getCurrent());
 
     }
 
