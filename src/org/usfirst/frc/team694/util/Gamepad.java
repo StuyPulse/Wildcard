@@ -208,9 +208,8 @@ public class Gamepad extends Joystick {
 	public Button getLeftTrigger() {
 		switch (switchMode) {
 			case SWITCH_D:
+            case PS4:
 				return new JoystickButton(this, 7);
-			case PS4:
-			    return new JoystickButton(this, 1); //TODO: Find this button
 			case SWITCH_X:
 			    return new LeftTriggerButton(this);
 			default:
@@ -257,9 +256,8 @@ public class Gamepad extends Joystick {
 	public Button getRightTrigger() {
 		switch (switchMode) {
 			case SWITCH_D:
+            case PS4:
 				return new JoystickButton(this, 8);
-			case PS4:
-			    return new JoystickButton(this, 1); // TODO: Find this button
 			case SWITCH_X:
 	             return new RightTriggerButton(this);
 			default:
