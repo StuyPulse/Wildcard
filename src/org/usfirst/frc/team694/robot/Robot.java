@@ -79,7 +79,6 @@ public class Robot extends IterativeRobot {
         //        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
-        Robot.drivetrain.resetEncoders();
     }
 
     public enum WhereTheBotIsInReferenceToDriver {
@@ -116,6 +115,10 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        drivetrain.resetEncoders();
+        drivetrain.resetGyro();
+        drivetrain.resetGyroError();
+
         double timestamp = Timer.getFPGATimestamp();
         while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
             gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -144,7 +147,10 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
-        Robot.drivetrain.resetEncoders(); // TEST
+        drivetrain.resetEncoders();
+        drivetrain.resetGyro();
+        drivetrain.resetGyroError();
+
         Robot.drivetrain.setRamp(0.0);
         if (autonCommand != null) {
             autonCommand.cancel();
@@ -223,7 +229,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Drivetrain: Gear Shift", Robot.drivetrain.isGearShift());
         SmartDashboard.putNumber("Drivetrain: Left Encoder Values", Robot.drivetrain.getLeftEncoderDistance());
         SmartDashboard.putNumber("Drivetrain: Right Encoder Values", Robot.drivetrain.getRightEncoderDistance());
-        SmartDashboard.putNumber("Drivetrain: Gyro Values", Robot.drivetrain.getGyroAngle());
+        SmartDashboard.putNumber("Drivetrain: RAW Left Encoder Values", Robot.drivetrain.getLeftRawEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: RAW Right Encoder Values", Robot.drivetrain.getRightRawEncoderDistance());
+        SmartDashboard.putNumber("Drivetrain: Gyro Value", Robot.drivetrain.getGyroAngle());
+        SmartDashboard.putNumber("Drivetrain: Gyro ABSOLUTE", Robot.drivetrain.getAbsoluteGyroAngle());
 
         SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine());
         SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine());

@@ -239,7 +239,11 @@ public class Drivetrain extends Subsystem {
         absoluteGyroError += getGyroAngle();
         navX.reset();
     }
-    
+
+    public void resetGyroError() {
+        absoluteGyroError = 0;
+    }
+
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
     }

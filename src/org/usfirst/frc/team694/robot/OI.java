@@ -16,11 +16,12 @@ import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -37,7 +38,8 @@ public class OI {
 
         // TESTING ONLY
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(200));
-//          driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateDegreesPIDCommand(90));
+//          driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+//          driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(90));
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());

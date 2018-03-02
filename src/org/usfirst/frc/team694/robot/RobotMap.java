@@ -127,7 +127,9 @@ public final class RobotMap {
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
             /*(127.0 / 121.0) * (161.5 / 1210.0) * */
             // 0.98 scale tested after driving a certain distance
-            0.98 * (296.0 / 2171.0) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
+            // Mildcard factor:
+            /*0.98 * (296.0 / 2171.0)*/ 
+            (72.5 / 71.5) * (83.0 / 632.1) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
 
