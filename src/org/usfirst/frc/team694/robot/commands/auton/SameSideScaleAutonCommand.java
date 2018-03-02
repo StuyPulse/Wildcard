@@ -24,30 +24,16 @@ public class SameSideScaleAutonCommand extends CommandGroup {
         addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 0.75));
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -45));
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 120, 5));
-        // TEMP ADD
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(20), 0));
-        // TEMP COMMENT OUT
-//         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), 0));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), 0));
         addSequential(rampCommand, 5);
 
         addSequential(new GrabberOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 10));
 //        addSequential(new LiftMoveToBottomCommand());
 
-        //        addSequential(new DrivetrainRotateDegreesPIDCommand(-165));
+        // ADD ME IN
+//        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
+//        addSequential(new ScaleScoreSecondTimeCommand(true));
 
-//        addParallel(new CrabArmAcquireCommand());
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(0.5,10));
-
-        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
-        addSequential(new ScaleScoreSecondTimeCommand(true));
-
-        // Move lift when we're kinda close
-//        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 100));
-//        addSequential(new DrivetrainRampSwerveCommand(DISTANCE_TOTAL, DISTANCE_TO_SWERVE, -30));
-
-//        addSequential(new GrabberOpenCommand());
-
-//        addSequential(new LiftMoveToBottomCommand());
     }
 }

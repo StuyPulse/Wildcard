@@ -32,8 +32,9 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.6,43), 2.5);//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
 
         addSequential(new GrabberOpenCommand());
-        addSequential(new ScaleGrabCubeAfterScoringCommand(false));
-        addSequential(new ScaleScoreSecondTimeCommand(false));
+        // Add me in
+//        addSequential(new ScaleGrabCubeAfterScoringCommand(false));
+//        addSequential(new ScaleScoreSecondTimeCommand(false));
 
     }
 
