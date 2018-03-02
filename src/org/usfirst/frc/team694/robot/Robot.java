@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.auton.LeftSideSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SideScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.SimpleDifferentSideScaleAutonCommand;
@@ -167,9 +170,12 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
         */
 
-        autonChooser.addObject("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
-        autonChooser.addDefault("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
-        autonChooser.addDefault("SIMPLE OTHER SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
+        autonChooser.addDefault("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
+        autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
+        autonChooser.addObject("FORCE LEFT SWITCH Auton", new LeftSideSwitchAutonCommand());
+        autonChooser.addObject("FORCE RIGHT SWITCH Auton", new RightSideSwitchAutonCommand());
+        autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand());
+        autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
