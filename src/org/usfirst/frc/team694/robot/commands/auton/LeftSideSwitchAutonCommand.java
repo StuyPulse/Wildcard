@@ -32,6 +32,8 @@ public class LeftSideSwitchAutonCommand extends CommandGroup {
         
         DriveStraightWithRampingCommand rampCommand = new DriveStraightNoRampingLimitCommand(DISTANCE_TOTAL);
 
+        addSequential(new PrintCommand("[LeftSideSwitchAuton] start!"));
+
 //        addSequential(new DrivetrainLowGearCommand());
 
         addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 1)); // Move at 0.3 speed

@@ -115,6 +115,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void autonomousInit() {
+        Scheduler.getInstance().removeAll();
+
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
@@ -169,7 +171,6 @@ public class Robot extends IterativeRobot {
     }
 
     private void initSmartDashboard() {
-
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
@@ -269,4 +270,5 @@ public class Robot extends IterativeRobot {
         //true is scale is close to robot 
         //false is scale is far away from robot 
     }
+
 }

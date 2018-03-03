@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LiftMoveToBottomCommand extends Command {
 
     public LiftMoveToBottomCommand() {
-        requires(Robot.lift);
+//        requires(Robot.lift);
     }
 
     @Override

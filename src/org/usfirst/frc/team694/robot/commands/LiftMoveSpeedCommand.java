@@ -11,7 +11,7 @@ public class LiftMoveSpeedCommand extends Command {
     double speed;
 
     public LiftMoveSpeedCommand(double speed) {
-        requires(Robot.lift);
+//        requires(Robot.lift);
         this.speed = speed;
     }
 

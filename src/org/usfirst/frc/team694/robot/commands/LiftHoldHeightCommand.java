@@ -12,7 +12,7 @@ public class LiftHoldHeightCommand extends Command {
     private double currentHeight;
 
     public LiftHoldHeightCommand() {
-        requires(Robot.lift);
+//        requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time

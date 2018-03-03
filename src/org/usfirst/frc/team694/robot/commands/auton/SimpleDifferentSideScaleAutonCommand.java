@@ -9,6 +9,7 @@ import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 
 public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
@@ -17,6 +18,7 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 
     public SimpleDifferentSideScaleAutonCommand() {
 
+        addSequential(new PrintCommand("[DifferentSideScale] Simple Different Side!"));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3 + 3));
 
         addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachPlatformZone()));

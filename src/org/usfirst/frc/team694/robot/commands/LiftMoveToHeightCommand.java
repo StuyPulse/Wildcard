@@ -9,7 +9,7 @@ public class LiftMoveToHeightCommand extends Command {
     private double targetHeight;
 
     public LiftMoveToHeightCommand(double height) {
-        requires(Robot.lift);
+//        requires(Robot.lift);
         this.targetHeight = height;
     }
 
