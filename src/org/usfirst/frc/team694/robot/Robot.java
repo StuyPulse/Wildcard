@@ -121,6 +121,8 @@ public class Robot extends IterativeRobot {
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
 
+        gameData = null;
+
         double timestamp = Timer.getFPGATimestamp();
         while ((Timer.getFPGATimestamp() - timestamp) < 5 && (gameData == null || gameData.isEmpty())) {
             gameData = DriverStation.getInstance().getGameSpecificMessage();

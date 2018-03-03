@@ -12,6 +12,7 @@ public class GrabberToggleCommand extends InstantCommand {
 
     @Override
     protected void initialize() {
+        System.out.println("[GrabberToggleCommand] toggle");
         Robot.grabber.toggle();
     }
 }
