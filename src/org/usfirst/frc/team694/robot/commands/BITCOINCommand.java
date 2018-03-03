@@ -1,10 +1,9 @@
-package org.usfirst.frc.team694.robot.commands;
+    package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class BITCOINCommand extends CommandGroup {
 
@@ -20,10 +19,11 @@ public class BITCOINCommand extends CommandGroup {
         addSequential(new LiftMoveToBottomCommand());
         addSequential(new GrabberOpenCommand());
 
-        addParallel(new SpatulaAcquireCommand(), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME);
+        // TODO: Fix Magic Numbers
+        addParallel(new SpatulaMoveSpeedCommand(0.25), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME + 0.75);
 
         addSequential(new FlapAndFlipUpCommand());
-        
+
 //        addSequential(new SpatulaFlipUpCommand());
 
         //addSequential(new WaitCommand(0.25));

@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team694.robot.subsystems;
 
-import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.DrivetrainDriveSystemCommand;
 import org.usfirst.frc.team694.util.LineSensor;
@@ -22,13 +21,13 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
 
     // TODO: Set
-    private double LIFT_AND_DRIVETRAIN_CURRENT_LIMIT = 999999;
-    private int DRIVETRAIN_CURRENT_LIMIT_LIFT = 10;
+//    private double LIFT_AND_DRIVETRAIN_CURRENT_LIMIT = 999999;
+//    private int DRIVETRAIN_CURRENT_LIMIT_LIFT = 10;
+    private static final double BROWNOUT_PROTECTION_PVBUS_CAP = 0.9;
 
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
@@ -48,6 +47,10 @@ public class Drivetrain extends Subsystem {
 
     private double absoluteGyroError;
 
+    private boolean brownoutProtectionEnabled;
+
+//    private boolean brownoutProtectionEnabled;
+
     public Drivetrain() {
         /// Left Motors
         leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
@@ -66,14 +69,14 @@ public class Drivetrain extends Subsystem {
         rightTopMotor.follow(rightBottomMotor);
 
         // Current limit
-        leftBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-        rightBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-        leftBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-        rightBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-        leftBottomMotor.configPeakCurrentDuration(1, 0);
-        rightBottomMotor.configPeakCurrentDuration(1, 0);
-        leftBottomMotor.enableCurrentLimit(false);
-        rightBottomMotor.enableCurrentLimit(false);
+//        leftBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        rightBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        leftBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        rightBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        leftBottomMotor.configPeakCurrentDuration(1, 0);
+//        rightBottomMotor.configPeakCurrentDuration(1, 0);
+//        leftBottomMotor.enableCurrentLimit(false);
+//        rightBottomMotor.enableCurrentLimit(false);
 
         /// Inverted
         rightTopMotor.setInverted(true);
@@ -175,14 +178,26 @@ public class Drivetrain extends Subsystem {
     }
 
     public void tankDrive(double left, double right) {
+        if (brownoutProtectionEnabled) {
+            left = Math.signum(left) * Math.min(Math.abs(left),BROWNOUT_PROTECTION_PVBUS_CAP);
+            right = Math.signum(right) * Math.min(Math.abs(right),BROWNOUT_PROTECTION_PVBUS_CAP);
+        }
         differentialDrive.tankDrive(left, right, false);
     }
 
     public void arcadeDrive(double speed, double rotation) {
+        if (brownoutProtectionEnabled) {
+            speed = Math.signum(speed) * Math.min(Math.abs(speed),BROWNOUT_PROTECTION_PVBUS_CAP);
+            rotation = Math.signum(rotation) * Math.min(Math.abs(rotation),BROWNOUT_PROTECTION_PVBUS_CAP);
+        }
         differentialDrive.arcadeDrive(speed, rotation);
     }
 
     public void curvatureDrive(double speed, double rotation, boolean turn) {
+        if (brownoutProtectionEnabled) {
+            speed = Math.signum(speed) * Math.min(Math.abs(speed),BROWNOUT_PROTECTION_PVBUS_CAP);
+            rotation = Math.signum(rotation) * Math.min(Math.abs(rotation),BROWNOUT_PROTECTION_PVBUS_CAP);
+        }
         differentialDrive.curvatureDrive(speed, rotation, turn);
     }
 
@@ -263,14 +278,20 @@ public class Drivetrain extends Subsystem {
         absoluteGyroError = 0;
     }
 
-    public void enableCurrentLimit() {
-        leftBottomMotor.enableCurrentLimit(true);
-        rightBottomMotor.enableCurrentLimit(true);
+    // If anyone mentions the phrase "current limit",
+    // they will be given a angry look
+    public void enableBrownOutProtection() {
+        System.out.println("[Drivetrain] ENABLE brownout protection");
+        brownoutProtectionEnabled = true;
+//        leftBottomMotor.enableCurrentLimit(true);
+//        rightBottomMotor.enableCurrentLimit(true);
     }
 
-    public void disableCurrentLimit() {
-        leftBottomMotor.enableCurrentLimit(false);
-        rightBottomMotor.enableCurrentLimit(false);
+    public void disableBrownOutProtection() {
+        System.out.println("[Drivetrain] DISABLE brownout protection");
+        brownoutProtectionEnabled = false;
+//        leftBottomMotor.enableCurrentLimit(false);
+//        rightBottomMotor.enableCurrentLimit(false);
     }
 
     public double getCurrent() {

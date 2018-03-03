@@ -155,7 +155,6 @@ public class Robot extends IterativeRobot {
         if (autonCommand != null) {
             autonCommand.cancel();
         }
-        Robot.drivetrain.setRamp(0);
     }
 
     @Override

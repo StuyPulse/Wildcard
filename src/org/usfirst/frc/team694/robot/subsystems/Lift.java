@@ -181,7 +181,6 @@ public class Lift extends Subsystem {
     }
 
     public double getCurrent() {
-        System.out.println("[Lift] Left: " + innerLeftMotor.getOutputCurrent() + ", Right: " + innerRightMotor.getOutputCurrent());
         return innerLeftMotor.getOutputCurrent()
              + innerRightMotor.getOutputCurrent()
              + outerLeftMotor.getOutputCurrent()

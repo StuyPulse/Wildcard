@@ -2,12 +2,21 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class DrivetrainDriveSystemCommand extends Command {
+
+    // When we start our auto low gear shift
+    private static final double BROWNOUT_PROTECTION_LOWER_BOUND_VOLTAGE = 8;
+
+    // After auto low gear shifting, when do we shift back up
+    private static final double BROWNOUT_PROTECTION_UPPER_BOUND_VOLTAGE = 9;
+
+    private boolean isBrownOutProtectionOn;
 
     boolean tankDrive;
     boolean driveModeToggleButtonWasPressed;
@@ -43,19 +52,43 @@ public class DrivetrainDriveSystemCommand extends Command {
         if (Robot.oi.driverGamepad.getRawOptionButton() && !driveModeToggleButtonWasPressed) {
             tankDrive = !tankDrive;
         }
+        driveModeToggleButtonWasPressed = Robot.oi.driverGamepad.getRawOptionButton();
 
-        if (!tankDrive) {
-            if (Math.abs(-1.0 * rightTrigger + leftTrigger) > 0.05) {
-//                Robot.drivetrain.highGearShift();
-                Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, false);
-            } else {
-//                if (Math.abs(leftJoystickX) > 0.05) {
-//                    Robot.drivetrain.lowGearShift();
-//                }
-                Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, true);
+        // AUTO GEAR SHIFTING to reduce brownouts
+        if (!isBrownOutProtectionOn) {
+            // If we're already manual gear shifting, ignore this change.
+            if (!Robot.oi.driverGamepad.getRawBottomButton() 
+              && RobotController.getBatteryVoltage() < BROWNOUT_PROTECTION_LOWER_BOUND_VOLTAGE) {
+                isBrownOutProtectionOn = true;
+                Robot.drivetrain.enableBrownOutProtection();
+                //Robot.drivetrain.lowGearShift();
+            }
+        } else {
+            if (RobotController.getBatteryVoltage() > BROWNOUT_PROTECTION_UPPER_BOUND_VOLTAGE) {
+                isBrownOutProtectionOn = false;
+                // If we're already manual gear shifting, don't override the driver's decision
+                if (!Robot.oi.driverGamepad.getRawBottomButton()) {
+                    Robot.drivetrain.disableBrownOutProtection();
+                    //Robot.drivetrain.highGearShift();
+                }
             }
         }
-        if (tankDrive) {
+
+
+        if (!tankDrive) {
+            if (Math.abs(rightTrigger + leftTrigger) > 0.05) {
+                // If we're already manual gear shifting, don't override the driver's decision
+                if (!Robot.oi.driverGamepad.getRawBottomButton()) {                
+                    Robot.drivetrain.highGearShift();
+                }
+                Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, false);
+            } else {
+                if (Math.abs(leftJoystickX) > 0.05) {
+                    Robot.drivetrain.lowGearShift();
+                }
+                Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, true);
+            }
+        } else {
             Robot.drivetrain.tankDrive(leftJoystickY, rightJoystickY);
         }
     }

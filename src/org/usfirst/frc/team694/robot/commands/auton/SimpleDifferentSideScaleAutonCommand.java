@@ -24,8 +24,8 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
         //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
         addSequential(new DriveStraightWithRampingCommand(203/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
 
-        addParallel(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
         addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()), 2);
+        addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
 
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
 //        addSequential(new DriveStraightWithRampingCommand(53 + 12));//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
