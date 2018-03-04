@@ -26,7 +26,8 @@ public class ScaleScoreSecondTimeCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.3, 20), 2);
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
-        addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
+        // Height used to be 89 - minheight
+        addSequential(new LiftMoveToHeightCommand(83 - RobotMap.MIN_HEIGHT_OF_LIFT));
 
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.3, 20), 3);
 
