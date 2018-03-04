@@ -14,6 +14,7 @@ public class RightSideSwitchAutonCommand extends CommandGroup {
 
     // 114: 2x speed
     private static final double DISTANCE_TOTAL = 153;
+    private final static double INITIAL_DRIVE_RAMP_TIMEOUT = 3;
 
     public RightSideSwitchAutonCommand() {
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromLineSensorToAutoLine()));
@@ -27,18 +28,19 @@ public class RightSideSwitchAutonCommand extends CommandGroup {
         addSequential(new PrintCommand("[RightSideSwitchAuton] start!"));
         DriveStraightWithRampingCommand rampCommand = new DriveStraightNoRampingLimitCommand(DISTANCE_TOTAL);
 
-        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 1));
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 0, 70)); // Start turning
-        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 65, -5)); // Turn back, ish
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
+        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 1), INITIAL_DRIVE_RAMP_TIMEOUT);
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 0, 70), INITIAL_DRIVE_RAMP_TIMEOUT); // Start turning
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 65, -5), INITIAL_DRIVE_RAMP_TIMEOUT); // Turn back, ish
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40), INITIAL_DRIVE_RAMP_TIMEOUT);
         // ultra fast and ultra fun but totally illegal
 //        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
         addParallel(new ConditionalDistanceEncodersCommand(
-                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
-        addSequential(rampCommand, 3);
+                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95), INITIAL_DRIVE_RAMP_TIMEOUT);
+        addSequential(rampCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
 
         addSequential(new CrabArmStopCommand());
 
+        addSequential(new PrintCommand("[RightSideSwitchAuton] Post score"));
         addSequential(new SwitchPostScoreExchangeScoreCommand(true));
     }
     
