@@ -25,14 +25,21 @@ public class LiftMoveToHeightCommand extends Command {
 
     @Override
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
-                || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
-                || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD);
+//                || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
+//                || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
     }
 
     @Override
     protected void end() {
         Robot.lift.stop();
-        System.out.println("[LiftMoveToHeight] STOP");
+        System.out.println("[LiftMoveToHeight] STOP " + Robot.lift.getLiftHeight());
     }
+
+    @Override
+    protected void interrupted() {
+        end();
+        System.out.println("[LiftMoveToHeight] INTERRUPTED (ruh roh)");
+    }
+
 }

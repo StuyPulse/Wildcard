@@ -32,12 +32,14 @@ public class RightSideSwitchAutonCommand extends CommandGroup {
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 65, -5)); // Turn back, ish
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
         // ultra fast and ultra fun but totally illegal
-        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
+//        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
+        addParallel(new ConditionalDistanceEncodersCommand(
+                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
         addSequential(rampCommand, 3);
 
         addSequential(new CrabArmStopCommand());
 
-        addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 40));
-
+        addSequential(new SwitchPostScoreExchangeScoreCommand(true));
     }
+    
 }

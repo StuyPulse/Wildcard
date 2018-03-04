@@ -20,6 +20,7 @@ import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaToggleAndAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
@@ -47,6 +48,8 @@ public class OI {
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
         operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
         operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
+        // Prev line replaced with:
+//        operatorGamepad.getTopButton().whenPressed(new SpatulaToggleAndAcquireCommand());
         operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());

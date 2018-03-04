@@ -29,7 +29,7 @@ public class LeftSideSwitchAutonCommand extends CommandGroup {
 //        addSequential(new GrabberOpenCommand());
 //        addSequential(new SpatulaDeacquireCommand());
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
-        
+
         DriveStraightWithRampingCommand rampCommand = new DriveStraightNoRampingLimitCommand(DISTANCE_TOTAL);
 
         addSequential(new PrintCommand("[LeftSideSwitchAuton] start!"));
@@ -41,13 +41,12 @@ public class LeftSideSwitchAutonCommand extends CommandGroup {
         addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 65, 5)); // Turn back, ish
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
         // ultra fast and ultra fun but totally illegal
-        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
+//        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
+        addParallel(new ConditionalDistanceEncodersCommand(
+                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
         addSequential(rampCommand, 3.5);
 
-        // Fun but illegal deacquire
-//        addSequential(new SpatulaDeacquireCommand(), 1);
-
-//        addSequential(new DrivetrainHighGearCommand());
+        addSequential(new SwitchPostScoreExchangeScoreCommand(false));
 
     }
 }

@@ -21,7 +21,6 @@ public class BITCOINCommand extends CommandGroup {
 
         // TODO: Fix Magic Numbers
         addParallel(new SpatulaMoveSpeedCommand(0.25), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME + 0.75);
-
         addSequential(new FlapAndFlipUpCommand());
 
 //        addSequential(new SpatulaFlipUpCommand());
