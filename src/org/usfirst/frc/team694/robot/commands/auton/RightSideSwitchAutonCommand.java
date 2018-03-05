@@ -36,6 +36,7 @@ public class RightSideSwitchAutonCommand extends CommandGroup {
 //        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
         addParallel(new ConditionalDistanceEncodersCommand(
                 new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95), INITIAL_DRIVE_RAMP_TIMEOUT);
+
         addSequential(rampCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
 
         addSequential(new CrabArmStopCommand());

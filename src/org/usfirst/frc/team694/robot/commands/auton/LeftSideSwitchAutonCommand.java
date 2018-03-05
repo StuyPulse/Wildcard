@@ -36,7 +36,6 @@ public class LeftSideSwitchAutonCommand extends CommandGroup {
 
         addSequential(new LeftSideSwitchAutonPartOneCommand(), INITIAL_DRIVE_RAMP_TIMEOUT);
 
-
         addSequential(new PrintCommand("[LeftSideSwitchAuton] Post score"));
 
         addSequential(new SwitchPostScoreExchangeScoreCommand(false));
@@ -53,6 +52,11 @@ public class LeftSideSwitchAutonCommand extends CommandGroup {
     protected void interrupted() {
         super.interrupted();
         System.out.println("[LeftSideSwitchAuton] INTERRUPTED");
+    }
+
+    @Override
+    public void cancel() {
+        // Don't cancel!
     }
 
     private static class LeftSideSwitchAutonPartOneCommand extends CommandGroup {
@@ -72,7 +76,30 @@ public class LeftSideSwitchAutonCommand extends CommandGroup {
                     new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95), INITIAL_DRIVE_RAMP_TIMEOUT);
             addSequential(new PrintCommand("[LeftSideSwitchAuton] Sequentials finished initializing..."));
             addSequential(rampCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
-
         }
+
+        @Override
+        public void initialize() {
+            super.initialize();
+            setTimeout(INITIAL_DRIVE_RAMP_TIMEOUT);
+        }
+
+        @Override
+        public boolean isFinished() {
+            return super.isFinished() || isTimedOut();
+        }
+        
+        @Override
+        public void execute() {
+            super.execute();
+            System.out.println("done? " + isFinished());
+        }
+
+        @Override
+        public void end() {
+            super.end();
+            System.out.println("[LeftSideSwitch Part 1] DONE!");
+        }
+
     }
 }

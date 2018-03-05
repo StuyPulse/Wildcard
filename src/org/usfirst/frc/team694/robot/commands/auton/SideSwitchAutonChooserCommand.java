@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 public class SideSwitchAutonChooserCommand extends ConditionalCommand {
 
     private static final double SPATULA_DEACQUIRE_TIME = 1.5;
+    private static final double SPATULA_DEACQUIRE_SPEED = 0.8;
 
     public SideSwitchAutonChooserCommand() {
         super(new RightSideSwitchAutonCommand(), new LeftSideSwitchAutonCommand()); 
@@ -30,7 +31,7 @@ public class SideSwitchAutonChooserCommand extends ConditionalCommand {
 
         @Override
         public void initialize() {
-            Robot.spatula.deacquire();
+            Robot.spatula.acquireSpeed(-1 * SPATULA_DEACQUIRE_SPEED);
         }
 
         @Override

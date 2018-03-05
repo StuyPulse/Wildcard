@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.RobotMap;
+import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.FlapAndFlipDownCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -22,7 +23,7 @@ public class SwitchPostScoreExchangeScoreCommand extends CommandGroup {
     public SwitchPostScoreExchangeScoreCommand(boolean isOnRight) {
         addSequential(new DrivetrainMoveInchesEncoderCommand(42.0 - RobotMap.LENGTH_OF_BOT/2 - 11.0/2.0, -0.3));
 
-        addParallel(new FlapAndFlipDownCommand());
+        addParallel(new CrabArrowAcquireCommand());
         if (isOnRight) {
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-90));
             // Grab cube and continue moving till we are ready to turn to the exchange
