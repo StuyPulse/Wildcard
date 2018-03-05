@@ -105,7 +105,7 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void disabledInit() {
-
+        Scheduler.getInstance().removeAll();
     }
 
     @Override
@@ -260,7 +260,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
-
+    
     public static boolean isRobotAndSwitchOnSameSide() {
         return (isAllianceSwitchRight && isRobotOnRight) || (!isAllianceSwitchRight && !isRobotOnRight);
         //true is switch is close to robot
