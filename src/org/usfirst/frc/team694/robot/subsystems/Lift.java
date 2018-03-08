@@ -57,15 +57,12 @@ public class Lift extends Subsystem {
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        // MILDCARD ONLY
-        innerLeftMotor.setSensorPhase(true);
-        innerRightMotor.setSensorPhase(true);
-
         // Lift P, to ramp up to a height
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
-        innerLeftMotor.setSensorPhase(true);
-        innerRightMotor.setSensorPhase(true);
+        // MILDCARD ONLY
+        innerLeftMotor.setSensorPhase(false);
+        innerRightMotor.setSensorPhase(false);
 
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
