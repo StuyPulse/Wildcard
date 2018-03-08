@@ -57,6 +57,10 @@ public class Lift extends Subsystem {
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
+        // MILDCARD ONLY
+        innerLeftMotor.setSensorPhase(true);
+        innerRightMotor.setSensorPhase(true);
+
         // Lift P, to ramp up to a height
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
