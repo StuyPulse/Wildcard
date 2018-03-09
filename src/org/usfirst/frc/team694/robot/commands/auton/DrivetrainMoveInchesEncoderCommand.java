@@ -2,7 +2,7 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-public class DrivetrainMoveInchesEncoderCommand extends DrivetrainDriveCommand {
+public class DrivetrainMoveInchesEncoderCommand extends DrivetrainDriveDistanceCommand {
     protected double moveSpeed;
 
     public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {

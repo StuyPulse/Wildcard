@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public abstract class DrivetrainDriveCommand extends Command {
+public abstract class DrivetrainDriveDistanceCommand extends Command {
 
     protected double targetDistance;
 
     private double startDistance;
 
-    public DrivetrainDriveCommand(double distance) {
+    public DrivetrainDriveDistanceCommand(double distance) {
         this.targetDistance = distance;
         requires(Robot.drivetrain);
     }
