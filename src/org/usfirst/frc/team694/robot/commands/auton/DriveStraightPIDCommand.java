@@ -2,53 +2,86 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveStraightPIDCommand extends PIDCommand {
-	double distance;
-	double speed;
-	double output;
+public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand {
+
+    protected double speedScaleFactor = 1;
+
+    private PIDController rotationPIDController;
+    private double gyroPIDOutput;
+
 	public DriveStraightPIDCommand(double distance, double speed) {
-		super(0,0,0);
-		requires(Robot.drivetrain);
-		this.distance = distance;
-		this.speed = speed;
+		super(distance, speed);
+		rotationPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
 	}
 
 	@Override
 	protected void initialize() {
+	    super.initialize();
 		Robot.drivetrain.resetGyro();
-		Robot.drivetrain.resetEncoders();
-		this.getPIDController().setPID(
+        rotationPIDController.setSetpoint(0);
+		rotationPIDController.setPID(
 				SmartDashboard.getNumber("DriveStraightPID P", 0), 
 				SmartDashboard.getNumber("DriveStraightPID I", 0), 
 				SmartDashboard.getNumber("DriveStraightPID D", 0)
 				);
+        rotationPIDController.enable();
 	}
 
     @Override
 	protected void execute() {
-		System.out.println("[DriveStraightPIDCommand] angle:" + returnPIDInput());
+        Robot.drivetrain.tankDrive(moveSpeed + getGyroPIDOutput(), moveSpeed - getGyroPIDOutput());
 	}
 
     @Override
 	protected boolean isFinished() {
-		return Robot.drivetrain.getEncoderDistance() >= distance;
+		return super.isFinished();
 	}
 
     @Override
 	protected void end() {
-		Robot.drivetrain.tankDrive(0, 0);
+        super.end();
+        rotationPIDController.setPID(0, 0, 0);
+        rotationPIDController.disable();
 	}
 
-	@Override
-	protected double returnPIDInput() {
-		return Robot.drivetrain.getGyroAngle();
+    protected double getGyroPIDOutput() {
+        return gyroPIDOutput;
+    }
+    
+    public void setTargetAngle(double angle) {
+        rotationPIDController.setSetpoint(angle);
+    }
+
+    public void setSpeedScale(double speedScaleFactor) {
+        this.speedScaleFactor = speedScaleFactor;
+    }
+
+
+	private class GyroPIDSource implements PIDSource {
+	    @Override
+        public void setPIDSourceType(PIDSourceType pidSource) {}
+
+        @Override
+        public PIDSourceType getPIDSourceType() {
+            return PIDSourceType.kDisplacement;
+        }
+
+        @Override
+        public double pidGet() {
+            return Robot.drivetrain.getGyroAngle();
+        }
 	}
-	@Override
-	protected void usePIDOutput(double output) {
-		this.output = output;
-		Robot.drivetrain.tankDrive(speed + output , speed - output);
+
+	private class GyroPIDOutput implements PIDOutput {
+        @Override
+        public void pidWrite(double output) {
+            gyroPIDOutput = output;
+        }    
 	}
 }

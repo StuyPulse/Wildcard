@@ -1,9 +1,11 @@
-package org.usfirst.frc.team694.robot.commands.auton;
+package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.GrabberCloseCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

@@ -2,37 +2,29 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-public class DrivetrainRotateDegreesGyroCommand extends Command {
-    public double targetAngle;
+public class DrivetrainRotateDegreesGyroCommand extends DrivetrainRotateCommand {
+    
+    private static final double CLOSE_ENOUGH_THRESHOLD = 4;
 
     public DrivetrainRotateDegreesGyroCommand(double targetAngle) {
-        this.targetAngle = targetAngle;
-        requires(Robot.drivetrain);
-    }
-
-    @Override
-    protected void initialize() {
-        Robot.drivetrain.resetGyro();
-        SmartDashboard.getNumber("Target Angle", 0);
+        super(targetAngle);
     }
 
     @Override
     protected void execute() {
-        Robot.drivetrain.arcadeDrive(0, Math.signum(Robot.drivetrain.getGyroAngle()) * .5);
+        double speed = Math.signum(-1 * getDeltaAngle());
+        Robot.drivetrain.tankDrive(speed, -1 * speed);
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(targetAngle) - Math.abs(Robot.drivetrain.getGyroAngle()) < 1;
+        return Math.abs(getDeltaAngle()) < CLOSE_ENOUGH_THRESHOLD;
     }
 
     @Override
     protected void end() {
+        super.end();
         Robot.drivetrain.stop();
-        Robot.drivetrain.resetGyro();
     }
 
 }

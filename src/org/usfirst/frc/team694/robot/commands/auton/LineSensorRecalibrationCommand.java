@@ -4,10 +4,10 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DrivetrainLineSensorCommand extends Command {
+public class LineSensorRecalibrationCommand extends Command {
     private double offset;
 
-    public DrivetrainLineSensorCommand(double offset) {
+    public LineSensorRecalibrationCommand(double offset) {
         this.offset = offset;
     }
 

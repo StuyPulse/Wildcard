@@ -2,8 +2,8 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-public class DriveStraightNoRampingLimitCommand extends DriveStraightWithRampingCommand {
-    public DriveStraightNoRampingLimitCommand(double targetDistance) {
+public class DriveStraightRampDownOnlyCommand extends DriveStraightWithRampingCommand {
+    public DriveStraightRampDownOnlyCommand(double targetDistance) {
         super(targetDistance);
     }
 

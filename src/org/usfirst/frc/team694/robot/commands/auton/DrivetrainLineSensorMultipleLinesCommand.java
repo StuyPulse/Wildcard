@@ -15,7 +15,7 @@ public class DrivetrainLineSensorMultipleLinesCommand extends CommandGroup {
             addSequential(new DrivetrainLineSensorEmptyCommand());
             addSequential(new WaitCommand(AFTER_LINE_WAIT_DELAY));
         }
-        addSequential(new DrivetrainLineSensorCommand(setDistance));
+        addSequential(new LineSensorRecalibrationCommand(setDistance));
     }
 
     private class DrivetrainLineSensorEmptyCommand extends Command {

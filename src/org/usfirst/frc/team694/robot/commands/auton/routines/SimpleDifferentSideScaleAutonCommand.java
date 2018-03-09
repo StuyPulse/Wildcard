@@ -1,5 +1,5 @@
 
-package org.usfirst.frc.team694.robot.commands.auton;
+package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
@@ -7,6 +7,9 @@ import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.PrintCommand;

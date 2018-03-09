@@ -1,8 +1,10 @@
-package org.usfirst.frc.team694.robot.commands.auton;
+package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireUntilAcquiredCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

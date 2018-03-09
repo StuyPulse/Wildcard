@@ -7,13 +7,13 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.auton.LeftSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.RightSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SameSideScaleAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SideScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SideSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.SimpleDifferentSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.LeftSideSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.RightSideSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
