@@ -13,9 +13,10 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
         RAMP_FULL,
         NO_RAMP_UP,
         NO_RAMP_DOWN,
+        NO_RAMPING
     }
 
-    private DriveStraightWithRampingCommand driveCommand = null;
+    private DriveStraightPIDCommand driveCommand = null;
 
     public DrivetrainDriveCurveCommand(double targetDistance, RampMode ramping) {
         switch (ramping) {
@@ -28,8 +29,10 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
             case NO_RAMP_DOWN:
                 driveCommand = new DriveStraightRampUpOnlyCommand(targetDistance);
                 break;
+            case NO_RAMPING:
+                driveCommand = new DriveStraightPIDCommand(targetDistance, 1);
+                break;
         }
-
         addSequential(driveCommand);
     }
 
@@ -52,17 +55,17 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
     private static class DrivetrainRampingSetSpeedScaleAtDistanceCommand extends ConditionalDistanceEncodersCommand {
 
         public DrivetrainRampingSetSpeedScaleAtDistanceCommand(
-                DriveStraightWithRampingCommand rampCommand, 
+                DriveStraightPIDCommand rampCommand, 
                 double distance, 
                 double factor) {
             super(new DrivetrainRampingSetSpeedScaleCommand(rampCommand, factor), distance);
         }
 
         private static class DrivetrainRampingSetSpeedScaleCommand extends InstantCommand {
-            private DriveStraightWithRampingCommand rampCommand;
+            private DriveStraightPIDCommand rampCommand;
             private double speedScaleFactor;
 
-            public DrivetrainRampingSetSpeedScaleCommand(DriveStraightWithRampingCommand rampCommand, double speedScaleFactor) {
+            public DrivetrainRampingSetSpeedScaleCommand(DriveStraightPIDCommand rampCommand, double speedScaleFactor) {
                 this.rampCommand = rampCommand;
                 this.speedScaleFactor = speedScaleFactor;
             }
@@ -79,7 +82,7 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
     private static class DrivetrainRampingSetTargetAngleAtDistanceCommand extends ConditionalDistanceEncodersCommand {
 
         public DrivetrainRampingSetTargetAngleAtDistanceCommand(
-                DriveStraightWithRampingCommand rampCommand, 
+                DriveStraightPIDCommand rampCommand, 
                 double distance,
                 double angle
                 ) {
@@ -94,9 +97,9 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
 
         private static class DrivetrainRampingSetTargetAngleCommand extends InstantCommand {
             private double targetAngle;
-            private DriveStraightWithRampingCommand rampCommand;
+            private DriveStraightPIDCommand rampCommand;
 
-            public DrivetrainRampingSetTargetAngleCommand(DriveStraightWithRampingCommand rampCommand, double targetAngle) {
+            public DrivetrainRampingSetTargetAngleCommand(DriveStraightPIDCommand rampCommand, double targetAngle) {
                 this.rampCommand = rampCommand;
                 this.targetAngle = targetAngle;
             }
