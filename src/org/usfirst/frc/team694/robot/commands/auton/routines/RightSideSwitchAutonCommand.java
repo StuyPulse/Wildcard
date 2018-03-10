@@ -30,9 +30,9 @@ public class RightSideSwitchAutonCommand extends AutonCommandGroup {
         driveCommand.addTurn(65, -5);
 
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
-//        addParallel(new ConditionalDistanceEncodersCommand(
-//                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
-        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
+        addParallel(new ConditionalDistanceEncodersCommand(
+                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
+//        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
         addSequential(driveCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
 
         addSequential(new CrabArmStopCommand());
