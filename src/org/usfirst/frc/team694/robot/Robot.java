@@ -225,6 +225,7 @@ public class Robot extends IterativeRobot {
     private void updateSmartDashboard() {
 
         //        SmartDashboard.putData(pdppanel);
+        SmartDashboard.putData("Scheduler", Scheduler.getInstance());
 
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
         SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());

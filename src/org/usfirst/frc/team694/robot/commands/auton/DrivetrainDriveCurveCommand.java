@@ -33,7 +33,7 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
                 driveCommand = new DriveStraightPIDCommand(targetDistance, 1);
                 break;
         }
-        addSequential(driveCommand);
+        addParallel(driveCommand); // Doing this so that we can make everything run at once
     }
 
     // By default, do regular ramping
@@ -41,16 +41,20 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
         this(targetDistance, RampMode.RAMP_FULL);
     }
 
+    @Override
+    protected void interrupted() {
+        System.out.println("[DrivetrainDriveCurve] INTERRUPT");
+    }
+
     // Changes the target angle at a certain distance
     public void addTurn(double distance, double targetAngle) {
-        addSequential(new DrivetrainRampingSetTargetAngleAtDistanceCommand(driveCommand, distance, targetAngle));
+        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(driveCommand, distance, targetAngle));
     }
 
     // Changes the speed scale factor at a certain distance (slows or speeds us up basically)
     public void addSpeedChange(double distance, double speedScale) {
-        addSequential(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(driveCommand, distance, speedScale));
+        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(driveCommand, distance, speedScale));
     }
-
 
     private static class DrivetrainRampingSetSpeedScaleAtDistanceCommand extends ConditionalDistanceEncodersCommand {
 
@@ -73,7 +77,6 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
             @Override
             protected void initialize() {
                 rampCommand.setSpeedScale(speedScaleFactor);
-                
                 System.out.println("[DrivetrainRampSetSpeed] set to " + speedScaleFactor + "!");
             }
         }
@@ -92,7 +95,7 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
         @Override
         protected void initialize() {
             super.initialize();
-            System.out.println("[SetTargetAngle] Set!");
+            System.out.println("[SetTargetAngle] Set");
         }
 
         private static class DrivetrainRampingSetTargetAngleCommand extends InstantCommand {
@@ -110,5 +113,4 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
             }
         }
     }
-
 }

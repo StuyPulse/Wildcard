@@ -6,6 +6,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 
 import edu.wpi.first.wpilibj.command.PrintCommand;
 
@@ -24,7 +25,7 @@ public class LeftSideSwitchAutonCommand extends AutonCommandGroup {
 
         addSequential(new PrintCommand("[LeftSideSwitchAuton] start!"));
 
-        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
+        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL, RampMode.NO_RAMPING);
         driveCommand.addSpeedChange(0, 1);
         driveCommand.addTurn(0, -80);
         driveCommand.addTurn(65, 5);

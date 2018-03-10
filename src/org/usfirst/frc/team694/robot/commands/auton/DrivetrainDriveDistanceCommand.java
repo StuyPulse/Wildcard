@@ -23,7 +23,7 @@ public abstract class DrivetrainDriveDistanceCommand extends Command {
         startDistance = getRawDistance();
     }
 
-    protected double getRawDistance() {
+    private double getRawDistance() {
         return Robot.drivetrain.getEncoderDistance();
     }
 

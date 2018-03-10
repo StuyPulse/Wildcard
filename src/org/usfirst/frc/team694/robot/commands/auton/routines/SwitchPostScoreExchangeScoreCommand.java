@@ -2,18 +2,16 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.FlapAndFlipDownCommand;
+import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
 
-public class SwitchPostScoreExchangeScoreCommand extends CommandGroup {
+public class SwitchPostScoreExchangeScoreCommand extends AutonCommandGroup {
 
     private static final double SWITCH_WIDTH = 189.5;
     // The extra distance that the center of the exchange zone is from the center of the field on the right side

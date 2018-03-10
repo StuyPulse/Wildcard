@@ -5,9 +5,15 @@ import org.usfirst.frc.team694.robot.Robot;
 public class DrivetrainMoveInchesEncoderCommand extends DrivetrainDriveDistanceCommand {
     protected double moveSpeed;
 
-    public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {
-        super(distance);
+    public DrivetrainMoveInchesEncoderCommand(double targetDistance, double speed) {
+        super(targetDistance);
         this.moveSpeed = speed;
+    }
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        System.out.println("[DrivetrainMoveInches] init");
     }
 
     @Override

@@ -17,12 +17,10 @@ import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.SpatulaToggleAndAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SwitchPostScoreDriveToScaleAutonCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -38,6 +36,7 @@ public class OI {
         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
 
         // TESTING ONLY
+        driverGamepad.getDPadUp().whenPressed(new SwitchPostScoreDriveToScaleAutonCommand(true));
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(200));
 //          driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
 //          driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(90));
