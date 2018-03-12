@@ -13,13 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Quisitor extends Subsystem {
 
-    private WPI_VictorSPX leftQuisitorMotor;
-    private WPI_VictorSPX rightQuisitorMotor;
+    private WPI_VictorSPX quisitorMotor;
     private DoubleSolenoid quisitorFlipSolenoid;
     private DoubleSolenoid quisitorGrabberSolenoid;
     //private Solenoid quisitorTongsSolenoid; 
 
-    private SpeedControllerGroup quisitorMotors;
     private DigitalInput quisitorLimitSwitch;
 
     public boolean isBITCOINAutomation;
@@ -27,17 +25,11 @@ public class Quisitor extends Subsystem {
 //    public boolean quisitorRunning;
 
     public Quisitor() {
-        leftQuisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_LEFT_MOTOR_PORT);
-        rightQuisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_RIGHT_MOTOR_PORT);
-        leftQuisitorMotor.setNeutralMode(NeutralMode.Brake);
-        rightQuisitorMotor.setNeutralMode(NeutralMode.Brake);
-
-        rightQuisitorMotor.setInverted(true);
+        quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_LEFT_MOTOR_PORT);
+        quisitorMotor.setNeutralMode(NeutralMode.Brake);
 
         quisitorFlipSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_FLIP_UP_PORT, RobotMap.QUISITOR_FLIP_DOWN_PORT);
         quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_LEFT_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_RIGHT_PORT);
-     //TODO: replace error with variables from Grabber   
-        quisitorMotors = new SpeedControllerGroup(leftQuisitorMotor, rightQuisitorMotor);
 
         quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
 
@@ -56,32 +48,20 @@ public class Quisitor extends Subsystem {
     }
 
     public void acquire() {
-        quisitorMotors.set(1);
+        quisitorMotor.set(1);
     }
 
     public void deacquire() {
-        quisitorMotors.set(-1);
+        quisitorMotor.set(-1);
     }
     
     // TESTING
     public void acquireSpeed(double speed) {
-        quisitorMotors.set(speed);
-    }
-
-    //left quisitor deacquires and the right acquires, rotating cube clockwise
-    public void leftQuisitorDeacquire() {
-        leftQuisitorMotor.set(1);
-        rightQuisitorMotor.set(-1);
-    }
-
-    //right quisitor deacquires and the left acquires, rotating cube counterclockwise
-    public void rightQuisitorDeacquire() {
-        leftQuisitorMotor.set(-1);
-        rightQuisitorMotor.set(1);
+        quisitorMotor.set(speed);
     }
 
     public void stop() {
-        quisitorMotors.set(0);
+        quisitorMotor.set(0);
     }
 
     public void flipUp() {
