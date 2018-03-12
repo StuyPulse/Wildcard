@@ -4,17 +4,14 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-/**
- *
- */
-public class SpatulaStopCommand extends InstantCommand {
+public class QuisitorOpenCommand extends InstantCommand {
 
-    public SpatulaStopCommand() {
-        requires(Robot.spatula);
+    public QuisitorOpenCommand() {
+        requires(Robot.quisitor);
     }
 
     @Override
     protected void initialize() {
-        Robot.spatula.stop();
+        Robot.quisitor.open();
     }
 }

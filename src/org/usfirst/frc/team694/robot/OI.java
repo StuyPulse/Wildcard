@@ -14,13 +14,13 @@ import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
-import org.usfirst.frc.team694.robot.commands.GrabberToggleCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaFlipToggleCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaLeftDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaRightDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaToggleAndAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorFlipToggleCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorLeftDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorRightDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorToggleAndAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
@@ -46,16 +46,16 @@ public class OI {
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
 
         operatorGamepad.getLeftButton().whileHeld(new CrabArmFlapOutCommand());
-        operatorGamepad.getRightButton().whenPressed(new GrabberToggleCommand());
+        operatorGamepad.getRightButton().whenPressed(new QuisitorToggleCommand());
 //        operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
         // Prev line replaced with:
-        operatorGamepad.getTopButton().whenPressed(new SpatulaToggleAndAcquireCommand());
+        operatorGamepad.getTopButton().whenPressed(new QuisitorToggleAndAcquireCommand());
         operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
-        operatorGamepad.getLeftTrigger().whileHeld(new SpatulaDeacquireCommand());
+        operatorGamepad.getLeftTrigger().whileHeld(new QuisitorDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
 
-        operatorGamepad.getLeftBumper().whileHeld(new SpatulaRightDeacquireCommand());
-        operatorGamepad.getRightBumper().whileHeld(new SpatulaLeftDeacquireCommand());
+        operatorGamepad.getLeftBumper().whileHeld(new QuisitorRightDeacquireCommand());
+        operatorGamepad.getRightBumper().whileHeld(new QuisitorLeftDeacquireCommand());
 
         operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
         operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());

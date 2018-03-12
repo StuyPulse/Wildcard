@@ -25,18 +25,18 @@ public class SideSwitchAutonChooserCommand extends ConditionalCommand {
     // To be used in the two switch commands: Runs the spatula deacquire for a period of time
     static class SpatulaDeacquireTimeCommand extends Command {
         public SpatulaDeacquireTimeCommand() {
-            requires(Robot.spatula);
+            requires(Robot.quisitor);
             setTimeout(SPATULA_DEACQUIRE_TIME);
         }
 
         @Override
         public void initialize() {
-            Robot.spatula.acquireSpeed(-1 * SPATULA_DEACQUIRE_SPEED);
+            Robot.quisitor.acquireSpeed(-1 * SPATULA_DEACQUIRE_SPEED);
         }
 
         @Override
         public void end() {
-            Robot.spatula.stop();
+            Robot.quisitor.stop();
             System.out.println("[SpatulaDeacquireTimeCommand] done");
         }
 

@@ -4,14 +4,14 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class GrabberOpenCommand extends InstantCommand {
+public class QuisitorCloseCommand extends InstantCommand {
 
-    public GrabberOpenCommand() {
-        requires(Robot.grabber);
+    public QuisitorCloseCommand() {
+        requires(Robot.quisitor);
     }
 
     @Override
     protected void initialize() {
-        Robot.grabber.open();
+        Robot.quisitor.close();
     }
 }

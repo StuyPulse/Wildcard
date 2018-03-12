@@ -28,8 +28,8 @@ public class LiftMoveCommand extends Command {
         //TODO: see whether Coby wants cubed or squared inputs on the lift.
 
         if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
-            if (Robot.spatula.isSpatulaUp()) {
-                Robot.spatula.acquireSpeed(-liftSquared * 0.2);
+            if (Robot.quisitor.isQuisitorUp()) {
+                Robot.quisitor.acquireSpeed(-liftSquared * 0.2);
             }
             Robot.lift.move(liftSquared);
 //            Robot.drivetrain.enableCurrentLimit();

@@ -4,18 +4,15 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class SpatulaRightDeacquireCommand extends Command {
+public class QuisitorDeacquireCommand extends Command {
 
-    public SpatulaRightDeacquireCommand() {
-        requires(Robot.spatula);
+    public QuisitorDeacquireCommand() {
+        requires(Robot.quisitor);
     }
 
     @Override
     protected void execute() {
-        Robot.spatula.rightSpatulaDeacquire();
+        Robot.quisitor.deacquire();
     }
 
     @Override
@@ -25,6 +22,6 @@ public class SpatulaRightDeacquireCommand extends Command {
 
     @Override
     protected void end() {
-        Robot.spatula.stop();
+        Robot.quisitor.stop();
     }
 }

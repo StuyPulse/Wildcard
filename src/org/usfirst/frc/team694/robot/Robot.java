@@ -16,9 +16,9 @@ import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChoo
 import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team694.robot.subsystems.Grabber;
+//import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
-import org.usfirst.frc.team694.robot.subsystems.Spatula;
+import org.usfirst.frc.team694.robot.subsystems.Quisitor;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -32,9 +32,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
     public static Drivetrain drivetrain;
-    public static Spatula spatula;
+    public static Quisitor quisitor;
     public static CrabArm crabArm;
-    public static Grabber grabber;
+    //public static Grabber grabber;
     public static Lift lift;
 
     public static OI oi;
@@ -56,9 +56,9 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         drivetrain = new Drivetrain();
-        spatula = new Spatula();
+        quisitor = new Quisitor();
         crabArm = new CrabArm();
-        grabber = new Grabber();
+        //grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
 
@@ -245,8 +245,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
         SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
 
-        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.spatula.isCubeDetected());
-        SmartDashboard.putBoolean("Spatula: Is up?", Robot.spatula.isSpatulaUp());
+        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.quisitor.isCubeDetected());
+        SmartDashboard.putBoolean("Spatula: Is up?", Robot.quisitor.isQuisitorUp());
 
         SmartDashboard.putNumber("Lift Current", lift.getCurrent());
         SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());

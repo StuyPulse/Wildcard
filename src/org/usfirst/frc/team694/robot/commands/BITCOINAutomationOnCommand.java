@@ -10,6 +10,6 @@ public class BITCOINAutomationOnCommand extends InstantCommand {
     }
 
     protected void initialize() {
-        Robot.spatula.isBITCOINAutomation = true;
+        Robot.quisitor.isBITCOINAutomation = true;
     }
 }

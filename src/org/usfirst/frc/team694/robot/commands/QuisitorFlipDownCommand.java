@@ -1,17 +1,16 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class GrabberCloseCommand extends InstantCommand {
+public class QuisitorFlipDownCommand extends InstantCommand {
 
-    public GrabberCloseCommand() {
-        requires(Robot.grabber);
+    public QuisitorFlipDownCommand() {
+        requires(Robot.quisitor);
     }
 
     @Override
     protected void initialize() {
-        Robot.grabber.close();
+        Robot.quisitor.flipDown();
     }
 }

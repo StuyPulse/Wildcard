@@ -5,7 +5,7 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
@@ -37,7 +37,7 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 //        addSequential(new DriveStraightWithRampingCommand(53 + 12));//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.6,43), 2.5);//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
 
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
         // Add me in
 //        addSequential(new ScaleGrabCubeAfterScoringCommand(false));
 //        addSequential(new ScaleScoreSecondTimeCommand(false));

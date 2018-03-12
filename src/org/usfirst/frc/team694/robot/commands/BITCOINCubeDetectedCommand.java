@@ -11,6 +11,6 @@ public class BITCOINCubeDetectedCommand extends ConditionalCommand {
     
     @Override
     public boolean condition() {
-        return Robot.spatula.isCubeDetected();
+        return Robot.quisitor.isCubeDetected();
     }
 }

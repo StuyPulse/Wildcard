@@ -9,7 +9,7 @@ public class CrabArrowAcquireUntilAcquiredCommand extends CrabArrowAcquireComman
 
     @Override
     protected boolean isFinished() {
-        return Robot.spatula.isCubeDetected();
+        return Robot.quisitor.isCubeDetected();
     }
 
 }

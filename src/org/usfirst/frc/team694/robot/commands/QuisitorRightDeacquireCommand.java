@@ -7,18 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SpatulaMoveSpeedCommand extends Command {
+public class QuisitorRightDeacquireCommand extends Command {
 
-    private double speed;
-
-    public SpatulaMoveSpeedCommand(double speed) {
-        this.speed = speed;
-        requires(Robot.spatula);
+    public QuisitorRightDeacquireCommand() {
+        requires(Robot.quisitor);
     }
 
     @Override
     protected void execute() {
-        Robot.spatula.acquireSpeed(speed);
+        Robot.quisitor.rightQuisitorDeacquire();
     }
 
     @Override
@@ -28,6 +25,6 @@ public class SpatulaMoveSpeedCommand extends Command {
 
     @Override
     protected void end() {
-        Robot.spatula.stop();
+        Robot.quisitor.stop();
     }
 }

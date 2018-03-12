@@ -6,19 +6,19 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Grabber extends Subsystem {
+/*public class Grabber extends Subsystem {
 
-    private DoubleSolenoid grabberSolenoid;
+   // private DoubleSolenoid grabberSolenoid;
 
     public Grabber() {
-        grabberSolenoid = new DoubleSolenoid(RobotMap.GRABBER_SOLENOID_OPEN_PORT, RobotMap.GRABBER_SOLENOID_CLOSE_PORT);
+    //    grabberSolenoid = new DoubleSolenoid(RobotMap.GRABBER_SOLENOID_OPEN_PORT, RobotMap.GRABBER_SOLENOID_CLOSE_PORT);
     }
 
     @Override
     public void initDefaultCommand() {
     }
 
-    public void open() {
+   /* public void open() {
         grabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
 
@@ -33,4 +33,4 @@ public class Grabber extends Subsystem {
             open();
         }
     }
-}
+}*/

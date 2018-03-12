@@ -33,7 +33,7 @@ public class FlapAndFlipDownCommand extends CommandGroup {
     private class TimedSpatulaFlipDownCommand extends CommandGroup {
         public TimedSpatulaFlipDownCommand() {
             addSequential(new WaitCommand(RobotMap.PRE_FLIP_WAIT_TIME));
-            addSequential(new SpatulaFlipDownCommand());
+            addSequential(new QuisitorFlipDownCommand());
             addSequential(new WaitCommand(RobotMap.POST_FLIP_WAIT_TIME));
         }
     }

@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  * Should Probably not run this on its own, the crabarms have to move out of the way first
  */
-public class SpatulaFlipUpCommand extends InstantCommand {
+public class QuisitorFlipUpCommand extends InstantCommand {
 
-    public SpatulaFlipUpCommand() {
+    public QuisitorFlipUpCommand() {
         //TESTING: requires(Robot.spatula);
     }
 
     @Override
     protected void initialize() {
-        Robot.spatula.flipUp();
+        Robot.quisitor.flipUp();
     }
 }

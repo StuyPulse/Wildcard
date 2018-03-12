@@ -16,7 +16,7 @@ public class ToggleCrabArmFlapOutAndSpatulaFlipCommand extends CommandGroup {
     private class TimedToggleCrabArmFlapOutAndSpatulaFlipCommand extends CommandGroup {
         public TimedToggleCrabArmFlapOutAndSpatulaFlipCommand() {
             addSequential(new WaitCommand(RobotMap.PRE_FLIP_WAIT_TIME));
-            addSequential(new SpatulaFlipToggleCommand());
+            addSequential(new QuisitorFlipToggleCommand());
             addSequential(new WaitCommand(RobotMap.POST_FLIP_WAIT_TIME));
         }
     }

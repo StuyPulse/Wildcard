@@ -1,8 +1,8 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.GrabberCloseCommand;
-import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
@@ -16,7 +16,7 @@ public class ScaleScoreSecondTimeCommand extends CommandGroup {
 
     public ScaleScoreSecondTimeCommand(boolean isRightSide) {
 
-        addSequential(new GrabberCloseCommand());
+        addSequential(new QuisitorCloseCommand());
 
         // Rotate back to where we were before grabbing the cube
         if (isRightSide) {
@@ -33,6 +33,6 @@ public class ScaleScoreSecondTimeCommand extends CommandGroup {
 
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.3, 20), 3);
 
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
     }
 }

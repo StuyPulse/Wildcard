@@ -7,13 +7,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class SpatulaFlipToggleCommand extends InstantCommand {
+public class QuisitorStopCommand extends InstantCommand {
 
-    public SpatulaFlipToggleCommand() {
-        requires(Robot.spatula);
+    public QuisitorStopCommand() {
+        requires(Robot.quisitor);
     }
 
+    @Override
     protected void initialize() {
-        Robot.spatula.flipToggle();
+        Robot.quisitor.stop();
     }
 }

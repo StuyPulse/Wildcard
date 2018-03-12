@@ -12,7 +12,7 @@ public class BITCOINCheckCommand extends ConditionalCommand {
 
     @Override
     protected boolean condition() {
-        return Robot.spatula.isBITCOINAutomation;
+        return Robot.quisitor.isBITCOINAutomation;
         // if true, will run BITCOINAutoCommand, which includes the acquirer limit switch
         // if false, will run the BITCOINManualCommand, in which the acquirer has already stopped
     }

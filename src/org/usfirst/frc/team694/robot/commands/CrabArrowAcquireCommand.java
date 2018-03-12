@@ -7,8 +7,8 @@ public class CrabArrowAcquireCommand extends CommandGroup {
 
     public CrabArrowAcquireCommand() {
         // Removed by order of Sir Blay:
-        addSequential(new SpatulaFlipDownIfUpCommand());
+        addSequential(new QuisitorFlipDownIfUpCommand());
         addParallel(new CrabArmAcquireCommand());
-        addSequential(new SpatulaAcquireCommand());  
+        addSequential(new QuisitorAcquireCommand());  
     }
 }

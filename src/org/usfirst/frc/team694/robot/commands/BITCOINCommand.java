@@ -17,10 +17,10 @@ public class BITCOINCommand extends CommandGroup {
 
         // Get the cube in the grabber
         addSequential(new LiftMoveToBottomCommand());
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
 
         // TODO: Fix Magic Numbers
-        addParallel(new SpatulaMoveSpeedCommand(0.25), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME + 0.75);
+        addParallel(new QuisitorMoveSpeedCommand(0.25), RobotMap.PRE_FLIP_WAIT_TIME + RobotMap.POST_FLIP_WAIT_TIME + 0.75);
         addSequential(new FlapAndFlipUpCommand());
 
 //        addSequential(new SpatulaFlipUpCommand());
@@ -38,12 +38,12 @@ public class BITCOINCommand extends CommandGroup {
 
     @Override
     protected void initialize() {
-        initialBITCOINAutomation = Robot.spatula.isBITCOINAutomation;
+        initialBITCOINAutomation = Robot.quisitor.isBITCOINAutomation;
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.spatula.isBITCOINAutomation != initialBITCOINAutomation ||
+        return Robot.quisitor.isBITCOINAutomation != initialBITCOINAutomation ||
                 super.isFinished();
     }
 

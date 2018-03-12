@@ -12,7 +12,7 @@ public final class RobotMap {
      * Robot Dimensions
      */
     public static final double DISTANCE_LINE_SENSOR_IS_FROM_FRONT_BUMPER_OF_BOT = 3.75; //
-    public static final double LENGTH_OF_BOT = 38; // (not including grabber)
+    public static final double LENGTH_OF_BOT = 38; // (not including QUISITOR)
     public static final double WIDTH_OF_BOT = 34.5; //
     public static final double MIDDLE_OF_BOT_LENGTHWISE = LENGTH_OF_BOT / 2;
     public static final double MIDDLE_OF_BOT_WIDTHWISE = WIDTH_OF_BOT / 2;
@@ -31,7 +31,7 @@ public final class RobotMap {
     public static final int DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT = 1;
 
     /**************************************************************************
-     * Spatula and CrabArm Constants //All times are in seconds
+     * QUISITOR and CrabArm Constants //All times are in seconds
      *************************************************************************/
     public static final double PRE_FLIP_WAIT_TIME = 0.25;
     public static final double POST_FLIP_WAIT_TIME = 0.5;
@@ -42,15 +42,15 @@ public final class RobotMap {
     public static final int DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT = 4;
 
     /**************************************************************************
-     * Spatula Motor Ports
+     * QUISITOR Motor Ports
      *************************************************************************/
-    public static final int SPATULA_LEFT_MOTOR_PORT = 11;
-    public static final int SPATULA_RIGHT_MOTOR_PORT = 12;
+    public static final int QUISITOR_LEFT_MOTOR_PORT = 11;
+    public static final int QUISITOR_RIGHT_MOTOR_PORT = 12;
 
     /**************************************************************************
-     * Spatula Limit Switch
+     * QUISITOR Limit Switch
      *************************************************************************/
-    public static final int SPATULA_LIMIT_SWITCH_PORT = 1;
+    public static final int QUISITOR_LIMIT_SWITCH_PORT = 1;
 
     /***************************************************************************
      * Lift Motor Ports
@@ -97,12 +97,12 @@ public final class RobotMap {
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = 7;
 
-    public static final int GRABBER_SOLENOID_OPEN_PORT = 2;
-    public static final int GRABBER_SOLENOID_CLOSE_PORT = 3;
+    public static final int QUISITOR_GRABBER_SOLENOID_LEFT_PORT = 2;//Left 
+    public static final int QUISITOR_GRABBER_SOLENOID_RIGHT_PORT = 3;//Right
 
-    public static final int SPATULA_FLIP_UP_PORT = 6;
-    public static final int SPATULA_FLIP_DOWN_PORT = 5;
-    //    public static final int SPATULA_TONGS_SOLENOID_PORT = -1; 
+    public static final int QUISITOR_FLIP_UP_PORT = 6;
+    public static final int QUISITOR_FLIP_DOWN_PORT = 5;
+    //    public static final int QUISITOR_TONGS_SOLENOID_PORT = -1; 
 
     /*****************************************************************************
      * Analog Ports

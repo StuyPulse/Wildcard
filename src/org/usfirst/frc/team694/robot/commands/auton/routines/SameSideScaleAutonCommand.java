@@ -1,7 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
@@ -33,7 +33,7 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
 //        addSequential(rampCommand, 5);
         addSequential(driveCommand);
 
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 10));
 //        addSequential(new LiftMoveToBottomCommand());
 

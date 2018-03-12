@@ -9,6 +9,6 @@ public class CrabArrowStopCommand extends CommandGroup {
 
     public CrabArrowStopCommand() {
         addParallel(new CrabArmStopCommand());
-        addSequential(new SpatulaStopCommand());
+        addSequential(new QuisitorStopCommand());
     }
 }
