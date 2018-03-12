@@ -11,7 +11,7 @@ public abstract class DrivetrainDriveDistanceCommand extends Command {
 
     protected double targetDistance;
 
-    private double startDistance;
+    protected double startDistance;
 
     public DrivetrainDriveDistanceCommand(double distance) {
         this.targetDistance = distance;

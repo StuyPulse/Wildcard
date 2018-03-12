@@ -18,6 +18,10 @@ public class LiftMoveCommand extends Command {
     }
 
     protected void initialize() {
+        // Don't run during auton
+        if (Robot.getInstance().isAutonomous()) {
+            cancel();
+        }
     }
 
     protected void execute() {

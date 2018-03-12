@@ -29,13 +29,23 @@ public class DrivetrainDriveSystemCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        // FIXME: Figure out a cleaner way to handle this issue
+        // (Command group gets interrupted but not canceled, and so
+        //   the scheduler thinks it's ok to run the Drive System Command
+        //   at the same time, since it's not in the scheduler)
+        // Don't run during auton
+        if (Robot.getInstance().isAutonomous()) {
+            cancel();
+        }
         tankDrive = false;
         driveModeToggleButtonWasPressed = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+        if (Robot.getInstance().isAutonomous()) {
+            return;
+        }
         //Preliminary Values from the triggers used for Curvature Drive
         double rightTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
@@ -100,6 +110,7 @@ public class DrivetrainDriveSystemCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+        
     }
 
 }

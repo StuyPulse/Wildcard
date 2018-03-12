@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
 
 public class SwitchPostScoreDriveToScaleAutonCommand extends AutonCommandGroup {
 
-    private static final double DISTANCE_TOTAL = 153;
+    private static final double DISTANCE_TOTAL = 155;
     private final static double DRIVE_RAMP_TIMEOUT = 30;
 
     public SwitchPostScoreDriveToScaleAutonCommand(boolean isRight) {
@@ -19,6 +19,7 @@ public class SwitchPostScoreDriveToScaleAutonCommand extends AutonCommandGroup {
 
         driveCommand.addSpeedChange(0, -1);
         driveCommand.addTurn(0, isRight ? -250 : 250);
+        driveCommand.addTurn(115, isRight ? -180 : 180); // If wrong sign it will do a 180
 
         addSequential(driveCommand, DRIVE_RAMP_TIMEOUT);
     }

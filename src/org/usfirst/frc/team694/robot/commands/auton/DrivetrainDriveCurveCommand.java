@@ -1,5 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
+import org.usfirst.frc.team694.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
@@ -77,12 +79,12 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
             @Override
             protected void initialize() {
                 rampCommand.setSpeedScale(speedScaleFactor);
-                System.out.println("[DrivetrainRampSetSpeed] set to " + speedScaleFactor + "!");
+                System.out.println("[DrivetrainRampSetSpeed] set to " + speedScaleFactor + " at " + + Robot.drivetrain.getEncoderDistance() + "!");
             }
         }
     }
-
     private static class DrivetrainRampingSetTargetAngleAtDistanceCommand extends ConditionalDistanceEncodersCommand {
+
 
         public DrivetrainRampingSetTargetAngleAtDistanceCommand(
                 DriveStraightPIDCommand rampCommand, 
@@ -95,7 +97,7 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
         @Override
         protected void initialize() {
             super.initialize();
-            System.out.println("[SetTargetAngle] Set");
+            System.out.println("[SetTargetAngle] Set at " + Robot.drivetrain.getEncoderDistance());
         }
 
         private static class DrivetrainRampingSetTargetAngleCommand extends InstantCommand {

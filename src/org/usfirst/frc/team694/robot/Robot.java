@@ -31,6 +31,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
+    // The main instance of Robot
+    private static Robot myInstance;
+
     public static Drivetrain drivetrain;
     public static Spatula spatula;
     public static CrabArm crabArm;
@@ -55,6 +58,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotInit() {
+        myInstance = this;
+
         drivetrain = new Drivetrain();
         spatula = new Spatula();
         crabArm = new CrabArm();
@@ -253,6 +258,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());
         SmartDashboard.putNumber("Lift + Drivetrain Current", lift.getCurrent() + drivetrain.getCurrent());
 
+        SmartDashboard.putString("Drivetrain Current Command", drivetrain.getCurrentCommandName());
+
     }
 
     /**
@@ -272,6 +279,10 @@ public class Robot extends IterativeRobot {
         return (isScaleRight && isRobotOnRight) || (!isScaleRight && !isRobotOnRight);
         //true is scale is close to robot 
         //false is scale is far away from robot 
+    }
+
+    public static Robot getInstance() {
+        return myInstance;
     }
 
 }

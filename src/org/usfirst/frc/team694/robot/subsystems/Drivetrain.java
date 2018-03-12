@@ -281,14 +281,14 @@ public class Drivetrain extends Subsystem {
     // If anyone mentions the phrase "current limit",
     // they will be given a angry look
     public void enableBrownOutProtection() {
-        System.out.println("[Drivetrain] ENABLE brownout protection");
+//        System.out.println("[Drivetrain] ENABLE brownout protection");
         brownoutProtectionEnabled = true;
 //        leftBottomMotor.enableCurrentLimit(true);
 //        rightBottomMotor.enableCurrentLimit(true);
     }
 
     public void disableBrownOutProtection() {
-        System.out.println("[Drivetrain] DISABLE brownout protection");
+//        System.out.println("[Drivetrain] DISABLE brownout protection");
         brownoutProtectionEnabled = false;
 //        leftBottomMotor.enableCurrentLimit(false);
 //        rightBottomMotor.enableCurrentLimit(false);
