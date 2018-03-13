@@ -14,15 +14,12 @@ import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArmFlapOutCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorFlipToggleCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorLeftDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorRightDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorToggleAndAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -49,7 +46,7 @@ public class OI {
         operatorGamepad.getRightButton().whenPressed(new QuisitorToggleCommand());
 //        operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
         // Prev line replaced with:
-        operatorGamepad.getTopButton().whenPressed(new QuisitorToggleAndAcquireCommand());
+        operatorGamepad.getTopButton().whenPressed(new QuisitorAcquireCommand());
         operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorDeacquireCommand());
         operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());

@@ -33,8 +33,6 @@ public final class RobotMap {
     /**************************************************************************
      * QUISITOR and CrabArm Constants //All times are in seconds
      *************************************************************************/
-    public static final double PRE_FLIP_WAIT_TIME = 0.25;
-    public static final double POST_FLIP_WAIT_TIME = 0.5;
     public static final double FLAP_OUT_SPEED = 1;
 
     public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = 6;
@@ -100,8 +98,6 @@ public final class RobotMap {
     public static final int QUISITOR_GRABBER_SOLENOID_LEFT_PORT = 2;//Left 
     public static final int QUISITOR_GRABBER_SOLENOID_RIGHT_PORT = 3;//Right
 
-    public static final int QUISITOR_FLIP_UP_PORT = 6;
-    public static final int QUISITOR_FLIP_DOWN_PORT = 5;
     //    public static final int QUISITOR_TONGS_SOLENOID_PORT = -1; 
 
     /*****************************************************************************
