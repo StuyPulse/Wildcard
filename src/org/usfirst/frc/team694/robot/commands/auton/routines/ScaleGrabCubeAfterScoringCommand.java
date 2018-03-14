@@ -1,6 +1,5 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.commands.BITCOINCommand;
 import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
@@ -26,6 +25,6 @@ public class ScaleGrabCubeAfterScoringCommand extends CommandGroup {
         }
         addParallel(new CrabArrowAcquireCommand(), 2);
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.4, 20), 2);
-        addSequential(new BITCOINCommand());
+    //  addSequential(new BITCOINCommand()); //TODO: Figure out what the new BITCOIN is and install it here
     }
 }

@@ -42,8 +42,7 @@ public final class RobotMap {
     /**************************************************************************
      * QUISITOR Motor Ports
      *************************************************************************/
-    public static final int QUISITOR_LEFT_MOTOR_PORT = 11;
-    public static final int QUISITOR_RIGHT_MOTOR_PORT = 12;
+    public static final int QUISITOR_MOTOR_PORT = 12; //TODO: Find out actual port from electronics
 
     /**************************************************************************
      * QUISITOR Limit Switch

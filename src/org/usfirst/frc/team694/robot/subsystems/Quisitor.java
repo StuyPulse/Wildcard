@@ -12,8 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Quisitor extends Subsystem {
 
-    private WPI_VictorSPX quisitorLeftMotor;
-    private WPI_VictorSPX quisitorRightMotor;
+    private WPI_VictorSPX quisitorMotor;
     private DoubleSolenoid quisitorGrabberSolenoid;
     //private Solenoid quisitorTongsSolenoid; 
 
@@ -24,11 +23,9 @@ public class Quisitor extends Subsystem {
 //    public boolean quisitorRunning;
 
     public Quisitor() {
-        quisitorLeftMotor = new WPI_VictorSPX(RobotMap.QUISITOR_LEFT_MOTOR_PORT);
-        quisitorRightMotor = new WPI_VictorSPX(RobotMap.QUISITOR_RIGHT_MOTOR_PORT);
-        
-        quisitorLeftMotor.setNeutralMode(NeutralMode.Brake);
-        quisitorRightMotor.setNeutralMode(NeutralMode.Brake);
+        quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_MOTOR_PORT);
+
+        quisitorMotor.setNeutralMode(NeutralMode.Brake);
         
         quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_LEFT_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_RIGHT_PORT);
 
@@ -49,39 +46,20 @@ public class Quisitor extends Subsystem {
     }
 
     public void acquire() {
-        quisitorLeftMotor.set(1);
-        quisitorRightMotor.set(1);
+        quisitorMotor.set(1);
     }
 
     public void deacquire() {
-        quisitorLeftMotor.set(-1);
-        quisitorRightMotor.set(-1);
+        quisitorMotor.set(-1);
     }
-    
-    public void leftQuisitorAcquire() {
-        quisitorLeftMotor.set(1);
-    }
-    
-    public void rightQuisitorAcquire() {
-        quisitorRightMotor.set(1);
-    }
-    
-    public void leftQuisitorDeacquire() {
-        quisitorLeftMotor.set(-1);
-    }
-    
-    public void rightQuisitorDeacquire() {
-        quisitorRightMotor.set(-1);
-    }
+
     // TESTING
     public void acquireSpeed(double speed) {
-        quisitorLeftMotor.set(speed);
-        quisitorRightMotor.set(speed);
+        quisitorMotor.set(speed);
     }
 
     public void stop() {
-        quisitorLeftMotor.set(0);
-        quisitorRightMotor.set(0);
+        quisitorMotor.set(0);
     }
 
     public boolean isCubeDetected() {
