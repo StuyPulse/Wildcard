@@ -51,7 +51,6 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
 
     @Override
     protected void execute() {
-        //System.out.println("[DriveDistanceEncodersCommand] distance left:" + (targetDistance - Robot.drivetrain.getEncoderDistance()));
 //        SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
 
         double output = speedPIDOutput;

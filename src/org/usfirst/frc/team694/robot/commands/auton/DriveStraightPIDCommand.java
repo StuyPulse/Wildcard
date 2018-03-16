@@ -35,6 +35,7 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
     @Override
     protected void execute() {
         Robot.drivetrain.tankDrive(moveSpeed*speedScaleFactor + getGyroPIDOutput(), moveSpeed*speedScaleFactor - getGyroPIDOutput());
+        System.out.println("[DriveStraightPID] target: " + targetDistance + ", dist: " + getDistance());
     }
 
     @Override

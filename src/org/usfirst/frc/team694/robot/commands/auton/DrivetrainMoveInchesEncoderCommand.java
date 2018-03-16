@@ -29,7 +29,7 @@ public class DrivetrainMoveInchesEncoderCommand extends DrivetrainDriveDistanceC
     @Override
     protected void end() {
         Robot.drivetrain.stop();
-        System.out.println("[DrivetrainMoveInches] end: " + getDistance() + " = " + Robot.drivetrain.getEncoderDistance() + " - " + startDistance);
+        System.out.println("[DrivetrainMoveInches] end: " + getDistance() + " = " + Robot.drivetrain.getEncoderMax() + " - " + startDistance);
     }
 
 }

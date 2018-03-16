@@ -127,7 +127,8 @@ public class Lift extends Subsystem {
     }
 
     public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
+        //TODO: Uncomment me, we temporarily disabled this due to brownouts
+//        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
 
     public void stop() {

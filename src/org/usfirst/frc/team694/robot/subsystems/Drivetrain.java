@@ -142,7 +142,11 @@ public class Drivetrain extends Subsystem {
     }
 
     public double getEncoderDistance() {
-        return Math.abs(Math.max(getLeftEncoderDistance(), getRightEncoderDistance()));
+        return Math.abs(getEncoderMax());
+    }
+
+    public double getEncoderMax() {
+        return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
     }
 
     public double getRawEncoderDistance() {

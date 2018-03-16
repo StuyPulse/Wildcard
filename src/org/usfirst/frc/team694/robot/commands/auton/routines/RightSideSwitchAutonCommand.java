@@ -38,8 +38,9 @@ public class RightSideSwitchAutonCommand extends AutonCommandGroup {
         addSequential(new CrabArmStopCommand());
 
         addSequential(new PrintCommand("[RightSideSwitchAuton] Post score"));
-//        addSequential(new SwitchPostScoreGetBackToStartCommand(true));
-        addSequential(new SwitchPostScoreDriveToScaleAutonCommand(true));
+        // Tested, sort of works for right side
+//        addSequential(new SwitchPostScoreDriveToScaleAutonCommand(true));
+        addSequential(new SwitchPostScoreGrabAnotherCubeCommand(true));
     }
 
 }
