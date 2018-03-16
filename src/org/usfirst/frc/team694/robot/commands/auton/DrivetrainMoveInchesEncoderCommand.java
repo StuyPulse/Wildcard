@@ -23,7 +23,7 @@ public class DrivetrainMoveInchesEncoderCommand extends DrivetrainDriveDistanceC
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(getDistance()) >= targetDistance;
+        return Math.abs(getDistance()) >= Math.abs(targetDistance);
     }
 
     @Override

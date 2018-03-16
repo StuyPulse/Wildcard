@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
+@Deprecated
 public class SwitchPostScoreDriveIntoCenterFieldCommand extends CommandGroup {
 
     private static final double SWITCH_WIDTH = 189.5;
