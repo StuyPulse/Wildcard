@@ -145,8 +145,17 @@ public class Drivetrain extends Subsystem {
         return Math.abs(getEncoderMax());
     }
 
+    // Gets the encoder with the largest magnitude
+    // Generally put in place to avoid "one encoder reads 0 100% of the time" problems
     public double getEncoderMax() {
-        return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
+        double left = getLeftEncoderDistance();
+        double right = getRightEncoderDistance();
+
+        if (Math.abs(left) > Math.abs(right)) {
+            return left;
+        } else {
+            return right;
+        }
     }
 
     public double getRawEncoderDistance() {
