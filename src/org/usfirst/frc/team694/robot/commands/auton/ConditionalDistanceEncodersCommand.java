@@ -18,12 +18,12 @@ public class ConditionalDistanceEncodersCommand extends Command {
 
     @Override
     protected void initialize() {
-        startDistance = Robot.drivetrain.getEncoderDistance();
+        startDistance = Robot.drivetrain.getEncoderMax();
     }
 
     @Override
     protected boolean isFinished() {
-        return Math.abs(Robot.drivetrain.getEncoderDistance() - startDistance) > distance;
+        return Math.abs(Robot.drivetrain.getEncoderMax() - startDistance) > distance;
     }
 
     @Override
