@@ -1,9 +1,8 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
@@ -23,13 +22,24 @@ public class SwitchPostScoreExchangeScoreCommand extends AutonCommandGroup {
     // How far our bot's center ends up from the scale's edge (use the edge closest to the edge of the scale)
     private static final double DISTANCE_BOT_CENTER_IS_FROM_SCALE_EDGE = 12 + RobotMap.WIDTH_OF_BOT / 2;
 
-    public SwitchPostScoreExchangeScoreCommand(boolean isOnRight) {
+    public SwitchPostScoreExchangeScoreCommand(boolean isRight) {
 
         // Back up
         addSequential(new DrivetrainMoveInchesEncoderCommand(-20, -1));
-        
-        
-        
+
+        // Exchange will always be behind us, to the left
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-90));
+
+        // Align with exchange
+        addSequential(new DrivetrainMoveInchesEncoderCommand(EXTRA_DISTANCE_FOR_RIGHT_SIDE, 0.2));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-180));
+
+        // Charge forth
+        addSequential(new DrivetrainMoveInchesEncoderCommand(100, 0.5), 3);
+
+        // Score!
+        addSequential(new SpatulaDeacquireCommand(), 0.8);
+
         // Old method grabs cubes sideways
 //        //Move back so we can not slam into the cube pyramid
 //        Old, untested system that grabs the cube on its side
