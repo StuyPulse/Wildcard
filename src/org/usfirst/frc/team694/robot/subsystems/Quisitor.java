@@ -12,13 +12,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Quisitor extends Subsystem {
 
-    private WPI_VictorSPX quisitorMotor;
-    private DoubleSolenoid quisitorGrabberSolenoid;
+    private WPI_VictorSPX quisitorMotor;//Motor for intake/outtake
+    
+    private DoubleSolenoid quisitorGrabberSolenoid;//solenoid for grabbing
     //private Solenoid quisitorTongsSolenoid; 
 
-    private DigitalInput quisitorLimitSwitch;
+    private DigitalInput quisitorLimitSwitch;//Not used but here anyways
 
-    public boolean isBITCOINAutomation;
+    //public boolean isBITCOINAutomation;
 
 //    public boolean quisitorRunning;
 
@@ -31,7 +32,7 @@ public class Quisitor extends Subsystem {
 
         quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
 
-        isBITCOINAutomation = false;
+        //isBITCOINAutomation = false;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireUntilAcquiredCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
@@ -29,7 +29,7 @@ public class SwitchPostScoreSecondScoreCommand extends CommandGroup {
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
         }
         // Grab cube and then go back
-        addParallel(new CrabArrowAcquireUntilAcquiredCommand(), 5);
+        addParallel(new QuisitorAcquireCommand(), 5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.4, SWITCH_WIDTH/2.0 - DISTANCE_BOT_CENTER_IS_FROM_SCALE_EDGE));
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.4, SWITCH_WIDTH/2.0 - DISTANCE_BOT_CENTER_IS_FROM_SCALE_EDGE));
 
