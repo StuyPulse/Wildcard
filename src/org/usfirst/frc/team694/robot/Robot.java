@@ -14,7 +14,7 @@ import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleAutonC
 import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleDifferentSideScaleAutonCommand;
-import org.usfirst.frc.team694.robot.subsystems.CrabArm;
+//import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 //import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
 
     public static Drivetrain drivetrain;
     public static Quisitor quisitor;
-    public static CrabArm crabArm;
+    //public static CrabArm crabArm;
     //public static Grabber grabber;
     public static Lift lift;
 
@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
         drivetrain = new Drivetrain();
         quisitor = new Quisitor();
-        crabArm = new CrabArm();
+        //crabArm = new CrabArm();
         //grabber = new Grabber();
         lift = new Lift();
         oi = new OI();

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
@@ -23,7 +23,7 @@ public class ScaleGrabCubeAfterScoringCommand extends CommandGroup {
         } else {
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(165));
         }
-        addParallel(new CrabArrowAcquireCommand(), 2);
+        addParallel(new QuisitorAcquireCommand(), 2);
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.4, 20), 2);
     //  addSequential(new BITCOINCommand()); //TODO: Figure out what the new BITCOIN is and install it here
     }
