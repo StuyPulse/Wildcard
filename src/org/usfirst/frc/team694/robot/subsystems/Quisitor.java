@@ -26,8 +26,8 @@ public class Quisitor extends Subsystem {
         quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_MOTOR_PORT);
 
         quisitorMotor.setNeutralMode(NeutralMode.Brake);
-        
-        quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_LEFT_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_RIGHT_PORT);
+
+        quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT);
 
         quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
 

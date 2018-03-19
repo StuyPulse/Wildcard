@@ -40,13 +40,10 @@ public class OI {
         operatorGamepad.getRightButton().whenPressed(new QuisitorToggleCommand());
 //        operatorGamepad.getTopButton().whenPressed(new SpatulaFlipToggleCommand());
         // Prev line replaced with:
-        operatorGamepad.getTopButton().whenPressed(new QuisitorAcquireCommand());
+        operatorGamepad.getRightTrigger().whileHeld(new QuisitorAcquireCommand());
    //   operatorGamepad.getBottomButton().whenPressed(new BITCOINCommand());
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorDeacquireCommand());
    //   operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
-
-        operatorGamepad.getLeftBumper().whileHeld(new QuisitorDeacquireCommand()); //TODO: Figure out what Coby wants
-        operatorGamepad.getRightBumper().whileHeld(new QuisitorDeacquireCommand());
 
     //  operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
    //   operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());
