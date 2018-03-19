@@ -1,7 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
@@ -38,8 +38,8 @@ public class SwitchPostScoreExchangeScoreCommand extends AutonCommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(100, 0.5), 3);
 
         // Score!
-        addSequential(new SpatulaDeacquireCommand(), 0.8);
-
+        addSequential(new QuisitorDeacquireCommand(), 0.8);
+    }
         // Old method grabs cubes sideways
 //        //Move back so we can not slam into the cube pyramid
 //        Old, untested system that grabs the cube on its side
@@ -62,5 +62,4 @@ public class SwitchPostScoreExchangeScoreCommand extends AutonCommandGroup {
 //        // Slam into that exchange
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(0.8, 130), 2.5);
 
-    }
 }

@@ -60,9 +60,8 @@ public class Lift extends Subsystem {
         // Lift P, to ramp up to a height
         innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
-        // MILDCARD ONLY
-        innerLeftMotor.setSensorPhase(false);
-        innerRightMotor.setSensorPhase(false);
+//        innerLeftMotor.setSensorPhase(true);
+//        innerRightMotor.setSensorPhase(true);
 
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
@@ -127,8 +126,7 @@ public class Lift extends Subsystem {
     }
 
     public void setHeight(double height) {
-        //TODO: Uncomment me, we temporarily disabled this due to brownouts
-//        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
+        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
 
     public void stop() {

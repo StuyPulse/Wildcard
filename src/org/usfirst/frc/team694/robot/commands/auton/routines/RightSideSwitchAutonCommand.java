@@ -2,9 +2,7 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.commands.CrabArmStopCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
@@ -34,8 +32,6 @@ public class RightSideSwitchAutonCommand extends AutonCommandGroup {
                 new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
 //        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
         addSequential(driveCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
-
-        addSequential(new CrabArmStopCommand());
 
         addSequential(new PrintCommand("[RightSideSwitchAuton] Post score"));
         // Tested, sort of works for right side

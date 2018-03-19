@@ -1,14 +1,9 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.CrabArmStopCommand;
-import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireUntilAcquiredCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -42,7 +37,7 @@ public class SwitchPostScoreSecondScoreCommand extends CommandGroup {
 //        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
         addSequential(driveCommand, DRIVE_RAMP_TIMEOUT);
 
-        addSequential(new CrabArmStopCommand());
+        addSequential(new QuisitorStopCommand());
 
         
         // Old method grabs cubes sideways

@@ -4,7 +4,7 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
@@ -42,7 +42,7 @@ public class DifferentSideScaleAutonCommand extends AutonCommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT - 18), DISTANCE_TOTAL - 200));
         addSequential(driveCommand);
 
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
 
     }
 

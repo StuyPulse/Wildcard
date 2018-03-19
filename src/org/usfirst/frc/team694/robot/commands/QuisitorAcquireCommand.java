@@ -4,24 +4,24 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CrabArmFlapOutCommand extends Command {
+public class QuisitorAcquireCommand extends Command {
 
-    public CrabArmFlapOutCommand() {
-        requires(Robot.crabArm);
+    public QuisitorAcquireCommand() {
+        requires(Robot.quisitor);
     }
 
-    protected void initialize() {
-    }
-
+    @Override
     protected void execute() {
-        Robot.crabArm.flapOut();
+        Robot.quisitor.acquire();
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
-        Robot.crabArm.stop();
+        Robot.quisitor.stop();
     }
 }

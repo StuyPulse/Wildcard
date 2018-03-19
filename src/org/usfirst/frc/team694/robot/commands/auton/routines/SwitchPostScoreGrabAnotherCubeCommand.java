@@ -1,12 +1,12 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.commands.CrabArmAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 
 import edu.wpi.first.wpilibj.command.PrintCommand;
 
@@ -32,7 +32,7 @@ public class SwitchPostScoreGrabAnotherCubeCommand extends AutonCommandGroup {
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
 
             // Go forth and grab the cube
-            addParallel(new CrabArmAcquireCommand(), 3);
+            addParallel(new QuisitorAcquireCommand(), 3);
             addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.5));
         } else {
             // Drive back to the start
@@ -43,7 +43,7 @@ public class SwitchPostScoreGrabAnotherCubeCommand extends AutonCommandGroup {
             addSequential(driveCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
 
             // Go forth and grab the cube
-            addParallel(new CrabArmAcquireCommand(), 3);
+            addParallel(new QuisitorAcquireCommand(), 3);
             addSequential(new DrivetrainMoveInchesEncoderCommand(100, 0.5));
         }
     }
