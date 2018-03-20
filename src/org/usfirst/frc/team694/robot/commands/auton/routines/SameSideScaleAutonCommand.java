@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
@@ -38,12 +39,12 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.5, 10));
 //        addSequential(new LiftMoveToBottomCommand());
 
-        addSequential(new PrintCommand("[SameSideScale] GOGOGOGOGOGOOGOGOGOGOG"));
+        addSequential(new PrintCommand("[SameSideScale] GOGOGOGOGOGOOGOGOGOGO"));
         addSequential(new WaitCommand(5));
 
         addSequential(new PrintCommand("[SameSideScale] Same Side STOP!"));
         // ADD ME IN
-        addSequential(new ScaleGrabCubeAfterScoringCommand(true));
+        addSequential(new ScaleGrabCubeAfterScoringCommand(Robot.getIsRobotOnRight()));
 //        addSequential(new ScaleScoreSecondTimeCommand(true));
 
     }

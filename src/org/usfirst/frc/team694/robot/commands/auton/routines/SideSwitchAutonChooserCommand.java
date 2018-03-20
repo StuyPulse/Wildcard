@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
  */
 public class SideSwitchAutonChooserCommand extends ConditionalCommand {
 
-    private static final double SPATULA_DEACQUIRE_TIME = 1.5;
-    private static final double SPATULA_DEACQUIRE_SPEED = 0.8;
+    private static final double QUISITOR_DEACQUIRE_TIME = 1.5;
+    private static final double QUISITOR_DEACQUIRE_SPEED = 0.8;
 
     public SideSwitchAutonChooserCommand() {
         super(new RightSideSwitchAutonCommand(), new LeftSideSwitchAutonCommand()); 
@@ -26,12 +26,12 @@ public class SideSwitchAutonChooserCommand extends ConditionalCommand {
     static class SpatulaDeacquireTimeCommand extends Command {
         public SpatulaDeacquireTimeCommand() {
             requires(Robot.quisitor);
-            setTimeout(SPATULA_DEACQUIRE_TIME);
+            setTimeout(QUISITOR_DEACQUIRE_TIME);
         }
 
         @Override
         public void initialize() {
-            Robot.quisitor.acquireSpeed(-1 * SPATULA_DEACQUIRE_SPEED);
+            Robot.quisitor.acquireSpeed(-1 * QUISITOR_DEACQUIRE_SPEED);
         }
 
         @Override

@@ -39,8 +39,8 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 
         addSequential(new QuisitorOpenCommand());
         // Add me in
-//        addSequential(new ScaleGrabCubeAfterScoringCommand(false));
-//        addSequential(new ScaleScoreSecondTimeCommand(false));
+        addSequential(new ScaleGrabCubeAfterScoringCommand(!Robot.getIsRobotOnRight()));
+        addSequential(new ScaleScoreSecondTimeCommand(!Robot.getIsRobotOnRight()));
 
     }
 
