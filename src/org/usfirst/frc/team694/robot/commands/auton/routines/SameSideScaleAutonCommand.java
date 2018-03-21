@@ -23,6 +23,9 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
 
         addSequential(new PrintCommand("[SameSideScale] Same Side!"));
+        if (Robot.USING_MILDCARD_LIFT_WITH_1_MOTOR) {
+            addSequential(new LiftMoveToHeightCommand(40 + 89 - RobotMap.MIN_HEIGHT_OF_LIFT));
+        }
 
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
         driveCommand.addSpeedChange(0, 0.75);
@@ -31,7 +34,9 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
 //        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 0.75));
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -45));
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 120, 5));
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), 15));
+        if (!Robot.USING_MILDCARD_LIFT_WITH_1_MOTOR) {
+            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), 15));
+        }
 //        addSequential(rampCommand, 5);
         addSequential(driveCommand, 3.3);
 
@@ -42,7 +47,7 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new PrintCommand("[SameSideScale] GOGOGOGOGOGOOGOGOGOGO"));
         addSequential(new WaitCommand(5));
 
-        addSequential(new PrintCommand("[SameSideScale] Same Side STOP!"));
+        addSequential(new PrintCommand("[SameSideScale] Same Side STOP!: " + Robot.getIsRobotOnRight()));
         // ADD ME IN
         addSequential(new ScaleGrabCubeAfterScoringCommand(Robot.getIsRobotOnRight()));
 //        addSequential(new ScaleScoreSecondTimeCommand(true));

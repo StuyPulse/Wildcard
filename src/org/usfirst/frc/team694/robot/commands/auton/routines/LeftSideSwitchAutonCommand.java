@@ -24,7 +24,9 @@ public class LeftSideSwitchAutonCommand extends AutonCommandGroup {
         super();
 
         addSequential(new PrintCommand("[LeftSideSwitchAuton] start!"));
-
+        if (Robot.USING_MILDCARD_LIFT_WITH_1_MOTOR) {
+            addSequential(new LiftMoveToHeightCommand(60));
+        }
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL, RampMode.NO_RAMPING);
         driveCommand.addSpeedChange(0, 1);
         driveCommand.addTurn(0, -80);
@@ -35,15 +37,18 @@ public class LeftSideSwitchAutonCommand extends AutonCommandGroup {
 //        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 1)); // Move at 0.3 speed
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 0, -80)); // Start turning
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 65, 5)); // Turn back, ish
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
+        if (!Robot.USING_MILDCARD_LIFT_WITH_1_MOTOR) {
+            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
+        }
         addParallel(new ConditionalDistanceEncodersCommand(
-                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
+                new SideSwitchAutonChooserCommand.QuisitorDeacquireTimeCommand(), 95));
 //        addSequential(rampCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
         addSequential(driveCommand, INITIAL_DRIVE_RAMP_TIMEOUT);
 
         addSequential(new PrintCommand("[LeftSideSwitchAuton] Post score"));
 
-        addSequential(new SwitchPostScoreExchangeScoreCommand(false));
+        addSequential(new SwitchPostScoreGrabAnotherCubeCommand(true));
+//        addSequential(new SwitchPostScoreExchangeScoreCommand(false));
 
     }
 

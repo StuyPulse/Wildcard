@@ -14,6 +14,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SwitchPostScoreGrabAnotherCubeCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
@@ -22,7 +23,7 @@ public class OI {
     public Gamepad operatorGamepad;
 
     public OI() {
-        driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
+        driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_D);
 
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
@@ -34,7 +35,8 @@ public class OI {
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(200));
 //          driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
 //          driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(90));
-        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
+//        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
+        driverGamepad.getDPadUp().whenPressed(new SwitchPostScoreGrabAnotherCubeCommand(true));
         //        operatorGamepad.getBottomButton().whileHeld(new BITCOINManualCommand());
         //operatorGamepad.getRightTrigger().whileHeld(new BITCOINCheckCommand());
 

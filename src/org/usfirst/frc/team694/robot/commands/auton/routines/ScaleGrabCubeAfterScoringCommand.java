@@ -25,9 +25,9 @@ public class ScaleGrabCubeAfterScoringCommand extends AutonCommandGroup {
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRightSide ? -165 : 165));
         addSequential(new QuisitorOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.4), 2);
-        addParallel(new QuisitorCloseCommand());
-        addSequential(new QuisitorAcquireCommand(),3);
-        
+        addSequential(new QuisitorCloseCommand());
+        addSequential(new QuisitorAcquireCommand(),2);
+
     //  addSequential(new BITCOINCommand()); //TODO: Figure out what the new BITCOIN is and install it here
     }
 }

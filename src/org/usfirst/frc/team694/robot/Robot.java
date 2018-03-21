@@ -31,6 +31,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
+    // TODO: REMOVE ME AS SOON AS POSSIBLE (after Lift is fixed)
+    // Whether we're testing with mildcard's broken lift
+    // This means we cannot run the lift and drivetrain simultaniously, too many
+    // brownouts
+    public static final boolean USING_MILDCARD_LIFT_WITH_1_MOTOR = true;
+
+    
     // The main instance of Robot
     private static Robot myInstance;
 
@@ -137,7 +144,7 @@ public class Robot extends IterativeRobot {
             System.err.print("******* Field Data Problem!!!");
             System.err.println("Please yell at the field management crew to fix this");
         } else {
-            isRobotOnRight = sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER;
+            isRobotOnRight = (sideChooser.getSelected() == WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
             isAllianceSwitchRight = gameData.charAt(0) == 'R';
             isScaleRight = gameData.charAt(1) == 'R';
             autonCommand = autonChooser.getSelected();

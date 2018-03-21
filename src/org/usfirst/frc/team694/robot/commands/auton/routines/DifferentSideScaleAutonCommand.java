@@ -23,6 +23,10 @@ public class DifferentSideScaleAutonCommand extends AutonCommandGroup {
         // Uncomment for no ramp down:
         addSequential(new PrintCommand("[DifferentSideScale] Different Side!"));
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightRampUpOnlyCommand(DISTANCE_TOTAL);
+
+        if (Robot.USING_MILDCARD_LIFT_WITH_1_MOTOR) {
+            addSequential(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT - 18));
+        }
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
 
         driveCommand.addSpeedChange(76, 0.4);
@@ -39,7 +43,9 @@ public class DifferentSideScaleAutonCommand extends AutonCommandGroup {
 //        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand,  76 + 200, 0.3)); // Slow speed before last turn
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 76 + 260, 15));  // Final turn // 300
         //addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT), DISTANCE_TOTAL - 200));
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT - 18), DISTANCE_TOTAL - 200));
+        if (!Robot.USING_MILDCARD_LIFT_WITH_1_MOTOR) {
+            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT - 18), DISTANCE_TOTAL - 200));
+        }
         addSequential(driveCommand);
 
         addSequential(new QuisitorOpenCommand());

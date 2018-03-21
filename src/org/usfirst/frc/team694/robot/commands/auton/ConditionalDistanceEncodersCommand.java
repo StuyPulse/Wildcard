@@ -28,7 +28,7 @@ public class ConditionalDistanceEncodersCommand extends Command {
 
     @Override
     protected void end() {
-        System.out.println("[ConditionalEncoderCommand] start: " + startDistance + "delta: " + (Robot.drivetrain.getEncoderDistance() - startDistance) + ".");
+        System.out.println("[ConditionalEncoderCommand] dist: " + distance + ", start: " + startDistance + " final: " + Robot.drivetrain.getEncoderMax() + ".");
         onTrue.start();
     }
 

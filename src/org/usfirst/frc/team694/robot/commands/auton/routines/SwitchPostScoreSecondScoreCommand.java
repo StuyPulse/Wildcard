@@ -33,7 +33,7 @@ public class SwitchPostScoreSecondScoreCommand extends CommandGroup {
 
 //        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30), 40));
         addParallel(new ConditionalDistanceEncodersCommand(
-                new SideSwitchAutonChooserCommand.SpatulaDeacquireTimeCommand(), 95));
+                new SideSwitchAutonChooserCommand.QuisitorDeacquireTimeCommand(), 95));
 //        addParallel(new ConditionalDistanceEncodersCommand(new SpatulaDeacquireCommand(), 95));
         addSequential(driveCommand, DRIVE_RAMP_TIMEOUT);
 
