@@ -20,16 +20,17 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 //    private static final double DISTANCE_TOTAL = 410;//450;
 
     public SimpleDifferentSideScaleAutonCommand() {
+        boolean isRight = Robot.getIsRobotOnRight();
 
-        addSequential(new PrintCommand("[DifferentSideScale] Simple Different Side!"));
+        addSequential(new PrintCommand("[DifferentSideScale] Simple Different Side! RIGHT? " + isRight));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3 + 3));
 
-        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand((isRight? -1 : 1) * quad.getAngleToTurnToReachPlatformZone()));
 
         //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
         addSequential(new DriveStraightWithRampingCommand(203/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
 
-        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()), 2);
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand((isRight? -1 : 1) * quad.getAngleToTurnToReachScaleSide()), 2);
         // Height used to be 89 - minheight
         addSequential(new LiftMoveToHeightCommand(83 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
 
@@ -39,8 +40,8 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 
         addSequential(new QuisitorOpenCommand());
         // Add me in
-        addSequential(new ScaleGrabCubeAfterScoringCommand(!Robot.getIsRobotOnRight()));
-        addSequential(new ScaleScoreSecondTimeCommand(!Robot.getIsRobotOnRight()));
+        addSequential(new ScaleGrabCubeAfterScoringCommand(!isRight));
+        addSequential(new ScaleScoreSecondTimeCommand(!isRight));
 
     }
 

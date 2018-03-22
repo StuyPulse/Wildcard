@@ -20,6 +20,7 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
     private static final double DISTANCE_TOTAL = 296;
 
     public SameSideScaleAutonCommand() {
+        boolean isRight = Robot.getIsRobotOnRight();
 //        DriveStraightWithRampingCommand rampCommand = new DriveStraightWithRampingCommand(DISTANCE_TOTAL);
 
         addSequential(new PrintCommand("[SameSideScale] Same Side!"));
@@ -29,8 +30,8 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
 
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
         driveCommand.addSpeedChange(0, 0.75);
-        driveCommand.addTurn(130, -45);
-        driveCommand.addTurn(130 + 120, 5);
+        driveCommand.addTurn(130, isRight ? -45 : 45);
+        driveCommand.addTurn(130 + 120, isRight ? 5 : -5);
 //        addParallel(new DrivetrainRampingSetSpeedScaleAtDistanceCommand(rampCommand, 0, 0.75));
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130, -45));
 //        addParallel(new DrivetrainRampingSetTargetAngleAtDistanceCommand(rampCommand, 130 + 120, 5));
@@ -48,8 +49,8 @@ public class SameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new WaitCommand(5));
 
         addSequential(new PrintCommand("[SameSideScale] Same Side STOP!: " + Robot.getIsRobotOnRight()));
-        // ADD ME IN
-        addSequential(new ScaleGrabCubeAfterScoringCommand(Robot.getIsRobotOnRight()));
+
+        addSequential(new ScaleGrabCubeAfterScoringCommand(isRight));
 //        addSequential(new ScaleScoreSecondTimeCommand(true));
 
     }
