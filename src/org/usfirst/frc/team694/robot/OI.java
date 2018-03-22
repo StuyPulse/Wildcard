@@ -54,6 +54,5 @@ public class OI {
         operatorGamepad.getRightButton().whenPressed(new PrepareForClimbCommand());
         // TODO: This should probably be a separate command
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
-        
     }
 }
