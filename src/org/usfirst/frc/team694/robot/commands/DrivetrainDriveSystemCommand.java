@@ -77,15 +77,8 @@ public class DrivetrainDriveSystemCommand extends Command {
 
         if (!tankDrive) {
             if (Math.abs(rightTrigger + leftTrigger) > 0.05) {
-                // If we're already manual gear shifting, don't override the driver's decision
-                if (!Robot.oi.driverGamepad.getRawBottomButton()) {                
-                    Robot.drivetrain.highGearShift();
-                }
                 Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, false);
             } else {
-                if (Math.abs(leftJoystickX) > 0.05) {
-                    Robot.drivetrain.lowGearShift();
-                }
                 Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, true);
             }
         } else {
