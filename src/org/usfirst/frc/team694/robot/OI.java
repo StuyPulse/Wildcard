@@ -10,7 +10,7 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.PrepareForClimbCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
@@ -51,7 +51,7 @@ public class OI {
 
     //  operatorGamepad.getDPadUp().whenPressed(new BITCOINAutomationOnCommand());
    //   operatorGamepad.getDPadDown().whenPressed(new BITCOINAutomationOffCommand());
-
+        operatorGamepad.getRightButton().whenPressed(new PrepareForClimbCommand());
         // TODO: This should probably be a separate command
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
         
