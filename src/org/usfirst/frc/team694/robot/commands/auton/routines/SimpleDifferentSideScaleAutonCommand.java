@@ -20,7 +20,7 @@ public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
 //    private static final double DISTANCE_TOTAL = 410;//450;
 
     public SimpleDifferentSideScaleAutonCommand() {
-        boolean isRight = Robot.getIsRobotOnRight();
+        boolean isRight = Robot.isRobotStartingOnRight();
 
         addSequential(new PrintCommand("[DifferentSideScale] Simple Different Side! RIGHT? " + isRight));
         addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3 + 3));

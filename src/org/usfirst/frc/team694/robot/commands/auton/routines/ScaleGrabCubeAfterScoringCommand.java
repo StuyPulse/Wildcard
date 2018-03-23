@@ -10,9 +10,6 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegr
 
 import edu.wpi.first.wpilibj.command.PrintCommand;
 
-/**
- *
- */
 public class ScaleGrabCubeAfterScoringCommand extends AutonCommandGroup {
  
     public ScaleGrabCubeAfterScoringCommand(boolean isRightSide) {
@@ -21,6 +18,7 @@ public class ScaleGrabCubeAfterScoringCommand extends AutonCommandGroup {
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
         addSequential(new DrivetrainMoveInchesEncoderCommand(10, -0.3));
         addSequential(new LiftMoveToBottomCommand());
+
         // Relative degrees: +/- 165
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRightSide ? -165 : 165));
         addSequential(new QuisitorOpenCommand());
@@ -28,6 +26,5 @@ public class ScaleGrabCubeAfterScoringCommand extends AutonCommandGroup {
         addSequential(new QuisitorCloseCommand());
         addSequential(new QuisitorAcquireCommand(),2);
 
-    //  addSequential(new BITCOINCommand()); //TODO: Figure out what the new BITCOIN is and install it here
     }
 }

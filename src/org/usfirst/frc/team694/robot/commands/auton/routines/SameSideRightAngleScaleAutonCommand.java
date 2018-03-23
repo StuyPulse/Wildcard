@@ -10,6 +10,7 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegr
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+@Deprecated
 public class SameSideRightAngleScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 

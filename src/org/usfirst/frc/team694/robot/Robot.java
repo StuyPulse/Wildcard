@@ -7,13 +7,9 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.auton.routines.LeftSideSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.RightSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleDifferentSideScaleAutonCommand;
 //import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 //import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -31,25 +27,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
-    // TODO: REMOVE ME AS SOON AS POSSIBLE (after Lift is fixed)
-    // Whether we're testing with mildcard's broken lift
-    // This means we cannot run the lift and drivetrain simultaniously, too many
-    // brownouts
-    public static final boolean USING_MILDCARD_LIFT_WITH_1_MOTOR = true;
-
-    
     // The main instance of Robot
     private static Robot myInstance;
 
     public static Drivetrain drivetrain;
     public static Quisitor quisitor;
-    //public static CrabArm crabArm;
-    //public static Grabber grabber;
     public static Lift lift;
 
     public static OI oi;
 
-    static boolean isRobotAtBottom;
+//    static boolean isRobotAtBottom;
 
     private String gameData;
     public static boolean isRobotOnRight;
@@ -69,26 +56,8 @@ public class Robot extends IterativeRobot {
 
         drivetrain = new Drivetrain();
         quisitor = new Quisitor();
-        //crabArm = new CrabArm();
-        //grabber = new Grabber();
         lift = new Lift();
         oi = new OI();
-
-        //        pdppanel = new PowerDistributionPanel();
-
-        //        autonChooser.addDefault("Do Nothing", new CommandGroup());
-        //        autonChooser.addObject("Mobility", new MobilityAutonUsingEncodersCommand());
-        //        SmartDashboard.putData("Autonomous", autonChooser);
-        //        
-        //        sideChooser.addObject("Right of Driver", WhereTheBotIsInReferenceToDriver.RIGHT_SIDE_OF_DRIVER);
-        //        sideChooser.addObject("Left Side of Driver", WhereTheBotIsInReferenceToDriver.LEFT_SIDE_OF_DRIVER);
-        //        SmartDashboard.putData("Where is the robot starting?", sideChooser);
-        //        
-        //        SmartDashboard.putNumber("Lift P", 0);
-        //        
-        //        SmartDashboard.putNumber("RotateDegreesPID P", 0);
-        //        SmartDashboard.putNumber("RotateDegreesPID I", 0);
-        //        SmartDashboard.putNumber("RotateDegreesPID D", 0);
 
         initSmartDashboard();
     }
@@ -166,8 +135,8 @@ public class Robot extends IterativeRobot {
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
+        drivetrain.setRamp(0.0);
 
-        Robot.drivetrain.setRamp(0.0);
         if (autonCommand != null) {
             autonCommand.cancel();
         }
@@ -188,19 +157,9 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        /* Testing autons:
-        autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
-        autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
-        autonChooser.addObject("Right Side Switch Auton", new RightSideSwitchAutonCommand());
-        autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
-        */
 
         autonChooser.addDefault("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
         autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
-        autonChooser.addObject("FORCE LEFT SWITCH Auton", new LeftSideSwitchAutonCommand());
-        autonChooser.addObject("FORCE RIGHT SWITCH Auton", new RightSideSwitchAutonCommand());
-        autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand());
-        autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
@@ -265,7 +224,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Lift + Drivetrain Current", lift.getCurrent() + drivetrain.getCurrent());
 
         SmartDashboard.putString("Drivetrain Current Command", drivetrain.getCurrentCommandName());
-
     }
 
     /**
@@ -274,21 +232,19 @@ public class Robot extends IterativeRobot {
     @Override
     public void testPeriodic() {
     }
-    
-    public static boolean isRobotAndSwitchOnSameSide() {
-        return (isAllianceSwitchRight && isRobotOnRight) || (!isAllianceSwitchRight && !isRobotOnRight);
-        //TODO: delete this
-        //true is switch is close to robot
-        //false is switch is far away robot
-    }
 
     public static boolean isRobotAndScaleOnSameSide() {
         return (isScaleRight == isRobotOnRight);
         //true is scale is close to robot 
         //false is scale is far away from robot 
     }
-    public static boolean getIsRobotOnRight(){
+
+    public static boolean isRobotStartingOnRight() {
         return isRobotOnRight;
+    }
+
+    public static boolean isSwitchOnRight() {
+        return isAllianceSwitchRight;
     }
 
     public static Robot getInstance() {

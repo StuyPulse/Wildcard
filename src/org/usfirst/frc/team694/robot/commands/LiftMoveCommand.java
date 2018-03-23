@@ -2,34 +2,28 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */
-public class LiftMoveCommand extends Command {
+public class LiftMoveCommand extends DefaultCommand {
 
     private static final double GAMEPAD_LIFT_THRESHOLD = 0.1;
 
     public LiftMoveCommand() {
         requires(Robot.lift);
-        // Problems with default command overriding spatula:
-//        requires(Robot.spatula);
     }
 
+    @Override
     protected void initialize() {
-        // Don't run during auton
-        if (Robot.getInstance().isAutonomous()) {
-            cancel();
-        }
+        super.initialize();
     }
 
+    @Override
     protected void execute() {
+        super.execute();
+
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
-
-
-        //TODO: see whether Coby wants cubed or squared inputs on the lift.
 
         if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
             Robot.lift.move(liftSquared);
@@ -40,10 +34,12 @@ public class LiftMoveCommand extends Command {
         }
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
     }
 }

@@ -8,9 +8,6 @@ import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
-/**
- *
- */
 public class ScaleScoreSecondTimeCommand extends AutonCommandGroup {
 
     public ScaleScoreSecondTimeCommand(boolean isRightSide) {

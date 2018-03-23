@@ -3,12 +3,11 @@ package org.usfirst.frc.team694.robot.commands;
 import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DrivetrainDriveSystemCommand extends Command {
+public class DrivetrainDriveSystemCommand extends DefaultCommand {
 
     // When we start our auto low gear shift
     private static final double BROWNOUT_PROTECTION_LOWER_BOUND_VOLTAGE = 8;
@@ -18,34 +17,23 @@ public class DrivetrainDriveSystemCommand extends Command {
 
     private boolean isBrownOutProtectionOn;
 
-    boolean tankDrive;
-    boolean driveModeToggleButtonWasPressed;
+    private boolean tankDrive;
+    private boolean driveModeToggleButtonWasPressed;
 
     public DrivetrainDriveSystemCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(Robot.drivetrain);
     }
 
-    // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
-        // FIXME: Figure out a cleaner way to handle this issue
-        // (Command group gets interrupted but not canceled, and so
-        //   the scheduler thinks it's ok to run the Drive System Command
-        //   at the same time, since it's not in the scheduler)
-        // Don't run during auton
-        if (Robot.getInstance().isAutonomous()) {
-            cancel();
-        }
+        super.initialize();
         tankDrive = false;
         driveModeToggleButtonWasPressed = false;
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-        if (Robot.getInstance().isAutonomous()) {
-            return;
-        }
+        super.execute();
         //Preliminary Values from the triggers used for Curvature Drive
         double rightTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
@@ -96,14 +84,13 @@ public class DrivetrainDriveSystemCommand extends Command {
         }
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
+    @Override
     protected void end() {
         
     }
-
 }

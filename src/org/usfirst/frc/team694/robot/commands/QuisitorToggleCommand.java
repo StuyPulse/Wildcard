@@ -12,7 +12,6 @@ public class QuisitorToggleCommand extends InstantCommand {
 
     @Override
     protected void initialize() {
-        System.out.println("[GrabberToggleCommand] toggle");
         Robot.quisitor.toggle();
     }
 }
