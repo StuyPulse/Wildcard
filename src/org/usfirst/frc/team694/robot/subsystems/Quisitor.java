@@ -15,13 +15,8 @@ public class Quisitor extends Subsystem {
     private WPI_VictorSPX quisitorMotor;//Motor for intake/outtake
     
     private DoubleSolenoid quisitorGrabberSolenoid;//solenoid for grabbing
-    //private Solenoid quisitorTongsSolenoid; 
 
     private DigitalInput quisitorLimitSwitch;//Not used but here anyways
-
-    //public boolean isBITCOINAutomation;
-
-//    public boolean quisitorRunning;
 
     public Quisitor() {
         quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_MOTOR_PORT);
@@ -31,8 +26,6 @@ public class Quisitor extends Subsystem {
         quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT);
 
         quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
-
-        //isBITCOINAutomation = false;
     }
 
     @Override
@@ -54,7 +47,6 @@ public class Quisitor extends Subsystem {
         quisitorMotor.set(-1);
     }
 
-    // TESTING
     public void acquireSpeed(double speed) {
         quisitorMotor.set(speed);
     }
@@ -67,7 +59,6 @@ public class Quisitor extends Subsystem {
         return !(quisitorLimitSwitch.get());
     }
     
-    //This is moved from the old Grabber Subsystem.
     public void open() {
         quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
