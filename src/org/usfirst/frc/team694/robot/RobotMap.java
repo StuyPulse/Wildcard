@@ -30,11 +30,6 @@ public final class RobotMap {
     public static final int DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT = 2;
     public static final int DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT = 1;
 
-    /**************************************************************************
-     * QUISITOR and CrabArm Constants //All times are in seconds
-     *************************************************************************/
-    public static final double FLAP_OUT_SPEED = 1;
-
     public static final int DRIVETRAIN_RIGHT_TOP_MOTOR_PORT = 6;
     public static final int DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT = 5;
     public static final int DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT = 4;
@@ -83,21 +78,12 @@ public final class RobotMap {
     public static final int LIFT_BOTTOM_LIMIT_SWITCH_PORT = 0;
 
     /****************************************************************************
-     * CrabArm Ports
-     *************************************************************************/
-
-    public static final int CRAB_ARM_LEFT_MOTOR_PORT = 13;
-    public static final int CRAB_ARM_RIGHT_MOTOR_PORT = 14;
-
-    /****************************************************************************
      * Solenoid Ports
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = 7;
 
     public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 3;//Left 
     public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 2;//Right
-
-    //    public static final int QUISITOR_TONGS_SOLENOID_PORT = -1; 
 
     /*****************************************************************************
      * Analog Ports
@@ -127,13 +113,5 @@ public final class RobotMap {
             (72.5 / 71.5) * (83.0 / 632.1) * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
-
-    /******************************************************************************
-     * Crab Arm Flap Constants
-     ******************************************************************************/
-    public static final double CRAB_ARM_COAST_POWER = 0.5; 
-    // Needs to be tested out, coast should exert less power than push, has to be enough to keep crab arms open but not overextending
-    public static final double CRAB_ARM_PUSH_POWER = 0.5; 
-    // Needs to be tested out, should be more than coast, the power to push the crab arm back initially before it stays open
 }
 
