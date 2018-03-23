@@ -25,9 +25,10 @@ public class LiftMoveToHeightCommand extends Command {
 
     @Override
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD);
-//                || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
-//                || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
+        double deltaTarget = targetHeight - Robot.lift.getLiftHeight();
+        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
+                || (Robot.lift.isAtBottom() && deltaTarget < 0) 
+                || (Robot.lift.isAtTop() && deltaTarget > 0);
     }
 
     @Override
