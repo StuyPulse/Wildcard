@@ -33,7 +33,6 @@ public class OI {
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorDeacquireCommand());
 
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
-        operatorGamepad.getRightButton().whenPressed(new PrepareForClimbCommand());
         operatorGamepad.getLeftButton().whenPressed( new PrepareForClimbCommand());
     }
 }
