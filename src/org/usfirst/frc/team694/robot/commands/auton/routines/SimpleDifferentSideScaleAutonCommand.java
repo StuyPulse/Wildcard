@@ -23,7 +23,7 @@ public class SimpleDifferentSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new DrivetrainRotateRelativeDegreesPIDCommand((isRight? -1 : 1) * quad.getAngleToTurnToReachPlatformZone()));
 
         //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
-        addSequential(new DriveStraightWithRampingCommand(203/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
+        addSequential(new DriveStraightWithRampingCommand(203 - 10/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
 
         addSequential(new DrivetrainRotateRelativeDegreesPIDCommand((isRight? -1 : 1) * quad.getAngleToTurnToReachScaleSide()), 2);
         // Height used to be 89 - minheight
