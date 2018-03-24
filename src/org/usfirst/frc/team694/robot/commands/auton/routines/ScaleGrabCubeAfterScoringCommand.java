@@ -22,9 +22,9 @@ public class ScaleGrabCubeAfterScoringCommand extends AutonCommandGroup {
         // Relative degrees: +/- 165
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRightSide ? -165 : 165));
         addSequential(new QuisitorOpenCommand());
+        addParallel(new QuisitorAcquireCommand(),3);
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.4), 2);
         addSequential(new QuisitorCloseCommand());
-        addSequential(new QuisitorAcquireCommand(),2);
 
     }
 }

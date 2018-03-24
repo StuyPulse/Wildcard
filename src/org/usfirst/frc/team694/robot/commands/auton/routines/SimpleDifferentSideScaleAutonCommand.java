@@ -38,5 +38,4 @@ public class SimpleDifferentSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new ScaleGrabCubeAfterScoringCommand(!isRight));
         addSequential(new ScaleScoreSecondTimeCommand(!isRight));
     }
-
 }
