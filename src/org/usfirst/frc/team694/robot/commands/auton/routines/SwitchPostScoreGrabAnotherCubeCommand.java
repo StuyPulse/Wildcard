@@ -32,8 +32,10 @@ public class SwitchPostScoreGrabAnotherCubeCommand extends AutonCommandGroup {
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
 
             // Go forth and grab the cube
+            addSequential(new QuisitorOpenCommand());
             addParallel(new QuisitorAcquireCommand(), 3);
             addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.5));
+            addSequential(new QuisitorCloseCommand());
         } else {
             // Drive back to the start
             DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL, RampMode.NO_RAMPING);
@@ -46,9 +48,9 @@ public class SwitchPostScoreGrabAnotherCubeCommand extends AutonCommandGroup {
 
             // Go forth and grab the cube
             addSequential(new QuisitorOpenCommand());
+            addParallel(new QuisitorAcquireCommand(), 3);
             addSequential(new DrivetrainMoveInchesEncoderCommand(100, 0.5), 2);
             addSequential(new QuisitorCloseCommand());
-            addSequential(new QuisitorAcquireCommand(), 3);
         }
     }
 

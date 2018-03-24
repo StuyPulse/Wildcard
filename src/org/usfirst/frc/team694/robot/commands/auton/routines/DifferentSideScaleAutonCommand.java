@@ -10,6 +10,7 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 
 import edu.wpi.first.wpilibj.command.PrintCommand;
 
+@Deprecated // I mean not technically deprecated but please don't use this yet
 public class DifferentSideScaleAutonCommand extends AutonCommandGroup {
 //    private FieldMapInterface quad = Robot.getRobotQuadrant();
 
