@@ -37,6 +37,6 @@ public class LeftSideSwitchAutonCommand extends AutonCommandGroup {
         addSequential(new PrintCommand("[LeftSideSwitchAuton] Post score"));
 
 //        addSequential(new SwitchPostScoreExchangeScoreCommand(false));
-        addSequential(new SwitchPostScoreGrabAnotherCubeCommand(true));
+        addSequential(new SwitchPostScoreGrabAnotherCubeCommand(false));
     }
 }

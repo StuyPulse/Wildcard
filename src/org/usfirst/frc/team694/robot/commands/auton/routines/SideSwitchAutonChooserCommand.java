@@ -12,6 +12,7 @@ public class SideSwitchAutonChooserCommand extends ConditionalCommand {
 
     public SideSwitchAutonChooserCommand() {
         super(new RightSideSwitchAutonCommand(), new LeftSideSwitchAutonCommand()); 
+        System.out.println("[SideSwitch] IS RIGHT? " + Robot.isRobotStartingOnRight());
     }
 
     @Override
@@ -29,6 +30,7 @@ public class SideSwitchAutonChooserCommand extends ConditionalCommand {
         @Override
         public void initialize() {
             Robot.quisitor.acquireSpeed(-1 * QUISITOR_DEACQUIRE_SPEED);
+            System.out.println("[SideSwitchChooser.QuisitorDeacquireTimed] deacquire!");
         }
 
         @Override

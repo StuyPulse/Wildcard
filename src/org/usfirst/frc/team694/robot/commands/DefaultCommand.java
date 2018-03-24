@@ -26,8 +26,11 @@ public abstract class DefaultCommand extends Command {
 
     @Override
     protected void execute() {
-        if (Robot.getInstance().isAutonomous()) {
-            return;
+        if (!Robot.getInstance().isAutonomous()) {
+            defaultExecute();
         }
     }
+    
+    protected abstract void defaultExecute();
+
 }

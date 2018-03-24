@@ -18,9 +18,10 @@ public class LiftMoveCommand extends DefaultCommand {
         super.initialize();
     }
 
+    // TODO: This is getting out of hand
+    //       Please fix DriveDistanceEncodersCommand
     @Override
-    protected void execute() {
-        super.execute();
+    protected void defaultExecute() {
 
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);

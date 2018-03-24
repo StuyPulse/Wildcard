@@ -32,8 +32,7 @@ public class DrivetrainDriveSystemCommand extends DefaultCommand {
     }
 
     @Override
-    protected void execute() {
-        super.execute();
+    protected void defaultExecute() {
         //Preliminary Values from the triggers used for Curvature Drive
         double rightTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
