@@ -110,6 +110,8 @@ public final class RobotMap {
 
     public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = 1;
     public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = 2;
+    public static final int DRIVETRAIN_SONAR_PING_CHANNEL_PORT = -1;
+    public static final int DRIVETRAIN_SONAR_ECHO_CHANNEL_PORT = -1;
 
     /******************************************************************************
      * Drivetrain Encoder/Movement Constants
