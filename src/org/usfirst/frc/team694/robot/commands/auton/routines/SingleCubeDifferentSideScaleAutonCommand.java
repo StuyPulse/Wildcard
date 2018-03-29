@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class SingleCubeDifferentSideScaleCommand extends CommandGroup {
+public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
 
-    public SingleCubeDifferentSideScaleCommand() {
+    public SingleCubeDifferentSideScaleAutonCommand() {
         // Add Commands here:
         addParallel(new DriveStraightRampDownOnlyCommand(235));
         //TODO: Make constructor for allowing differing inital speeds for ramping
