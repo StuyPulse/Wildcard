@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class DoubleCubeSameSideScaleAutonCommand extends CommandGroup {
+public class DoubleCubeScaleAutonCommand extends CommandGroup {
 
-    public DoubleCubeSameSideScaleAutonCommand() {
-        addSequential(new SingleCubeSameSideScaleAutonCommand());
+    public DoubleCubeScaleAutonCommand() {
+        addSequential(Robot.isRobotAndScaleOnSameSide()? new SingleCubeSameSideScaleAutonCommand() : new SingleCubeDifferentSideScaleAutonCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(Robot.isRobotStartingOnRight() ? -150.0 : 150.0));
         addSequential(new LiftMoveToBottomCommand());
         addSequential(new QuisitorAcquireCommand(), 3.0);

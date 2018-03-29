@@ -16,7 +16,7 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
     public SingleCubeSameSideScaleAutonCommand() {
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(TOTAL_DISTANCE);
         driveCommand.addSpeedChange(0, 0.8);
-        driveCommand.addTurn(261, 45);
+        driveCommand.addTurn(261, Robot.isRobotStartingOnRight()? -45.0 : 45.0);
         
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(82.0), 168));
         addSequential(driveCommand, 3.5);
