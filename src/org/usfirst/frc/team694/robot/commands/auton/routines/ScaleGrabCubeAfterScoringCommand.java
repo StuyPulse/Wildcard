@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
 public class ScaleGrabCubeAfterScoringCommand extends AutonCommandGroup {
  
     public ScaleGrabCubeAfterScoringCommand(boolean isRightSide) {
-        addSequential(new PrintCommand("[ScaleGrabCube] START"));
+        addSequential(new PrintCommand("[ScaleGrabCube] START, right? " + isRightSide));
         addSequential(new DrivetrainMoveInchesEncoderCommand(10,-0.3));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
         addSequential(new DrivetrainMoveInchesEncoderCommand(10, -0.3));

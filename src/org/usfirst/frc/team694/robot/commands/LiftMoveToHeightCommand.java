@@ -1,7 +1,6 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,13 +19,22 @@ public class LiftMoveToHeightCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.lift.setHeight(targetHeight);
+        // Original:
+//        Robot.lift.setHeight(targetHeight);
+        if (targetHeight > Robot.lift.getLiftHeight()) {
+            Robot.lift.move(1);
+        }
+//         else {
+//            Robot.lift.move(-1);
+//        }
     }
 
     @Override
     protected boolean isFinished() {
         double deltaTarget = targetHeight - Robot.lift.getLiftHeight();
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
+        // Original
+//        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
+        return (deltaTarget < 0)
                 || (Robot.lift.isAtBottom() && deltaTarget < 0) 
                 || (Robot.lift.isAtTop() && deltaTarget > 0);
     }

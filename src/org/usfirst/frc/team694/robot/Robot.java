@@ -7,11 +7,12 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.auton.routines.AlternativeCurvySwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand.POST_SCORE;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleDifferentSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleSideSwitchAutonChooserCommand;
 //import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 //import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -150,7 +151,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        updateSmartDashboard();
+       updateSmartDashboard();
     }
 
     @Override
@@ -159,13 +160,20 @@ public class Robot extends IterativeRobot {
     }
 
     private void initSmartDashboard() {
+        // TEMPORARY
+
         // AUTON CHOOSER
         autonChooser.addObject("Do Nothing", new CommandGroup());
         autonChooser.addDefault("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
-        autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
-        autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand(true));
-        autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand(true));
+        autonChooser.addObject("SWITCH Auton", new SideSwitchAutonChooserCommand());
+        autonChooser.addObject("SIMPLE SWITCH Auton", new SimpleSideSwitchAutonChooserCommand());
+        autonChooser.addObject("ALTERNATIVE SWITCH Auton", new AlternativeCurvySwitchAutonChooserCommand());
+        autonChooser.addObject("SCALE 1 CUBE Auton", new SideScaleAutonChooserCommand(POST_SCORE.NONE));
+        autonChooser.addObject("SCALE + GRAB CUBE Auton", new SideScaleAutonChooserCommand(POST_SCORE.GRAB_CUBE));
+        autonChooser.addObject("SCALE + GRAB + SCORE CUBE Auton", new SideScaleAutonChooserCommand(POST_SCORE.GRAB_CUBE_AND_SCORE));
+
+//        autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand(true));
+//        autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand(true));
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
@@ -251,6 +259,10 @@ public class Robot extends IterativeRobot {
 
     public static boolean isSwitchOnRight() {
         return isAllianceSwitchRight;
+    }
+    
+    public static boolean isScaleOnRight() {
+        return isScaleRight;
     }
 
     public static Robot getInstance() {

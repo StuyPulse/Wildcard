@@ -48,17 +48,23 @@ public class Lift extends Subsystem {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
 
+        // LAST MINUTE PREFINALS AAAAAh
+        innerLeftMotor.follow(innerRightMotor);
+        outerRightMotor.follow(innerRightMotor);
+        outerLeftMotor.follow(innerRightMotor);
+
         /// Followers
-        innerRightMotor.follow(innerLeftMotor);
-        outerRightMotor.follow(innerLeftMotor);
-        outerLeftMotor.follow(innerLeftMotor);
+//        innerRightMotor.follow(innerLeftMotor);
+//        outerRightMotor.follow(innerLeftMotor);
+//        outerLeftMotor.follow(innerLeftMotor);
 
         /// Encoders
         innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         // Lift P, to ramp up to a height
-        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
+//        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
+        innerRightMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
         innerLeftMotor.setSensorPhase(true);
         innerRightMotor.setSensorPhase(true);
@@ -89,7 +95,8 @@ public class Lift extends Subsystem {
         if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
             stop();
         } else {
-            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
+//            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
+            innerRightMotor.set(ControlMode.PercentOutput,speed); 
         }
     }
 
@@ -129,15 +136,18 @@ public class Lift extends Subsystem {
     }
 
     public void setHeight(double height) {
-        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
+        innerRightMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
+//        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
 
     public void stop() {
-        innerLeftMotor.set(ControlMode.PercentOutput, 0);
+        innerRightMotor.set(ControlMode.PercentOutput, 0);
+//        innerLeftMotor.set(ControlMode.PercentOutput, 0);
     }
 
     public double getSpeed() {
-        return innerLeftMotor.get();
+        return innerRightMotor.get();
+//        return innerLeftMotor.get();
     }
 
     public boolean isAtBottom() {
@@ -170,7 +180,8 @@ public class Lift extends Subsystem {
 
 
     public double getMotorVelocity() {
-        return innerLeftMotor.getSelectedSensorVelocity(0);
+        return innerRightMotor.getSelectedSensorVelocity(0);
+//        return innerLeftMotor.getSelectedSensorVelocity(0);
     }
 
     public void enableCurrentLimit() {

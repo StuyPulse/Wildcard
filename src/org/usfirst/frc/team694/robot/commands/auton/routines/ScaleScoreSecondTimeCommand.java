@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
 public class ScaleScoreSecondTimeCommand extends AutonCommandGroup {
 
     public ScaleScoreSecondTimeCommand(boolean isRightSide) {
-        addSequential(new PrintCommand("[ScaleScoreSecondTime] START"));
+        addSequential(new PrintCommand("[ScaleScoreSecondTime] START, right? " + isRightSide));
 
         addSequential(new QuisitorCloseCommand());
 

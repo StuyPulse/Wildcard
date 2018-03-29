@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
 public class DifferentSideScaleAutonCommand extends AutonCommandGroup {
 //    private FieldMapInterface quad = Robot.getRobotQuadrant();
 
+    // Switch
+    
     private static final double DISTANCE_TOTAL = 410;//450;
 
     public DifferentSideScaleAutonCommand() {

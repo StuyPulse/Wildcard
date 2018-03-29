@@ -19,6 +19,8 @@ import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class OI {
     public Gamepad driverGamepad;
     public Gamepad operatorGamepad;
@@ -38,8 +40,5 @@ public class OI {
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
 //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
 
-        // TESTING
-        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT));
-        driverGamepad.getDPadDown().whenPressed(new LiftMoveToBottomCommand());
     }
 }
