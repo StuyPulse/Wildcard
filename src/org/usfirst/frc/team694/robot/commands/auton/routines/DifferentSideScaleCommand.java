@@ -1,8 +1,12 @@
-package org.usfirst.frc.team694.robot.commands.auton;
+package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -19,12 +23,12 @@ public class DifferentSideScaleCommand extends CommandGroup {
         
         addSequential(new DrivetrainDriveCurveCommand(69.4));//Distance? Ramping or no Ramping?
         addSequential(new DriveStraightRampDownOnlyCommand(-234));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(Robot.isRobotOnRight ? -45 : 45));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(Robot.isRobotStartingOnRight() ? -45 : 45));
         
         addParallel(new LiftMoveToHeightCommand(75));//TODO: Ask engineering
         addSequential(new DriveStraightPIDCommand(55, 0.3));
         
-        addSequential(new QuisitorDeacquireCommand(), 2);
+        addSequential(new QuisitorDeacquireCommand(), 2);//TODO: ask for timeout
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.

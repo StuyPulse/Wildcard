@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
@@ -36,7 +37,7 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.6, 42.0));
         //addSequential(new ArcCommand(0.0));
         addSequential(new DriveStraightPIDCommand(72.0, 0.6));
-        addSequential(new DeacquireCommand();)
+        addSequential(new QuisitorDeacquireCommand());
         
         
     }
