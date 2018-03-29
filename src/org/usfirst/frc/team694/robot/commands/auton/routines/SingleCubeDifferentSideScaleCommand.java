@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class DifferentSideScaleCommand extends CommandGroup {
+public class SingleCubeDifferentSideScaleCommand extends CommandGroup {
 
-    public DifferentSideScaleCommand() {
+    public SingleCubeDifferentSideScaleCommand() {
         // Add Commands here:
         //TODO: kill magic numbers
         addParallel(new DriveStraightRampDownOnlyCommand(235));
