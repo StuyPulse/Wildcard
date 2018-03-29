@@ -253,7 +253,7 @@ public class Drivetrain extends Subsystem {
         leftLineSensor.mainLoop();
     }
 
-    public boolean isOnLine() {//TODO:Decide if we want to have different auton speeds(modes). If so, then create enums instead.
+    public boolean isOnLine() {
         return leftIsOnLine() || rightIsOnLine();
     }
 
