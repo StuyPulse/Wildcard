@@ -4,12 +4,17 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class CrabArmStopCommand extends InstantCommand {
-    public CrabArmStopCommand() {
-        requires(Robot.crabArm);
+/**
+ *
+ */
+public class QuisitorStopCommand extends InstantCommand {
+
+    public QuisitorStopCommand() {
+        requires(Robot.quisitor);
     }
-    
+
+    @Override
     protected void initialize() {
-        Robot.crabArm.stop();
+        Robot.quisitor.stop();
     }
 }

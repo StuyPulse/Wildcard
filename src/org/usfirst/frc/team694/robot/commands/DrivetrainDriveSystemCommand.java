@@ -3,12 +3,11 @@ package org.usfirst.frc.team694.robot.commands;
 import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DrivetrainDriveSystemCommand extends Command {
+public class DrivetrainDriveSystemCommand extends DefaultCommand {
 
     // When we start our auto low gear shift
     private static final double BROWNOUT_PROTECTION_LOWER_BOUND_VOLTAGE = 8;
@@ -18,24 +17,22 @@ public class DrivetrainDriveSystemCommand extends Command {
 
     private boolean isBrownOutProtectionOn;
 
-    boolean tankDrive;
-    boolean driveModeToggleButtonWasPressed;
+    private boolean tankDrive;
+    private boolean driveModeToggleButtonWasPressed;
 
     public DrivetrainDriveSystemCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
         requires(Robot.drivetrain);
     }
 
-    // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
+        super.initialize();
         tankDrive = false;
         driveModeToggleButtonWasPressed = false;
     }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-
+    @Override
+    protected void defaultExecute() {
         //Preliminary Values from the triggers used for Curvature Drive
         double rightTrigger = Robot.oi.driverGamepad.getRawRightTriggerAxis();
         double leftTrigger = Robot.oi.driverGamepad.getRawLeftTriggerAxis();
@@ -77,15 +74,8 @@ public class DrivetrainDriveSystemCommand extends Command {
 
         if (!tankDrive) {
             if (Math.abs(rightTrigger + leftTrigger) > 0.05) {
-                // If we're already manual gear shifting, don't override the driver's decision
-                if (!Robot.oi.driverGamepad.getRawBottomButton()) {                
-                    Robot.drivetrain.highGearShift();
-                }
                 Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, false);
             } else {
-                if (Math.abs(leftJoystickX) > 0.05) {
-                    Robot.drivetrain.lowGearShift();
-                }
                 Robot.drivetrain.curvatureDrive(rightTriggerSquared - leftTriggerSquared, leftJoystickX, true);
             }
         } else {
@@ -93,13 +83,13 @@ public class DrivetrainDriveSystemCommand extends Command {
         }
     }
 
-    // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
+    @Override
     protected void end() {
+        
     }
-
 }

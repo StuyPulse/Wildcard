@@ -30,9 +30,9 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
 
     @Override
     protected void initialize() {
+        super.initialize();
         speedScaleFactor = 1;
 
-        Robot.drivetrain.resetEncoders();
         Robot.drivetrain.resetGyro();
         Robot.drivetrain.setRamp(SmartDashboard.getNumber("DriveStraight RampSeconds", 2.5));
 
@@ -44,12 +44,13 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
                 SmartDashboard.getNumber("DriveDistanceEncodersPID D", 0));
         speedPIDController.setAbsoluteTolerance(DRIVE_DISTANCE_THRESHOLD);
 
+        speedPIDController.enable();
+
         System.out.println("[DriveStraight] Init");
     }
 
     @Override
     protected void execute() {
-        //System.out.println("[DriveDistanceEncodersCommand] distance left:" + (targetDistance - Robot.drivetrain.getEncoderDistance()));
 //        SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
 
         double output = speedPIDOutput;
@@ -64,6 +65,8 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
         double left = output * speedScaleFactor  + getGyroPIDOutput();
         double right = output * speedScaleFactor - getGyroPIDOutput();
         Robot.drivetrain.tankDrive(left, right);
+
+//        System.out.println("[Drive Straight Ramp] Angle output: " + getGyroPIDOutput());
     }
 
     @Override
@@ -83,6 +86,7 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
 
     @Override
     protected void end() {
+        super.end();
         Robot.drivetrain.stop();
         Robot.drivetrain.setRamp(0);
 

@@ -11,7 +11,7 @@ public abstract class DrivetrainDriveDistanceCommand extends Command {
 
     protected double targetDistance;
 
-    private double startDistance;
+    protected double startDistance;
 
     public DrivetrainDriveDistanceCommand(double distance) {
         this.targetDistance = distance;
@@ -21,10 +21,11 @@ public abstract class DrivetrainDriveDistanceCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
         startDistance = getRawDistance();
+        System.out.println("[DrivetrainDriveDistance] SET: " + startDistance);
     }
 
-    protected double getRawDistance() {
-        return Robot.drivetrain.getEncoderDistance();
+    private double getRawDistance() {
+        return Robot.drivetrain.getEncoderMax();
     }
 
     protected double getDistance() {
@@ -34,4 +35,5 @@ public abstract class DrivetrainDriveDistanceCommand extends Command {
     protected double getDistanceFromTarget() {
         return targetDistance - getDistance();
     }
+
 }
