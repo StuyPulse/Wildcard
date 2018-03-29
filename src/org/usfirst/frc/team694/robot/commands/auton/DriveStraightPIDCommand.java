@@ -15,45 +15,45 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
     private PIDController rotationPIDController;
     private double gyroPIDOutput;
 
-	public DriveStraightPIDCommand(double distance, double speed) {
-		super(distance, speed);
-		rotationPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
-	}
+    public DriveStraightPIDCommand(double targetDistance, double speed) {
+        super(targetDistance, speed);
+        rotationPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
+    }
 
-	@Override
-	protected void initialize() {
-	    super.initialize();
-		Robot.drivetrain.resetGyro();
+    @Override
+    protected void initialize() {
+        super.initialize();
+        Robot.drivetrain.resetGyro();
         rotationPIDController.setSetpoint(0);
-		rotationPIDController.setPID(
-				SmartDashboard.getNumber("DriveStraightPID P", 0), 
-				SmartDashboard.getNumber("DriveStraightPID I", 0), 
-				SmartDashboard.getNumber("DriveStraightPID D", 0)
-				);
+        rotationPIDController.setPID(
+                SmartDashboard.getNumber("DriveStraightGyroPID P", 0),
+                SmartDashboard.getNumber("DriveStraightGyroPID I", 0), 
+                SmartDashboard.getNumber("DriveStraightGyroPID D", 0));
         rotationPIDController.enable();
-	}
+    }
 
     @Override
-	protected void execute() {
-        Robot.drivetrain.tankDrive(moveSpeed + getGyroPIDOutput(), moveSpeed - getGyroPIDOutput());
-	}
+    protected void execute() {
+        Robot.drivetrain.tankDrive(moveSpeed*speedScaleFactor + getGyroPIDOutput(), moveSpeed*speedScaleFactor - getGyroPIDOutput());
+        System.out.println("[DriveStraightPID] target: " + targetDistance + ", dist: " + getDistance());
+    }
 
     @Override
-	protected boolean isFinished() {
-		return super.isFinished();
-	}
+    protected boolean isFinished() {
+        return super.isFinished();
+    }
 
     @Override
-	protected void end() {
+    protected void end() {
         super.end();
         rotationPIDController.setPID(0, 0, 0);
         rotationPIDController.disable();
-	}
+    }
 
     protected double getGyroPIDOutput() {
         return gyroPIDOutput;
     }
-    
+
     public void setTargetAngle(double angle) {
         rotationPIDController.setSetpoint(angle);
     }
@@ -62,10 +62,10 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
         this.speedScaleFactor = speedScaleFactor;
     }
 
-
-	private class GyroPIDSource implements PIDSource {
-	    @Override
-        public void setPIDSourceType(PIDSourceType pidSource) {}
+    private class GyroPIDSource implements PIDSource {
+        @Override
+        public void setPIDSourceType(PIDSourceType pidSource) {
+        }
 
         @Override
         public PIDSourceType getPIDSourceType() {
@@ -76,12 +76,12 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
         public double pidGet() {
             return Robot.drivetrain.getGyroAngle();
         }
-	}
+    }
 
-	private class GyroPIDOutput implements PIDOutput {
+    private class GyroPIDOutput implements PIDOutput {
         @Override
         public void pidWrite(double output) {
             gyroPIDOutput = output;
-        }    
-	}
+        }
+    }
 }

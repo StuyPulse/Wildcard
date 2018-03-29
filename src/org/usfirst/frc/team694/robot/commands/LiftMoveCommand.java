@@ -2,35 +2,31 @@ package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  *
  */
-public class LiftMoveCommand extends Command {
+public class LiftMoveCommand extends DefaultCommand {
 
     private static final double GAMEPAD_LIFT_THRESHOLD = 0.1;
 
     public LiftMoveCommand() {
         requires(Robot.lift);
-        // Problems with default command overriding spatula:
-//        requires(Robot.spatula);
     }
 
+    @Override
     protected void initialize() {
+        super.initialize();
     }
 
-    protected void execute() {
+    // TODO: This is getting out of hand
+    //       Please fix DriveDistanceEncodersCommand
+    @Override
+    protected void defaultExecute() {
+
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
 
-
-        //TODO: see whether Coby wants cubed or squared inputs on the lift.
-
         if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
-            if (Robot.spatula.isSpatulaUp()) {
-                Robot.spatula.acquireSpeed(-liftSquared * 0.2);
-            }
             Robot.lift.move(liftSquared);
 //            Robot.drivetrain.enableCurrentLimit();
         } else {
@@ -39,10 +35,12 @@ public class LiftMoveCommand extends Command {
         }
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
     }
 }

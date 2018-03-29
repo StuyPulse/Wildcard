@@ -1,16 +1,17 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class SpatulaFlipDownCommand extends InstantCommand {
+public class QuisitorOpenCommand extends InstantCommand {
 
-    public SpatulaFlipDownCommand() {
-        requires(Robot.spatula);
+    public QuisitorOpenCommand() {
+        requires(Robot.quisitor);
     }
 
     @Override
     protected void initialize() {
-        Robot.spatula.flipDown();
+        Robot.quisitor.open();
     }
 }
