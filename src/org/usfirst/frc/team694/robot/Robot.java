@@ -7,13 +7,6 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.auton.routines.LeftSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.RightSideSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.CrabArm;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Grabber;
@@ -128,7 +121,7 @@ public class Robot extends IterativeRobot {
             gameData = DriverStation.getInstance().getGameSpecificMessage();
         }
         if (gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
-            autonCommand = new MobilityAutonCommand();
+            //autonCommand = new MobilityAutonCommand();
             System.err.print("******* Field Data Problem!!!");
             System.err.println("Please yell at the field management crew to fix this");
         } else {
@@ -175,7 +168,7 @@ public class Robot extends IterativeRobot {
     private void initSmartDashboard() {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
-        autonChooser.addObject("Mobility", new MobilityAutonCommand());
+        //autonChooser.addObject("Mobility", new MobilityAutonCommand());
         /* Testing autons:
         autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
         autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
@@ -183,12 +176,12 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
         */
 
-        autonChooser.addDefault("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
-        autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
-        autonChooser.addObject("FORCE LEFT SWITCH Auton", new LeftSideSwitchAutonCommand());
-        autonChooser.addObject("FORCE RIGHT SWITCH Auton", new RightSideSwitchAutonCommand());
-        autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand());
-        autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
+        //autonChooser.addDefault("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
+        //autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
+        //autonChooser.addObject("FORCE LEFT SWITCH Auton", new LeftSideSwitchAutonCommand());
+        //autonChooser.addObject("FORCE RIGHT SWITCH Auton", new RightSideSwitchAutonCommand());
+        //autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand());
+        //autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
