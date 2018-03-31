@@ -19,6 +19,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -48,6 +49,8 @@ public class Drivetrain extends Subsystem {
     private double absoluteGyroError;
 
     private boolean brownoutProtectionEnabled;
+    
+    private Ultrasonic sonar;
 
 //    private boolean brownoutProtectionEnabled;
 
@@ -107,6 +110,8 @@ public class Drivetrain extends Subsystem {
         navX = new AHRS(SPI.Port.kMXP);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
+        
+        sonar = new Ultrasonic(RobotMap.DRIVETRAIN_SONAR_PING_CHANNEL_PORT, RobotMap.DRIVETRAIN_SONAR_ECHO_CHANNEL_PORT);
     }
 
     @Override
@@ -318,6 +323,14 @@ public class Drivetrain extends Subsystem {
 
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
+    }
+    
+    public void setSonar(boolean mode) {
+        sonar.setAutomaticMode(mode);
+    }
+    
+    public double getInchesAway() {
+        return sonar.getRangeInches();
     }
 }
 
