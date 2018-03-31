@@ -7,15 +7,14 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.auton.routines.AlternativeCurvySwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SideScaleAutonChooserCommand.POST_SCORE;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SideSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SimpleSideSwitchAutonChooserCommand;
-//import org.usfirst.frc.team694.robot.subsystems.CrabArm;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
-//import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;
 
@@ -39,11 +38,10 @@ public class Robot extends IterativeRobot {
 
     public static OI oi;
 
-//    static boolean isRobotAtBottom;
+    //    static boolean isRobotAtBottom;
 
     private String gameData;
     private static boolean isRobotOnRight;
-
     private static boolean isAllianceSwitchRight;
     private static boolean isScaleRight;
 
@@ -52,7 +50,7 @@ public class Robot extends IterativeRobot {
 
     private Command autonCommand; // Selected command run during auton
 
-//    private PowerDistributionPanel pdppanel;
+    //    private PowerDistributionPanel pdppanel;
 
     @Override
     public void robotInit() {
@@ -113,12 +111,13 @@ public class Robot extends IterativeRobot {
             gameData = DriverStation.getInstance().getGameSpecificMessage();
         }
         if (gameData == null || gameData.isEmpty()) {//If there is no field data run mobility
-            autonCommand = new MobilityAutonCommand();
+            //autonCommand = new MobilityAutonCommand();
             System.err.print("******* Field Data Problem!!!");
             System.err.println("Please yell at the field management crew to fix this");
         } else {
             isRobotOnRight = (sideChooser.getSelected() == RobotStartPosition.RIGHT_SIDE_OF_DRIVER);
-            System.out.println("[Robot] SIDE CHOOSER: " + sideChooser.getSelected() + ", equals right? " + isRobotOnRight);
+            System.out.println(
+                    "[Robot] SIDE CHOOSER: " + sideChooser.getSelected() + ", equals right? " + isRobotOnRight);
             isAllianceSwitchRight = gameData.charAt(0) == 'R';
             isScaleRight = gameData.charAt(1) == 'R';
             autonCommand = autonChooser.getSelected();
@@ -151,7 +150,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-       updateSmartDashboard();
+        updateSmartDashboard();
     }
 
     @Override
@@ -160,20 +159,16 @@ public class Robot extends IterativeRobot {
     }
 
     private void initSmartDashboard() {
-        // TEMPORARY
-
         // AUTON CHOOSER
-        autonChooser.addObject("Do Nothing", new CommandGroup());
-        autonChooser.addDefault("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("SWITCH Auton", new SideSwitchAutonChooserCommand());
-        autonChooser.addObject("SIMPLE SWITCH Auton", new SimpleSideSwitchAutonChooserCommand());
-        autonChooser.addObject("ALTERNATIVE SWITCH Auton", new AlternativeCurvySwitchAutonChooserCommand());
-        autonChooser.addObject("SCALE 1 CUBE Auton", new SideScaleAutonChooserCommand(POST_SCORE.NONE));
-        autonChooser.addObject("SCALE + GRAB CUBE Auton", new SideScaleAutonChooserCommand(POST_SCORE.GRAB_CUBE));
-        autonChooser.addObject("SCALE + GRAB + SCORE CUBE Auton", new SideScaleAutonChooserCommand(POST_SCORE.GRAB_CUBE_AND_SCORE));
+        autonChooser.addDefault("Do Nothing", new CommandGroup());
+        autonChooser.addObject("Mobility", new MobilityAutonCommand());
+        autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand());
+        autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand());
+        autonChooser.addObject("Double SCALE ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Triple SWITCH ALWAYS Auton", new TripleCubeSwitchAutonCommand());
+        autonChooser.addObject("Triple SCALE ALWAYS Auton", new TripleCubeScaleAutonChooserCommand());
 
-//        autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand(true));
-//        autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand(true));
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
@@ -260,9 +255,13 @@ public class Robot extends IterativeRobot {
     public static boolean isSwitchOnRight() {
         return isAllianceSwitchRight;
     }
-    
+
     public static boolean isScaleOnRight() {
         return isScaleRight;
+    }
+
+    public static boolean isRobotOnSameSideScale() {
+        return !(isRobotOnRight ^ isScaleRight);
     }
 
     public static Robot getInstance() {
