@@ -18,8 +18,9 @@ public class TripleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new DoubleCubeSwitchAutonCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(48, -0.25));
         addSequential(new LiftMoveToBottomCommand());
-        addSequential(new QuisitorAcquireCommand());
-        addParallel(new DrivetrainRotateAbsoluteDegreesPIDCommand(-45));
+
+        addParallel(new QuisitorAcquireCommand(),3.0);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-45));
         addSequential(new DrivetrainMoveInchesEncoderCommand(60, 0.25));
         addSequential(new DrivetrainMoveInchesEncoderCommand(-60, -0.25));  
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));

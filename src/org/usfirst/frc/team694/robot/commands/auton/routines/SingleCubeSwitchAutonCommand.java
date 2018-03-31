@@ -15,14 +15,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class SingleCubeSwitchAutonCommand extends CommandGroup {
 
     public SingleCubeSwitchAutonCommand() {
-        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(283);
-        
+        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(124);
+        driveCommand.addSpeedChange(0.0, 0.6);
+        driveCommand.addTurn(10.0, 90.0);
+        driveCommand.addTurn(42.0, 0.0);
         addParallel(new LiftMoveToHeightCommand(0.0)); //TODO: Find a height for the lift to move to.
-        addSequential(new DrivetrainMoveInchesEncoderCommand(0.6, 10.0));
-        //addSequential(new ArcCommand(isRight ? 90.0 : -90.0)); TODO: Use an arc command here when we get to making one.
-        addSequential(new DrivetrainMoveInchesEncoderCommand(0.6, 42.0));
-        //addSequential(new ArcCommand(0.0)); //Absolute Degrees Assumed TODO
-        addSequential(new DriveStraightPIDCommand(72.0, 0.6));
+        addSequential(driveCommand, 7);
         addSequential(new QuisitorDeacquireCommand());
         
     }

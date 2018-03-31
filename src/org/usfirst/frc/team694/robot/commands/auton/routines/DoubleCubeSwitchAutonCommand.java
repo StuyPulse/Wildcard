@@ -35,7 +35,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
         addSequential(new QuisitorOpenCommand());
-        addSequential(new QuisitorAcquireCommand(),2);
+        addParallel(new QuisitorAcquireCommand(),2);
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.1));
         addSequential(new QuisitorCloseCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, -0.1));
