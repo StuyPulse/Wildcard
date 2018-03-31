@@ -15,15 +15,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DoubleCubeScaleAutonCommand extends CommandGroup {
 
-    public DoubleCubeScaleAutonCommand() {
-        addSequential(Robot.isRobotAndScaleOnSameSide()? new SingleCubeSameSideScaleAutonCommand() : new SingleCubeDifferentSideScaleAutonCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(Robot.isRobotStartingOnRight() ? -150.0 : 150.0));
+    public DoubleCubeScaleAutonCommand(boolean isRight) {
+        addSequential(new SingleCubeScaleAutonChooserCommand());
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150.0 : 150.0));
         addSequential(new LiftMoveToBottomCommand());
         addParallel(new QuisitorAcquireCommand(), 3.0);
         addSequential(new DrivetrainMoveInchesEncoderCommand(64.0, .25));
         addSequential(new DrivetrainMoveInchesEncoderCommand(64.0, -.25));
         addSequential(new LiftMoveToHeightCommand(83.0));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(Robot.isRobotStartingOnRight() ? -45.0 : 45.0));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -45.0 : 45.0));
         addSequential(new QuisitorDeacquireCommand());
     }
 }

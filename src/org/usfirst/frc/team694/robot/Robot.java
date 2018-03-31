@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 
     private String gameData;
     private static boolean isRobotOnRight;
-
+    private static boolean isRobotOnSameSideScale;
     private static boolean isAllianceSwitchRight;
     private static boolean isScaleRight;
 
@@ -259,6 +259,10 @@ public class Robot extends IterativeRobot {
     
     public static boolean isScaleOnRight() {
         return isScaleRight;
+    }
+
+    public static boolean isRobotOnSameSideScale() {
+        return !(isRobotOnRight ^ isScaleRight);
     }
 
     public static Robot getInstance() {
