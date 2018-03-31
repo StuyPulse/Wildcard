@@ -24,7 +24,8 @@ public class TripleCubeSameSideSwitchAutonCommand extends CommandGroup {
         //Drive 60 inches at 25%
         addSequential(new DrivetrainMoveInchesEncoderCommand(60, 0.25));
         addSequential(new DrivetrainMoveInchesEncoderCommand(-60, -0.25));  
-        //Rotate to 0 Degrees?
+        //Rotate to Absolute Zero Degrees.
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
         //Raise lift to 20 inches.
         addSequential(new LiftMoveToHeightCommand(20));
         //Drive 48 inches:
