@@ -19,7 +19,7 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
         driveCommand.addSpeedChange(0.0, 0.6);
         driveCommand.addTurn(10.0, 90.0);
         driveCommand.addTurn(42.0, 0.0);
-        addParallel(new LiftMoveToHeightCommand(0.0)); //TODO: Find a height for the lift to move to.
+        addParallel(new LiftMoveToHeightCommand(30.0)); //TODO: Find a height for the lift to move to.
         addSequential(driveCommand, 7);
         addSequential(new QuisitorDeacquireCommand());
         
