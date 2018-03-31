@@ -1,8 +1,8 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.CrabArrowAcquireUntilAcquiredCommand;
-import org.usfirst.frc.team694.robot.commands.SpatulaDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
+@Deprecated
 public class SwitchPostScoreDriveIntoCenterFieldCommand extends CommandGroup {
 
     private static final double SWITCH_WIDTH = 189.5;
@@ -29,7 +30,7 @@ public class SwitchPostScoreDriveIntoCenterFieldCommand extends CommandGroup {
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
         }
         // Grab cube and then go back
-        addParallel(new CrabArrowAcquireUntilAcquiredCommand(), 5);
+        addParallel(new QuisitorAcquireCommand(), 5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.4, SWITCH_WIDTH/2.0 - DISTANCE_BOT_CENTER_IS_FROM_SCALE_EDGE));
         addSequential(new DrivetrainMoveInchesEncoderCommand(-0.4, SWITCH_WIDTH/2.0 - DISTANCE_BOT_CENTER_IS_FROM_SCALE_EDGE));
 
@@ -38,7 +39,7 @@ public class SwitchPostScoreDriveIntoCenterFieldCommand extends CommandGroup {
 
         // Slam into that switch and score again
         addSequential(new DrivetrainMoveInchesEncoderCommand(0.8, 20), 1.5);
-        addSequential(new SpatulaDeacquireCommand(), 1.5);
+        addSequential(new QuisitorDeacquireCommand(), 1.5);
 
     }
 }

@@ -3,13 +3,14 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+@Deprecated
 public class SameSideRightAngleScaleAutonCommand extends CommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
@@ -25,7 +26,7 @@ public class SameSideRightAngleScaleAutonCommand extends CommandGroup {
         
         addSequential(new DriveStraightWithRampingCommand(quad.getDistanceToReachScaleEdge())); 
         
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
 
     }
 }

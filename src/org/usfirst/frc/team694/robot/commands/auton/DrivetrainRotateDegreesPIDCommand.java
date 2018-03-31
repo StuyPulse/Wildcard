@@ -27,7 +27,6 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
 
         gyroPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
 
-        gyroPIDController.setSetpoint(targetAngle);
     }
 
     @Override
@@ -42,6 +41,8 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
     			0, 
     			SmartDashboard.getNumber("RotateDegreesPID D", 0.06)
 			);
+        gyroPIDController.setSetpoint(targetAngle);
+        gyroPIDController.enable();
 
 		System.out.println("[RotatePID] START");
 	}

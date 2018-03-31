@@ -1,47 +1,49 @@
-
 package org.usfirst.frc.team694.robot.commands.auton.routines;
-
 
 import org.usfirst.frc.team694.robot.FieldMapInterface;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.GrabberOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
+import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateRelativeDegreesPIDCommand;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 
-public class SimpleDifferentSideScaleAutonCommand extends CommandGroup {
+public class SimpleDifferentSideScaleAutonCommand extends AutonCommandGroup {
     private FieldMapInterface quad = Robot.getRobotQuadrant();
 
-//    private static final double DISTANCE_TOTAL = 410;//450;
+    public SimpleDifferentSideScaleAutonCommand(boolean isRight) {
+        super();
+        
+        // PRACTICE FIELD MEASUREMENTSS
+        double TEMP_DIST_FROM_CARPET_TO_RAMP = 25.5;
+        double TEMP_DIST_FROM_SWITCH_TO_SCALE = 17*12;
 
-    public SimpleDifferentSideScaleAutonCommand() {
+        addSequential(new PrintCommand("[DifferentSideScale] Simple Different Side! RIGHT? " + isRight));
+        // EXTRA 3 (should be 2)!!! 3/25 before Match 79
+        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3 + 3 + 3));
 
-        addSequential(new PrintCommand("[DifferentSideScale] Simple Different Side!"));
-        addSequential(new DriveStraightWithRampingCommand(quad.getTotalDistanceToTravelBeforeTurn() + 3 + 3));
-
-        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachPlatformZone()));
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand((isRight? -1 : 1) * quad.getAngleToTurnToReachPlatformZone()));
 
         //addParallel(new DrivetrainLineSensorPlatformZoneCommand());
-        addSequential(new DriveStraightWithRampingCommand(203/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
+        addSequential(new DriveStraightWithRampingCommand(203 - 25/*quad.getTotalDistanceToTravelToReachOtherSideOfPlatformZone()*/));
 
-        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand(-1 * quad.getAngleToTurnToReachScaleSide()), 2);
+        addSequential(new DrivetrainRotateRelativeDegreesPIDCommand((isRight? -1 : 1) * quad.getAngleToTurnToReachScaleSide()), 2);
         // Height used to be 89 - minheight
-        addSequential(new LiftMoveToHeightCommand(83 - RobotMap.MIN_HEIGHT_OF_LIFT));//unsure about height
+        addSequential(new LiftMoveToHeightCommand(20 + 83 - RobotMap.MIN_HEIGHT_OF_LIFT), 2.3);//unsure about height
 
         //addParallel(new DrivetrainLineSensorCommand(quad.getDistanceFromRobotAfterTwoTurnsToNullTerritory()));
 //        addSequential(new DriveStraightWithRampingCommand(53 + 12));//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(0.6,43), 2.5);//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(43, 0.6), 2.5);//quad.getTotalDistanceToTravelToReachScaleSide() - 5));
 
-        addSequential(new GrabberOpenCommand());
+        addSequential(new QuisitorOpenCommand());
+//        addSequential(new QuisitorMoveSpeedCommand(-0.2), 1);
+
         // Add me in
-//        addSequential(new ScaleGrabCubeAfterScoringCommand(false));
-//        addSequential(new ScaleScoreSecondTimeCommand(false));
-
+//        addSequential(new ScaleGrabCubeAfterScoringCommand(!isRight));
+//        addSequential(new ScaleScoreSecondTimeCommand(!isRight));
     }
-
 }
