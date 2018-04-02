@@ -26,6 +26,7 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
 
         addSequential(new LiftMoveToHeightCommand(30.0)); //TODO: Find a height for the lift to move to.
         addSequential(new WaitCommand(0.5));
+
         addSequential(driveCommand, 7);
         addSequential(new QuisitorDeacquireCommand());
         

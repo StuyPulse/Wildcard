@@ -6,8 +6,6 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
@@ -21,7 +19,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
     private static final double DISTANCE_TO_CUBE = 100;
     private static final double DISTANCE_TO_SWITCH = 100;
 
-    public DoubleCubeSwitchAutonCommand(boolean isRight) {
+    public DoubleCubeSwitchAutonCommand() {
         DrivetrainDriveCurveCommand curveToCube = new DrivetrainDriveCurveCommand(DISTANCE_TO_CUBE);
         curveToCube.addSpeedChange(0, -0.6);
         curveToCube.addTurn(40, 90);
@@ -30,7 +28,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         curveToSwitch.addSpeedChange(0, 0.6);
         curveToSwitch.addTurn(40, 0);
 
-        addSequential(new SingleCubeSwitchAutonCommand(isRight));
+        addSequential(new SingleCubeSwitchAutonChooserCommand());
         addSequential(curveToCube, 5); //TODO: Is this the right amt of secs?
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
