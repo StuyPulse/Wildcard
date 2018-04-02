@@ -21,7 +21,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
     private static final double DISTANCE_TO_CUBE = 100;
     private static final double DISTANCE_TO_SWITCH = 100;
 
-    public DoubleCubeSwitchAutonCommand() {
+    public DoubleCubeSwitchAutonCommand(boolean isRight) {
         DrivetrainDriveCurveCommand curveToCube = new DrivetrainDriveCurveCommand(DISTANCE_TO_CUBE);
         curveToCube.addSpeedChange(0, -0.6);
         curveToCube.addTurn(40, 90);
@@ -30,7 +30,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         curveToSwitch.addSpeedChange(0, 0.6);
         curveToSwitch.addTurn(40, 0);
 
-        addSequential(new SingleCubeSwitchAutonCommand());
+        addSequential(new SingleCubeSwitchAutonCommand(isRight));
         addSequential(curveToCube, 5); //TODO: Is this the right amt of secs?
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));

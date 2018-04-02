@@ -44,7 +44,8 @@ public class OI {
 //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
 
         /// TESTING
-        driverGamepad.getDPadUp().whenPressed(new TestCurveCommand());
+        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
+//        driverGamepad.getDPadUp().whenPressed(new TestCurveCommand());
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(100));
 //        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
 
