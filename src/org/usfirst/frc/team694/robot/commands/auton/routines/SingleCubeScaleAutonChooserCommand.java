@@ -2,6 +2,7 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.Robot;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.ConditionalCommand;
 
 /**
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 public class SingleCubeScaleAutonChooserCommand extends ConditionalCommand {
 
     public SingleCubeScaleAutonChooserCommand() {
-        super(new SingleCubeSameSideScaleAutonChooserCommand()); //TODO: Add me in, and fix out-of-memory-threads problem, new SingleCubeDifferentSideScaleAutonChooserCommand());
+        super(new SingleCubeSameSideScaleAutonChooserCommand(), new SingleCubeDifferentSideScaleAutonChooserCommand());
     }
 
     @Override

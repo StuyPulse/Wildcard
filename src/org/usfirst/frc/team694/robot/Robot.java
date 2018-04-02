@@ -164,10 +164,10 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
         autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand(false));
         autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
-        autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand(false));
-        autonChooser.addObject("Double SCALE ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
-        autonChooser.addObject("Triple SWITCH ALWAYS Auton", new TripleCubeSwitchAutonCommand(false));
-        autonChooser.addObject("Triple SCALE ALWAYS Auton", new TripleCubeScaleAutonChooserCommand());
+//        autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand(false));
+//        autonChooser.addObject("Double SCALE ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
+//        autonChooser.addObject("Triple SWITCH ALWAYS Auton", new TripleCubeSwitchAutonCommand(false));
+//        autonChooser.addObject("Triple SCALE ALWAYS Auton", new TripleCubeScaleAutonChooserCommand());
 
         SmartDashboard.putData("Autonomous", autonChooser);
 

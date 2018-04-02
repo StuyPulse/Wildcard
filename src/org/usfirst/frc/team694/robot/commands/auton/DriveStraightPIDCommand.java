@@ -81,6 +81,7 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
     private class GyroPIDOutput implements PIDOutput {
         @Override
         public void pidWrite(double output) {
+            System.out.println("[GyroPIDOutput] : " + output);
             gyroPIDOutput = output;
         }
     }

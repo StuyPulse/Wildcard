@@ -17,6 +17,7 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
 import org.usfirst.frc.team694.robot.commands.TestCurveCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
@@ -44,9 +45,10 @@ public class OI {
 //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
 
         /// TESTING
-        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
+//        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
 //        driverGamepad.getDPadUp().whenPressed(new TestCurveCommand());
-//        driverGamepad.getDPadUp().whenPressed(new DriveStraightWithRampingCommand(100));
+        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
+        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
 //        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
 
     }
