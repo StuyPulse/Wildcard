@@ -47,9 +47,10 @@ public class OI {
         /// TESTING
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
 //        driverGamepad.getDPadUp().whenPressed(new TestCurveCommand());
-        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
-        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
-//        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
+//        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
+//        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
+        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
+        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
 
     }
 }

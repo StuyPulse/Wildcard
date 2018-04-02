@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class TripleCubeSwitchAutonCommand extends CommandGroup {
 
-    public TripleCubeSwitchAutonCommand(boolean isRight) {
-        addSequential(new DoubleCubeSwitchAutonCommand(isRight));
+    public TripleCubeSwitchAutonCommand() {
+        addSequential(new DoubleCubeSwitchAutonCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(48, -0.25));
         addSequential(new LiftMoveToBottomCommand());
 

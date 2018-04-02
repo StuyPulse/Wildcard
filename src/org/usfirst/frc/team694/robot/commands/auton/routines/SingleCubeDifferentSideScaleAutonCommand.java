@@ -25,9 +25,9 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
 
         addSequential(new LiftMoveToHeightCommand(5));      
 
-        addSequential(new DriveStraightRampDownOnlyCommand(-1 * (234 + 20 + 24 + 24) ));
+        addSequential(new DriveStraightRampDownOnlyCommand(-1 * (234 + 20 + 24 + 24 + 10) ));
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 45 : -45) );
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 30 : -30) );//TODO: change to 45
 
         addParallel(new LiftMoveToHeightCommand(75));//TODO: Ask engineering
         addSequential(new DriveStraightPIDCommand(55, 0.3));
