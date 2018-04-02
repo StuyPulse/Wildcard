@@ -50,7 +50,8 @@ public class Drivetrain extends Subsystem {
 
     private boolean brownoutProtectionEnabled;
     
-    private Ultrasonic sonar;
+    private Ultrasonic rearSonar;
+    private Ultrasonic frontSonar;
 
 //    private boolean brownoutProtectionEnabled;
 
@@ -110,8 +111,9 @@ public class Drivetrain extends Subsystem {
         navX = new AHRS(SPI.Port.kMXP);
 
         gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-        
-        sonar = new Ultrasonic(RobotMap.DRIVETRAIN_SONAR_PING_CHANNEL_PORT, RobotMap.DRIVETRAIN_SONAR_ECHO_CHANNEL_PORT);
+
+        rearSonar = new Ultrasonic(RobotMap.FRONT_SONAR_INPUT_PORT, RobotMap.FRONT_SONAR_OUTPUT_PORT);
+        frontSonar = new Ultrasonic(RobotMap.REAR_SONAR_INPUT_PORT, RobotMap.REAR_SONAR_OUTPUT_PORT);
     }
 
     @Override
@@ -324,13 +326,13 @@ public class Drivetrain extends Subsystem {
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
     }
-    
-    public void setSonar(boolean mode) {
-        sonar.setAutomaticMode(mode);
+
+    public double getRearInchesAway() {
+        return rearSonar.getRangeInches();
     }
-    
-    public double getInchesAway() {
-        return sonar.getRangeInches();
+
+    public double getFrontInchesAway() {
+        return frontSonar.getRangeInches();
     }
 }
 

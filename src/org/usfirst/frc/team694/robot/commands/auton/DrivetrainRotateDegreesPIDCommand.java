@@ -63,8 +63,8 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
         }
 
         double output = gyroPIDOutput;
-        if (Math.abs(output) < 0.1) {
-            output = 0.1 * Math.signum(output);
+        if (Math.abs(output) < 0.15) {
+            output = 0.15 * Math.signum(output);
         }
         Robot.drivetrain.tankDrive(output, -output);
 

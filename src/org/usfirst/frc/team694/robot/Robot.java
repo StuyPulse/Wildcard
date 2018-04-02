@@ -189,13 +189,13 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.08);
 
         // Drive Straight Rotation PID
-        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012);
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.016);
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
-        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.08);
 
-        SmartDashboard.putNumber("RotateDegreesPID P", 0.037);
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.02);
         SmartDashboard.putNumber("RotateDegreesPID I", 0.0);
-        SmartDashboard.putNumber("RotateDegreesPID D", 0.1);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0.05);
 
         SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.0);
 
@@ -220,6 +220,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: RAW Right Encoder Values", Robot.drivetrain.getRightRawEncoderDistance());
         SmartDashboard.putNumber("Drivetrain: Gyro Value", Robot.drivetrain.getGyroAngle());
         SmartDashboard.putNumber("Drivetrain: Gyro ABSOLUTE", Robot.drivetrain.getAbsoluteGyroAngle());
+        SmartDashboard.putNumber("Drivetrain: Sonar Front Value", Robot.drivetrain.getFrontInchesAway());
+        SmartDashboard.putNumber("Drivetrain: Sonar Rear Value", Robot.drivetrain.getRearInchesAway());
 
         SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine());
         SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine());
