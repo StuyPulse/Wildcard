@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SingleCubeSwitchAutonCommand extends CommandGroup {
-
-    public SingleCubeSwitchAutonCommand() {
+    
+    public SingleCubeSwitchAutonCommand(boolean isRight) {
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(124);
         driveCommand.addSpeedChange(0.0, 0.6);
         driveCommand.addTurn(10.0, 90.0);
