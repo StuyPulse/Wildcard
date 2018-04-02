@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 /**
  *
  */
-public class SingleCubeAutonChooserCommand extends ConditionalCommand {
+public class SingleCubeSwitchAutonChooserCommand extends ConditionalCommand {
 
-    public SingleCubeAutonChooserCommand() {
+    public SingleCubeSwitchAutonChooserCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         super(new SingleCubeSwitchAutonCommand(true), new SingleCubeSwitchAutonCommand(false));
