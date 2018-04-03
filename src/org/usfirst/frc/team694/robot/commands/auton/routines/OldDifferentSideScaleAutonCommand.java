@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class OldDifferentSideScaleAutonCommand extends CommandGroup {
-    
+
     public OldDifferentSideScaleAutonCommand() {
         addSequential(new DriveStraightWithRampingCommand(209.935)); //Retrieved from Field Map
 

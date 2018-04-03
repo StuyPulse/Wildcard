@@ -23,8 +23,9 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
     @Override
     protected void initialize() {
         super.initialize();
-        Robot.drivetrain.resetGyro();
-        rotationPIDController.setSetpoint(0);
+//        Robot.drivetrain.resetGyro();
+        rotationPIDController.setSetpoint(Robot.drivetrain.getGyroAngle());
+//        rotationPIDController.setSetpoint(0);
         rotationPIDController.setPID(
                 SmartDashboard.getNumber("DriveStraightGyroPID P", 0),
                 SmartDashboard.getNumber("DriveStraightGyroPID I", 0), 
@@ -81,6 +82,7 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
     private class GyroPIDOutput implements PIDOutput {
         @Override
         public void pidWrite(double output) {
+            System.out.println("[GyroPIDOutput] : " + output);
             gyroPIDOutput = output;
         }
     }

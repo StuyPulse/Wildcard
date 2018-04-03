@@ -24,14 +24,14 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
 
     public DrivetrainRotateDegreesPIDCommand(double targetAngle) {
         super(targetAngle);
-
-        gyroPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
-
     }
 
     @Override
     protected void initialize() {
         super.initialize();
+        // To prevent Java out of memory thread error
+        gyroPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
+
         lastTimeNotOnTarget = Timer.getFPGATimestamp();
 
 		Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
@@ -44,7 +44,7 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
         gyroPIDController.setSetpoint(targetAngle);
         gyroPIDController.enable();
 
-		System.out.println("[RotatePID] START");
+		System.out.println("[RotatePID] START: " + getAngle());
 	}
 
     @Override
@@ -64,10 +64,11 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
 
         double output = gyroPIDOutput;
         if (Math.abs(output) < 0.15) {
-            output = 0.15 * Math.signum(output);
+            output = 0.15 * Math.signum(gyroPIDController.getError());//Math.signum(output);
         }
-        Robot.drivetrain.tankDrive(output, -output);
 
+        System.out.println("[DrivetrainRotateDegreesPID] delta: " + gyroPIDController.getError() + ", angle: " + Robot.drivetrain.getAbsoluteGyroAngle() + ", output: " + output);
+        Robot.drivetrain.tankDrive(output, -output);
     }
 
     @Override

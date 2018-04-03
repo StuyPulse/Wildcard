@@ -1,36 +1,45 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
+import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 
 /**
  *
  */
-public class SingleCubeSameSideScaleAutonCommand extends CommandGroup {
+public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
+    private static final double TOTAL_DISTANCE = 286; //TODO: Not sure about this distance
 
     public SingleCubeSameSideScaleAutonCommand(boolean isRight) {
-        // Add Commands here:
-        //TODO: kill magic numbers
-        addParallel(new DriveStraightRampDownOnlyCommand(235));
-        //TODO: Make constructor for allowing differing inital speeds for ramping
-        addSequential(new LiftMoveToHeightCommand(5));      
-        
-        //addSequential(new DrivetrainDriveCurveCommand(69.4));//Distance? Ramping or no Ramping?
-        //No arc command yet?
-        
-        addSequential(new DriveStraightRampDownOnlyCommand(-234));
-        
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -45 : 45) );
-        
-        addParallel(new LiftMoveToHeightCommand(75));//TODO: Ask engineering
-        addSequential(new DriveStraightPIDCommand(55, 0.3));
-        
-        addSequential(new QuisitorDeacquireCommand(), 2);//TODO: ask for timeout
+
+        addSequential(new PrintCommand("[SingleCubeSameSideScale] isRight? " + isRight));
+
+        /*
+        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(TOTAL_DISTANCE);
+        driveCommand.addSpeedChange(0, 0.8);
+        driveCommand.addTurn(261 - 12, isRight? -45.0 : 45.0);
+        //TODO: Make sure this logic is correct
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(82.0), 168));
+        addSequential(driveCommand, 3.5);
+        */
+
+        // If browning out while turning+lifting, comment this line
+        addParallel(new LiftMoveToHeightCommand(5.0));
+        addSequential(new DriveStraightWithRampingCommand(261 + 12 + 6), 3.5);
+        // If browning out while turning+lifting, uncomment this line
+//        addParallel(new LiftMoveToHeightCommand(86.0));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -60 : 60), 1.5 /* + .5*/);
+        addSequential(new LiftMoveToHeightCommand(86 - 12.0));
+        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        addSequential(new LiftMoveToBottomCommand());
+
     }
 }

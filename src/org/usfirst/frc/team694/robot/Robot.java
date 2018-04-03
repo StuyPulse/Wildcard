@@ -162,7 +162,7 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand());
+        autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand(false));
         autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand());
         autonChooser.addObject("Double SCALE ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
