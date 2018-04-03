@@ -14,26 +14,29 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SingleCubeSwitchThenStartScaleAutonCommand extends CommandGroup {
-    private static final double DISTANCE_TO_SWITCH = 100;
+    private static final double DISTANCE_TO_POWER_CUBES = 53;
 
-    public SingleCubeSwitchThenStartScaleAutonCommand() {
-        DrivetrainDriveCurveCommand curveToSwitch = new DrivetrainDriveCurveCommand(DISTANCE_TO_SWITCH);
-        curveToSwitch.addSpeedChange(0, 0.6);
-        curveToSwitch.addTurn(40, 0);
+    public SingleCubeSwitchThenStartScaleAutonCommand(boolean isRight) {
+        DrivetrainDriveCurveCommand curveToPowerCube = new DrivetrainDriveCurveCommand(DISTANCE_TO_POWER_CUBES);
+        curveToPowerCube.addSpeedChange(0.0, -0.6);
+        curveToPowerCube.addTurn(42.0, isRight? 90.0 : -90.0);
+        curveToPowerCube.addTurn(52.0, 0.0);
         
         DrivetrainDriveCurveCommand curveToScale = new DrivetrainDriveCurveCommand(200);
         curveToScale.addSpeedChange(0, 0.6);
         curveToScale.addTurn(72, 0);
-
+        
+        //scores switch
         addSequential(new SingleCubeSwitchAutonChooserCommand());
-        addSequential(curveToSwitch, 5); //TODO: Is this the right amt of secs?
+        
+        
+        addSequential(curveToPowerCube, 5); //TODO: Is this the right amt of secs?
         addParallel(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(),2);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.1));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(24, 0.4));
         addSequential(new QuisitorCloseCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.25));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(15, -0.25));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
         addSequential(curveToScale);
     }
