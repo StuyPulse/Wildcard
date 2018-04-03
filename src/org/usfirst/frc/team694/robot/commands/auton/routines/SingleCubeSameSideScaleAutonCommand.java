@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
+import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
@@ -30,9 +31,15 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(driveCommand, 3.5);
         */
 
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86.0), 168));
-        addSequential(new DriveStraightWithRampingCommand(261));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -60 : 60));
-        addSequential(new QuisitorDeacquireCommand());
+        // If browning out while turning+lifting, comment this line
+        addParallel(new LiftMoveToHeightCommand(5.0));
+        addSequential(new DriveStraightWithRampingCommand(261 + 12 + 6), 3.5);
+        // If browning out while turning+lifting, uncomment this line
+//        addParallel(new LiftMoveToHeightCommand(86.0));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -60 : 60), 1.5 /* + .5*/);
+        addSequential(new LiftMoveToHeightCommand(86 - 12.0));
+        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        addSequential(new LiftMoveToBottomCommand());
+
     }
 }
