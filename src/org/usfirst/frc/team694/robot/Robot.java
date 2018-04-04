@@ -8,11 +8,8 @@
 package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
@@ -165,11 +162,11 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Single Cube SWITCH", new SingleCubeSwitchAutonChooserCommand());
         autonChooser.addObject("Single Cube SCALE", new SingleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double Cube SCALE (single opposite if scale is on the other side)", new DoubleCubeScaleAutonChooserCommand());
-//        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
-//        autonChooser.addObject("Single Cube SWITCH then go to SCALE", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
-//        autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
-//        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
-        
+        //        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
+        //        autonChooser.addObject("Single Cube SWITCH then go to SCALE", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
+        //        autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
+        //        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
+
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
@@ -273,6 +270,7 @@ public class Robot extends IterativeRobot {
         return !(isRobotOnRight ^ isAllianceSwitchRight);
 
     }
+
     public static Robot getInstance() {
         return myInstance;
     }

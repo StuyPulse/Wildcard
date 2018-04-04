@@ -4,10 +4,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.AutonCommandGroup;
-import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.PrintCommand;
@@ -16,7 +13,7 @@ import edu.wpi.first.wpilibj.command.PrintCommand;
  *
  */
 public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
-    private static final double TOTAL_DISTANCE = 286; //TODO: Not sure about this distance
+    //private static final double TOTAL_DISTANCE = 286; //TODO: Not sure about this distance
 
     public SingleCubeSameSideScaleAutonCommand(boolean isRight) {
 
@@ -36,7 +33,7 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new DriveStraightWithRampingCommand(261 + 12 + 6), 3.5);
         // If browning out while turning+lifting, uncomment this line
         // addParallel(new LiftMoveToHeightCommand(86.0));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -60 : 60), 1.5 /* + .5*/);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -60 : 60), 1.5 /* + .5*/);
         addSequential(new LiftMoveToHeightCommand(86 - 12.0));
         addSequential(new QuisitorDeacquireCommand(), 0.5);
         addSequential(new LiftMoveToBottomCommand());

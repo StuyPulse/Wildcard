@@ -1,7 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.QuisitorMoveControlCommand;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
