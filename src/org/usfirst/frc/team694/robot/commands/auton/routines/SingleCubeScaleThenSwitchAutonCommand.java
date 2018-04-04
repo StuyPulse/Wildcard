@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class SingleCubeScaleThenSwitchAutonCommand extends CommandGroup {
 
-    public SingleCubeScaleThenSwitchAutonCommand(boolean isRight) {
+    public SingleCubeScaleThenSwitchAutonCommand(boolean isRobotOnRight) {
         addSequential(new SingleCubeScaleAutonChooserCommand()); 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150.0 : 150.0));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotOnRight ? -150.0 : 150.0));
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand());
@@ -26,5 +26,6 @@ public class SingleCubeScaleThenSwitchAutonCommand extends CommandGroup {
         addSequential(new LiftMoveToHeightCommand(30.0));
         addSequential(new QuisitorDeacquireCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(10, -.7));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotOnRight ? -135.0 : 135.0));
     }
 }

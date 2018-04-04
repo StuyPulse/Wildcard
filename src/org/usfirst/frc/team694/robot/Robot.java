@@ -274,6 +274,9 @@ public class Robot extends IterativeRobot {
     public static boolean isSwitchOnSameSideScale() {
         return !(isAllianceSwitchRight ^ isScaleRight);
     }
+    public static boolean isRobotSwitchScaleOnSameSide() {
+        return isRobotOnSameSideScale() && isSwitchOnSameSideScale();
+    }
     public static Robot getInstance() {
         return myInstance;
     }

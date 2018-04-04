@@ -15,7 +15,10 @@ public class SingleCubeScaleThenSwitchAutonChooserCommand extends ConditionalCom
 
     @Override
     public boolean condition() {
-        return Robot.isSwitchOnSameSideScale();
+        return Robot.isRobotSwitchScaleOnSameSide();
+        //If the robot, scale, and switch are on the same side, it will run Scale then Switch.
+        //Otherwise, it will run the Single Cube Scale, different side or same side depending on position.
+        //TODO: Change to double cube chooser if it is consistent.
     }
     
     private static class SingleCubeScaleThenSwitchAutonChooser extends ConditionalCommand {
@@ -26,6 +29,7 @@ public class SingleCubeScaleThenSwitchAutonChooserCommand extends ConditionalCom
         @Override
         public boolean condition() {
             return Robot.isScaleOnRight();
+            //Determines whether the robot will be playing on the right side or left side of the field.
         }
     }
 }
