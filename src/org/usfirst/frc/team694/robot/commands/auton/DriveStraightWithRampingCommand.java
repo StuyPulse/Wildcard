@@ -19,7 +19,7 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
     protected PIDController speedPIDController;
 
     // Multiplies our speed, limiting it
-    private double speedScaleFactor;
+//    private double speedScaleFactor;
 
     private double speedPIDOutput;
 
@@ -32,8 +32,6 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
         super.initialize();
         // Initialized the controller here to prevent "java.lang.OutOfMemoryError: unable to create new native thread" error
         speedPIDController = new PIDController(0,0,0, new SpeedPIDSource(), new SpeedPIDOutput());
-
-        speedScaleFactor = 1;
 
         Robot.drivetrain.setRamp(SmartDashboard.getNumber("DriveStraight RampSeconds", 2.5));
 
