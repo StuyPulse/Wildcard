@@ -7,17 +7,17 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleThenSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.TripleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.DelayedMobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.RoboTigersAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeScaleThenSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchThenStartScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
@@ -274,8 +274,14 @@ public class Robot extends IterativeRobot {
     public static boolean isSwitchOnSameSideScale() {
         return !(isAllianceSwitchRight ^ isScaleRight);
     }
+
     public static boolean isRobotSwitchScaleOnSameSide() {
         return isRobotOnSameSideScale() && isSwitchOnSameSideScale();
+    }
+
+    public static boolean isRobotOnSameSideSwitch() {
+        return !(isRobotOnRight ^ isAllianceSwitchRight);
+
     }
     public static Robot getInstance() {
         return myInstance;
