@@ -1,6 +1,6 @@
 package org.usfirst.frc.team694.util;
 
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,7 +26,7 @@ public class IRSensor {
     public static final double EQUATION_EXPONENT = -0.9779601588;
     public static final double CONVERSION_FACTOR_CM_TO_INCHES = 0.393701;
     
-    private static AnalogInput cubeSensor;
+    private static DigitalInput cubeSensor;
 
     // Create instance of a timer that we can use to keep track of how long the
     // gear is kept in the position for.
@@ -35,17 +35,17 @@ public class IRSensor {
     private boolean isTimerRunning;
 
     public IRSensor(int port) {
-        cubeSensor = new AnalogInput(port);
+        cubeSensor = new DigitalInput(port);
         timeSinceEntry = new Timer();
         isTimerRunning = false;
     }
 
-    public static double getSensorVoltage() {
-        return cubeSensor.getVoltage();
+    public static boolean getSensorData() {
+        return cubeSensor.get();
     }
 
     public boolean isCubeDetected() {
-        return getSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", IR_SENSOR_THRESHOLD);
+        return getSensorData();
     }
 
     // The use of LEDs for the robot is currently unclear so this needs further detail in the future
