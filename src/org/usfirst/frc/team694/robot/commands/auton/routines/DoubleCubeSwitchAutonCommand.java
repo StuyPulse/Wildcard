@@ -29,7 +29,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         curveToSwitch.addTurn(40, 0);
 
         addSequential(new SingleCubeSwitchAutonChooserCommand());
-        addSequential(curveToCube, 5); //TODO: Is this the right amt of secs?
+        addSequential(curveToSwitch, 5); //TODO: Is this the right amt of secs?
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
         addSequential(new QuisitorOpenCommand());
@@ -39,7 +39,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, -0.1));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
         addSequential(new LiftMoveToHeightCommand(10));
-        addSequential(curveToSwitch, 5); 
+        addSequential(curveToCube, 5); 
         addSequential(new QuisitorDeacquireCommand());
     }
 }
