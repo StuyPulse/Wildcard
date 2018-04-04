@@ -11,7 +11,10 @@ import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeScaleAuto
 import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeScaleThenSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
@@ -162,12 +165,15 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand(false));
+        autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonChooserCommand());
+        autonChooser.addObject("Single SWITCH then go to SCALE IF ON SAME SIDE ALWAYS Auton", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
         autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Single SCALE then Single SWITCH ALWAYS Auton", new SingleCubeScaleThenSwitchAutonChooserCommand());
         autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand());
         autonChooser.addObject("Double SCALE ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Triple SWITCH ALWAYS Auton", new TripleCubeSwitchAutonCommand());
         autonChooser.addObject("Triple SCALE ALWAYS Auton", new TripleCubeScaleAutonChooserCommand());
+       
 
         SmartDashboard.putData("Autonomous", autonChooser);
 
@@ -266,6 +272,9 @@ public class Robot extends IterativeRobot {
         return !(isRobotOnRight ^ isScaleRight);
     }
 
+    public static boolean isSwitchOnSameSideScale() {
+        return !(isAllianceSwitchRight ^ isScaleRight);
+    }
     public static Robot getInstance() {
         return myInstance;
     }
