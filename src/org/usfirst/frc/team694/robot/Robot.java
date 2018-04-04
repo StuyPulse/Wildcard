@@ -226,7 +226,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
         SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
 
-        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.quisitor.isCubeDetected());
+        SmartDashboard.putBoolean("Quisitor: Detect Cube", Robot.quisitor.isCubeDetected());
 
         SmartDashboard.putNumber("Lift Current", lift.getCurrent());
         SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());

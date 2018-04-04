@@ -32,9 +32,13 @@ public class DoubleCubeScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(64.0 - 25 + 5, -1), 2 + .5);
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -60.0 - 25: 60.0 + 25), .5 + .3);
         addSequential(new QuisitorStopCommand());
-        
+
+        // Move back 5 inches while lifting to give cube clearance, then move forward
+        addParallel(new DrivetrainMoveInchesEncoderCommand(5, -0.2));
         addSequential(new LiftMoveToHeightCommand(83.0));
         addSequential(new QuisitorDeacquireCommand(), 1.5);
         addSequential(new LiftMoveToBottomCommand());
+        // Move forward
+        addSequential(new DrivetrainMoveInchesEncoderCommand(5, 0.2));
     }
 }

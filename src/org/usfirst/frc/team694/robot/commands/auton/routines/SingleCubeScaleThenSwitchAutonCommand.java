@@ -25,7 +25,7 @@ public class SingleCubeScaleThenSwitchAutonCommand extends CommandGroup {
         addParallel(new QuisitorAcquireCommand());
         addSequential(new DriveStraightRampDownOnlyCommand(71 + 12), 2);
         addSequential(new LiftMoveToHeightCommand(30.0));
-        addSequential(new QuisitorDeacquireCommand());
+        addSequential(new QuisitorDeacquireCommand(), 0.5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(10, -.7));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotOnRight ? -135.0 : 135.0));
     }
