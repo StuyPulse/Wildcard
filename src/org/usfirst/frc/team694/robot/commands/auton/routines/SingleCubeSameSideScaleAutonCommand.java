@@ -37,7 +37,7 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
         // If browning out while turning+lifting, uncomment this line
 //        addParallel(new LiftMoveToHeightCommand(86.0));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -60 : 60), 1.5 /* + .5*/);
-        addSequential(new LiftMoveToHeightCommand(86 - 12.0));
+        addSequential(new LiftMoveToHeightCommand(86));
         addSequential(new QuisitorDeacquireCommand(), 0.5);
         addSequential(new LiftMoveToBottomCommand());
 
