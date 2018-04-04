@@ -264,5 +264,11 @@ public class Robot extends IterativeRobot {
     public static Robot getInstance() {
         return myInstance;
     }
+    
+    public static double getTotalVoltage() {
+        return Robot.drivetrain.getLeftDrivetrainVoltage()
+             + Robot.drivetrain.getRightDrivetrainVoltage()
+             + Robot.lift.getCurrent();
+    }
 
 }
