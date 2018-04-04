@@ -1,7 +1,9 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
+import java.awt.Robot;
+
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.QuisitorMoveControlCommand;
+import org.usfirst.frc.team694.util.IRSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -14,19 +16,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Quisitor extends Subsystem {
 
     private WPI_VictorSPX quisitorMotor;//Motor for intake/outtake
-    
     private DoubleSolenoid quisitorGrabberSolenoid;//solenoid for grabbing
-
     private DigitalInput quisitorLimitSwitch;//Not used but here anyways
+    private IRSensor quisitorCubeSensor;
 
     public Quisitor() {
         quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_MOTOR_PORT);
-
         quisitorMotor.setNeutralMode(NeutralMode.Brake);
-
         quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT);
-
         quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
+        quisitorCubeSensor = new IRSensor(RobotMap.QUISITOR_IR_SENSOR_PORT);
     }
 
     @Override
@@ -74,5 +73,9 @@ public class Quisitor extends Subsystem {
         } else {
             open();
         }
+    }
+    
+    public boolean isCubeDetectedIR() {
+        return quisitorCubeSensor.isCubeDetected();
     }
 }
