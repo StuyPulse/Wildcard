@@ -10,16 +10,15 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
-import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
-import org.usfirst.frc.team694.robot.commands.PrepareForClimbCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
     public Gamepad driverGamepad;
@@ -34,11 +33,24 @@ public class OI {
 
         operatorGamepad.getLeftButton().whenPressed( new QuisitorToggleCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorToggleCommand());
-        operatorGamepad.getRightTrigger().whileHeld(new QuisitorAcquireCommand());
-        operatorGamepad.getLeftTrigger().whileHeld(new QuisitorDeacquireCommand());
-
+        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
+        operatorGamepad.getBottomButton().whenPressed(new QuisitorCloseCommand());
+        
+        //operatorGamepad.getRightBumper().whileHeld(new QuisitorAcquireCommand());
+        operatorGamepad.getLeftBumper().whileHeld(new QuisitorMoveSpeedCommand(- 0.4));
+        operatorGamepad.getRightTrigger().whileHeld(new QuisitorMoveSpeedCommand(1.0));
+        operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
+        
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
 //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
+
+        /// TESTING
+//        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
+//        driverGamepad.getDPadUp().whenPressed(new TestCurveCommand());
+//        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
+//        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
+        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
+        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
 
     }
 }
