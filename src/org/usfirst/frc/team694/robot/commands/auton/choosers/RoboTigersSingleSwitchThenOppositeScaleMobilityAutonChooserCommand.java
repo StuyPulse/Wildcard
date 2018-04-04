@@ -3,7 +3,6 @@ package org.usfirst.frc.team694.robot.commands.auton.choosers;
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.auton.routines.RoboTigersSingleSwitchThenOppositeScaleMobilityAutonCommand;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.ConditionalCommand;
 
 /**

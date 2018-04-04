@@ -8,17 +8,12 @@
 package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleThenSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.TripleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.DelayedMobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;
@@ -167,19 +162,14 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonChooserCommand());
-        autonChooser.addObject("Single SWITCH then go to SCALE IF ON SAME SIDE ALWAYS Auton", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
-        autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
-        autonChooser.addObject("Single SCALE then Single SWITCH ALWAYS Auton", new SingleCubeScaleThenSwitchAutonChooserCommand());
-        autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand());
-        //this option will do the opposite side scale if we're not on the same side
-        autonChooser.addObject("Double SCALE If Same Side ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
-        //this option will not do the opposite side scale, just an opposite side mobility
-        autonChooser.addObject("RoboTigers Double SCALE If Same Side ALWAYS Auton", new RoboTigersAutonChooserCommand());
-        autonChooser.addObject("Triple SWITCH ALWAYS Auton", new TripleCubeSwitchAutonCommand());
-        autonChooser.addObject("Triple SCALE ALWAYS Auton", new TripleCubeScaleAutonChooserCommand());
-       
-
+        autonChooser.addObject("Single Cube SWITCH", new SingleCubeSwitchAutonChooserCommand());
+        autonChooser.addObject("Single Cube SCALE", new SingleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Double Cube SCALE (single opposite if scale is on the other side)", new DoubleCubeScaleAutonChooserCommand());
+//        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
+//        autonChooser.addObject("Single Cube SWITCH then go to SCALE", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
+//        autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
+//        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
+        
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER

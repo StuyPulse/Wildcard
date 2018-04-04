@@ -10,17 +10,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class RoboTigersOppositeSideScaleAutonCommand extends CommandGroup {
+public class RoboTigersOppositeSideScaleMobilityAutonCommand extends CommandGroup {
 
-    public RoboTigersOppositeSideScaleAutonCommand(boolean isRight) {
+    public RoboTigersOppositeSideScaleMobilityAutonCommand(boolean isRight) {
         addSequential(new DriveStraightRampDownOnlyCommand(235 - 14), 3);
 
         // Rotate so that we're BACKWARDS
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
 
-        addSequential(new LiftMoveToHeightCommand(5));      
+        addSequential(new LiftMoveToHeightCommand(5));
 
-        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12),3);
+        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12), 3);
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
     }
