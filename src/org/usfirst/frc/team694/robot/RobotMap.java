@@ -40,9 +40,10 @@ public final class RobotMap {
     public static final int QUISITOR_MOTOR_PORT = 11;
 
     /**************************************************************************
-     * QUISITOR Limit Switch
+     * QUISITOR Sensors
      *************************************************************************/
     public static final int QUISITOR_LIMIT_SWITCH_PORT = 1;
+    public static final int QUISITOR_IR_SENSOR_PORT = 8;
 
     /***************************************************************************
      * Lift Motor Ports
@@ -122,5 +123,9 @@ public final class RobotMap {
             DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
+    /******************************************************************************
+     * LED Device Addresses
+     ******************************************************************************/
+    public static final int LIFTLIGHTING_ADDRESS = 95;
 }
 
