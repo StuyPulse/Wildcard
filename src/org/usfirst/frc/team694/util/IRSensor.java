@@ -16,7 +16,6 @@ public class IRSensor {
      * These require further testing.
      *****************************************************************************/
 
-    public static final int IR_SENSOR_PORT = -1;
     //TODO: Test the IR Sensor Threshold value. Should correspond with how far away the cube is from the IR sensor.
     //Use SmartDashboard, track the IR Sensor Voltage value.
     //The current value is accurate for when the cube is about 4 inches away from the IR sensor.
@@ -35,8 +34,8 @@ public class IRSensor {
     // We manually record whether the timer is running (Timer keeps that information private...)
     private boolean isTimerRunning;
 
-    public IRSensor() {
-        cubeSensor = new AnalogInput(IR_SENSOR_PORT);
+    public IRSensor(int port) {
+        cubeSensor = new AnalogInput(port);
         timeSinceEntry = new Timer();
         isTimerRunning = false;
     }
@@ -45,7 +44,7 @@ public class IRSensor {
         return cubeSensor.getVoltage();
     }
 
-    public static boolean isCubeDetected() {
+    public boolean isCubeDetected() {
         return getSensorVoltage() > SmartDashboard.getNumber("IRVoltageThreshold", IR_SENSOR_THRESHOLD);
     }
 
