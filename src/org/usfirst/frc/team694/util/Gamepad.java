@@ -1,6 +1,8 @@
 package org.usfirst.frc.team694.util;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -560,4 +562,13 @@ public class Gamepad extends Joystick {
             return gamepad.getRawRightTrigger();
         }
     }
+    
+    public void gamepadRumble(double strength, double time){
+        double startTime = Timer.getFPGATimestamp();
+        while(Timer.getFPGATimestamp() - startTime < time){
+            setRumble(GenericHID.RumbleType.kLeftRumble, strength);
+            setRumble(GenericHID.RumbleType.kRightRumble, strength);
+        }
+    }
 }
+
