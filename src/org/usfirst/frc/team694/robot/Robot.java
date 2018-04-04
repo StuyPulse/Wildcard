@@ -7,9 +7,11 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.auton.routines.DelayedMobilityAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.RoboTigersAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeScaleAutonChooserCommand;
@@ -162,10 +164,14 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
+        autonChooser.addObject("Delayed Mobility", new DelayedMobilityAutonCommand());
         autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand(false));
         autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand());
-        autonChooser.addObject("Double SCALE ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
+        //this option will do the opposite side scale if we're not on the same side
+        autonChooser.addObject("Double SCALE If Same Side ALWAYS Auton", new DoubleCubeScaleAutonChooserCommand());
+        //this option will not do the opposite side scale, just an opposite side mobility
+        autonChooser.addObject("RoboTigers Double SCALE If Same Side ALWAYS Auton", new RoboTigersAutonChooserCommand());
         autonChooser.addObject("Triple SWITCH ALWAYS Auton", new TripleCubeSwitchAutonCommand());
         autonChooser.addObject("Triple SCALE ALWAYS Auton", new TripleCubeScaleAutonChooserCommand());
 
@@ -242,12 +248,6 @@ public class Robot extends IterativeRobot {
      */
     @Override
     public void testPeriodic() {
-    }
-
-    public static boolean isRobotAndScaleOnSameSide() {
-        return (isScaleRight == isRobotOnRight);
-        //true is scale is close to robot 
-        //false is scale is far away from robot 
     }
 
     public static boolean isRobotStartingOnRight() {
