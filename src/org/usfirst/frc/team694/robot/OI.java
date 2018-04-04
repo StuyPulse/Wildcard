@@ -31,10 +31,10 @@ public class OI {
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
 
-        operatorGamepad.getLeftButton().whenPressed( new QuisitorToggleCommand());
-        operatorGamepad.getRightButton().whenPressed(new QuisitorToggleCommand());
-        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
-        operatorGamepad.getBottomButton().whenPressed(new QuisitorCloseCommand());
+        operatorGamepad.getLeftButton().whenPressed( new QuisitorOpenCommand());
+        operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());
+//        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
+//        operatorGamepad.getBottomButton().whenPressed(new QuisitorCloseCommand());
 
         //operatorGamepad.getRightBumper().whileHeld(new QuisitorAcquireCommand());
         operatorGamepad.getLeftBumper().whileHeld(new QuisitorMoveSpeedCommand(- 0.4));
