@@ -1,8 +1,10 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
@@ -17,10 +19,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class SingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGroup {
     private static final double DISTANCE_TO_POWER_CUBES = 53;
 
-    public SingleCubeSwitchThenStartLeftScaleAutonCommand(boolean isRight) {
+    public SingleCubeSwitchThenStartLeftScaleAutonCommand(boolean isSwitchRight) {
         DrivetrainDriveCurveCommand curveToPowerCube = new DrivetrainDriveCurveCommand(DISTANCE_TO_POWER_CUBES);
         curveToPowerCube.addSpeedChange(0.0, -0.6);
-        curveToPowerCube.addTurn(42.0, isRight ? 90.0 : -90.0);
+        curveToPowerCube.addTurn(42.0, isSwitchRight ? 90.0 : -90.0);
         curveToPowerCube.addTurn(52.0, 0.0);
 
         DrivetrainDriveCurveCommand curveToScale = new DrivetrainDriveCurveCommand(200);
@@ -37,8 +39,21 @@ public class SingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGroup
         addSequential(new DrivetrainMoveInchesEncoderCommand(24, 0.4));
         addSequential(new QuisitorCloseCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(15, -0.25));
-
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
+        addSequential(new LiftMoveToHeightCommand(30));
         addSequential(curveToScale);
+        
+        //score scale
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(60));
+        addSequential(new LiftMoveToHeightCommand(86 -12));
+        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        
+        //grab cube and backup
+        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new DrivetrainMoveInchesEncoderCommand(50, -1));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(150));
+        addParallel(new QuisitorAcquireCommand(), 2);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(50, 1));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(24, -1));
     }
 }

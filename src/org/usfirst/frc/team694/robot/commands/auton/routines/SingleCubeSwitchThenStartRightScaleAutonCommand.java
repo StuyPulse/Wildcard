@@ -1,8 +1,10 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
@@ -40,5 +42,18 @@ public class SingleCubeSwitchThenStartRightScaleAutonCommand extends CommandGrou
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-90));
         addSequential(curveToScale);
+        
+        //score scale
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-60));
+        addSequential(new LiftMoveToHeightCommand(86 -12));
+        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        
+        //grab cube and backup
+        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new DrivetrainMoveInchesEncoderCommand(50, -1));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-150));
+        addParallel(new QuisitorAcquireCommand(), 2);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(50, 1));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(24, -1));
     }
 }
