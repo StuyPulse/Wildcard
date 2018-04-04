@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.auton.routines.DelayedMobilityAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeSwitchAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
@@ -162,6 +163,7 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
+        autonChooser.addObject("Delayed Mobility", new DelayedMobilityAutonCommand());
         autonChooser.addObject("Single SWITCH ALWAYS Auton", new SingleCubeSwitchAutonCommand(false));
         autonChooser.addObject("Single SCALE ALWAYS Auton", new SingleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double SWITCH ALWAYS Auton", new DoubleCubeSwitchAutonCommand());
