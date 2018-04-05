@@ -564,11 +564,8 @@ public class Gamepad extends Joystick {
     }
     
     public void gamepadRumble(double strength, double time){
-        double startTime = Timer.getFPGATimestamp();
-        while(Timer.getFPGATimestamp() - startTime < time){
-            setRumble(GenericHID.RumbleType.kLeftRumble, strength);
-            setRumble(GenericHID.RumbleType.kRightRumble, strength);
-        }
+        setRumble(GenericHID.RumbleType.kLeftRumble, strength);
+        setRumble(GenericHID.RumbleType.kRightRumble, strength);
     }
 }
 
