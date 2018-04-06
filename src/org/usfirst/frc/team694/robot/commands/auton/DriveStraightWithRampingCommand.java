@@ -55,10 +55,7 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
 
         double output = speedPIDOutput;
         if (Math.abs(output) < 0.2) {
-            if (isOnTarget())
-                output = 0;
-            else
-                output = 0.2 * Math.signum(output);
+           output = isOnTarget() ? 0 : 0.2 * Math.signum(output);
         }
         output = Math.min(Math.max(-1, output), 1);
 
