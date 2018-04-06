@@ -58,15 +58,15 @@ public class Quisitor extends Subsystem {
     }
     
     public void open() {
-        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kReverse);
+        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void close() {
-        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kForward);
+        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void toggle() {
-        if (quisitorGrabberSolenoid.get() == DoubleSolenoid.Value.kReverse) {
+        if (quisitorGrabberSolenoid.get() == DoubleSolenoid.Value.kForward) {
             close();
         } else {
             open();

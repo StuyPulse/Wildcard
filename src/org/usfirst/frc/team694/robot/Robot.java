@@ -12,6 +12,7 @@ import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityA
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchThenStartLeftScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;
@@ -173,7 +174,7 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("Single Cube SWITCH then grab another cube", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
+        autonChooser.addObject("Single Cube SWITCH then grab another cube", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
         autonChooser.addObject("Single Cube SCALE", new SingleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double Cube SCALE (single opposite if scale is on the other side)", new DoubleCubeScaleAutonChooserCommand());
         //        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge

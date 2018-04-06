@@ -52,7 +52,8 @@ public class SingleCubeSwitchThenStartRightScaleAutonCommand extends CommandGrou
         addSequential(new WaitCommand(0.5));
         addParallel(new QuisitorStopCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(30, -0.5));
-
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(24, 0.5));
         // Grab 90 degrees
         //        addSequential(new DrivetrainMoveInchesEncoderCommand(10, -0.3));
         //        addParallel(new LiftMoveToBottomCommand());

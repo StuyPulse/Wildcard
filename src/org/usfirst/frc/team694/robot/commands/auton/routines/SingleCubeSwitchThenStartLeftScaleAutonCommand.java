@@ -32,7 +32,7 @@ public class SingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGroup
         curveToScale.addTurn(72, 0);
 //
 //        //scores switch
-       addSequential(new SingleCubeSwitchAutonChooserCommand());
+       addSequential(new SingleCubeSwitchAutonCommand(false));// remove whhats behind me SingleCubeSwitchAutonChooserCommand());
        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight? 45 : -45));
        addParallel(new LiftMoveToBottomCommand());
        addSequential(new DrivetrainMoveInchesEncoderCommand(55 - 10 - 3, -0.4));
@@ -46,6 +46,8 @@ public class SingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGroup
        addSequential(new WaitCommand(0.5));
        addParallel(new QuisitorStopCommand());
        addSequential(new DrivetrainMoveInchesEncoderCommand(30, -0.5));
+       addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(-45));
+       addSequential(new DrivetrainMoveInchesEncoderCommand(24, 0.5));
 
 
 

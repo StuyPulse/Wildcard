@@ -13,5 +13,6 @@ public class QuisitorOpenCommand extends InstantCommand {
     @Override
     protected void initialize() {
         Robot.quisitor.open();
+//        System.out.println("")
     }
 }
