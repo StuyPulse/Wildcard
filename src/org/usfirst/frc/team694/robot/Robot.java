@@ -36,13 +36,13 @@ public class Robot extends IterativeRobot {
     public static Lift lift;
 
     public static OI oi;
-    
+
     public static ArduinoLED liftLED;
 
     //    static boolean isRobotAtBottom;
 
     public static boolean isPurpleFlashing = false;
-    
+
     private String gameData;
     private static boolean isRobotOnRight;
     private static boolean isAllianceSwitchRight;
@@ -156,10 +156,10 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         updateSmartDashboard();
-        
-        if(Robot.quisitor.isCubeDetectedIR() && !isPurpleFlashing) {
+
+        if(Robot.quisitor.isCubeDetected() && !isPurpleFlashing) {
             liftLED.sendGreen();
-        } else if(!Robot.quisitor.isCubeDetectedIR() && !isPurpleFlashing) {
+        } else if(!Robot.quisitor.isCubeDetected() && !isPurpleFlashing) {
             liftLED.sendAllOff();
         }
     }
