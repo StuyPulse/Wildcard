@@ -34,7 +34,10 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new DriveStraightWithRampingCommand(261 + 12 + 6 /*+ 7*/), 3.5 - .5);
         // If browning out while turning+lifting, uncomment this line
         // addParallel(new LiftMoveToHeightCommand(86.0));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -60 : 60), 1.5 - .5 /* + .5*/);
+
+        // This is against Joe Ricci/Mr. Blay's reasoning, but I think this will work better
+        // because it plants our first cube further from the center (which would be a problem)
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(60-15) : (60-15)), 1.5 /* - .5  + .5*/);
 
         addSequential(new LiftMoveToHeightCommand(86));
         addSequential(new QuisitorDeacquireCommand(), 0.5);
