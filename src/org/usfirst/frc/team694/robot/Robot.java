@@ -63,7 +63,8 @@ public class Robot extends IterativeRobot {
         oi = new OI();
 
         liftLED = new ArduinoLED(RobotMap.LIFTLIGHTING_ADDRESS);
-        
+
+        liftLED.initialize();
         initSmartDashboard();
     }
 

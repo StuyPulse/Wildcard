@@ -75,10 +75,10 @@ public class ArduinoLED {
         state = LED_STATE.OFF;
 
         if (Robot.getInstance().isAutonomous()) {
-            state = LED_STATE.RAINBOW;
+//            state = LED_STATE.RAINBOW;
         }
         if (Robot.getInstance().isDisabled()) {
-            state = LED_STATE.PULSE_ALLIANCE;
+//            state = LED_STATE.PULSE_ALLIANCE;
         }
 
         if (cubeDetected) {
