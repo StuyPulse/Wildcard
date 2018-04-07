@@ -20,14 +20,7 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
 
         addSequential(new PrintCommand("[SingleCubeSameSideScale] isRight? " + isRight));
 
-        /*
-        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(TOTAL_DISTANCE);
-        driveCommand.addSpeedChange(0, 0.8);
-        driveCommand.addTurn(261 - 12, isRight? -45.0 : 45.0);
-        //TODO: Make sure this logic is correct
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(82.0), 168));
-        addSequential(driveCommand, 3.5);
-        */
+        // Move to Scale
 
         // If browning out while turning+lifting, comment this line
         addParallel(new LiftMoveToHeightCommand(5.0));
@@ -43,6 +36,16 @@ public class SingleCubeSameSideScaleAutonCommand extends AutonCommandGroup {
         addSequential(new QuisitorDeacquireCommand(), 0.5);
         //addSequential(new DrivetrainMoveInchesEncoderCommand(5, .4));
         addSequential(new LiftMoveToBottomCommand());
+
+        /*
+        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(TOTAL_DISTANCE);
+        driveCommand.addSpeedChange(0, 0.8);
+        driveCommand.addTurn(261 - 12, isRight? -45.0 : 45.0);
+        //TODO: Make sure this logic is correct
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(82.0), 168));
+        addSequential(driveCommand, 3.5);
+        */
+
 
     }
 }

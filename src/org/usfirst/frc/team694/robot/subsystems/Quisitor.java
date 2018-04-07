@@ -53,7 +53,7 @@ public class Quisitor extends Subsystem {
     }
 
     public boolean isCubeDetected() {
-       return quisitorCubeSensor.isCubeDetected();
+       return quisitorCubeSensor.isSensorTriggered();
 //        return !(quisitorLimitSwitch.get());
     }
     

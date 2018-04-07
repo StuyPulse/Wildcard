@@ -20,25 +20,37 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DoubleCubeScaleAutonCommand extends CommandGroup {
 
     public DoubleCubeScaleAutonCommand(boolean isRight) {
+        // Score the first cube
         addSequential(new SingleCubeScaleAutonChooserCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150.0 + 5 : 150.0 - 5), 0.5 + .5);
+
+        // Grab the second cube
+        double GRAB_APPROACH_ANGLE = 150 - 5;
+        double GRAB_APPROACH_DISTANCE = 71 + 12;
+        double GRAB_BACKUP_DISTANCE = 64.0 - 25 + 5;
+
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand( (isRight ? -1 : 1) * GRAB_APPROACH_ANGLE), 0.5 + .5);
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DriveStraightRampDownOnlyCommand(71 + 12), 2);
+        addSequential(new DriveStraightRampDownOnlyCommand(GRAB_APPROACH_DISTANCE), 2);
         //addSequential(new DrivetrainMoveInchesEncoderCommand(64.0 + 7, .6), 2 + .5);
         addSequential(new QuisitorCloseCommand());
         addSequential(new QuisitorAcquireCommand(), .5);
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(64.0 - 25 + 5, -1), 2 + .5);
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -60.0 - 25: 60.0 + 25), .5 + .3);
-        addSequential(new QuisitorStopCommand());
+        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACKUP_DISTANCE, -1), 2 + .5);
 
-        // Move back 5 inches while lifting to give cube clearance, then move forward
-        addParallel(new DrivetrainMoveInchesEncoderCommand(5, -0.2));
+        // Move back while lifting to give cube clearance before scoring
+        double SCORE_ANGLE = 60 + 25;
+        double SCORE_BACKUP_DISTANCE = 5 + 20;
+        double SCORE_BACKUP_SPEED = 0.2;
+
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand((isRight ? -1 : 1) * SCORE_ANGLE ), .5 + .3);
+        addSequential(new QuisitorStopCommand());
+        addParallel(new DrivetrainMoveInchesEncoderCommand(SCORE_BACKUP_DISTANCE, -1 * SCORE_BACKUP_SPEED));
         addSequential(new LiftMoveToHeightCommand(83.0));
+
+        // Score, maybe while moving
         addSequential(new QuisitorDeacquireCommand(), 1.5);
         addSequential(new LiftMoveToBottomCommand());
-        // Move forward
-        addSequential(new DrivetrainMoveInchesEncoderCommand(5, 0.2));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(SCORE_BACKUP_DISTANCE, SCORE_BACKUP_SPEED));
     }
 }

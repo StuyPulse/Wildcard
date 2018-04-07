@@ -1,7 +1,6 @@
 package org.usfirst.frc.team694.robot.commands;
 
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -9,23 +8,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 
-public class TestCurveCommand extends CommandGroup {
+public class TestCommand extends CommandGroup {
 
-    private static final double DISTANCE_TURN = 10;
-    private static final double TURN_ANGLE = 90;
+    public TestCommand() {
+        // Move back while lifting to give cube clearance, then move forward
+        double BACKUP_DISTANCE = 5 + 20;
+        double BACKUP_SPEED = 0.2;
 
-    private static final double TOTAL_DISTANCE = DISTANCE_TURN + 100;
+        addParallel(new DrivetrainMoveInchesEncoderCommand(BACKUP_DISTANCE, -1 * BACKUP_SPEED));
+        addSequential(new LiftMoveToHeightCommand(83.0));
 
-    private static final double DISTANCE_TO_POWER_CUBES = 53;
-    public TestCurveCommand() {
-        
-//        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(TOTAL_DISTANCE, RampMode.NO_RAMPING);
-//        driveCommand.addSpeedChange(0, -0.8);
-//        driveCommand.addTurn(DISTANCE_TURN, TURN_ANGLE);
-        DrivetrainDriveCurveCommand curveToPowerCube = new DrivetrainDriveCurveCommand(DISTANCE_TO_POWER_CUBES);
-        curveToPowerCube.addSpeedChange(0.0, -0.6);
-        curveToPowerCube.addTurn(42.0, 90.0);
-        curveToPowerCube.addTurn(52.0, 0.0);
-        addSequential(curveToPowerCube);
     }
 }
