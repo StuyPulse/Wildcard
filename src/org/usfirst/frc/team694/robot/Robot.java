@@ -103,6 +103,8 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
 
+        liftLED.initialize();
+
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
@@ -140,6 +142,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+        liftLED.initialize();
+
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
@@ -158,7 +162,6 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void robotPeriodic() {
-        /// Current Limiting
         liftLED.periodic();
     }
 
