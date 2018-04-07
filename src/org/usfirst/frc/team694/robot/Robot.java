@@ -12,7 +12,6 @@ import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityA
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSwitchThenStartLeftScaleAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;
@@ -38,11 +37,9 @@ public class Robot extends IterativeRobot {
 
     public static OI oi;
 
-    public static ArduinoLED liftLED;
+    private static ArduinoLED liftLED;
 
     //    static boolean isRobotAtBottom;
-
-    public static boolean isPurpleFlashing = false;
 
     private String gameData;
     private static boolean isRobotOnRight;
@@ -157,17 +154,12 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         updateSmartDashboard();
-
-        if(Robot.quisitor.isCubeDetected() && !isPurpleFlashing) {
-            liftLED.sendGreen();
-        } else if(!Robot.quisitor.isCubeDetected() && !isPurpleFlashing) {
-            liftLED.sendAllOff();
-        }
     }
 
     @Override
     public void robotPeriodic() {
         /// Current Limiting
+        liftLED.periodic();
     }
 
     private void initSmartDashboard() {

@@ -9,13 +9,10 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
-import org.usfirst.frc.team694.robot.commands.FlashHumanPlayer;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
-import org.usfirst.frc.team694.robot.commands.TestCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
@@ -43,7 +40,6 @@ public class OI {
 
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
 //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
-        operatorGamepad.getDPadUp().whenPressed(new FlashHumanPlayer());
 
         /// TESTING
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
