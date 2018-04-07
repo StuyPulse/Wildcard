@@ -4,6 +4,7 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.I2C;
 
 /**   ArduinoLED
@@ -63,18 +64,30 @@ public class ArduinoLED {
     }
 
     // CUSTOMIZE ME
+    /*
+     * This is the "state machine" loop that determines what state we are in each frame
+     */
     private void setLightState() {
 
         boolean cubeDetected = Robot.quisitor.isCubeDetected();
         boolean operatorSignalPress = Robot.oi.operatorGamepad.getRawDPadUp();
 
         state = LED_STATE.OFF;
+
+        if (Robot.getInstance().isAutonomous()) {
+            state = LED_STATE.RAINBOW;
+        }
+        if (Robot.getInstance().isDisabled()) {
+            state = LED_STATE.PULSE_ALLIANCE;
+        }
+
         if (cubeDetected) {
             state = LED_STATE.SOLID_GREEN;
         }
         if (operatorSignalPress) {
             state = LED_STATE.PULSE_POLICE;
         }
+
     }
 
     // CALL ME

@@ -41,7 +41,7 @@ public class DoubleCubeScaleAutonCommand extends CommandGroup {
         // Move back while lifting to give cube clearance before scoring
         double SCORE_ANGLE = 60 + 25;
         double SCORE_BACKUP_DISTANCE = 5 + 20;
-        double SCORE_BACKUP_SPEED = 0.2;
+        double SCORE_BACKUP_SPEED = 0.4;
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand((isRight ? -1 : 1) * SCORE_ANGLE ), .5 + .3);
         addSequential(new QuisitorStopCommand());
