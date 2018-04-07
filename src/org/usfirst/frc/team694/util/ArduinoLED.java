@@ -4,7 +4,6 @@ import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import edu.wpi.first.wpilibj.I2C;
 
 /**   ArduinoLED
@@ -61,6 +60,7 @@ public class ArduinoLED {
 
     private void sendData(byte mode) {
         arduinoPort.write(deviceAddress, mode);
+        System.out.println("[ArduinoLED] SEND LED MODE: " + ((char) mode) );
     }
 
     // CUSTOMIZE ME

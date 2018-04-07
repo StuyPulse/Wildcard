@@ -35,7 +35,7 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 35 : -35), 1.5 );//TODO: change to 45
 
         // Drive forward and raise lift for scoring
-        addParallel(new DriveStraightPIDCommand(18 + 6, 0.3));
+        addParallel(new DriveStraightPIDCommand(18 + 6 + 6, 0.3));
         addSequential(new LiftMoveToHeightCommand(86), 2.5);
 
         addSequential(new QuisitorDeacquireCommand(), 0.5);//TODO: ask for timeout
