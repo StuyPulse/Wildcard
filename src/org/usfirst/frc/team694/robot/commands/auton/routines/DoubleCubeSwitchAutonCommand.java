@@ -31,16 +31,15 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         double SCALE_READY_ANGLE = 45;
         double SCALE_READY_DISTANCE = 24 + 24;
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(SCALE_READY_ANGLE), 1);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SCALE_READY_ANGLE : (-1 * SCALE_READY_ANGLE)), 1);
         addParallel(new LiftMoveToHeightCommand(30.0)); //TODO: Find a height for the lift to move to.
         addSequential(new DrivetrainMoveInchesEncoderCommand(SCALE_READY_DISTANCE, 1));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
 
         // Score that 2nd bad boy
         double SCALE_SCORE_DISTANCE = 20;
         addSequential(new DrivetrainMoveInchesEncoderCommand(SCALE_SCORE_DISTANCE, 1), 2);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
-        
 
         // Old routine, not sure if it works
 
