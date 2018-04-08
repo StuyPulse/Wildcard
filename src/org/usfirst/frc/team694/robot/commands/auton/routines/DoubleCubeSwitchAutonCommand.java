@@ -39,7 +39,8 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         // Score that 2nd bad boy
         double SCALE_SCORE_DISTANCE = 20;
         addSequential(new DrivetrainMoveInchesEncoderCommand(SCALE_SCORE_DISTANCE, 1), 2);
-        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        // Don't actually score. It makes no difference
+//        addSequential(new QuisitorDeacquireCommand(), 0.5);
 
         // Old routine, not sure if it works
 
