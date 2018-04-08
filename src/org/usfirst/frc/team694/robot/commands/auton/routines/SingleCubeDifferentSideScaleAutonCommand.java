@@ -4,6 +4,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
@@ -38,7 +39,7 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
         addParallel(new DriveStraightPIDCommand(18 + 6 + 6, 0.3));
         addSequential(new LiftMoveToHeightCommand(86), 2.5);
 
-        addSequential(new QuisitorDeacquireCommand(), 0.5);//TODO: ask for timeout
+        addSequential(new QuisitorMoveSpeedCommand(-0.5), 0.5);
 
         // Back up
         addSequential(new DriveStraightPIDCommand(18, -0.3));
