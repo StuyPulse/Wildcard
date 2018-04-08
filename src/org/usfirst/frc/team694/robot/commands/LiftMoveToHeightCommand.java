@@ -22,7 +22,7 @@ public class LiftMoveToHeightCommand extends Command {
         // Original:
 //        Robot.lift.setHeight(targetHeight);
         if (targetHeight > Robot.lift.getLiftHeight()) {
-            Robot.lift.move(1);
+            Robot.lift.moveRamp(1);
         }
 //         else {
 //            Robot.lift.move(-1);
