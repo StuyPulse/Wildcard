@@ -2,37 +2,34 @@ package org.usfirst.frc.team694.robot.commands.auton;
 
 import org.usfirst.frc.team694.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+public class DrivetrainMoveInchesEncoderCommand extends DrivetrainDriveDistanceCommand {
+    protected double moveSpeed;
 
-public class DrivetrainMoveInchesEncoderCommand extends Command {
-    private double distance;
-    private double speed;
-
-    private double startDistance;
-
-    public DrivetrainMoveInchesEncoderCommand(double speed, double distance) {
-        requires(Robot.drivetrain);
-        this.speed = speed;
-        this.distance = distance;
+    public DrivetrainMoveInchesEncoderCommand(double targetDistance, double speed) {
+        super(targetDistance);
+        this.moveSpeed = speed;
     }
 
+    @Override
     protected void initialize() {
-//        Robot.drivetrain.resetEncoders();
-        // no reset encoders. sad reaccs :(
-        startDistance = Robot.drivetrain.getEncoderDistance();
-        System.out.println("DrivetrainMoveInches] start: " + startDistance);
+        super.initialize();
+        System.out.println("[DrivetrainMoveInches] init");
     }
 
+    @Override
     protected void execute() {
-        Robot.drivetrain.tankDrive(speed, speed);
+        Robot.drivetrain.tankDrive(moveSpeed, moveSpeed);
     }
 
+    @Override
     protected boolean isFinished() {
-        return Math.abs(Robot.drivetrain.getEncoderDistance() - startDistance) >= distance;
+        return Math.abs(getDistance()) >= Math.abs(targetDistance);
     }
 
+    @Override
     protected void end() {
-        System.out.println("[DrivetrainMoveInches] end: " + Robot.drivetrain.getEncoderDistance());
         Robot.drivetrain.stop();
+        System.out.println("[DrivetrainMoveInches] end: " + getDistance() + " = " + Robot.drivetrain.getEncoderMax() + " - " + startDistance);
     }
+
 }

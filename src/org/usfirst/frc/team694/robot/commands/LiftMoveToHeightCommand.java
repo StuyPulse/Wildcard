@@ -1,36 +1,54 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class LiftMoveToHeightCommand extends Command {
     private double targetHeight;
 
-    //It's in inches
     public LiftMoveToHeightCommand(double height) {
-        requires(Robot.lift);
+//        requires(Robot.lift);
         this.targetHeight = height;
     }
 
+    @Override
     protected void initialize() {
-//        Robot.lift.temporarySetkP(SmartDashboard.getNumber("Lift P", 0));
-        System.out.println("[LiftMoveToHeight] START");
+        System.out.println("[LiftMoveToHeight] starto!");
     }
 
+    @Override
     protected void execute() {
-        Robot.lift.setHeight(targetHeight);
+        // Original:
+//        Robot.lift.setHeight(targetHeight);
+        if (targetHeight > Robot.lift.getLiftHeight()) {
+            Robot.lift.move(1);
+        }
+//         else {
+//            Robot.lift.move(-1);
+//        }
     }
 
+    @Override
     protected boolean isFinished() {
-        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
-                || (Robot.lift.isAtBottom() && Robot.lift.getMotorVelocity() < 0) 
-                || (Robot.lift.isAtTop() && Robot.lift.getMotorVelocity() > 0);
+        double deltaTarget = targetHeight - Robot.lift.getLiftHeight();
+        // Original
+//        return (Math.abs(Robot.lift.getLiftHeight() - targetHeight) < RobotMap.LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD)
+        return (deltaTarget < 0)
+                || (Robot.lift.isAtBottom() && deltaTarget < 0) 
+                || (Robot.lift.isAtTop() && deltaTarget > 0);
     }
 
+    @Override
     protected void end() {
-        System.out.println("[LiftMoveToHeight] END");
         Robot.lift.stop();
+        System.out.println("[LiftMoveToHeight] STOP " + Robot.lift.getLiftHeight());
     }
+
+    @Override
+    protected void interrupted() {
+        end();
+        System.out.println("[LiftMoveToHeight] INTERRUPTED (ruh roh)");
+    }
+
 }

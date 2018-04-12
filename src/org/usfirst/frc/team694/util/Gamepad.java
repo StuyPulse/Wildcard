@@ -21,7 +21,7 @@ public class Gamepad extends Joystick {
 	// On the back of the logitech controller there is a switch.
 	// "X" gives you access to the axis inputs
 	public enum GamepadSwitchMode {
-		SWITCH_X, // NOTE: getLeftTrigger and getRightTrigger will return null!
+		SWITCH_X,
 		SWITCH_D,
 		PS4 //PS4 Controller Enum.
 	}
@@ -205,10 +205,13 @@ public class Gamepad extends Joystick {
 		}
 	}
 
-	public JoystickButton getLeftTrigger() {
+	public Button getLeftTrigger() {
 		switch (switchMode) {
 			case SWITCH_D:
+            case PS4:
 				return new JoystickButton(this, 7);
+			case SWITCH_X:
+			    return new LeftTriggerButton(this);
 			default:
 				return null;
 		}
@@ -250,10 +253,13 @@ public class Gamepad extends Joystick {
 		}
 	}
 
-	public JoystickButton getRightTrigger() {
+	public Button getRightTrigger() {
 		switch (switchMode) {
 			case SWITCH_D:
+            case PS4:
 				return new JoystickButton(this, 8);
+			case SWITCH_X:
+	             return new RightTriggerButton(this);
 			default:
 				return null;
 		}
@@ -486,6 +492,11 @@ public class Gamepad extends Joystick {
 	    }
 	}
 	
+	/**
+	 * DPadButton Class
+	 * 
+	 * Lets us treat the D-Pad axis as individual buttons
+	 */
 	public static class DPadButton extends Button {
 		public static enum Direction {
 			UP, DOWN, LEFT, RIGHT
@@ -515,4 +526,38 @@ public class Gamepad extends Joystick {
 			}
 		}
 	}
+
+    /**
+     * LeftTriggerButton Class
+     * 
+     * Lets us treat the Left trigger as an individual button in SWITCH_X mode
+     */
+	public static class LeftTriggerButton extends Button {
+	    private Gamepad gamepad;
+	    public LeftTriggerButton(Gamepad gamepad) {
+	        this.gamepad = gamepad;
+	    }
+
+	    @Override
+	    public boolean get() {
+	        return gamepad.getRawLeftTrigger();
+	    }
+	}
+
+    /**
+     * RightTriggerButton Class
+     * 
+     * Lets us treat the right trigger as an individual button in SWITCH_X mode
+     */
+    public static class RightTriggerButton extends Button {
+        private Gamepad gamepad;
+        public RightTriggerButton(Gamepad gamepad) {
+            this.gamepad = gamepad;
+        }
+
+        @Override
+        public boolean get() {
+            return gamepad.getRawRightTrigger();
+        }
+    }
 }

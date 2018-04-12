@@ -1,50 +1,47 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class LiftMoveCommand extends Command {
+public class LiftMoveCommand extends DefaultCommand {
 
-    private static final double DRIVETRAIN_LIMIT_LIFT_THRESHOLD = 0.1;
+    private static final double GAMEPAD_LIFT_THRESHOLD = 0.1;
 
     public LiftMoveCommand() {
         requires(Robot.lift);
-        requires(Robot.spatula);
     }
 
+    @Override
     protected void initialize() {
+        super.initialize();
     }
 
-    protected void execute() {
+    // TODO: This is getting out of hand
+    //       Please fix DriveDistanceEncodersCommand
+    @Override
+    protected void defaultExecute() {
+
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
 
-        if (Robot.spatula.isSpatulaUp()) {
-            Robot.spatula.acquireSpeed(-liftSquared * 0.2);
-        }
-
-        Robot.lift.move(liftSquared);
-        //TODO: see whether Coby wants cubed or squared inputs on the lift.
-
-        if (Math.abs(liftControl) > DRIVETRAIN_LIMIT_LIFT_THRESHOLD) {
-            Robot.drivetrain.enableCurrentLimit();
+        if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
+            Robot.lift.move(liftSquared);
+//            Robot.drivetrain.enableCurrentLimit();
         } else {
-            Robot.drivetrain.disableCurrentLimit();
+            Robot.lift.stop();
+//            Robot.drivetrain.disableCurrentLimit();
         }
+//        System.out.println("[LiftMoveCommand] output: " + liftSquared);
     }
 
+    @Override
     protected boolean isFinished() {
         return false;
     }
 
+    @Override
     protected void end() {
-        // In case if we're interrupted mid lift move
-        Robot.drivetrain.disableCurrentLimit();
     }
 }

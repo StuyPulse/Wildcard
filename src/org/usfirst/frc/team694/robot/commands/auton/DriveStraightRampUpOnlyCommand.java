@@ -1,7 +1,5 @@
 package org.usfirst.frc.team694.robot.commands.auton;
 
-import org.usfirst.frc.team694.robot.Robot;
-
 public class DriveStraightRampUpOnlyCommand extends DriveStraightWithRampingCommand {
 
     public DriveStraightRampUpOnlyCommand(double targetDistance) {
@@ -12,12 +10,12 @@ public class DriveStraightRampUpOnlyCommand extends DriveStraightWithRampingComm
     protected void initialize() {
         super.initialize();
         // 100% bang bang controller
-        this.getPIDController().setPID(1,0,0);
+        speedPIDController.setPID(1,0,0);
     }
 
     @Override
     protected boolean isFinished() {
-        return Robot.drivetrain.getEncoderDistance() > targetDistance;
+        return getDistanceFromTarget() < 0;
     }
 
 }

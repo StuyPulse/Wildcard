@@ -20,13 +20,17 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drivetrain extends Subsystem {
 
-    private static final int PEAK_LIMIT_AMPS = 4;
-    private static final int PEAK_LIMIT_MILLISECONDS = 250;
+    // TODO: Set
+//    private double LIFT_AND_DRIVETRAIN_CURRENT_LIMIT = 999999;
+//    private int DRIVETRAIN_CURRENT_LIMIT_LIFT = 10;
+    // Remove brownout protection
+    private static final double BROWNOUT_PROTECTION_PVBUS_CAP = 1;//0.9;
 
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;
@@ -45,21 +49,43 @@ public class Drivetrain extends Subsystem {
 
     public static AHRS navX;
 
+    private double absoluteGyroError;
+
+    private boolean brownoutProtectionEnabled;
+    
+    private Ultrasonic rearSonar;
+    private Ultrasonic frontSonar;
+
+//    private boolean brownoutProtectionEnabled;
+
     public Drivetrain() {
+        /// Left Motors
         leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
         leftMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_MIDDLE_MOTOR_PORT);
         leftBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_LEFT_BOTTOM_MOTOR_PORT);
-        //master-follower, leftBottomMotor designated master
-        leftMiddleMotor.follow(leftBottomMotor);
-        leftTopMotor.follow(leftBottomMotor);
 
+        /// Right Motors
         rightTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_TOP_MOTOR_PORT);
         rightMiddleMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_RIGHT_MIDDLE_MOTOR_PORT);
         rightBottomMotor = new WPI_TalonSRX(RobotMap.DRIVETRAIN_RIGHT_BOTTOM_MOTOR_PORT);
-        //master-follower, rightBottomMotor designated master
+
+        // Followers
+        leftMiddleMotor.follow(leftBottomMotor);
+        leftTopMotor.follow(leftBottomMotor);
         rightMiddleMotor.follow(rightBottomMotor);
         rightTopMotor.follow(rightBottomMotor);
 
+        // Current limit
+//        leftBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        rightBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        leftBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        rightBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//        leftBottomMotor.configPeakCurrentDuration(1, 0);
+//        rightBottomMotor.configPeakCurrentDuration(1, 0);
+//        leftBottomMotor.enableCurrentLimit(false);
+//        rightBottomMotor.enableCurrentLimit(false);
+
+        /// Inverted
         rightTopMotor.setInverted(true);
         rightMiddleMotor.setInverted(true);
         rightBottomMotor.setInverted(true);
@@ -67,6 +93,7 @@ public class Drivetrain extends Subsystem {
         leftMiddleMotor.setInverted(true);
         leftBottomMotor.setInverted(true);
 
+        /// Brake Mode
         leftTopMotor.setNeutralMode(NeutralMode.Brake);
         leftMiddleMotor.setNeutralMode(NeutralMode.Brake);
         leftBottomMotor.setNeutralMode(NeutralMode.Brake);
@@ -74,33 +101,52 @@ public class Drivetrain extends Subsystem {
         rightMiddleMotor.setNeutralMode(NeutralMode.Brake);
         rightBottomMotor.setNeutralMode(NeutralMode.Brake);
 
-        leftBottomMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS, 0);
-        rightBottomMotor.configPeakCurrentLimit(PEAK_LIMIT_AMPS, 0);
-        leftBottomMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
-        rightBottomMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
-        leftBottomMotor.enableCurrentLimit(false);
-        rightBottomMotor.enableCurrentLimit(false);
-
+        /// Encoders
         leftBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         rightBottomMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-        leftLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
-        rightLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
-        lineSensorSystem = new LineSensorSystem(leftLineSensor,rightLineSensor);
-        gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
-
         differentialDrive = new DifferentialDrive(leftBottomMotor, rightBottomMotor);
 
-        // the navX is plugged into the kMXP port on the roboRIO
+        /// Line Sensors
+        leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
+
+
         navX = new AHRS(SPI.Port.kMXP);
+
+        gearShift = new Solenoid(RobotMap.GEAR_SHIFT_CHANNEL);
+
+        rearSonar = new Ultrasonic(RobotMap.FRONT_SONAR_INPUT_PORT, RobotMap.FRONT_SONAR_OUTPUT_PORT);
+        frontSonar = new Ultrasonic(RobotMap.REAR_SONAR_INPUT_PORT, RobotMap.REAR_SONAR_OUTPUT_PORT);
     }
+
+    @Override
+    public void initDefaultCommand() {
+        //setDefaultCommand(new DriveCommand());
+        setDefaultCommand(new DrivetrainDriveSystemCommand());
+    }
+
     //@Override
+<<<<<<< HEAD
     /*public void periodic(){
         updateSensors();
     }*/
 
     public void resetRamping() {
         setRamp(0);
+=======
+    public void periodic(){
+//        System.out.println("[Drivetrain] LEFT -> mid:" + leftMiddleMotor.getOutputCurrent());
+//        SmartDashboard.putNumber("[Drivetrain] left bottom motor current", leftBottomMotor.getOutputCurrent());
+////        updateSensors();
+//        // TODO: Test with current limit set 100% of the time to find optimal current limit
+//        // TODO: Find at what point should the lift be limited
+//        if (getCurrent() + Robot.lift.getCurrent() > LIFT_AND_DRIVETRAIN_CURRENT_LIMIT /* SET ME */) {
+//            enableCurrentLimit();
+//        } else {
+//            disableCurrentLimit();
+//        }
+>>>>>>> master
     }
 
     public double getLeftSpeed() {
@@ -115,13 +161,33 @@ public class Drivetrain extends Subsystem {
         return Math.max(Math.abs(getLeftSpeed()), Math.abs(getRightSpeed()));
     }
 
+    public double getEncoderDistance() {
+        return Math.abs(getEncoderMax());
+    }
+
+    // Gets the encoder with the largest magnitude
+    // Generally put in place to avoid "one encoder reads 0 100% of the time" problems
+    public double getEncoderMax() {
+        double left = getLeftEncoderDistance();
+        double right = getRightEncoderDistance();
+
+        if (Math.abs(left) > Math.abs(right)) {
+            return left;
+        } else {
+            return right;
+        }
+    }
+
     public double getRawEncoderDistance() {
         return Math.abs(Math.max(getLeftRawEncoderDistance(), getRightRawEncoderDistance()));
     }
+<<<<<<< HEAD
 
     public double getEncoderDistance() {
         return Math.abs(Math.max(getLeftEncoderDistance(), getRightEncoderDistance()));
     }
+=======
+>>>>>>> master
 
     public double getLeftEncoderDistance() {
         return leftBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
@@ -152,14 +218,26 @@ public class Drivetrain extends Subsystem {
     }
 
     public void tankDrive(double left, double right) {
+        if (brownoutProtectionEnabled) {
+            left = Math.signum(left) * Math.min(Math.abs(left),BROWNOUT_PROTECTION_PVBUS_CAP);
+            right = Math.signum(right) * Math.min(Math.abs(right),BROWNOUT_PROTECTION_PVBUS_CAP);
+        }
         differentialDrive.tankDrive(left, right, false);
     }
 
     public void arcadeDrive(double speed, double rotation) {
+        if (brownoutProtectionEnabled) {
+            speed = Math.signum(speed) * Math.min(Math.abs(speed),BROWNOUT_PROTECTION_PVBUS_CAP);
+            rotation = Math.signum(rotation) * Math.min(Math.abs(rotation),BROWNOUT_PROTECTION_PVBUS_CAP);
+        }
         differentialDrive.arcadeDrive(speed, rotation);
     }
 
     public void curvatureDrive(double speed, double rotation, boolean turn) {
+        if (brownoutProtectionEnabled) {
+            speed = Math.signum(speed) * Math.min(Math.abs(speed),BROWNOUT_PROTECTION_PVBUS_CAP);
+            rotation = Math.signum(rotation) * Math.min(Math.abs(rotation),BROWNOUT_PROTECTION_PVBUS_CAP);
+        }
         differentialDrive.curvatureDrive(speed, rotation, turn);
     }
 
@@ -180,7 +258,11 @@ public class Drivetrain extends Subsystem {
         gearShift.set(m);
     }
 
+<<<<<<< HEAD
     public void gearShiftInput(boolean isShifted) {
+=======
+    public void setGearShift(boolean isShifted) {
+>>>>>>> master
         gearShift.set(isShifted);
     }
 
@@ -188,6 +270,13 @@ public class Drivetrain extends Subsystem {
         return gearShift.get();
     }
 
+<<<<<<< HEAD
+=======
+    //    public void resetLineSensors(){
+    //        leftLineSensor.resetAmbient();
+    //        rightLineSensor.resetAmbient();
+    //    }
+>>>>>>> master
 
     public double getGyroAngle() {
         return navX.getAngle();
@@ -196,6 +285,7 @@ public class Drivetrain extends Subsystem {
     public void updateSensors() {
        lineSensorSystem.mainLoop();
 
+<<<<<<< HEAD
     }
 
     public boolean isOnLine() {
@@ -210,6 +300,28 @@ public class Drivetrain extends Subsystem {
         setDefaultCommand(new DrivetrainDriveSystemCommand());
     }
 
+=======
+    public boolean isOnLine() {
+        return leftIsOnLine() || rightIsOnLine();
+    }
+
+    public boolean rightIsOnLine() {
+        return rightLineSensor.basicFind();
+    }
+
+    public boolean leftIsOnLine() {
+        return leftLineSensor.basicFind();
+    }
+
+    public double getRawLeftLineSensor() {
+        return leftLineSensor.getRawData();
+    }
+
+    public double getRawRightLineSensor() {
+        return rightLineSensor.getRawData();
+    }
+
+>>>>>>> master
     public void setRamp(double rampSeconds) {
         leftTopMotor.configOpenloopRamp(rampSeconds, 0);
         rightTopMotor.configOpenloopRamp(rampSeconds, 0);
@@ -220,17 +332,49 @@ public class Drivetrain extends Subsystem {
     }
 
     public void resetGyro() {
+        absoluteGyroError += getGyroAngle();
         navX.reset();
     }
 
-    public void enableCurrentLimit() {
-        leftBottomMotor.enableCurrentLimit(true);
-        rightBottomMotor.enableCurrentLimit(true);
+    public void resetGyroError() {
+        absoluteGyroError = 0;
     }
 
-    public void disableCurrentLimit() {
-        leftBottomMotor.enableCurrentLimit(false);
-        rightBottomMotor.enableCurrentLimit(false);
+    // If anyone mentions the phrase "current limit",
+    // they will be given a angry look
+    public void enableBrownOutProtection() {
+//        System.out.println("[Drivetrain] ENABLE brownout protection");
+        brownoutProtectionEnabled = true;
+//        leftBottomMotor.enableCurrentLimit(true);
+//        rightBottomMotor.enableCurrentLimit(true);
     }
 
+    public void disableBrownOutProtection() {
+//        System.out.println("[Drivetrain] DISABLE brownout protection");
+        brownoutProtectionEnabled = false;
+//        leftBottomMotor.enableCurrentLimit(false);
+//        rightBottomMotor.enableCurrentLimit(false);
+    }
+
+    public double getCurrent() {
+        return leftBottomMotor.getOutputCurrent() 
+             + rightBottomMotor.getOutputCurrent()
+             + leftMiddleMotor.getOutputCurrent()
+             + rightMiddleMotor.getOutputCurrent()
+             + leftTopMotor.getOutputCurrent()
+             + rightTopMotor.getOutputCurrent();
+    }
+
+    public double getAbsoluteGyroAngle() {
+        return absoluteGyroError + getGyroAngle();
+    }
+
+    public double getRearInchesAway() {
+        return rearSonar.getRangeInches();
+    }
+
+    public double getFrontInchesAway() {
+        return frontSonar.getRangeInches();
+    }
 }
+
