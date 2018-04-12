@@ -1,8 +1,9 @@
-package org.usfirst.frc.team694.robot.commands.auton.routines;
+package org.usfirst.frc.team694.robot.commands.auton.choosers;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeDifferentSideScaleAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeSameSideScaleAutonCommand;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.ConditionalCommand;
 
 /**

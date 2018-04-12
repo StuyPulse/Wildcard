@@ -1,6 +1,5 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
@@ -11,9 +10,9 @@ import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -33,9 +32,13 @@ public class DoubleCubeScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(64.0 - 25 + 5, -1), 2 + .5);
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -60.0 - 25: 60.0 + 25), .5 + .3);
         addSequential(new QuisitorStopCommand());
-        
+
+        // Move back 5 inches while lifting to give cube clearance, then move forward
+        addParallel(new DrivetrainMoveInchesEncoderCommand(5, -0.2));
         addSequential(new LiftMoveToHeightCommand(83.0));
         addSequential(new QuisitorDeacquireCommand(), 1.5);
         addSequential(new LiftMoveToBottomCommand());
+        // Move forward
+        addSequential(new DrivetrainMoveInchesEncoderCommand(5, 0.2));
     }
 }
