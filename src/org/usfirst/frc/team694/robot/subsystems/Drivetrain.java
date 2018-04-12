@@ -108,8 +108,8 @@ public class Drivetrain extends Subsystem {
         differentialDrive = new DifferentialDrive(leftBottomMotor, rightBottomMotor);
 
         /// Line Sensors
-        leftLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
-        rightLineSensor = new LineSensor(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
+        leftLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
+        rightLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
 
 
         navX = new AHRS(SPI.Port.kMXP);
