@@ -7,10 +7,15 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
-//import org.usfirst.frc.team694.robot.subsystems.Grabber;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;
+import org.usfirst.frc.team694.util.ArduinoLED;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -31,21 +36,24 @@ public class Robot extends IterativeRobot {
     public static Lift lift;
 
     public static OI oi;
+    
+    public static ArduinoLED liftLED;
 
-//    static boolean isRobotAtBottom;
+    //    static boolean isRobotAtBottom;
 
+    public static boolean isPurpleFlashing = false;
+    
     private String gameData;
     private static boolean isRobotOnRight;
-
     private static boolean isAllianceSwitchRight;
     private static boolean isScaleRight;
 
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
-    private static SendableChooser<RobotStartPosition> sideChooser = new SendableChooser<>();;
+    private static SendableChooser<RobotStartPosition> sideChooser = new SendableChooser<>();
 
     private Command autonCommand; // Selected command run during auton
 
-//    private PowerDistributionPanel pdppanel;
+    //    private PowerDistributionPanel pdppanel;
 
     @Override
     public void robotInit() {
@@ -56,6 +64,8 @@ public class Robot extends IterativeRobot {
         lift = new Lift();
         oi = new OI();
 
+        liftLED = new ArduinoLED(RobotMap.LIFTLIGHTING_ADDRESS);
+        
         initSmartDashboard();
     }
 
@@ -111,7 +121,8 @@ public class Robot extends IterativeRobot {
             System.err.println("Please yell at the field management crew to fix this");
         } else {
             isRobotOnRight = (sideChooser.getSelected() == RobotStartPosition.RIGHT_SIDE_OF_DRIVER);
-            System.out.println("[Robot] SIDE CHOOSER: " + sideChooser.getSelected() + ", equals right? " + isRobotOnRight);
+            System.out.println(
+                    "[Robot] SIDE CHOOSER: " + sideChooser.getSelected() + ", equals right? " + isRobotOnRight);
             isAllianceSwitchRight = gameData.charAt(0) == 'R';
             isScaleRight = gameData.charAt(1) == 'R';
             autonCommand = autonChooser.getSelected();
@@ -144,7 +155,13 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-       updateSmartDashboard();
+        updateSmartDashboard();
+        
+        if(Robot.quisitor.isCubeDetectedIR() && !isPurpleFlashing) {
+            liftLED.sendGreen();
+        } else if(!Robot.quisitor.isCubeDetectedIR() && !isPurpleFlashing) {
+            liftLED.sendAllOff();
+        }
     }
 
     @Override
@@ -155,20 +172,13 @@ public class Robot extends IterativeRobot {
     private void initSmartDashboard() {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
-        //autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        /* Testing autons:
-        autonChooser.addObject("Same Side Scale Auton", new SameSideScaleAutonCommand());
-        autonChooser.addObject("Different Side Scale Auton", new DifferentSideScaleAutonCommand());
-        autonChooser.addObject("Right Side Switch Auton", new RightSideSwitchAutonCommand());
-        autonChooser.addObject("Left Side Switch Auton", new LeftSideSwitchAutonCommand());
-        */
-
-        //autonChooser.addDefault("SWITCH ALWAYS Auton", new SideSwitchAutonChooserCommand());
-        //autonChooser.addObject("SCALE ALWAYS Auton", new SideScaleAutonChooserCommand());
-        //autonChooser.addObject("FORCE LEFT SWITCH Auton", new LeftSideSwitchAutonCommand());
-        //autonChooser.addObject("FORCE RIGHT SWITCH Auton", new RightSideSwitchAutonCommand());
-        //autonChooser.addObject("FORCE SAME SIDE SCALE Auton", new SameSideScaleAutonCommand());
-        //autonChooser.addObject("FORCE DIFFERENT SIDE SCALE Auton", new SimpleDifferentSideScaleAutonCommand());
+        autonChooser.addObject("Mobility", new MobilityAutonCommand());
+        autonChooser.addObject("Single Cube SWITCH then grab another cube", new SingleCubeSwitchThenStartScaleAutonChooserCommand());
+        autonChooser.addObject("Single Cube SCALE", new SingleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Double Cube SCALE (single opposite if scale is on the other side)", new DoubleCubeScaleAutonChooserCommand());
+        //        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
+        autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
+        //        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
 
         SmartDashboard.putData("Autonomous", autonChooser);
 
@@ -190,13 +200,13 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DriveDistanceEncodersPID D", 0.08);
 
         // Drive Straight Rotation PID
-        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.012);
+        SmartDashboard.putNumber("DriveStraightGyroPID P", 0.016);
         SmartDashboard.putNumber("DriveStraightGyroPID I", 0);
-        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.2);
+        SmartDashboard.putNumber("DriveStraightGyroPID D", 0.08);
 
-        SmartDashboard.putNumber("RotateDegreesPID P", 0.037);
+        SmartDashboard.putNumber("RotateDegreesPID P", 0.02);
         SmartDashboard.putNumber("RotateDegreesPID I", 0.0);
-        SmartDashboard.putNumber("RotateDegreesPID D", 0.1);
+        SmartDashboard.putNumber("RotateDegreesPID D", 0.05);
 
         SmartDashboard.putNumber("RotateDegreesPID RampSeconds", 0.0);
 
@@ -221,13 +231,15 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Drivetrain: RAW Right Encoder Values", Robot.drivetrain.getRightRawEncoderDistance());
         SmartDashboard.putNumber("Drivetrain: Gyro Value", Robot.drivetrain.getGyroAngle());
         SmartDashboard.putNumber("Drivetrain: Gyro ABSOLUTE", Robot.drivetrain.getAbsoluteGyroAngle());
+        SmartDashboard.putNumber("Drivetrain: Sonar Front Value", Robot.drivetrain.getFrontInchesAway());
+        SmartDashboard.putNumber("Drivetrain: Sonar Rear Value", Robot.drivetrain.getRearInchesAway());
 
         SmartDashboard.putBoolean("Drivetrain: Left Line Sensor On Line", Robot.drivetrain.leftIsOnLine());
         SmartDashboard.putBoolean("Drivetrain: Right Line Sensor On Line", Robot.drivetrain.rightIsOnLine());
         SmartDashboard.putNumber("Drivetrain: Raw Left Line Sensor", Robot.drivetrain.getRawLeftLineSensor());
         SmartDashboard.putNumber("Drivetrain: Raw Right Line Sensor", Robot.drivetrain.getRawRightLineSensor());
 
-        SmartDashboard.putBoolean("Spatula: Detect Cube", Robot.quisitor.isCubeDetected());
+        SmartDashboard.putBoolean("Quisitor: Detect Cube", Robot.quisitor.isCubeDetected());
 
         SmartDashboard.putNumber("Lift Current", lift.getCurrent());
         SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());
@@ -243,12 +255,6 @@ public class Robot extends IterativeRobot {
     public void testPeriodic() {
     }
 
-    public static boolean isRobotAndScaleOnSameSide() {
-        return (isScaleRight == isRobotOnRight);
-        //true is scale is close to robot 
-        //false is scale is far away from robot 
-    }
-
     public static boolean isRobotStartingOnRight() {
         return isRobotOnRight;
     }
@@ -256,9 +262,26 @@ public class Robot extends IterativeRobot {
     public static boolean isSwitchOnRight() {
         return isAllianceSwitchRight;
     }
-    
+
     public static boolean isScaleOnRight() {
         return isScaleRight;
+    }
+
+    public static boolean isRobotOnSameSideScale() {
+        return !(isRobotOnRight ^ isScaleRight);
+    }
+
+    public static boolean isSwitchOnSameSideScale() {
+        return !(isAllianceSwitchRight ^ isScaleRight);
+    }
+
+    public static boolean isRobotSwitchScaleOnSameSide() {
+        return isRobotOnSameSideScale() && isSwitchOnSameSideScale();
+    }
+
+    public static boolean isRobotOnSameSideSwitch() {
+        return !(isRobotOnRight ^ isAllianceSwitchRight);
+
     }
 
     public static Robot getInstance() {

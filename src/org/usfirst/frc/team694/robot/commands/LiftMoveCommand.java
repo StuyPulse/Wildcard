@@ -33,6 +33,7 @@ public class LiftMoveCommand extends DefaultCommand {
             Robot.lift.stop();
 //            Robot.drivetrain.disableCurrentLimit();
         }
+//        System.out.println("[LiftMoveCommand] output: " + liftSquared);
     }
 
     @Override
