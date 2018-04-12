@@ -127,14 +127,6 @@ public class Drivetrain extends Subsystem {
     }
 
     //@Override
-<<<<<<< HEAD
-    /*public void periodic(){
-        updateSensors();
-    }*/
-
-    public void resetRamping() {
-        setRamp(0);
-=======
     public void periodic(){
 //        System.out.println("[Drivetrain] LEFT -> mid:" + leftMiddleMotor.getOutputCurrent());
 //        SmartDashboard.putNumber("[Drivetrain] left bottom motor current", leftBottomMotor.getOutputCurrent());
@@ -146,7 +138,6 @@ public class Drivetrain extends Subsystem {
 //        } else {
 //            disableCurrentLimit();
 //        }
->>>>>>> master
     }
 
     public double getLeftSpeed() {
@@ -181,13 +172,7 @@ public class Drivetrain extends Subsystem {
     public double getRawEncoderDistance() {
         return Math.abs(Math.max(getLeftRawEncoderDistance(), getRightRawEncoderDistance()));
     }
-<<<<<<< HEAD
 
-    public double getEncoderDistance() {
-        return Math.abs(Math.max(getLeftEncoderDistance(), getRightEncoderDistance()));
-    }
-=======
->>>>>>> master
 
     public double getLeftEncoderDistance() {
         return leftBottomMotor.getSelectedSensorPosition(0) * RobotMap.DRIVETRAIN_RAW_MULTIPLIER;
@@ -258,11 +243,7 @@ public class Drivetrain extends Subsystem {
         gearShift.set(m);
     }
 
-<<<<<<< HEAD
-    public void gearShiftInput(boolean isShifted) {
-=======
     public void setGearShift(boolean isShifted) {
->>>>>>> master
         gearShift.set(isShifted);
     }
 
@@ -270,38 +251,19 @@ public class Drivetrain extends Subsystem {
         return gearShift.get();
     }
 
-<<<<<<< HEAD
-=======
     //    public void resetLineSensors(){
     //        leftLineSensor.resetAmbient();
     //        rightLineSensor.resetAmbient();
     //    }
->>>>>>> master
 
     public double getGyroAngle() {
         return navX.getAngle();
     }
 
-    public void updateSensors() {
+    /*public void updateSensors() {
        lineSensorSystem.mainLoop();
 
-<<<<<<< HEAD
-    }
-
-    public boolean isOnLine() {
-        return lineSensorSystem.basicFind();
-    }
-
-
-
-
-    public void initDefaultCommand() {
-        //setDefaultCommand(new DriveCommand());
-        setDefaultCommand(new DrivetrainDriveSystemCommand());
-    }
-
-=======
-    public boolean isOnLine() {
+    /*public boolean isOnLine() {
         return leftIsOnLine() || rightIsOnLine();
     }
 
@@ -319,9 +281,8 @@ public class Drivetrain extends Subsystem {
 
     public double getRawRightLineSensor() {
         return rightLineSensor.getRawData();
-    }
+    }*/
 
->>>>>>> master
     public void setRamp(double rampSeconds) {
         leftTopMotor.configOpenloopRamp(rampSeconds, 0);
         rightTopMotor.configOpenloopRamp(rampSeconds, 0);
