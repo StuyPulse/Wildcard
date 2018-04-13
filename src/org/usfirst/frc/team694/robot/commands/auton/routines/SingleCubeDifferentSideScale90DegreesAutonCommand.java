@@ -25,10 +25,14 @@ public class SingleCubeDifferentSideScale90DegreesAutonCommand extends CommandGr
             // Rotate so that we're BACKWARDS.
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
             addSequential(new LiftMoveToHeightCommand(5));      
-            addSequential(new DriveStraightRampDownOnlyCommand(-1 * (234 + 20 + 24 + 24 + 10) ),3);
+            addSequential(new DriveStraightRampDownOnlyCommand(-1 * (197) ),3);
             //Rotate 90 Degrees so we face the Scale.
             addParallel(new QuisitorAcquireCommand(), 0.5);
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 1.5 );
-
+            //Go forward towards the scale and raising the lift.
+            addParallel(new DriveStraightRampDownOnlyCommand(25),1);
+            addSequential(new LiftMoveToHeightCommand(83.0));
+            addSequential(new QuisitorDeacquireCommand(), 1.5);
+            addSequential(new LiftMoveToBottomCommand());
     }
 }
