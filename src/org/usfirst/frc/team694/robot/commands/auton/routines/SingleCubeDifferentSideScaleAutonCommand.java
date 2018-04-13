@@ -8,6 +8,7 @@ import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainLineSensorMultipleLinesCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
@@ -29,10 +30,11 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
 
         addSequential(new LiftMoveToHeightCommand(5));      
-
+        
+        addParallel(new DrivetrainLineSensorMultipleLinesCommand(2, 190.94));
         addSequential(new DriveStraightRampDownOnlyCommand(-1 * (234 + 20 + 24 + 24 + 10) ),3);
+        
         addParallel(new QuisitorAcquireCommand(), 0.5);
-
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 15 : -15), 1.5 );//Was originally 45, then 35
 
         // Drive forward and raise lift for scoring
