@@ -15,7 +15,8 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
 
     public SingleCubeSwitchAutonCommand(boolean isRight) {
 
-        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand((isRight? 118 : 119 - 3) + 5);
+        //TODO: Make sure that distance is far enough to avoid tech foul
+        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand((isRight? 118 : 119 - 3) + 5 + 3);
 
         driveCommand.addTurn(isRight? 5.0 : 2.5, isRight ? 90.0 : -90.0); // Originally was 10 inches
         driveCommand.addTurn(isRight ? 68.0 : 68, 0.0);
