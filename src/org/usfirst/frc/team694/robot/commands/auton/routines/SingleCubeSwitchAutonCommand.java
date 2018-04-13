@@ -15,10 +15,8 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
 
     public SingleCubeSwitchAutonCommand(boolean isRight) {
 
-        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(isRight? 118 : 119 - 3);
-//        driveCommand.addSpeedChange(0, 0.6);
-//        driveCommand.addSpeedChange(0.0, 0.4);
-//        driveCommand.addSpeedChange(0.0 + 10, 0.6);
+        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand((isRight? 118 : 119 - 3) + 5);
+
         driveCommand.addTurn(isRight? 5.0 : 2.5, isRight ? 90.0 : -90.0); // Originally was 10 inches
         driveCommand.addTurn(isRight ? 68.0 : 68, 0.0);
 
@@ -27,7 +25,7 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(driveCommand, 3.5);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
         //faster one: addParallel(new QuisitorDeacquireCommand(), 0.5);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(10, -1)); // -0.45
-        
+        addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 5, -1)); // -0.45
+
     }
 }

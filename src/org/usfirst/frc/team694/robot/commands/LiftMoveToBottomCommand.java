@@ -17,7 +17,7 @@ public class LiftMoveToBottomCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.lift.move(-1);
+        Robot.lift.moveRamp(-1);
     }
 
     @Override

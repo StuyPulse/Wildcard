@@ -9,13 +9,11 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
-import org.usfirst.frc.team694.robot.commands.FlashHumanPlayer;
 import org.usfirst.frc.team694.robot.commands.LiftMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorToggleCommand;
-import org.usfirst.frc.team694.robot.commands.TestCurveCommand;
+import org.usfirst.frc.team694.robot.commands.TestCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.util.Gamepad;
 import org.usfirst.frc.team694.util.Gamepad.GamepadSwitchMode;
@@ -26,6 +24,7 @@ public class OI {
 
     public OI() {
         driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
+        //Needs to be set to X mode for rumbling to work
         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_D);
 
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
@@ -43,15 +42,14 @@ public class OI {
 
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
 //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
-        operatorGamepad.getDPadUp().whenPressed(new FlashHumanPlayer());
 
         /// TESTING
 //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
-        driverGamepad.getDPadUp().whenPressed(new TestCurveCommand());
+//        driverGamepad.getDPadUp().whenPressed(new TestCommand());
 //        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
 //        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
-        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
-        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
+//        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
+//        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
 
     }
 }
