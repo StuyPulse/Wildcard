@@ -6,6 +6,7 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -15,7 +16,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class TripleCubeSwitchAutonCommand extends CommandGroup {
 
     public TripleCubeSwitchAutonCommand() {
-        addSequential(new DoubleCubeSwitchAutonCommand());
+        addSequential(new DoubleCubeSwitchAutonChooserCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(48, -0.25));
         addSequential(new LiftMoveToBottomCommand());
 
