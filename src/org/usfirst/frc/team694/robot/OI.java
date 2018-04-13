@@ -26,6 +26,7 @@ public class OI {
 
     public OI() {
         driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.PS4);
+        //Needs to be set to X mode for rumbling to work
         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_D);
 
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
