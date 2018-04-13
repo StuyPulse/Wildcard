@@ -4,6 +4,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
@@ -22,7 +23,7 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new PrintCommand("[SingleCubeDifferentSideScale] isRight? " + isRight));
         // Add Commands here:
         //TODO: kill magic numbers
-        addSequential(new DriveStraightRampDownOnlyCommand(235 - 14), 3);
+        addSequential(new DriveStraightRampDownOnlyCommand(235 - 14 + 7), 4);
 
         // Rotate so that we're BACKWARDS
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
@@ -32,13 +33,13 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DriveStraightRampDownOnlyCommand(-1 * (234 + 20 + 24 + 24 + 10) ),3);
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 35 : -35), 1.5 );//TODO: change to 45
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 15 : -15), 1.5 );//Was originally 45, then 35
 
         // Drive forward and raise lift for scoring
-        addParallel(new DriveStraightPIDCommand(18, 0.3));
+        addParallel(new DriveStraightPIDCommand(18 + 6 + 6, 0.3));
         addSequential(new LiftMoveToHeightCommand(86), 2.5);
 
-        addSequential(new QuisitorDeacquireCommand(), 0.5);//TODO: ask for timeout
+        addSequential(new QuisitorMoveSpeedCommand(-0.5), 0.5);
 
         // Back up
         addSequential(new DriveStraightPIDCommand(18, -0.3));
