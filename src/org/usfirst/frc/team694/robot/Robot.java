@@ -11,7 +11,6 @@ import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAuto
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
@@ -22,6 +21,7 @@ import org.usfirst.frc.team694.util.ArduinoLED;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -34,6 +34,8 @@ public class Robot extends IterativeRobot {
     // The main instance of Robot
     private static Robot myInstance;
 
+    public static PowerDistributionPanel pdp;
+    
     public static Drivetrain drivetrain;
     public static Quisitor quisitor;
     public static Lift lift;
@@ -59,6 +61,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void robotInit() {
         myInstance = this;
+        
+        pdp = new PowerDistributionPanel();
 
         drivetrain = new Drivetrain();
         quisitor = new Quisitor();

@@ -128,5 +128,12 @@ public final class RobotMap {
      * LED Device Addresses
      ******************************************************************************/
     public static final int LIFTLIGHTING_ADDRESS = 95;
+    
+    
+    /******************************************************************************
+     * Brownout Prevention Constants
+     ******************************************************************************/
+    public static final double BROWNOUT_START_VOLTAGE = 6.8;
+    public static final double VOLTAGE_LOWER_LIMIT = 7.0;
 }
 

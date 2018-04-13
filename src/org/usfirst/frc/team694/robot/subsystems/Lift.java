@@ -203,7 +203,7 @@ public class Lift extends Subsystem {
         //        return innerLeftMotor.getSelectedSensorVelocity(0);
     }
 
-    public void enableCurrentLimit() {
+    /*public void enableCurrentLimit() {
         innerLeftMotor.enableCurrentLimit(true);
         innerRightMotor.enableCurrentLimit(true);
     }
@@ -211,7 +211,7 @@ public class Lift extends Subsystem {
     public void disableCurrentLimit() {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
-    }
+    }*/
 
     public double getCurrent() {
         return innerLeftMotor.getOutputCurrent() + innerRightMotor.getOutputCurrent()

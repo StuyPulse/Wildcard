@@ -37,6 +37,9 @@ public class Drivetrain extends Subsystem {
     private WPI_VictorSPX rightTopMotor;
     private WPI_VictorSPX rightMiddleMotor;
     private WPI_TalonSRX rightBottomMotor;
+    
+    double leftSidePower;
+    double rightSidePower;
 
     private DifferentialDrive differentialDrive;
 
@@ -199,6 +202,9 @@ public class Drivetrain extends Subsystem {
     }
 
     public void tankDrive(double left, double right) {
+        leftSidePower = left;
+        rightSidePower = right;
+        
         if (brownoutProtectionEnabled) {
             left = Math.signum(left) * Math.min(Math.abs(left),BROWNOUT_PROTECTION_PVBUS_CAP);
             right = Math.signum(right) * Math.min(Math.abs(right),BROWNOUT_PROTECTION_PVBUS_CAP);
@@ -215,6 +221,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void curvatureDrive(double speed, double rotation, boolean turn) {
+        
+        
         if (brownoutProtectionEnabled) {
             speed = Math.signum(speed) * Math.min(Math.abs(speed),BROWNOUT_PROTECTION_PVBUS_CAP);
             rotation = Math.signum(rotation) * Math.min(Math.abs(rotation),BROWNOUT_PROTECTION_PVBUS_CAP);
@@ -223,6 +231,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void stop() {
+        leftSidePower = 0.0;
+        rightSidePower = 0.0;
         tankDrive(0, 0);
     }
 
@@ -324,7 +334,7 @@ public class Drivetrain extends Subsystem {
              + rightTopMotor.getOutputCurrent();
     }
 
-    public double getRightDrivetrainVoltage() {
+    /*public double getRightDrivetrainVoltage() {
         return rightBottomMotor.getOutputVoltage()
              + rightMiddleMotor.getOutputVoltage()
              + rightTopMotor.getOutputVoltage();
@@ -332,11 +342,11 @@ public class Drivetrain extends Subsystem {
     }
     
     public double getLeftDrivetrainVoltage() {
-        return lefttBottomMotor.getOutputVoltage()
+        return leftBottomMotor.getOutputVoltage()
              + leftMiddleMotor.getOutputVoltage()
              + leftTopMotor.getOutputVoltage();
 
-    }
+    }*/
     
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
@@ -348,6 +358,29 @@ public class Drivetrain extends Subsystem {
 
     public double getFrontInchesAway() {
         return frontSonar.getRangeInches();
+    }
+    
+    public double getDrivetrainLeftPower() {
+        return leftSidePower;
+    }
+    
+    public double getDrivetrainRightPower() {
+        return rightSidePower;
+    }
+    
+    public double getDrivetrainLeftCurrent() {
+        return (leftBottomMotor.getOutputCurrent() + leftTopMotor.getOutputCurrent() + leftMiddleMotor.getOutputCurrent());
+    }
+    
+    public double getDrivetrainRightCurrent() {
+        return (rightBottomMotor.getOutputCurrent() + rightTopMotor.getOutputCurrent() + rightMiddleMotor.getOutputCurrent());
+    }
+    
+    public double predictLeftMotorCurrent() {
+        return -1.0;
+    }
+    public double predictRightMotorCurrent() {
+        return -1.0;
     }
 }
 
