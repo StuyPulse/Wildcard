@@ -110,7 +110,7 @@ public class Drivetrain extends Subsystem {
         /// Line Sensors
         leftLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_LEFT_PORT);
         rightLineSensor = new DigitalInput(RobotMap.DRIVETRAIN_LINE_SENSOR_RIGHT_PORT);
-
+        lineSensorSystem = new LineSensorSystem(leftLineSensor, rightLineSensor);
 
         navX = new AHRS(SPI.Port.kMXP);
 
@@ -260,28 +260,19 @@ public class Drivetrain extends Subsystem {
         return navX.getAngle();
     }
 
-    /*public void updateSensors() {
+    public void updateSensors() {
        lineSensorSystem.mainLoop();
-
-    /*public boolean isOnLine() {
-        return leftIsOnLine() || rightIsOnLine();
     }
-
+    public boolean isOnLine() {
+        return lineSensorSystem.basicFind();
+    }
     public boolean rightIsOnLine() {
-        return rightLineSensor.basicFind();
+        return lineSensorSystem.getRightSensorValue();
     }
-
     public boolean leftIsOnLine() {
-        return leftLineSensor.basicFind();
+        return lineSensorSystem.getLeftSensorValue();
     }
 
-    public double getRawLeftLineSensor() {
-        return leftLineSensor.getRawData();
-    }
-
-    public double getRawRightLineSensor() {
-        return rightLineSensor.getRawData();
-    }*/
 
     public void setRamp(double rampSeconds) {
         leftTopMotor.configOpenloopRamp(rampSeconds, 0);

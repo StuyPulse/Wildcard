@@ -6,41 +6,44 @@ import java.util.ArrayList;
 
 public class LineSensorSystem {
     private boolean onLineBefore;
-    private boolean darkRawValue;
-    private boolean lightRawValue;
+    private boolean rightRawValue;
+    private boolean leftRawValue;
     private boolean newLine;
     private String colorFound;
-    private DigitalInput darkColorSensor;
-    private DigitalInput lightColorSensor;
-    public LineSensorSystem(DigitalInput dark, DigitalInput light){
-        darkColorSensor = dark;
-        lightColorSensor = light;
+    private DigitalInput rightColorSensor;
+    private DigitalInput leftColorSensor;
+    public LineSensorSystem(DigitalInput right, DigitalInput left){
+        rightColorSensor = right;
+        leftColorSensor = left;
         colorFound = "grey";
 
     }
     public void getRawData(){
-        darkRawValue = darkColorSensor.get();
-        lightRawValue = lightColorSensor.get();
+        rightRawValue = rightColorSensor.get();
+        leftRawValue = leftColorSensor.get();
+    }
+    public boolean getRightSensorValue(){
+        return rightRawValue;
+    }
+    public boolean getLeftSensorValue(){
+        return leftRawValue;
     }
     public void mainLoop(){
       getRawData();
-      if (!(darkRawValue || lightRawValue)){
-          colorFound = "black";
+      if (!(rightRawValue || leftRawValue)){
+          colorFound = "black/grey";
       }else{
-          if (!lightRawValue && darkRawValue){
-              colorFound = "grey";
-          }else{
-              colorFound = "Red/White/Blue";
-          }
+          colorFound = "Red/White/Blue";
+
       }
-      newLine = (darkRawValue  || lightRawValue) != onLineBefore;
+      newLine = (rightRawValue  || leftRawValue) != onLineBefore;
       onLineBefore = newLine ;
 
     }
     public boolean basicFind(){
         if (newLine){
-            System.out.println("port 2 DIO (DARK):" + darkRawValue);
-            System.out.println("port 3 DIO (LIGHT):" + lightRawValue);
+            System.out.println("port 2 DIO (DARK):" + rightRawValue);
+            System.out.println("port 3 DIO (LIGHT):" + leftRawValue);
             System.out.println("new Color:" + colorFound);
         }
         return newLine;
