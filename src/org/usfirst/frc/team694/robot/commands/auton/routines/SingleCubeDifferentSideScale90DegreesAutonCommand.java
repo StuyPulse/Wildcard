@@ -4,8 +4,6 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
@@ -30,7 +28,7 @@ public class SingleCubeDifferentSideScale90DegreesAutonCommand extends CommandGr
             addParallel(new QuisitorAcquireCommand(), 0.5);
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 1.5 );
             //Go forward towards the scale and raising the lift.
-            addParallel(new DriveStraightRampDownOnlyCommand(25),1);
+            addParallel(new DrivetrainMoveInchesEncoderCommand(25,0.8),1);
             addSequential(new LiftMoveToHeightCommand(83.0));
             addSequential(new QuisitorDeacquireCommand(), 1.5);
             addSequential(new LiftMoveToBottomCommand());
