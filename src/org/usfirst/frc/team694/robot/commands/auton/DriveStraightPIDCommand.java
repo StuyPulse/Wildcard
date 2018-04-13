@@ -17,12 +17,12 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
 
     public DriveStraightPIDCommand(double targetDistance, double speed) {
         super(targetDistance, speed);
-        rotationPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
     }
 
     @Override
     protected void initialize() {
         super.initialize();
+        rotationPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
 //        Robot.drivetrain.resetGyro();
         rotationPIDController.setSetpoint(Robot.drivetrain.getGyroAngle());
 //        rotationPIDController.setSetpoint(0);

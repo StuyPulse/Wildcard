@@ -21,7 +21,7 @@ public class LiftMoveSpeedCommand extends Command {
 
     @Override
     protected void execute() {
-        Robot.lift.move(speed);
+        Robot.lift.moveDangerous(speed);
     }
 
     @Override

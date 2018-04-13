@@ -34,18 +34,13 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
 
         lastTimeNotOnTarget = Timer.getFPGATimestamp();
 
-		Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
+	Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
 
-		gyroPIDController.setPID(
-				SmartDashboard.getNumber("RotateDegreesPID P", 0.03), 
-    			0, 
-    			SmartDashboard.getNumber("RotateDegreesPID D", 0.06)
-			);
+	gyroPIDController.setPID(SmartDashboard.getNumber("RotateDegreesPID P", 0.03), 0, SmartDashboard.getNumber("RotateDegreesPID D", 0.06));
         gyroPIDController.setSetpoint(targetAngle);
         gyroPIDController.enable();
-
-		System.out.println("[RotatePID] START: " + getAngle());
-	}
+	System.out.println("[RotatePID] START: " + getAngle());
+    }
 
     @Override
     protected void execute() {
