@@ -2,6 +2,7 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 
@@ -21,8 +22,10 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
         driveCommand.addTurn(isRight? 5.0 : 2.5, isRight ? 90.0 : -90.0); // Originally was 10 inches
         driveCommand.addTurn(isRight ? 68.0 : 68, 0.0);
 
-        addSequential(new LiftMoveToHeightCommand(30.0)); //TODO: Find a height for the lift to move to.
-        addSequential(new WaitCommand(0.5));
+//        addSequential(new LiftMoveToHeightCommand(30.0)); //TODO: Find a height for the lift to move to.
+//        addSequential(new WaitCommand(0.5));
+        //TODO: Change distance at which the lift is raised
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30.0), 0));
         addSequential(driveCommand, 3.5);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
         //faster one: addParallel(new QuisitorDeacquireCommand(), 0.5);
