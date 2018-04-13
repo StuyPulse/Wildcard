@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.OperatorGamepadRumbleCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
@@ -159,6 +160,7 @@ public class Robot extends IterativeRobot {
         
         if(Robot.quisitor.isCubeDetectedIR() && !isPurpleFlashing) {
             liftLED.sendGreen();
+            new OperatorGamepadRumbleCommand(0.5, 0.5);
         } else if(!Robot.quisitor.isCubeDetectedIR() && !isPurpleFlashing) {
             liftLED.sendAllOff();
         }
