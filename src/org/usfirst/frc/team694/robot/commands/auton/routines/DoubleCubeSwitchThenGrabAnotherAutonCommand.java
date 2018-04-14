@@ -4,7 +4,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.FasterSingleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -20,17 +20,18 @@ public class DoubleCubeSwitchThenGrabAnotherAutonCommand extends CommandGroup {
     public DoubleCubeSwitchThenGrabAnotherAutonCommand(boolean isSwitchRight) {
 
         // Score the 1st bad boy and Grab the 2nd bad boy
-        addSequential(new FasterSingleCubeSwitchAutonChooserCommand());
-        addSequential(new FasterPostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight));
+        addSequential(new DoubleCubeSwitchAutonChooserCommand());
+        addSequential(new PostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight, true));
 
+        /*
         // Approach the switch to score that bad boy
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SWITCH_READY_ANGLE : (-1 * SWITCH_READY_ANGLE)), .8/*1*/);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SWITCH_READY_ANGLE : (-1 * SWITCH_READY_ANGLE)), .8/*1* /);
         addParallel(new LiftMoveToHeightCommand(30.0));
         addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_READY_DISTANCE, 1));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), .8);
 
         // Score that 2nd bad boy
         addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_SCORE_DISTANCE, 1), 2);
-        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        addSequential(new QuisitorDeacquireCommand(), 0.5); */
     }
 }
