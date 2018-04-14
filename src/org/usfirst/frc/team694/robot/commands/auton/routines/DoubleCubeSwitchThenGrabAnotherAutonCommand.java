@@ -18,6 +18,7 @@ public class DoubleCubeSwitchThenGrabAnotherAutonCommand extends CommandGroup {
     private static final double SWITCH_SCORE_DISTANCE = 50;
 
     public DoubleCubeSwitchThenGrabAnotherAutonCommand(boolean isSwitchRight) {
+
         // Score the 1st bad boy and Grab the 2nd bad boy
         addSequential(new FasterSingleCubeSwitchAutonChooserCommand());
         addSequential(new FasterPostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight));

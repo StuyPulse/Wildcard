@@ -5,6 +5,8 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
@@ -20,7 +22,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
         // Get in position to grab second cube
         double GRAB_READY_ANGLE = 45;
-        double GRAB_READY_DISTANCE = 55 - 10 - 3;
+        double GRAB_READY_DISTANCE = 55 - 10 - 3 + 16;
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
                 isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
@@ -39,8 +41,12 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         addParallel(new QuisitorAcquireCommand());
         addSequential(new WaitCommand(0.5));
         addParallel(new QuisitorStopCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -0.5));
-
+        DrivetrainDriveCurveCommand backupCommand = new DrivetrainDriveCurveCommand(GRAB_BACK_DISTANCE, RampMode.NO_RAMPING);
+        //addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -0.5));
+        backupCommand.addTurn(0, 0);
+        backupCommand.addSpeedChange(0, -0.5);
+        addSequential(backupCommand);
+        
 //        // Get in 2nd cube Switch scoring position
 //        double SCALE_READY_ANGLE = 45;
 //        double SCALE_READY_DISTANCE = 24 + 24;
