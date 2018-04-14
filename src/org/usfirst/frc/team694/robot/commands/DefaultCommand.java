@@ -5,8 +5,8 @@ import org.usfirst.frc.team694.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *   This is how we circumvent auton commands running
- *   at the same times as default commands
+ * This is how we circumvent auton commands running at the same times as default
+ * commands
  */
 
 // FIXME: Figure out a cleaner way to handle this issue
@@ -30,7 +30,7 @@ public abstract class DefaultCommand extends Command {
             defaultExecute();
         }
     }
-    
+
     protected abstract void defaultExecute();
 
 }

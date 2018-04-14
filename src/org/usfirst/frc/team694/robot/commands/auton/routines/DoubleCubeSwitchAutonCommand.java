@@ -1,18 +1,11 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.FasterSingleCubeSwitchAutonChooserCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -23,17 +16,17 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
 
     public DoubleCubeSwitchAutonCommand(boolean isSwitchRight) {
 
-        addSequential(new SingleCubeSwitchAutonChooserCommand());
+        addSequential(new FasterSingleCubeSwitchAutonChooserCommand());
 
-        addSequential(new PostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight));
+        addSequential(new FasterPostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight));
 
         // Get in 2nd cube Switch scoring position
-        double SCALE_READY_ANGLE = 45;
-        double SCALE_READY_DISTANCE = 24 + 24;
+        double SWITCH_READY_ANGLE = 45;
+        double SWITCH_READY_DISTANCE = 24 + 10/*24*/;
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SCALE_READY_ANGLE : (-1 * SCALE_READY_ANGLE)), 1);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SWITCH_READY_ANGLE : (-1 * SWITCH_READY_ANGLE)), .8/*1*/);
         addParallel(new LiftMoveToHeightCommand(30.0)); //TODO: Find a height for the lift to move to.
-        addSequential(new DrivetrainMoveInchesEncoderCommand(SCALE_READY_DISTANCE, 1));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_READY_DISTANCE, 1));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
 
         // Score that 2nd bad boy

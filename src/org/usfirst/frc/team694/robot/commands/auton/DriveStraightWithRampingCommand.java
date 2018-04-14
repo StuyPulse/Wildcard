@@ -19,7 +19,7 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
     protected PIDController speedPIDController;
 
     // Multiplies our speed, limiting it
-//    private double speedScaleFactor;
+    //    private double speedScaleFactor;
 
     private double speedPIDOutput;
 
@@ -31,14 +31,13 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
     protected void initialize() {
         super.initialize();
         // Initialized the controller here to prevent "java.lang.OutOfMemoryError: unable to create new native thread" error
-        speedPIDController = new PIDController(0,0,0, new SpeedPIDSource(), new SpeedPIDOutput());
+        speedPIDController = new PIDController(0, 0, 0, new SpeedPIDSource(), new SpeedPIDOutput());
 
         Robot.drivetrain.setRamp(SmartDashboard.getNumber("DriveStraight RampSeconds", 2.5));
 
         //startEncoderValue = Robot.drivetrain.getRightEncoderDistance();
         speedPIDController.setSetpoint(targetDistance);
-        speedPIDController.setPID(
-                SmartDashboard.getNumber("DriveDistanceEncodersPID P", 0),
+        speedPIDController.setPID(SmartDashboard.getNumber("DriveDistanceEncodersPID P", 0),
                 SmartDashboard.getNumber("DriveDistanceEncodersPID I", 0),
                 SmartDashboard.getNumber("DriveDistanceEncodersPID D", 0));
         speedPIDController.setAbsoluteTolerance(DRIVE_DISTANCE_THRESHOLD);
@@ -51,7 +50,7 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
     @Override
     protected void execute() {
         System.out.println("[DriveStraightWithRamping] ===============================");
-//        SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
+        //        SmartDashboard.putNumber("DriveStraight Encoder Vel", Robot.drivetrain.getSpeed());
 
         double output = speedPIDOutput;
         if (Math.abs(output) < 0.15) {
@@ -62,10 +61,10 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
         }
         output = Math.min(Math.max(-1, output), 1);
 
-        double left = output * speedScaleFactor  + getGyroPIDOutput();
+        double left = output * speedScaleFactor + getGyroPIDOutput();
         double right = output * speedScaleFactor - getGyroPIDOutput();
         Robot.drivetrain.tankDrive(left, right);
-//        System.out.println("[Drive Straight Ramp] Angle output: " + getGyroPIDOutput());
+        //        System.out.println("[Drive Straight Ramp] Angle output: " + getGyroPIDOutput());
     }
 
     @Override
@@ -109,7 +108,8 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
 
     private class SpeedPIDSource implements PIDSource {
         @Override
-        public void setPIDSourceType(PIDSourceType pidSource) {}
+        public void setPIDSourceType(PIDSourceType pidSource) {
+        }
 
         @Override
         public PIDSourceType getPIDSourceType() {
@@ -127,7 +127,7 @@ public class DriveStraightWithRampingCommand extends DriveStraightPIDCommand {
         public void pidWrite(double output) {
             System.out.println("[DriveStraightWithRamping] speed output: " + output);
             speedPIDOutput = output;
-        }    
+        }
     }
 }
 

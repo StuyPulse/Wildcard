@@ -1,5 +1,4 @@
 package org.usfirst.frc.team694.robot.commands;
-
 import org.usfirst.frc.team694.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,7 +10,7 @@ public class LiftMoveSpeedCommand extends Command {
     private double speed;
 
     public LiftMoveSpeedCommand(double speed) {
-//        requires(Robot.lift);
+        //        requires(Robot.lift);
         this.speed = speed;
     }
 
