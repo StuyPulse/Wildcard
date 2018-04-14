@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
+import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
@@ -18,12 +19,12 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
-    public PostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight) {
+    public PostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight, boolean isSecondCube) {
 
         // Get in position to grab second cube
         double GRAB_READY_ANGLE = 45;
         double GRAB_READY_DISTANCE = 55 - 10 - 3 + 16;
-
+        
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
                 isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
         addParallel(new LiftMoveToBottomCommand());
@@ -35,6 +36,9 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         double GRAB_BACK_DISTANCE = 30;
 
         addSequential(new QuisitorOpenCommand());
+        if (isSecondCube) {
+            addSequential(new LiftMoveToHeightCommand(15));
+        }
         addParallel(new QuisitorAcquireCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_FORWARD_DISTANCE, 0.3));
         addSequential(new QuisitorCloseCommand());
