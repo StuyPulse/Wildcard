@@ -45,7 +45,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
             addSequential(new LiftMoveToHeightCommand(15));
         }
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(isSecondCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(isSecondCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3), 1.5);
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand());
         addSequential(new WaitCommand(0.5));

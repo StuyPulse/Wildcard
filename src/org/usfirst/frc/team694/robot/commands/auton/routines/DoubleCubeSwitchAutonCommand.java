@@ -3,10 +3,8 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -22,7 +20,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
     private static final double SWITCH_READY_ANGLE = 45;
     private static final double SWITCH_READY_DISTANCE = 24 + 10/*24*/;
 
-    private static final double SWITCH_SCORE_DISTANCE = 20 + 6 + 13 + 5;
+    private static final double SWITCH_SCORE_DISTANCE = 20 + 6 + 13 + 15;
 
     public DoubleCubeSwitchAutonCommand(boolean isSwitchRight) {
 
@@ -39,10 +37,10 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
 
         // Score that 2nd bad boy
-        //addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_SCORE_DISTANCE, 1), 2);
-        addSequential(new DrivetrainDriveCurveCommand(SWITCH_SCORE_DISTANCE, RampMode.NO_RAMP_UP));
-        //addSequential(new WaitCommand(0.5));
-        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_SCORE_DISTANCE, 0.3), 1.5);
+        //addSequential(new DrivetrainDriveCurveCommand(SWITCH_SCORE_DISTANCE, RampMode.NO_RAMP_UP), 2.0);
+        addSequential(new WaitCommand(.25/*0.5*/));
+        addParallel(new QuisitorDeacquireCommand(), 0.5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 5, -1)); // -0.45
 
 

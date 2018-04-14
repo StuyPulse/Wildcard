@@ -26,7 +26,7 @@ public class SingleCubeSwitchAutonCommand extends CommandGroup {
 //        addSequential(new WaitCommand(0.5));
         //TODO: Change distance at which the lift is raised
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30.0), 15));
-        addSequential(driveCommand, 3.5);
+        addSequential(driveCommand, 3.0);
         addParallel(new QuisitorDeacquireCommand(), 0.5);
         //faster one: addParallel(new QuisitorDeacquireCommand(), 0.5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 5, -1)); // -0.45
