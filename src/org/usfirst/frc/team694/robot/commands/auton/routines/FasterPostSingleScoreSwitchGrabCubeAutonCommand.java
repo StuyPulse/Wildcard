@@ -29,15 +29,15 @@ public class FasterPostSingleScoreSwitchGrabCubeAutonCommand extends CommandGrou
 
         // Grab the second cube
         double GRAB_FORWARD_DISTANCE = 30 /*+ 5*/;
-        double GRAB_BACK_DISTANCE = /*30*/ 30 - 5;
+        double GRAB_BACK_DISTANCE = /*30*/ 30 - 10;
 
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_FORWARD_DISTANCE, .75/*0.3*/));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_FORWARD_DISTANCE, 1/*0.3*/));
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand());
         addSequential(new WaitCommand(0.5));
         addParallel(new QuisitorStopCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -0.8/*-0.5*/));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -1/*-0.5*/));
     }
 }
