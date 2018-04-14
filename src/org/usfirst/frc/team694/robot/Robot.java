@@ -9,11 +9,12 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.TripleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
@@ -141,7 +142,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-//        updateSmartDashboard();
+        //        updateSmartDashboard();
     }
 
     @Override
@@ -161,7 +162,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-//        updateSmartDashboard();
+        //        updateSmartDashboard();
     }
 
     @Override
@@ -176,13 +177,16 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
         autonChooser.addObject("Single Cube SWITCH then grab another cube", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
         autonChooser.addObject("Single Cube SCALE", new SingleCubeScaleAutonChooserCommand());
+        //autonChooser.addObject("Single Cube 90 Degree SCALE", new SingleCube90DegreeScaleAutonChooserCommand());
         autonChooser.addObject("Double Cube SCALE (single opposite if scale is on the other side)", new DoubleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double Cube SWITCH", new DoubleCubeSwitchAutonChooserCommand());
-        //        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
+        autonChooser.addObject("OH BABY A TRIPLE, or a double", new TripleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Double Cube SWITCH then grab another cube", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
+        //Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
         autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
         autonChooser.addObject("RoboTigers Double Cube Scale or Double Cube Switch", new RoboTigersDoubleCubeSwitchAutonChooserCommand());
-        
-//        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
+
+        //        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
 
         SmartDashboard.putData("Autonomous", autonChooser);
 

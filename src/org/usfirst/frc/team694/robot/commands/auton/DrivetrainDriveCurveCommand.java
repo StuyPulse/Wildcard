@@ -6,34 +6,32 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
- *    A command that lets us trick DriveStraightPID to turn and change speed mid trajectory (wildcard motion profiling)
+ * A command that lets us trick DriveStraightPID to turn and change speed mid
+ * trajectory (wildcard motion profiling)
  */
 
 public class DrivetrainDriveCurveCommand extends CommandGroup {
 
     public enum RampMode {
-        RAMP_FULL,
-        NO_RAMP_UP,
-        NO_RAMP_DOWN,
-        NO_RAMPING
+        RAMP_FULL, NO_RAMP_UP, NO_RAMP_DOWN, NO_RAMPING
     }
 
     private DriveStraightPIDCommand driveCommand = null;
 
     public DrivetrainDriveCurveCommand(double targetDistance, RampMode ramping) {
         switch (ramping) {
-            case RAMP_FULL:
-                driveCommand = new DriveStraightWithRampingCommand(targetDistance);
-                break;
-            case NO_RAMP_UP:
-                driveCommand = new DriveStraightRampDownOnlyCommand(targetDistance);
-                break;
-            case NO_RAMP_DOWN:
-                driveCommand = new DriveStraightRampUpOnlyCommand(targetDistance);
-                break;
-            case NO_RAMPING:
-                driveCommand = new DriveStraightPIDCommand(targetDistance, 1);
-                break;
+        case RAMP_FULL:
+            driveCommand = new DriveStraightWithRampingCommand(targetDistance);
+            break;
+        case NO_RAMP_UP:
+            driveCommand = new DriveStraightRampDownOnlyCommand(targetDistance);
+            break;
+        case NO_RAMP_DOWN:
+            driveCommand = new DriveStraightRampUpOnlyCommand(targetDistance);
+            break;
+        case NO_RAMPING:
+            driveCommand = new DriveStraightPIDCommand(targetDistance, 1);
+            break;
         }
         addParallel(driveCommand); // Doing this so that we can make everything run at once
     }
@@ -60,9 +58,7 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
 
     private static class DrivetrainRampingSetSpeedScaleAtDistanceCommand extends ConditionalDistanceEncodersCommand {
 
-        public DrivetrainRampingSetSpeedScaleAtDistanceCommand(
-                DriveStraightPIDCommand rampCommand, 
-                double distance, 
+        public DrivetrainRampingSetSpeedScaleAtDistanceCommand(DriveStraightPIDCommand rampCommand, double distance,
                 double factor) {
             super(new DrivetrainRampingSetSpeedScaleCommand(rampCommand, factor), distance);
         }
@@ -79,18 +75,16 @@ public class DrivetrainDriveCurveCommand extends CommandGroup {
             @Override
             protected void initialize() {
                 rampCommand.setSpeedScale(speedScaleFactor);
-                System.out.println("[DrivetrainRampSetSpeed] set to " + speedScaleFactor + " at " + + Robot.drivetrain.getEncoderDistance() + "!");
+                System.out.println("[DrivetrainRampSetSpeed] set to " + speedScaleFactor + " at "
+                        + +Robot.drivetrain.getEncoderDistance() + "!");
             }
         }
     }
+
     private static class DrivetrainRampingSetTargetAngleAtDistanceCommand extends ConditionalDistanceEncodersCommand {
 
-
-        public DrivetrainRampingSetTargetAngleAtDistanceCommand(
-                DriveStraightPIDCommand rampCommand, 
-                double distance,
-                double angle
-                ) {
+        public DrivetrainRampingSetTargetAngleAtDistanceCommand(DriveStraightPIDCommand rampCommand, double distance,
+                double angle) {
             super(new DrivetrainRampingSetTargetAngleCommand(rampCommand, angle), distance);
         }
 
