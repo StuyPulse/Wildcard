@@ -1,12 +1,11 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.robot.commands.QuisitorMoveControlCommand;
+import org.usfirst.frc.team694.util.IRSensor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,19 +13,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Quisitor extends Subsystem {
 
     private WPI_VictorSPX quisitorMotor;//Motor for intake/outtake
-    
     private DoubleSolenoid quisitorGrabberSolenoid;//solenoid for grabbing
-
-    private DigitalInput quisitorLimitSwitch;//Not used but here anyways
+//    private DigitalInput quisitorLimitSwitch;//Not used but here anyways
+    private IRSensor quisitorCubeSensor;
 
     public Quisitor() {
         quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_MOTOR_PORT);
-
         quisitorMotor.setNeutralMode(NeutralMode.Brake);
-
         quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT);
-
-        quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
+//        quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
+        quisitorCubeSensor = new IRSensor(RobotMap.QUISITOR_IR_SENSOR_PORT);
     }
 
     @Override
@@ -57,22 +53,24 @@ public class Quisitor extends Subsystem {
     }
 
     public boolean isCubeDetected() {
-        return !(quisitorLimitSwitch.get());
+       return quisitorCubeSensor.isSensorTriggered();
+//        return !(quisitorLimitSwitch.get());
     }
     
     public void open() {
-        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kReverse);
+        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }
 
     public void close() {
-        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kForward);
+        quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void toggle() {
-        if (quisitorGrabberSolenoid.get() == DoubleSolenoid.Value.kReverse) {
+        if (quisitorGrabberSolenoid.get() == DoubleSolenoid.Value.kForward) {
             close();
         } else {
             open();
         }
     }
+
 }

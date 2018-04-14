@@ -40,9 +40,10 @@ public final class RobotMap {
     public static final int QUISITOR_MOTOR_PORT = 11;
 
     /**************************************************************************
-     * QUISITOR Limit Switch
+     * QUISITOR Sensors
      *************************************************************************/
     public static final int QUISITOR_LIMIT_SWITCH_PORT = 1;
+    public static final int QUISITOR_IR_SENSOR_PORT = 8;
 
     /***************************************************************************
      * Lift Motor Ports
@@ -55,19 +56,23 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Constants
      *************************************************************************/
+    // Extra factor empirically determined
+    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = 34.5 / 31.57;//1.0818;
+
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
     public static final double ENCODER_TO_SPROCKET_REDUCTION = (1.0 / 4) * (1.0 / 3);
-    // Extra factor empirically determined
-    public static final double LIFT_ENCODER_RAW_MULTIPLIER = 1.0818 * (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) / 4.4 * ENCODER_TO_SPROCKET_REDUCTION;
+    public static final double LIFT_ENCODER_RAW_MULTIPLIER = 
+            LIFT_EMPERICAL_RAW_MULTIPLIER * (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) 
+            / 4.4 * ENCODER_TO_SPROCKET_REDUCTION;
 
     public static final double MIN_HEIGHT_OF_LIFT = 20.5;
     public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
     public static final double LIFT_MAX_SPEED = 1;
     public static final double LIFT_BACKDRIVE_SPEED = 0.16667;
 
-    public static final double LIFT_MIN_SPEED = 0.25;
-    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 20.0;
+    public static final double LIFT_MIN_SPEED = 0.1;//0.25;
+    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 30;//20.0;
     public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_RAMP_HEIGHT_THRESHOLD;
     public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
     public static final double LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD = 2;
@@ -84,8 +89,8 @@ public final class RobotMap {
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = 7;
 
-    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 6;//Left 
-    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 5;//Right
+    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 3;//Left 
+    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 2;//Right
 
     /*****************************************************************************
      * Analog Ports
@@ -111,16 +116,17 @@ public final class RobotMap {
      * DRIVETRAIN_RAW_MULTIPLIER: We multiply by 4 because the encoder has 4
      * Quadrants, and each Quadrant passes 256 pulses.
      **/
-    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = 0.1302063789868668;
+
+    // Extra factor imperically determined
+    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = 0.14038963905588;//0.1302063789868668;
 
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
-            /*(127.0 / 121.0) * (161.5 / 1210.0) * */
-            // 0.98 scale tested after driving a certain distance
-            // Mildcard factor:
-            /*0.98 * (296.0 / 2171.0)*/ 
-            /*(72.5 / 71.5) * (83.0 / 632.1) * */
             DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
 
+    /******************************************************************************
+     * LED Device Addresses
+     ******************************************************************************/
+    public static final int LIFTLIGHTING_ADDRESS = 95;
 }
 
