@@ -27,8 +27,13 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
                 isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
+        if (isSecondCube) {
+            addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4));
+        }
+        else {
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4));
+        }
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
 
         // Grab the second cube
@@ -40,7 +45,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
             addSequential(new LiftMoveToHeightCommand(15));
         }
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_FORWARD_DISTANCE, 0.3), 1.5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(isSecondCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3));
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand());
         addSequential(new WaitCommand(0.5));
