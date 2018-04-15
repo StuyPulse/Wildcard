@@ -43,7 +43,7 @@ public class Quisitor extends Subsystem {
     public void deacquire() {
         quisitorMotor.set(-1);
     }
-
+    
     public void acquireSpeed(double speed) {
         quisitorMotor.set(speed);
     }

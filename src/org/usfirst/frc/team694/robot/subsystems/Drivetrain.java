@@ -334,7 +334,7 @@ public class Drivetrain extends Subsystem {
              + rightTopMotor.getOutputCurrent();
     }
 
-    /*public double getRightDrivetrainVoltage() {
+    public double getRightDrivetrainVoltage() {
         return rightBottomMotor.getOutputVoltage()
              + rightMiddleMotor.getOutputVoltage()
              + rightTopMotor.getOutputVoltage();
@@ -346,7 +346,7 @@ public class Drivetrain extends Subsystem {
              + leftMiddleMotor.getOutputVoltage()
              + leftTopMotor.getOutputVoltage();
 
-    }*/
+    }
     
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
