@@ -221,10 +221,18 @@ public class Lift extends Subsystem {
     public void setAutonCurrentLimit() {
         innerLeftMotor.configContinuousCurrentLimit(RobotMap.LIFT_AUTON_CURRENT_LIMIT, 0);
         innerRightMotor.configContinuousCurrentLimit(RobotMap.LIFT_AUTON_CURRENT_LIMIT, 0);
+        innerLeftMotor.configPeakCurrentLimit(0, 0);
+        innerRightMotor.configPeakCurrentLimit(0, 0);
+        innerLeftMotor.enableCurrentLimit(true);
+        innerRightMotor.enableCurrentLimit(true);
     }
     
     public void setTeleopCurrentLimit() {
         innerLeftMotor.configContinuousCurrentLimit(RobotMap.LIFT_TELEOP_CURRENT_LIMIT, 0);
-        innerLeftMotor.configContinuousCurrentLimit(RobotMap.LIFT_TELEOP_CURRENT_LIMIT, 0);
+        innerRightMotor.configContinuousCurrentLimit(RobotMap.LIFT_TELEOP_CURRENT_LIMIT, 0);
+        innerLeftMotor.configPeakCurrentLimit(0, 0);
+        innerRightMotor.configPeakCurrentLimit(0, 0);
+        innerLeftMotor.enableCurrentLimit(true);
+        innerRightMotor.enableCurrentLimit(true);
     }
 }

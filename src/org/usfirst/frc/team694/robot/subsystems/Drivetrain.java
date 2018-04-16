@@ -388,11 +388,19 @@ public class Drivetrain extends Subsystem {
     public void setAutonCurrentLimit() {
         leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_AUTON_CURRENT_LIMIT, 0);
         rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_AUTON_CURRENT_LIMIT, 0);
+        leftBottomMotor.configPeakCurrentLimit(0, 0);
+        rightBottomMotor.configPeakCurrentLimit(0, 0);
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
     }
     
     public void setTeleopCurrentLimit() {
         leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_TELEOP_CURRENT_LIMIT,0);
         rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_TELEOP_CURRENT_LIMIT, 0);
+        leftBottomMotor.configPeakCurrentLimit(0, 0);
+        rightBottomMotor.configPeakCurrentLimit(0, 0);
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
     }
 }
 
