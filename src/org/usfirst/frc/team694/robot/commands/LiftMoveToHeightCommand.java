@@ -21,7 +21,7 @@ public class LiftMoveToHeightCommand extends Command {
     protected void execute() {
         // Original:
         //        Robot.lift.setHeight(targetHeight);
-        if (targetHeight > Robot.lift.getLiftHeight()) {
+        if (targetHeight > Math.abs(Robot.lift.getLiftHeight())) {
             Robot.lift.moveRamp(1);
         }
         else {
