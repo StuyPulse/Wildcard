@@ -77,14 +77,15 @@ public class Drivetrain extends Subsystem {
         rightTopMotor.follow(rightBottomMotor);
 
         // Current limit
-//        leftBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-//        rightBottomMotor.configContinuousCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-//        leftBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-//        rightBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
-//        leftBottomMotor.configPeakCurrentDuration(1, 0);
-//        rightBottomMotor.configPeakCurrentDuration(1, 0);
-//        leftBottomMotor.enableCurrentLimit(false);
-//        rightBottomMotor.enableCurrentLimit(false);
+//        leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_CURRENT_LIMIT, 0);
+//       rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_CURRENT_LIMIT, 0);
+        
+//      leftBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//      rightBottomMotor.configPeakCurrentLimit(DRIVETRAIN_CURRENT_LIMIT_LIFT, 0);
+//      leftBottomMotor.configPeakCurrentDuration(1, 0);
+//      rightBottomMotor.configPeakCurrentDuration(1, 0);
+//      leftBottomMotor.enableCurrentLimit(false);
+//      rightBottomMotor.enableCurrentLimit(false);
 
         /// Inverted
         rightTopMotor.setInverted(true);
@@ -379,8 +380,19 @@ public class Drivetrain extends Subsystem {
     public double predictLeftMotorCurrent() {
         return -1.0;
     }
+    
     public double predictRightMotorCurrent() {
         return -1.0;
+    }
+    
+    public double setAutonCurrentLimit() {
+        leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_AUTON_CURRENT_LIMIT, 0);
+        rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_AUTON_CURRENT_LIMIT, 0);
+    }
+    
+    public double setTeleopCurrentLimit() {
+        leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_TELEOP_CURRENT_LIMIT,0);
+        rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_TELEOP_CURRENT_LIMIT, 0);
     }
 }
 

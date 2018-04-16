@@ -217,4 +217,14 @@ public class Lift extends Subsystem {
         return innerLeftMotor.getOutputCurrent() + innerRightMotor.getOutputCurrent()
                 + outerLeftMotor.getOutputCurrent() + outerRightMotor.getOutputCurrent();
     }
+    
+    public double setAutonCurrentLimit() {
+        innerLeftMotor.configContinuousCurrentLimit(RobotMap.LIFT_AUTON_CURRENT_LIMIT, 0);
+        innerRightMotor.configContinuousCurrentLimit(RobotMap.LIFT_AUTON_CURRENT_LIMIT, 0);
+    }
+    
+    public double setTeleopCurrentLimit() {
+        innerLeftMotor.configContinuousCurrentLimit(RobotMap.LIFT_TELEOP_CURRENT_LIMIT, 0);
+        innerLeftMotor.configContinuousCurrentLimit(RobotMap.LIFT_TELEOP_CURRENT_LIMIT, 0);
+    }
 }

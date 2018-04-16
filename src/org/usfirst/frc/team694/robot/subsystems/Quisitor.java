@@ -48,9 +48,14 @@ public class Quisitor extends Subsystem {
         quisitorMotor.set(speed);
     }
 
+    public double getSpeed(){
+        quisitorMotor.get();
+    }
+    
     public void stop() {
         quisitorMotor.set(0);
     }
+    
 
     public boolean isCubeDetected() {
        return quisitorCubeSensor.isSensorTriggered();

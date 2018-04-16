@@ -22,8 +22,9 @@ public class BrownoutProtection {
         //TODO: What to put in the constructor? Not a port argument because it's not a sensor...
     }
     
-    // Method used to 
-    public void reset() {
+    // Method used to stop.
+
+ public void reset() {
         Robot.drivetrain.stop();
         Robot.lift.stop();
         Robot.quisitor.stop();

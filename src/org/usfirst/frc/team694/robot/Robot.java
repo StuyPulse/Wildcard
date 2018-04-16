@@ -116,6 +116,8 @@ public class Robot extends IterativeRobot {
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
+        drivetrain.setAutonCurrentLimit();
+        lift.setAutonCurrentLimit();
 
         gameData = null;
 
@@ -156,6 +158,8 @@ public class Robot extends IterativeRobot {
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
         drivetrain.setRamp(0.0);
+        drivetrain.setTeleopCurrentLimit();
+        lift.setTeleopCurrentLimit();
 
         if (autonCommand != null) {
             autonCommand.cancel();
