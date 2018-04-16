@@ -34,7 +34,7 @@ public class BrownoutProtection {
         leftDrivetrainVoltage = Robot.drivetrain.getLeftSpeed();
         rightDrivetrainVoltage = Robot.drivetrain.getRightSpeed();
         liftVoltage = Robot.lift.getSpeed();
-        quisitorVoltage = Robot.quisitor.getSpeed();
+        //quisitorVoltage = Robot.quisitor.getSpeed();
     }
     
     public double findRequestedVoltage() {

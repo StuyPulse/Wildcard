@@ -335,19 +335,19 @@ public class Drivetrain extends Subsystem {
              + rightTopMotor.getOutputCurrent();
     }
 
-    public double getRightDrivetrainVoltage() {
-        return rightBottomMotor.getOutputVoltage()
-             + rightMiddleMotor.getOutputVoltage()
-             + rightTopMotor.getOutputVoltage();
-
-    }
+//    public double getRightDrivetrainVoltage() {
+//        return rightBottomMotor.getOutputVoltage()
+//             + rightMiddleMotor.getOutputVoltage()
+//             + rightTopMotor.getOutputVoltage();
+//
+//    }
     
-    public double getLeftDrivetrainVoltage() {
-        return leftBottomMotor.getOutputVoltage()
-             + leftMiddleMotor.getOutputVoltage()
-             + leftTopMotor.getOutputVoltage();
-
-    }
+//    public double getLeftDrivetrainVoltage() {
+//        return leftBottomMotor.getOutputVoltage()
+//             + leftMiddleMotor.getOutputVoltage()
+//             + leftTopMotor.getOutputVoltage();
+//
+//    }
     
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
@@ -385,12 +385,12 @@ public class Drivetrain extends Subsystem {
         return -1.0;
     }
     
-    public double setAutonCurrentLimit() {
+    public void setAutonCurrentLimit() {
         leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_AUTON_CURRENT_LIMIT, 0);
         rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_AUTON_CURRENT_LIMIT, 0);
     }
     
-    public double setTeleopCurrentLimit() {
+    public void setTeleopCurrentLimit() {
         leftBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_TELEOP_CURRENT_LIMIT,0);
         rightBottomMotor.configContinuousCurrentLimit(RobotMap.DRIVETRAIN_TELEOP_CURRENT_LIMIT, 0);
     }

@@ -158,8 +158,11 @@ public class Robot extends IterativeRobot {
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
         drivetrain.setRamp(0.0);
-        drivetrain.setTeleopCurrentLimit();
-        lift.setTeleopCurrentLimit();
+        //drivetrain.setTeleopCurrentLimit();
+        //lift.setTeleopCurrentLimit();
+        
+        drivetrain.setAutonCurrentLimit();
+        lift.setAutonCurrentLimit();
 
         if (autonCommand != null) {
             autonCommand.cancel();
@@ -300,10 +303,10 @@ public class Robot extends IterativeRobot {
         return myInstance;
     }
     
-    public static double getTotalVoltage() {
-        return Robot.drivetrain.getLeftDrivetrainVoltage()
-             + Robot.drivetrain.getRightDrivetrainVoltage()
-             + Robot.lift.getCurrent();
-    }
+//    public static double getTotalVoltage() {
+//        return Robot.drivetrain.getLeftDrivetrainVoltage()
+//             + Robot.drivetrain.getRightDrivetrainVoltage()
+//             + Robot.lift.getCurrent();
+//    }
 
 }

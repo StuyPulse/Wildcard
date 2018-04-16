@@ -135,10 +135,10 @@ public final class RobotMap {
      ******************************************************************************/
     public static final double BROWNOUT_START_VOLTAGE = 6.8;
     public static final double VOLTAGE_LOWER_LIMIT = 7.0;
-    public static final double DRIVETRAIN_AUTON_CURRENT_LIMIT = 20;
-    public static final double DRIVETRAIN_TELEOP_CURRENT_LIMIT = 0;
-    public static final double LIFT_AUTON_CURRENT_LIMIT = 15;
-    public static final double LIFT_TELEOP_CURRENT_LIMIT = 0;
+    public static final int DRIVETRAIN_AUTON_CURRENT_LIMIT = 20;
+    public static final int DRIVETRAIN_TELEOP_CURRENT_LIMIT = 0;
+    public static final int LIFT_AUTON_CURRENT_LIMIT = 15;
+    public static final int LIFT_TELEOP_CURRENT_LIMIT = 0;
 
 }
 

@@ -47,10 +47,6 @@ public class Quisitor extends Subsystem {
     public void acquireSpeed(double speed) {
         quisitorMotor.set(speed);
     }
-
-    public double getSpeed(){
-        quisitorMotor.get();
-    }
     
     public void stop() {
         quisitorMotor.set(0);
