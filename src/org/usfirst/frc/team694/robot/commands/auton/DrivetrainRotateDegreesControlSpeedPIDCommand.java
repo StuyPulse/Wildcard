@@ -28,6 +28,9 @@ public abstract class DrivetrainRotateDegreesControlSpeedPIDCommand extends Comm
     
     private double speedChange;
     
+    public double speed;
+    
+    
     private PIDController gyroPIDController;
 
     
@@ -76,6 +79,7 @@ public abstract class DrivetrainRotateDegreesControlSpeedPIDCommand extends Comm
 
             System.out.println("[DrivetrainRotateDegreesPID] delta: " + gyroPIDController.getError() + ", angle: " + Robot.drivetrain.getAbsoluteGyroAngle() + ", output: " + output);
             Robot.drivetrain.tankDrive(speedChange * output, speedChange * -output);
+            speed = output * speedChange;
         }
 
         @Override
