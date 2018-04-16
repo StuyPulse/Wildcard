@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 /**
  *
  */
-public class KryptoniteAutonChooserCommand extends ConditionalCommand {
+public class RightAngleSameSideSwitchAutonCommandChooser extends ConditionalCommand {
 
-    public KryptoniteAutonChooserCommand() {
+    public RightAngleSameSideSwitchAutonCommandChooser() {
         super(new KryptoniteAutonSameSideChooser());
     }
 
