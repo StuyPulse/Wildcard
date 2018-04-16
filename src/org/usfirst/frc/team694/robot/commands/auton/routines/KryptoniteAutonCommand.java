@@ -6,8 +6,6 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
@@ -19,12 +17,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class KryptoniteAutonCommand extends CommandGroup {
 
     public KryptoniteAutonCommand(boolean isRight) {
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(15.0), 10));
-        //TODO: Check distances
-        addSequential(new DriveStraightRampDownOnlyCommand(176));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -90 : 90));
-        //TODO: Check distance to move 
-        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.5));
+        // scores first cube into switch
+        addSequential(new RightAngleSameSideSwitchAutonCommand(isRight));
         addSequential(new QuisitorDeacquireCommand());
         
         //To acquire and score second cube
