@@ -153,13 +153,15 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopInit() {
         liftLED.initialize();
-
+        
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
         drivetrain.setRamp(0.0);
         //drivetrain.setTeleopCurrentLimit();
         //lift.setTeleopCurrentLimit();
+        //drivetrain.disableCurrentLimit();
+        //lift.disableCurrentLimit();
         
         drivetrain.setAutonCurrentLimit();
         lift.setAutonCurrentLimit();
