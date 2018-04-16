@@ -12,29 +12,33 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderC
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
- * GOOD ONE
+ *
  */
+public class NEWBUTDOESNTWORKRoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
 
-public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
+    public NEWBUTDOESNTWORKRoboTigersDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean 
 
-    public RoboTigersDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
+isSwitchSameSide) {
 
         // Drive to rough scoring position
         addParallel(new LiftMoveToHeightCommand(5));
         addSequential(new DriveStraightWithRampingCommand(235 - 14 + 7 ), 2.5);
-        addSequential(new WaitCommand(0.5));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 1.4);
+        //addSequential(new WaitCommand(0.5));
         addParallel(new LiftMoveToHeightCommand(30));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 
+1.4);
+        addParallel(new QuisitorAcquireCommand(), 0.25);
         if (isSwitchSameSide){
-            addSequential(new DrivetrainMoveInchesEncoderCommand(15 + 18 /*+ 5*/, 0.3));
+            addSequential(new DrivetrainMoveInchesEncoderCommand(15 + 18 - 5 /*+ 5*/, 0.3));
         } else {
             addSequential(new DriveStraightWithRampingCommand(121));
         }
         //addSequential(new DriveStraightWithRampingCommand(isSwitchSameSide ? 15 + 24 + 5 : 121));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -180 : 180));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -180 : 
+
+180));
 
         // Score 1st cube
         //drive forward
@@ -47,7 +51,7 @@ public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new QuisitorOpenCommand());
         addSequential(new LiftMoveToBottomCommand());
         addParallel(new QuisitorAcquireCommand(), 0.5);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.5));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.3));
         addSequential(new QuisitorCloseCommand());
         addSequential(new QuisitorAcquireCommand(), 0.5);
         addSequential(new QuisitorStopCommand());
@@ -57,28 +61,40 @@ public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
         //forward
         addSequential(new DrivetrainMoveInchesEncoderCommand(13, .75));
         addSequential(new QuisitorDeacquireCommand(), 0.5);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(20, -.75));
+        addSequential(new QuisitorOpenCommand());
+        addSequential(new DrivetrainMoveInchesEncoderCommand(15, -.75));
         addParallel(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -155 : 155));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -100 : 
+
+100));
+        addParallel(new QuisitorAcquireCommand(), 1);
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.3));
+        addSequential(new QuisitorCloseCommand());
 
         // Go to other side
 
-//        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(15), 50));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(176, 0.8));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -90));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.8)); //TODO: Check distance
-//        addSequential(new QuisitorDeacquireCommand(), 0.5);
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(-5, 0.2));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+//        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(15), 
 //
-//        // Grab the second cube
-//        addSequential(new LiftMoveToBottomCommand());
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(70, 0.4));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -90));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.3));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 180 : -180));
-//        addSequential(new QuisitorOpenCommand());
+//50));
+////        addSequential(new DrivetrainMoveInchesEncoderCommand(176, 0.8));
+////        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -
+//
+//90));
+////        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.8)); //TODO: Check //        addSequential(new QuisitorDeacquireCommand(), 0.5);
+////        addSequential(new DrivetrainMoveInchesEncoderCommand(-5, 0.2));
+////        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+////
+////        // Grab the second cube
+////        addSequential(new LiftMoveToBottomCommand());
+////        addSequential(new DrivetrainMoveInchesEncoderCommand(70, 0.4));
+////        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -
+//
+//90));
+////        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.3));
+////        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 180 : -
+//
+//180));
+////        addSequential(new QuisitorOpenCommand());
 //        addParallel(new QuisitorAcquireCommand());
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(6, 0.8));
 //        addSequential(new QuisitorCloseCommand());

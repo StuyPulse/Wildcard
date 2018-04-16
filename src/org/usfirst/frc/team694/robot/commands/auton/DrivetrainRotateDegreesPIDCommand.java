@@ -35,12 +35,13 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
 
         lastTimeNotOnTarget = Timer.getFPGATimestamp();
 
-	Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
+        Robot.drivetrain.setRamp(SmartDashboard.getNumber("RotateDegreesPID RampSeconds", 0.03));
 
-	gyroPIDController.setPID(SmartDashboard.getNumber("RotateDegreesPID P", 0.03), 0, SmartDashboard.getNumber("RotateDegreesPID D", 0.06));
+        gyroPIDController.setPID(SmartDashboard.getNumber("RotateDegreesPID P", 0.03), 0,
+                SmartDashboard.getNumber("RotateDegreesPID D", 0.06));
         gyroPIDController.setSetpoint(targetAngle);
         gyroPIDController.enable();
-	System.out.println("[RotatePID] START: " + getAngle());
+        System.out.println("[RotatePID] START: " + getAngle());
     }
 
     @Override
@@ -49,8 +50,7 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
             isSet = true;
             gyroPIDController.reset();
             gyroPIDController.enable();
-            gyroPIDController.setPID(
-                    SmartDashboard.getNumber("RotateDegreesPID P", 0.0),
+            gyroPIDController.setPID(SmartDashboard.getNumber("RotateDegreesPID P", 0.0),
                     SmartDashboard.getNumber("RotateDegreesPID I", 0.0),
                     SmartDashboard.getNumber("RotateDegreesPID D", 0.0));
         }
@@ -63,7 +63,8 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
             output = 0.15 * Math.signum(gyroPIDController.getError());//Math.signum(output);
         }
 
-        System.out.println("[DrivetrainRotateDegreesPID] delta: " + gyroPIDController.getError() + ", angle: " + Robot.drivetrain.getAbsoluteGyroAngle() + ", output: " + output);
+        System.out.println("[DrivetrainRotateDegreesPID] delta: " + gyroPIDController.getError() + ", angle: "
+                + Robot.drivetrain.getAbsoluteGyroAngle() + ", output: " + output);
         Robot.drivetrain.tankDrive(output, -output);
     }
 
@@ -90,7 +91,8 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
 
     private class GyroPIDSource implements PIDSource {
         @Override
-        public void setPIDSourceType(PIDSourceType pidSource) {}
+        public void setPIDSourceType(PIDSourceType pidSource) {
+        }
 
         @Override
         public PIDSourceType getPIDSourceType() {
@@ -107,7 +109,7 @@ public abstract class DrivetrainRotateDegreesPIDCommand extends DrivetrainRotate
         @Override
         public void pidWrite(double output) {
             gyroPIDOutput = output;
-        }    
+        }
     }
 
 }

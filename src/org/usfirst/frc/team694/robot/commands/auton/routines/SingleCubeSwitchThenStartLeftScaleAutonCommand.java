@@ -1,6 +1,5 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
@@ -19,7 +18,7 @@ public class SingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGroup
         addSequential(new SingleCubeSwitchAutonChooserCommand());
 
         // Grab 2nd cube
-        addSequential(new PostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight));
+        addSequential(new PostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight, false));
 
         // Get in scale scoring position
         double SCALE_READY_ANGLE = 45;
