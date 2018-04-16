@@ -14,14 +14,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class RightAngleSameSideSwitchAutonCommand extends CommandGroup {
 
-    public RightAngleSameSideSwitchAutonCommand(boolean isRight) {
+    public RightAngleSameSideSwitchAutonCommand(boolean isRobotRight) {
         // scores one cube into the switch
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(15.0), 10));
         //TODO: Check distances
         addSequential(new DriveStraightRampDownOnlyCommand(176));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -90 : 90));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? -90 : 90));
         //TODO: Check distance to move 
         addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.5));
-        addSequential(new QuisitorDeacquireCommand());
+        addParallel(new QuisitorDeacquireCommand(),0.5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(15.0, -0.8));
     }
 }

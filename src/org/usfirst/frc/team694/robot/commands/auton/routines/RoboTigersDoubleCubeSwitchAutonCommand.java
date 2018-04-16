@@ -55,12 +55,13 @@ public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
         // Score that 2nd cube
         addSequential(new LiftMoveToHeightCommand(30));
         //forward
-        addSequential(new DrivetrainMoveInchesEncoderCommand(13, .75));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(5, .75));
         addSequential(new QuisitorDeacquireCommand(), 0.5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, -.75));
         addParallel(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -155 : 155));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.3));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -145 : 145));
+        addParallel(new QuisitorAcquireCommand(), 0.5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(20 + 2, 0.3));
 
         // Go to other side
 
