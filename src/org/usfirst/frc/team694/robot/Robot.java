@@ -52,6 +52,9 @@ public class Robot extends IterativeRobot {
     private static boolean isRobotOnRight;
     private static boolean isAllianceSwitchRight;
     private static boolean isScaleRight;
+    
+    public static boolean isDrivetrainRunning;
+    public static boolean isLiftRunning;
 
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private static SendableChooser<RobotStartPosition> sideChooser = new SendableChooser<>();
@@ -75,6 +78,9 @@ public class Robot extends IterativeRobot {
 
         liftLED.initialize();
         initSmartDashboard();
+        
+        isDrivetrainRunning = false;
+        isLiftRunning = false;
     }
 
     public enum RobotStartPosition {
@@ -177,6 +183,13 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         //        updateSmartDashboard();
+        if(isDrivetrainRunning && isLiftRunning) {
+            Robot.drivetrain.enableCurrentLimit();
+            Robot.lift.enableCurrentLimit();
+        } else {
+            Robot.drivetrain.disableCurrentLimit();
+            Robot.lift.disableCurrentLimit();
+        }
     }
 
     @Override

@@ -240,4 +240,9 @@ public class Lift extends Subsystem {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
     }
+    
+    public void enableCurrentLimit() {
+        innerLeftMotor.enableCurrentLimit(true);
+        innerRightMotor.enableCurrentLimit(true);
+    }
 }

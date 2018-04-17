@@ -46,6 +46,13 @@ public class DrivetrainDriveSystemCommand extends DefaultCommand {
         double rightJoystickY = Robot.oi.driverGamepad.getRightY();
         double leftJoystickY = Robot.oi.driverGamepad.getLeftY();
 
+        if((Math.abs(rightTrigger + leftTrigger) < 0.05) && (Math.abs(leftJoystickX) < 0.05)) {
+            Robot.isDrivetrainRunning = false;
+        } else {
+            Robot.isDrivetrainRunning = true;
+        }
+        //TODO: Add cases for Tank Drive controls
+        
         if (Robot.oi.driverGamepad.getRawOptionButton() && !driveModeToggleButtonWasPressed) {
             tankDrive = !tankDrive;
         }

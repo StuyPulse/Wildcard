@@ -407,5 +407,10 @@ public class Drivetrain extends Subsystem {
         leftBottomMotor.enableCurrentLimit(false);
         rightBottomMotor.enableCurrentLimit(false);
     }
+    
+    public void enableCurrentLimit() {
+        leftBottomMotor.enableCurrentLimit(true);
+        rightBottomMotor.enableCurrentLimit(true);
+    }
  }
 

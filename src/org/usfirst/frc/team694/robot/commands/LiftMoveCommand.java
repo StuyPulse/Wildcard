@@ -25,7 +25,13 @@ public class LiftMoveCommand extends DefaultCommand {
 
         double liftControl = Robot.oi.operatorGamepad.getLeftY();
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
-
+        
+        if(Math.abs(liftSquared) < 0.05) {
+            Robot.isLiftRunning = false;
+        } else {
+            Robot.isLiftRunning = true;
+        }
+        
         if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
             Robot.lift.moveDangerous(liftSquared);
 //            Robot.drivetrain.enableCurrentLimit();
