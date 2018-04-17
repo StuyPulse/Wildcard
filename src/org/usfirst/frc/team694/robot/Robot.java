@@ -10,6 +10,7 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.RightAngleSameSideSwitchAutonCommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCube90DegreeScaleAutonChooserCommand;
@@ -186,7 +187,7 @@ public class Robot extends IterativeRobot {
         //Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
         autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
         autonChooser.addObject("RoboTigers Double Cube Scale or Double Cube Switch", new RoboTigersDoubleCubeSwitchAutonChooserCommand());
-        autonChooser.addObject("Kyptonite Single Switch Auton", new SingleCube90DegreeScaleAutonChooserCommand());
+        autonChooser.addObject("Kyptonite Single Switch Auton", new RightAngleSameSideSwitchAutonCommandChooser());
         //        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
 
         SmartDashboard.putData("Autonomous", autonChooser);

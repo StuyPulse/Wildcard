@@ -40,7 +40,7 @@ public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
         // Score 1st cube
         //drive forward
         addParallel(new LiftMoveToHeightCommand(30));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(13 + 3+ 3, .3));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(13 + 3+ 3, .3),2);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
 
         // Grab 2nd cube
@@ -63,7 +63,7 @@ public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -145 : 145));
         addParallel(new QuisitorAcquireCommand(), 3);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(20 + 2, 0.3));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(20 + 3, 0.3));
 
         // Go to other side
 
