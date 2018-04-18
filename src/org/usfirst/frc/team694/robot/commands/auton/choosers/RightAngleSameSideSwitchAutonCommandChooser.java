@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 public class RightAngleSameSideSwitchAutonCommandChooser extends ConditionalCommand {
 
     public RightAngleSameSideSwitchAutonCommandChooser() {
-        super(new KryptoniteAutonSameSideChooser());
+        super(new RightAngleSameSideSwitchAutonSameSideChooser());
     }
 
     @Override
@@ -19,9 +19,9 @@ public class RightAngleSameSideSwitchAutonCommandChooser extends ConditionalComm
         return Robot.isRobotOnSameSideSwitch();
     }
     
-    private static class KryptoniteAutonSameSideChooser extends ConditionalCommand {
+    private static class RightAngleSameSideSwitchAutonSameSideChooser extends ConditionalCommand {
 
-        public KryptoniteAutonSameSideChooser() {
+        public RightAngleSameSideSwitchAutonSameSideChooser() {
             super(new RightAngleSameSideSwitchAutonCommand(true), new RightAngleSameSideSwitchAutonCommand(false));
         }
         
