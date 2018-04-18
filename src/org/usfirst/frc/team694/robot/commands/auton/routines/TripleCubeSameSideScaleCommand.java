@@ -26,7 +26,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
         driveCommand.addSpeedChange(0, 0.75);
         driveCommand.addTurn(130, isRight ? -45 : 45);
-        driveCommand.addTurn(130 + 120, isRight ? 5 : -5);
+        driveCommand.addTurn(130 + 116, isRight ? 5 : -5);
         
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(89 - RobotMap.MIN_HEIGHT_OF_LIFT - 12), 15));
         addSequential(driveCommand, 3.3);
