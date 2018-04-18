@@ -16,7 +16,7 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegr
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * WITH CURVES
  */
 public class TripleCubeSameSideScaleCommand extends CommandGroup {
     private static final double DISTANCE_TOTAL = 296 - 4;

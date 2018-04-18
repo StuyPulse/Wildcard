@@ -6,6 +6,7 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
+import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
@@ -19,22 +20,41 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
+    // Set to false for now
+    private static final boolean FAST_BUT_UNCERTAIN_SCORE = false;
+
     public PostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight, boolean isSecondCube) {
 
-        // Get in position to grab second cube
-        double GRAB_READY_ANGLE = 45 + 15;
-        double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12;
+        if (FAST_BUT_UNCERTAIN_SCORE) {
+            // Don't use this. It's actually not much faster.
+            if (!isSecondCube) {
+                addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
+            }
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
-                isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
-        if (isSecondCube) {
-            addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
+            DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(-1 * (45 + 26 + 13 + 5));
+
+            driveCommand.addSpeedChange(0, 1.5);
+            driveCommand.addTurn(0, isSwitchRight ? 90.0 : -90.0);
+            driveCommand.addTurn(30 + 26 + 13 + 5, 0.0);
+            addSequential(driveCommand);
+        } else {
+
+            // Get in position to grab second cube
+            double GRAB_READY_ANGLE = 45 + 15;
+            double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12;
+    
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
+                    isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
+            if (isSecondCube) {
+                addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
+            }
+            else {
+                addParallel(new LiftMoveToBottomCommand());
+                addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
+            }
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
+
         }
-        else {
-        addParallel(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
-        }
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
 
         // Grab the second cube
         double GRAB_FORWARD_DISTANCE = 30 + 5;
