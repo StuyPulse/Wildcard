@@ -30,8 +30,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
 
         // Get in 2nd cube Switch scoring position
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
-                isSwitchRight ? SWITCH_READY_ANGLE : (-1 * SWITCH_READY_ANGLE)), .8/*1*/);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SWITCH_READY_ANGLE : (-1 * SWITCH_READY_ANGLE)), .8/*1*/);
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30.0), 15));
         addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_READY_DISTANCE, 1));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
