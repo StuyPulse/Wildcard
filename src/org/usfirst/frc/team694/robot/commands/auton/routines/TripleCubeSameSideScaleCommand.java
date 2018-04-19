@@ -69,25 +69,25 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
             addParallel(new QuisitorAcquireCommand(), 1);
             addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
             addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3));
+            addParallel(new QuisitorAcquireCommand(), 1);
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)));
-            addParallel(new QuisitorAcquireCommand(), 0.5);
 //            addParallel(new LiftMoveToHeightCommand(68));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10, 0.5));
+            addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.5));
         }
 
         // Deacquire 2nd cube
         addSequential(new QuisitorMoveSpeedCommand(-0.5), 1);
 
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(15, -0.4));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(15+3, -0.4));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -135 : 135));
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(), 2);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(26, 0.3));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(26 + 6, 0.3));
 //        addSequential(new DriveStraightRampDownOnlyCommand(40));
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand(), 1);
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 15));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 30));
         addSequential(new DrivetrainMoveInchesEncoderCommand(40, -0.4));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)));
         addParallel(new QuisitorAcquireCommand(), 0.5);
