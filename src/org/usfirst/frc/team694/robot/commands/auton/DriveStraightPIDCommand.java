@@ -34,8 +34,10 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
 
     @Override
     protected void execute() {
-        Robot.drivetrain.tankDrive(moveSpeed * speedScaleFactor + getGyroPIDOutput(),
-                moveSpeed * speedScaleFactor - getGyroPIDOutput());
+        // To make it able to move backwards
+        double deltaSign = Math.signum(this.getDistanceFromTarget());
+        Robot.drivetrain.tankDrive(deltaSign * moveSpeed * speedScaleFactor + getGyroPIDOutput(),
+                deltaSign * moveSpeed * speedScaleFactor - getGyroPIDOutput());
         System.out.println("[DriveStraightPID] target: " + targetDistance + ", dist: " + getDistance());
     }
 
