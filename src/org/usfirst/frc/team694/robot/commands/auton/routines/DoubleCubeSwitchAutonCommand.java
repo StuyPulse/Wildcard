@@ -33,11 +33,11 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight ? SWITCH_READY_ANGLE : (-1 * SWITCH_READY_ANGLE)), .8/*1*/);
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(30.0), 15));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_READY_DISTANCE, 1));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_READY_DISTANCE + (isSwitchRight? 0 : 10), 1));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
 
         // Score that 2nd bad boy
-        addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_SCORE_DISTANCE, 0.3), 1.5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_SCORE_DISTANCE - (isSwitchRight ? 0 : 10.0/1.4), 0.3), 1);
         //addSequential(new DrivetrainDriveCurveCommand(SWITCH_SCORE_DISTANCE, RampMode.NO_RAMP_UP), 2.0);
         addSequential(new WaitCommand(.25/*0.5*/));
         addSequential(new QuisitorDeacquireCommand(), 0.25);

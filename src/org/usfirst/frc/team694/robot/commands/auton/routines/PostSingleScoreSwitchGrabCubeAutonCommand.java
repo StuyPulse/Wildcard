@@ -11,6 +11,8 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
+import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -28,21 +30,31 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
     // false: Grab corner 1st layer cube in pyramid
     private static final boolean CUBE_3_GRAB_MIDDLE_CUBE = false;
 
-    public PostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight, boolean isSecondCube) {
+    // isThirdCube
+    // true:  Third Cube
+    // false: Second Cube
+    public PostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight, boolean isThirdCube) {
 
         // Forced here for 3rd cube.
         // Grab the diagonal if we want to
-        if (!isSecondCube && !CUBE_3_GRAB_MIDDLE_CUBE) {
+        if (isThirdCube && !CUBE_3_GRAB_MIDDLE_CUBE) {
             // Get into diagonal grabbing orientation
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(28, -0.4));
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight? -45 : 45));
+            addParallel(new LiftMoveToBottomCommand());
+//            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
+//            addSequential(new DrivetrainMoveInchesEncoderCommand(28 / 2, -0.4));
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight? -45 : 45), 1);
 
             // Move forward and grab 3rd cube diagonally
-            addParallel(new QuisitorAcquireCommand());
-            addSequential(new DrivetrainMoveInchesEncoderCommand(28*1.4, 0.4));
-            addSequential(new WaitCommand(0.5));
-            addSequential(new QuisitorStopCommand());
+            addSequential(new QuisitorOpenCommand());
+            addParallel(new QuisitorAcquireCommand(), 3);
+
+            addParallel(new DrivetrainMoveInchesEncoderCommand(28*1.4 + 3, 0.4));
+            addSequential(new WaitUntilCubeDetectedCommand());
+            addSequential(new DrivetrainStopCommand());
+            addSequential(new QuisitorCloseCommand());
+            addParallel(new QuisitorAcquireCommand()); // Keep acquiring (don't interrupt)
+
+            addSequential(new WaitCommand(0.75));
 
             // Move back and face switch, but don't approach to score
             addSequential(new DrivetrainMoveInchesEncoderCommand(28*1.4, -0.4));
@@ -53,7 +65,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
         if (FAST_BUT_UNCERTAIN_SCORE) {
             // Don't use this. It's actually not much faster.
-            if (!isSecondCube) {
+            if (!isThirdCube) {
                 addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
             }
 
@@ -67,11 +79,11 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
             // Get in position to grab second cube
             double GRAB_READY_ANGLE = 45 + 15;
-            double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12;
+            double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12 + 10;
     
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
                     isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
-            if (isSecondCube) {
+            if (isThirdCube) {
                 addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
             }
             else {
@@ -84,14 +96,18 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
         // Grab the second cube
         double GRAB_FORWARD_DISTANCE = 30 + 5;
-        double GRAB_BACK_DISTANCE = 30;
+        double GRAB_BACK_DISTANCE = 30 - (isSwitchRight ? 0 : 15);
 
         addSequential(new QuisitorOpenCommand());
-        if (isSecondCube) {
+        if (isThirdCube) {
             addSequential(new LiftMoveToHeightCommand(15));
         }
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(isSecondCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3/*+.2*/), 1.5);
+
+        addParallel(new DrivetrainMoveInchesEncoderCommand(isThirdCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3/*+.2*/), 1.5);
+        addSequential(new WaitUntilCubeDetectedCommand());
+        addSequential(new DrivetrainStopCommand());
+
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand());
         addSequential(new WaitCommand(0.5));
@@ -101,7 +117,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         backupCommand.addTurn(0, 0);
         backupCommand.addSpeedChange(0, -0.5);
         addSequential(backupCommand);
-        
+
 //        // Get in 2nd cube Switch scoring position
 //        double SCALE_READY_ANGLE = 45;
 //        double SCALE_READY_DISTANCE = 24 + 24;

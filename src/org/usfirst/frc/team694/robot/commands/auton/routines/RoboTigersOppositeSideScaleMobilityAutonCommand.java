@@ -18,9 +18,9 @@ public class RoboTigersOppositeSideScaleMobilityAutonCommand extends CommandGrou
         // Rotate so that we're BACKWARDS
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
 
-        addSequential(new LiftMoveToHeightCommand(5));
+        addSequential(new LiftMoveToHeightCommand(10));
 
-        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12), 3);
+        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12 + 4*12), 3);
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
     }

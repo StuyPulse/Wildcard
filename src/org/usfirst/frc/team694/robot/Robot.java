@@ -190,8 +190,8 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("OH BABY A TRIPLE, or a double", new TripleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Double Cube SWITCH then grab another cube", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
         //Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
-        autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
-        autonChooser.addObject("RoboTigers Double Cube Scale or Double Cube Switch", new BlackHawksDoubleCubeSwitchAutonChooserCommand());
+        autonChooser.addObject("RoboTigers Triple Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
+        autonChooser.addObject("BlackHawks Triple Cube Scale or Triple Cube Switch", new BlackHawksDoubleCubeSwitchAutonChooserCommand());
         autonChooser.addObject("Kryptonite Single Switch Auton", new RightAngleSameSideSwitchAutonCommandChooser());
         autonChooser.addObject("Kryptonite Triple Switch Auton", new KryptoniteAutonCommandChooser());
         //        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
@@ -277,7 +277,7 @@ public class Robot extends IterativeRobot {
         return isRobotOnRight;
     }
 
-    public static boolean isSwitchOnRight() {
+    public static boolean isRobotOnRight() {
         return isAllianceSwitchRight;
     }
 

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 public class BlackHawksDoubleCubeSwitchAutonChooserCommand extends ConditionalCommand {
 
     public BlackHawksDoubleCubeSwitchAutonChooserCommand() {
-        super(new DoubleCubeScaleAutonChooserCommand(), new BlackHawksRealDoubleCubeSwitchAutonChooser());
+        super(new TripleCubeScaleAutonChooserCommand(), new BlackHawksRealDoubleCubeSwitchAutonChooser());
     }
 
     @Override
@@ -28,7 +28,7 @@ public class BlackHawksDoubleCubeSwitchAutonChooserCommand extends ConditionalCo
         public boolean condition() {
             return Robot.isRobotStartingOnRight();
         }
-        
+
         private static class BlackHawksRealDoubleCubeSwitchRightStartAutonChooserCommand extends ConditionalCommand {
             public BlackHawksRealDoubleCubeSwitchRightStartAutonChooserCommand() {
                 super(new BlackHawksDoubleCubeSwitchAutonCommand(true, true), new BlackHawksDoubleCubeSwitchAutonCommand(true, false));

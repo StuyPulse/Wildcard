@@ -15,6 +15,6 @@ public class DoubleCubeSwitchThenGrabAnotherAutonChooserCommand extends Conditio
     }
     
     public boolean condition() {
-        return Robot.isSwitchOnRight();
+        return Robot.isRobotOnRight();
     }
 }

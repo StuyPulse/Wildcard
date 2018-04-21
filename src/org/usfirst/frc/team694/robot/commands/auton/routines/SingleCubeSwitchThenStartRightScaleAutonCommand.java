@@ -21,7 +21,7 @@ public class SingleCubeSwitchThenStartRightScaleAutonCommand extends CommandGrou
         addSequential(new PostSingleScoreSwitchGrabCubeAutonCommand(isSwitchRight,false));
 
         // Get in scale scoring position
-        double SCALE_READY_ANGLE = 45;
+        double SCALE_READY_ANGLE = 45 + 10;
         double SCALE_READY_DISTANCE = 24 + 24;
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(SCALE_READY_ANGLE));
