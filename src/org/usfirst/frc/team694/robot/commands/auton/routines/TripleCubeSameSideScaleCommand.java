@@ -11,8 +11,12 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand.RampMode;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
+import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
+import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * WITH CURVES
@@ -49,12 +53,17 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         } else {
             addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
             addSequential(new DrivetrainMoveInchesEncoderCommand(-15, -0.4));
-            addSequential(new LiftMoveToBottomCommand());
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150 : 150));
+            // Don't wait until lift hits the bottom before rotating
+//            addSequential(new LiftMoveToBottomCommand());
+            addSequential(new WaitUntilLiftGoesToHeightCommand(10));
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150 : 150), 1.25);
         }
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(), 2);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/24 + 12 , 0.3));
+
+        addParallel(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/24 + 12 , 0.3 + 0.1));
+        addSequential(new WaitUntilCubeDetectedCommand());
+        addSequential(new DrivetrainStopCommand());
 //        addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
         addSequential(new QuisitorCloseCommand());
 
@@ -68,32 +77,50 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         } else {
             addParallel(new QuisitorAcquireCommand(), 1);
             addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3));
+            addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
             addParallel(new QuisitorAcquireCommand(), 1);
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)));
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)), 1.25);
 //            addParallel(new LiftMoveToHeightCommand(68));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.5));
+            addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.4));
         }
 
-        // Deacquire 2nd cube
-        addSequential(new QuisitorMoveSpeedCommand(-0.5), 1);
+        // Wait to stabilize
+        addSequential(new WaitCommand(0.2));
 
-//        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
+        // Deacquire 2nd cube
+        addParallel(new QuisitorMoveSpeedCommand(-0.75), 1);
+
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
         addSequential(new DrivetrainMoveInchesEncoderCommand(15+3, -0.4));
-        addSequential(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -135 : 135));
+//        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new WaitUntilLiftGoesToHeightCommand(10));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -125 : 125), 1.25);
+
+        // Prepare to grab 3rd cube
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(), 2);
-        addSequential(new DrivetrainMoveInchesEncoderCommand(26 + 6, 0.3));
-//        addSequential(new DriveStraightRampDownOnlyCommand(40));
+
+        // Approach 3rd cube to grab
+        addParallel(new DrivetrainMoveInchesEncoderCommand(26 + 6 + 12 + 24, 0.3 + 0.1), 1.5);
+        addSequential(new WaitUntilCubeDetectedCommand());
+        addSequential(new DrivetrainStopCommand());
+
+        // Grab the 3rd cube
+        //        addSequential(new DriveStraightRampDownOnlyCommand(40));
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand(), 1);
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 30));
+        //addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 30));
+
+        addSequential(new WaitCommand(0.5));
+        //addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
         addSequential(new DrivetrainMoveInchesEncoderCommand(40, -0.4));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)));
-        addParallel(new QuisitorAcquireCommand(), 0.5);
-        addSequential(new LiftMoveToHeightCommand(86));
-        addSequential(new QuisitorMoveSpeedCommand(-0.4), 0.5);
+
+//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)), 1.25);
+//        addParallel(new QuisitorAcquireCommand(), 0.5);
+//
+//        addSequential(new DrivetrainMoveInchesEncoderCommand(20, 0.4));
+//        // Spit out 3rd cube and dominate that scale baby
+//        addSequential(new QuisitorMoveSpeedCommand(-0.4), 0.5);
 
     }
 }

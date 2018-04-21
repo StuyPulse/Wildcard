@@ -27,9 +27,9 @@ public class Lift extends Subsystem {
     private DigitalInput bottomLimitSwitch;
 
     public Lift() {
-        innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
-        innerRightMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
-        //We will be using encoder data from the right motor only, and leaving it as a TalonSRX.
+        innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
+        innerRightMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
+        //We will be using encoder data from the left motor only, and leaving it as a TalonSRX.
 
         outerLeftMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_LEFT_MOTOR_PORT);
         outerRightMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_RIGHT_MOTOR_PORT);

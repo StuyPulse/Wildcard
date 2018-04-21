@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
+// TODO: Figure out whether we're using this
+@Deprecated
 public class TripleCubeSwitchAutonCommand extends CommandGroup {
 
     public TripleCubeSwitchAutonCommand() {

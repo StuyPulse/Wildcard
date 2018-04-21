@@ -23,7 +23,33 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
     // Set to false for now
     private static final boolean FAST_BUT_UNCERTAIN_SCORE = false;
 
+    // FOR THIRD CUBE:
+    // true:  Grab middle 2nd layer cube in pyramid
+    // false: Grab corner 1st layer cube in pyramid
+    private static final boolean CUBE_3_GRAB_MIDDLE_CUBE = false;
+
     public PostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight, boolean isSecondCube) {
+
+        // Forced here for 3rd cube.
+        // Grab the diagonal if we want to
+        if (!isSecondCube && !CUBE_3_GRAB_MIDDLE_CUBE) {
+            // Get into diagonal grabbing orientation
+            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
+            addSequential(new DrivetrainMoveInchesEncoderCommand(28, -0.4));
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight? -45 : 45));
+
+            // Move forward and grab 3rd cube diagonally
+            addParallel(new QuisitorAcquireCommand());
+            addSequential(new DrivetrainMoveInchesEncoderCommand(28*1.4, 0.4));
+            addSequential(new WaitCommand(0.5));
+            addSequential(new QuisitorStopCommand());
+
+            // Move back and face switch, but don't approach to score
+            addSequential(new DrivetrainMoveInchesEncoderCommand(28*1.4, -0.4));
+            addParallel(new QuisitorAcquireCommand(), 0.5);
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+            return;
+        }
 
         if (FAST_BUT_UNCERTAIN_SCORE) {
             // Don't use this. It's actually not much faster.
