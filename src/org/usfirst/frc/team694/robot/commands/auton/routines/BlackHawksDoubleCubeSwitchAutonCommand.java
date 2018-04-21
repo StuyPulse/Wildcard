@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  * GOOD ONE
  */
 
-public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
+public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
 
-    public RoboTigersDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
+    public BlackHawksDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
 
         // Drive to rough scoring position
         addParallel(new LiftMoveToHeightCommand(5));

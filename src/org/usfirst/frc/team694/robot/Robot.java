@@ -10,9 +10,10 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.KillerTreesDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KryptoniteAutonCommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RightAngleSameSideSwitchAutonCommandChooser;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersDoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.BlackHawksDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCube90DegreeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
@@ -190,11 +191,13 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("Double Cube SWITCH then grab another cube", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
         //Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
         autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
-        autonChooser.addObject("RoboTigers Double Cube Scale or Double Cube Switch", new RoboTigersDoubleCubeSwitchAutonChooserCommand());
+        autonChooser.addObject("RoboTigers Double Cube Scale or Double Cube Switch", new BlackHawksDoubleCubeSwitchAutonChooserCommand());
         autonChooser.addObject("Kryptonite Single Switch Auton", new RightAngleSameSideSwitchAutonCommandChooser());
         autonChooser.addObject("Kryptonite Triple Switch Auton", new KryptoniteAutonCommandChooser());
         //        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
         autonChooser.addObject("90 deg null territory Scale Auton", new SingleCube90DegreeScaleAutonChooserCommand());
+        //TODO: Fix the Killer Trees chooser so it doesn't do nothing if we're not on the different side
+        autonChooser.addObject("KillerTrees Double Switch if different side", new KillerTreesDoubleCubeSwitchAutonChooserCommand());
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
