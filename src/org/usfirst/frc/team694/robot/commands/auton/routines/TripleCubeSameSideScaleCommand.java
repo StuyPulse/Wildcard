@@ -88,7 +88,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addSequential(new WaitCommand(0.2));
 
         // Deacquire 2nd cube
-        addParallel(new QuisitorMoveSpeedCommand(-0.75), 1);
+        addParallel(new QuisitorMoveSpeedCommand(-0.5), 1);
 
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
         addSequential(new DrivetrainMoveInchesEncoderCommand(15+3, -0.4));
