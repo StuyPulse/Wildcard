@@ -21,7 +21,7 @@ public class GamepadRumbleWhenCubeDetectedCommand extends Command {
         this.gamepad = gamepad; 
         this.intensity = intensity;
         this.duration = duration; 
-        rumbleCommand = new GamepadRumbleCommand(gamepad, 0.5, 0.5);
+        rumbleCommand = new GamepadRumbleCommand(gamepad, 0.5, 0.3);
     }
 
     // Called just before this Command runs the first time
