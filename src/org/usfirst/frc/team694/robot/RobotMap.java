@@ -89,8 +89,8 @@ public final class RobotMap {
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = 7;
 
-    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 3;//Left 
-    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 2;//Right
+    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 5;//Left 
+    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 6;//Right
 
     /*****************************************************************************
      * Analog Ports

@@ -75,8 +75,6 @@ public class Robot extends IterativeRobot {
         
         driverpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.driverGamepad, 0.5, 0.5);
         operatorpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.operatorGamepad, 0.5, 0.5);
-        driverpadRumbleCommand.start();
-        operatorpadRumbleCommand.start();
     }
 
     public enum RobotStartPosition {
@@ -164,6 +162,9 @@ public class Robot extends IterativeRobot {
         if (autonCommand != null) {
             autonCommand.cancel();
         }
+        
+        driverpadRumbleCommand.start();
+        operatorpadRumbleCommand.start();
     }
 
     @Override

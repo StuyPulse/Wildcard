@@ -12,8 +12,8 @@ public class GamepadRumbleWhenCubeDetectedCommand extends Command {
     Gamepad gamepad;
     double intensity; 
     double duration; 
-    boolean wasCubeDetected; 
-    boolean isCubeDetected; 
+    boolean wasCubeDetected;
+    GamepadRumbleCommand rumbleCommand; 
     
     public GamepadRumbleWhenCubeDetectedCommand(Gamepad gamepad, double intensity, double duration) {
         // Use requires() here to declare subsystem dependencies
@@ -21,6 +21,7 @@ public class GamepadRumbleWhenCubeDetectedCommand extends Command {
         this.gamepad = gamepad; 
         this.intensity = intensity;
         this.duration = duration; 
+        rumbleCommand = new GamepadRumbleCommand(gamepad, 0.5, 0.5);
     }
 
     // Called just before this Command runs the first time
@@ -30,11 +31,10 @@ public class GamepadRumbleWhenCubeDetectedCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        isCubeDetected = Robot.quisitor.isCubeDetected();
-        if(isCubeDetected && !wasCubeDetected) {
-            new GamepadRumbleCommand(gamepad, intensity, duration);
+        if(Robot.quisitor.isCubeDetected() && !wasCubeDetected) {
+            rumbleCommand.start();
         }
-        wasCubeDetected = isCubeDetected; 
+        wasCubeDetected = Robot.quisitor.isCubeDetected(); 
     }
 
     // Make this return true when this Command no longer needs to run execute()
