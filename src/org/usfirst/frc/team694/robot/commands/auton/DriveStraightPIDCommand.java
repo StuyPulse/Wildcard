@@ -23,19 +23,21 @@ public class DriveStraightPIDCommand extends DrivetrainMoveInchesEncoderCommand 
     protected void initialize() {
         super.initialize();
         rotationPIDController = new PIDController(0, 0, 0, new GyroPIDSource(), new GyroPIDOutput());
-//        Robot.drivetrain.resetGyro();
+        //        Robot.drivetrain.resetGyro();
         rotationPIDController.setSetpoint(Robot.drivetrain.getGyroAngle());
-//        rotationPIDController.setSetpoint(0);
-        rotationPIDController.setPID(
-                SmartDashboard.getNumber("DriveStraightGyroPID P", 0),
-                SmartDashboard.getNumber("DriveStraightGyroPID I", 0), 
+        //        rotationPIDController.setSetpoint(0);
+        rotationPIDController.setPID(SmartDashboard.getNumber("DriveStraightGyroPID P", 0),
+                SmartDashboard.getNumber("DriveStraightGyroPID I", 0),
                 SmartDashboard.getNumber("DriveStraightGyroPID D", 0));
         rotationPIDController.enable();
     }
 
     @Override
     protected void execute() {
-        Robot.drivetrain.tankDrive(moveSpeed*speedScaleFactor + getGyroPIDOutput(), moveSpeed*speedScaleFactor - getGyroPIDOutput());
+        // To make it able to move backwards
+        double deltaSign = Math.signum(this.getDistanceFromTarget());
+        Robot.drivetrain.tankDrive(deltaSign * moveSpeed * speedScaleFactor + getGyroPIDOutput(),
+                deltaSign * moveSpeed * speedScaleFactor - getGyroPIDOutput());
         System.out.println("[DriveStraightPID] target: " + targetDistance + ", dist: " + getDistance());
     }
 

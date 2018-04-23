@@ -57,7 +57,7 @@ public final class RobotMap {
      * Lift Constants
      *************************************************************************/
     // Extra factor empirically determined
-    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = 34.5 / 31.57;//1.0818;
+    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (68 - 9)/56.0;
 
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
@@ -89,8 +89,8 @@ public final class RobotMap {
      *************************************************************************/
     public static final int GEAR_SHIFT_CHANNEL = 7;
 
-    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 5;//Left 
-    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 6;//Right
+    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 6;//Left 
+    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 5;//Right
 
     /*****************************************************************************
      * Analog Ports
@@ -118,7 +118,7 @@ public final class RobotMap {
      **/
 
     // Extra factor imperically determined
-    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = 0.14038963905588;//0.1302063789868668;
+    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = 163/1246.0;
 
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
             DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION

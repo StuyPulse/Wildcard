@@ -10,11 +10,23 @@ package org.usfirst.frc.team694.robot;
 import org.usfirst.frc.team694.robot.commands.GamepadRumbleWhenCubeDetectedCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersDoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.KillerTreesDoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.KryptoniteAutonCommandChooser;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.RightAngleSameSideSwitchAutonCommandChooser;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.BlackHawksDoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.CommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
+<<<<<<< HEAD
+=======
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCube90DegreeScaleAutonChooserCommand;
+>>>>>>> MildcardDevelop
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleThenBackupAutonChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.TripleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
+import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleNinetyNullAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;
@@ -147,7 +159,7 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-//        updateSmartDashboard();
+        //        updateSmartDashboard();
     }
 
     @Override
@@ -183,16 +195,45 @@ public class Robot extends IterativeRobot {
         // AUTON CHOOSER
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
-        autonChooser.addObject("Single Cube SWITCH then grab another cube", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
-        autonChooser.addObject("Single Cube SCALE", new SingleCubeScaleAutonChooserCommand());
-        autonChooser.addObject("Double Cube SCALE (single opposite if scale is on the other side)", new DoubleCubeScaleAutonChooserCommand());
-        autonChooser.addObject("Double Cube SWITCH", new DoubleCubeSwitchAutonChooserCommand());
-        //        Auton Routines that aren't tested that you could implement if you wanted to live life on the edge
-        autonChooser.addObject("RoboTigers Double Cube Scale or Mobility", new RoboTigersMobilityAutonChooserCommand());
-        autonChooser.addObject("RoboTigers Double Cube Scale or Double Cube Switch", new RoboTigersDoubleCubeSwitchAutonChooserCommand());
-        
-//        autonChooser.addObject("RoboTigers Double Cube Scale or Score SWITCH then Mobility", new RoboTigersSingleSwitchThenOppositeScaleMobilityAutonChooserCommand());
-
+        autonChooser.addObject("1.5 switch go to scale", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
+        autonChooser.addObject("2.5 switch", new DoubleCubeSwitchAutonChooserCommand());
+        autonChooser.addObject("2.5 same side scale or 1.5 opposite side", new TripleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("Fit with Black Hawk/KillerTrees", 
+                new CommandChooser(
+                        new TripleCubeScaleAutonChooserCommand(), 
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
+                        new TripleCubeScaleAutonChooserCommand(), 
+                        new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
+        autonChooser.addObject("Don't fit with Black Hawk/KillerTrees", 
+                new CommandChooser(
+                        new TripleCubeScaleAutonChooserCommand(), 
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
+                        new TripleCubeScaleAutonChooserCommand(), 
+                        new RoboTigersMobilityAutonChooserCommand()));
+        autonChooser.addObject("Fit with 195",
+                new CommandChooser(
+                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new KryptoniteAutonCommandChooser(), 
+                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
+        autonChooser.addObject("Don't fit with 195", 
+                new CommandChooser(
+                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new KryptoniteAutonCommandChooser(), 
+                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new RoboTigersMobilityAutonChooserCommand()));
+        autonChooser.addObject("Fit with 2056",
+                new CommandChooser(
+                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
+                        new SingleCube90DegreeScaleAutonChooserCommand(), 
+                        new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
+        autonChooser.addObject("Don't fit with 2056", 
+                new CommandChooser(
+                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
+                        new SingleCube90DegreeScaleAutonChooserCommand(), 
+                        new RoboTigersMobilityAutonChooserCommand()));
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
@@ -272,7 +313,7 @@ public class Robot extends IterativeRobot {
         return isRobotOnRight;
     }
 
-    public static boolean isSwitchOnRight() {
+    public static boolean isRobotOnRight() {
         return isAllianceSwitchRight;
     }
 

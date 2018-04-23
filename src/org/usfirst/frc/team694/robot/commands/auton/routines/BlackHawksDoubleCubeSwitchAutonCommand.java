@@ -7,43 +7,75 @@ import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
+import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
+import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
+import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
+
+import com.ctre.phoenix.time.StopWatch;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
- *
+ * GOOD ONE
  */
 
-public class RoboTigersDoubleCubeSwitchAutonCommand extends CommandGroup {
+public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
 
-    public RoboTigersDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
+    public BlackHawksDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
 
         // Drive to rough scoring position
-        addParallel(new LiftMoveToHeightCommand(5));
-        addSequential(new DriveStraightWithRampingCommand(235 - 14 + 7));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? 90 : -90));
-        addParallel(new LiftMoveToHeightCommand(30));
-        addSequential(new DriveStraightWithRampingCommand(isSwitchSameSide ? 15 : 121));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? 180 : -180));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 15));
+        addSequential(new DriveStraightWithRampingCommand(235 - 14 + 7 ), 2.5);
+        addSequential(new WaitCommand(0.5));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 1.4);
+        addParallel(new LiftMoveToHeightCommand(10));
+        addParallel(new QuisitorAcquireCommand(), 0.5);
+        if (isSwitchSameSide){
+            addSequential(new DriveStraightWithRampingCommand(15 + 18 + 5 + 6.5 + 9));
+        } else {
+            addSequential(new DriveStraightWithRampingCommand(121));
+        }
+        //addSequential(new DriveStraightWithRampingCommand(isSwitchSameSide ? 15 + 24 + 5 : 121));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -180 : 180));
 
         // Score 1st cube
+        //drive forward
+        addParallel(new LiftMoveToHeightCommand(30));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(13 + 3+ 3, .3 + 0.1),2);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
 
         // Grab 2nd cube
+        //backup parallel 6in
+        addSequential(new DrivetrainMoveInchesEncoderCommand(6, -1));
         addSequential(new QuisitorOpenCommand());
-        addParallel(new LiftMoveToBottomCommand());
-        addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.5));
+        addSequential(new LiftMoveToBottomCommand());
+        addParallel(new QuisitorAcquireCommand(), 0.5);
+
+        addParallel(new DrivetrainMoveInchesEncoderCommand(10, 0.5));
+        addSequential(new WaitUntilCubeDetectedCommand());
+        addSequential(new DrivetrainStopCommand());
+
         addSequential(new QuisitorCloseCommand());
         addSequential(new QuisitorAcquireCommand(), 0.5);
         addSequential(new QuisitorStopCommand());
 
         // Score that 2nd cube
         addSequential(new LiftMoveToHeightCommand(30));
+        //forward
+        addSequential(new DrivetrainMoveInchesEncoderCommand(5, .75));
         addSequential(new QuisitorDeacquireCommand(), 0.5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(20, -.75));
+        addParallel(new LiftMoveToBottomCommand());
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -145 : 145), 1);
+        addParallel(new QuisitorAcquireCommand(), 3);
+        addParallel(new DrivetrainMoveInchesEncoderCommand(20 + 3, 0.3 + 0.1));
+        addSequential(new WaitUntilCubeDetectedCommand());
+        addSequential(new DrivetrainStopCommand());
+        addSequential(new QuisitorStopCommand());
 
         // Go to other side
 

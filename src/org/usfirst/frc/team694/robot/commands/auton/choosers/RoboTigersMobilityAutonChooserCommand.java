@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.ConditionalCommand;
 public class RoboTigersMobilityAutonChooserCommand extends ConditionalCommand {
 
     public RoboTigersMobilityAutonChooserCommand() {
-        super(new DoubleCubeScaleAutonChooserCommand(), new RoboTigersOppositeSideScaleMobilityAutonChooser());
+        super(new TripleCubeScaleAutonChooserCommand(), new RoboTigersOppositeSideScaleMobilityAutonChooser());
 
     }
 
