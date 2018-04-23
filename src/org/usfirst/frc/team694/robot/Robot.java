@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot {
 
     private Command autonCommand; // Selected command run during auton
     
-    private GamepadRumbleWhenCubeDetectedCommand driverpadRumbleCommand;
+    //private GamepadRumbleWhenCubeDetectedCommand driverpadRumbleCommand;
     private GamepadRumbleWhenCubeDetectedCommand operatorpadRumbleCommand;
 
     //    private PowerDistributionPanel pdppanel;
@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
         liftLED.initialize();
         initSmartDashboard();
         
-        driverpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.driverGamepad, 0.5, 0.5);
+        //driverpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.driverGamepad, 0.5, 0.5);
         operatorpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.operatorGamepad, 0.5, 0.5);
     }
 
