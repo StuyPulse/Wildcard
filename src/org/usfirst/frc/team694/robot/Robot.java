@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team694.robot;
 
+import org.usfirst.frc.team694.robot.commands.GamepadRumbleWhenCubeDetectedCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersDoubleCubeSwitchAutonChooserCommand;
@@ -52,6 +53,9 @@ public class Robot extends IterativeRobot {
     private static SendableChooser<RobotStartPosition> sideChooser = new SendableChooser<>();
 
     private Command autonCommand; // Selected command run during auton
+    
+    private GamepadRumbleWhenCubeDetectedCommand driverpadRumbleCommand;
+    private GamepadRumbleWhenCubeDetectedCommand operatorpadRumbleCommand;
 
     //    private PowerDistributionPanel pdppanel;
 
@@ -68,6 +72,11 @@ public class Robot extends IterativeRobot {
 
         liftLED.initialize();
         initSmartDashboard();
+        
+        driverpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.driverGamepad, 0.5, 0.5);
+        operatorpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.operatorGamepad, 0.5, 0.5);
+        driverpadRumbleCommand.start();
+        operatorpadRumbleCommand.start();
     }
 
     public enum RobotStartPosition {
