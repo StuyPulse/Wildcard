@@ -28,6 +28,6 @@ public class RightAngleSameSideSwitchAutonCommand extends CommandGroup {
         addSequential(new QuisitorDeacquireCommand(),0.5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(15.0, -0.8));
         addSequential(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
     }
 }

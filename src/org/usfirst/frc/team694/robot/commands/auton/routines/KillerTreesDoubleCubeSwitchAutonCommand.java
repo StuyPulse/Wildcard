@@ -29,11 +29,11 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
         // Go first distance and turn
         addSequential(new DriveStraightRampDownOnlyCommand(228), 2.5);
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 2);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? 90 : -90), 2);
         addParallel(new QuisitorAcquireCommand(), .5);
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(10), 15));
         addSequential(new DriveStraightRampDownOnlyCommand(143 - 2*12 - 10), 2/*.5*/);
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -135 : 135), 1);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? 135 : -135), 1);
         addParallel(new DrivetrainMoveInchesEncoderCommand(13 + 12, .4));
 
         addSequential(new LiftMoveToHeightCommand(60));
@@ -69,7 +69,7 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new QuisitorOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 12, -0.3));
         addSequential(new LiftMoveToBottomCommand());
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -(180 + 30) : 180 + 30), 1);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? (180 + 30) : -(180 + 30) ), 1);
         addParallel(new QuisitorAcquireCommand());
         addParallel(new DrivetrainMoveInchesEncoderCommand(20, 0.4));
         addSequential(new WaitUntilCubeDetectedCommand());

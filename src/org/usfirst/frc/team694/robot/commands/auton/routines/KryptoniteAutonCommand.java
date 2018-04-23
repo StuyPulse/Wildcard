@@ -19,10 +19,11 @@ public class KryptoniteAutonCommand extends CommandGroup {
     public KryptoniteAutonCommand(boolean isRobotRight) {
         // scores first cube into switch
         addSequential(new RightAngleSameSideSwitchAutonCommand(isRobotRight));
-        
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+
         //To acquire and score second cube
-        
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(180));
+        /*
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? -180 : 180));
         //TODO: Check distance
         addSequential(new DrivetrainMoveInchesEncoderCommand(50, -0.8));
         //TODO: Check angle
@@ -34,11 +35,11 @@ public class KryptoniteAutonCommand extends CommandGroup {
         addSequential(new QuisitorCloseCommand());
         addSequential(new LiftMoveToHeightCommand(15));
         addSequential(new DrivetrainMoveInchesEncoderCommand(6, 0.5));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(180));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? -180 : 180));
         addSequential(new QuisitorDeacquireCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(6, -0.5));
         addSequential(new LiftMoveToBottomCommand());
-        
+
         //To acquire third cube and turn to scale
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? -135 : 135));
         addParallel(new QuisitorOpenCommand());
@@ -46,5 +47,6 @@ public class KryptoniteAutonCommand extends CommandGroup {
         addSequential(new QuisitorAcquireCommand(), 0.5);
         addSequential(new QuisitorCloseCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? -90 : 90));
+        */
     }
 }
