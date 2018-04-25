@@ -64,8 +64,8 @@ public class Lift extends Subsystem {
         //        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
         innerRightMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
-        innerLeftMotor.setSensorPhase(false);
-        innerRightMotor.setSensorPhase(false);
+        innerLeftMotor.setSensorPhase(true);
+        innerRightMotor.setSensorPhase(true);
 
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
