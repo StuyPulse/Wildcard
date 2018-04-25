@@ -143,7 +143,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        //        updateSmartDashboard();
     }
 
     @Override
@@ -163,7 +162,6 @@ public class Robot extends IterativeRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //        updateSmartDashboard();
     }
 
     @Override
