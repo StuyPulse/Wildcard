@@ -14,8 +14,6 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegr
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
 
-import com.ctre.phoenix.time.StopWatch;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 

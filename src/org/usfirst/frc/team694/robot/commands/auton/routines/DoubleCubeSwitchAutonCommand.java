@@ -3,7 +3,6 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
-import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
@@ -15,8 +14,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  */
 public class DoubleCubeSwitchAutonCommand extends CommandGroup {
-    private static final double DISTANCE_TO_CUBE = 100;
-    private static final double DISTANCE_TO_SWITCH = 100;
+//    private static final double DISTANCE_TO_CUBE = 100;
+//    private static final double DISTANCE_TO_SWITCH = 100;
 
     private static final double SWITCH_READY_ANGLE = 45;
     private static final double SWITCH_READY_DISTANCE = 24 + 10/*24*/;

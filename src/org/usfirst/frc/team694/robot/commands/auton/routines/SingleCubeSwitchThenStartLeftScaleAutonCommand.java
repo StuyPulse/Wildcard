@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class SingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGroup {
-    private static final double DISTANCE_TO_POWER_CUBES = 53;
+//    private static final double DISTANCE_TO_POWER_CUBES = 53;
 
     public SingleCubeSwitchThenStartLeftScaleAutonCommand(boolean isSwitchRight) {
 

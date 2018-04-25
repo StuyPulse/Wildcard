@@ -6,7 +6,6 @@ import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightRampDownOnlyCommand;
@@ -17,7 +16,6 @@ import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand
 import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *

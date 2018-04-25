@@ -7,22 +7,16 @@
 
 package org.usfirst.frc.team694.robot;
 
-import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.BlackHawksDoubleCubeSwitchAutonChooserCommand;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.CommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KillerTreesDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KryptoniteAutonCommandChooser;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.RightAngleSameSideSwitchAutonCommandChooser;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.BlackHawksDoubleCubeSwitchAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.CommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCube90DegreeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleAutonChooserCommand;
-import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeScaleThenBackupAutonChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.TripleCubeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.MobilityAutonCommand;
-import org.usfirst.frc.team694.robot.commands.auton.routines.SameSideScaleNinetyNullAutonCommand;
 import org.usfirst.frc.team694.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team694.robot.subsystems.Lift;
 import org.usfirst.frc.team694.robot.subsystems.Quisitor;

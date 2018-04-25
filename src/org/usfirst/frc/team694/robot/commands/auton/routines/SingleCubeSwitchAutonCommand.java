@@ -7,7 +7,6 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainDriveCurveCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *

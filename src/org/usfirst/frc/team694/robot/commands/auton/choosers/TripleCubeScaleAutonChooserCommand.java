@@ -1,7 +1,6 @@
 package org.usfirst.frc.team694.robot.commands.auton.choosers;
 
 import org.usfirst.frc.team694.robot.Robot;
-import org.usfirst.frc.team694.robot.commands.auton.routines.DoubleCubeDifferentSideScale90DegreesAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.SingleCubeDifferentSideScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.routines.TripleCubeSameSideScaleCommand;
 
