@@ -12,7 +12,7 @@ public class KryptoniteAutonCommand extends CommandGroup {
     public KryptoniteAutonCommand(boolean isRobotRight) {
         // scores first cube into switch
         addSequential(new RightAngleSameSideSwitchAutonCommand(isRobotRight));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1.4);
 
         //To acquire and score second cube
         /*

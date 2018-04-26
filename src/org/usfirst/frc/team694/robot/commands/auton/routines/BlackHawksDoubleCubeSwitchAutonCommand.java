@@ -33,7 +33,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         addParallel(new LiftMoveToHeightCommand(10));
         addParallel(new QuisitorAcquireCommand(), 0.5);
         if (isSwitchSameSide){
-            addSequential(new DriveStraightWithRampingCommand(15 + 18 + 5 + 6.5 + 9));
+            addSequential(new DriveStraightWithRampingCommand(15 + 18 + 5 + 6.5 + 9 - 11));
         } else {
             addSequential(new DriveStraightWithRampingCommand(121));
         }

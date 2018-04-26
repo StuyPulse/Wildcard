@@ -324,7 +324,6 @@ public class Robot extends IterativeRobot {
 
     public static boolean isRobotOnSameSideSwitch() {
         return !(isRobotOnRight ^ isAllianceSwitchRight);
-
     }
 
     public static Robot getInstance() {
