@@ -5,6 +5,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
@@ -27,7 +28,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
 
         // Drive to rough scoring position
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 15));
-        addSequential(new DriveStraightWithRampingCommand(235 - 14 + 7 ), 2.5);
+        addSequential(new DriveStraightWithRampingCommand(235 - 14 + 7 + 5), 2.5);
         addSequential(new WaitCommand(0.5));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 1.4);
         addParallel(new LiftMoveToHeightCommand(10));
@@ -38,12 +39,12 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
             addSequential(new DriveStraightWithRampingCommand(121));
         }
         //addSequential(new DriveStraightWithRampingCommand(isSwitchSameSide ? 15 + 24 + 5 : 121));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -180 : 180));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -180 : 180), 1.5);
 
         // Score 1st cube
         //drive forward
         addParallel(new LiftMoveToHeightCommand(30));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(13 + 3+ 3, .3 + 0.1),2);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(13 + 3 + 3 + 5, .3 + 0.1),2);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
 
         // Grab 2nd cube
@@ -65,7 +66,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new LiftMoveToHeightCommand(30));
         //forward
         addSequential(new DrivetrainMoveInchesEncoderCommand(5, .75));
-        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        addSequential(new QuisitorMoveSpeedCommand(-0.6), 0.5);
         addSequential(new DrivetrainMoveInchesEncoderCommand(20, -.75));
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchSameSide ? -145 : 145), 1);
