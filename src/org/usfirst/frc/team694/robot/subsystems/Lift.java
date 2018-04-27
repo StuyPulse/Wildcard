@@ -50,6 +50,7 @@ public class Lift extends Subsystem {
         innerLeftMotor.follow(innerRightMotor);
         outerRightMotor.follow(innerRightMotor);
         outerLeftMotor.follow(innerRightMotor);
+        
 
         /// Followers
         //        innerRightMotor.follow(innerLeftMotor);
@@ -70,6 +71,7 @@ public class Lift extends Subsystem {
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
 
+        enableRamping();
     }
 
     @Override
@@ -200,7 +202,7 @@ public class Lift extends Subsystem {
 
     public double getMotorVelocity() {
         return innerRightMotor.getSelectedSensorVelocity(0);
-        //        return innerLeftMotor.getSelectedSensorVelocity(0);
+        //       return innerLeftMotor.getSelectedSensorVelocity(0);
     }
 
     public void enableCurrentLimit() {
@@ -208,6 +210,14 @@ public class Lift extends Subsystem {
         innerRightMotor.enableCurrentLimit(true);
     }
 
+    public void enableRamping() {
+        innerRightMotor.configOpenloopRamp(0.2, 0);
+    }
+    
+    public void disableRamping() {
+        innerRightMotor.configOpenloopRamp(0, 0);
+    }
+    
     public void disableCurrentLimit() {
         innerLeftMotor.enableCurrentLimit(false);
         innerRightMotor.enableCurrentLimit(false);
