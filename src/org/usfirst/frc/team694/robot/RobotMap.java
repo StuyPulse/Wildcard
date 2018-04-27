@@ -96,6 +96,8 @@ public final class RobotMap {
      * Analog Ports
      ****************************************************************************/
 
+    // Temporary module
+    public static final int DIO_PI_PORT = 1; // Temporary digital output for if the Arduino LEDs don't work
     public static final int DRIVETRAIN_LINE_SENSOR_LEFT_PORT = 1;
     public static final int DRIVETRAIN_LINE_SENSOR_RIGHT_PORT = 2;
     public static final int FRONT_SONAR_INPUT_PORT = 6;

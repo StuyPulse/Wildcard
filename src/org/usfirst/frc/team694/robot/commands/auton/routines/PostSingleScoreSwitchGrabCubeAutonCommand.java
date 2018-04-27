@@ -79,8 +79,8 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
 
             // Get in position to grab second cube
             double GRAB_READY_ANGLE = 45 + 15;
-            double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12 + 10;
-    
+            double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12 + 10 + (isSwitchRight? 0 : 8.4);
+
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
                     isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
             if (isThirdCube) {
