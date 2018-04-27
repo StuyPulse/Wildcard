@@ -18,7 +18,7 @@ import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesToHeightCom
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Grabs cubes from the center of the platform side switch
  */
 public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
 

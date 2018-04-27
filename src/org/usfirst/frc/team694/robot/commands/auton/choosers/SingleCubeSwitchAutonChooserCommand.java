@@ -18,6 +18,6 @@ public class SingleCubeSwitchAutonChooserCommand extends ConditionalCommand {
 
     @Override
     public boolean condition() {
-        return Robot.isRobotOnRight();
+        return Robot.isSwitchOnRight();
     }
 }

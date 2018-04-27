@@ -27,7 +27,7 @@ public class SingleCubeSwitchThenStartScaleAutonChooserCommand extends Condition
         
         @Override
         public boolean condition() {
-            return Robot.isRobotOnRight();
+            return Robot.isSwitchOnRight();
         }
     }
 
@@ -38,7 +38,7 @@ public class SingleCubeSwitchThenStartScaleAutonChooserCommand extends Condition
         
         @Override
         public boolean condition() {
-            return Robot.isRobotOnRight();
+            return Robot.isSwitchOnRight();
         }
     }
 }

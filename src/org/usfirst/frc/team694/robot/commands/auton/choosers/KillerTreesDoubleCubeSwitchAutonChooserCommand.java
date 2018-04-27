@@ -16,6 +16,6 @@ public class KillerTreesDoubleCubeSwitchAutonChooserCommand extends ConditionalC
     
     @Override
     public boolean condition() {
-        return Robot.isRobotOnRight();
+        return Robot.isRobotStartingOnRight();//isRobotOnRight();
     }
 }

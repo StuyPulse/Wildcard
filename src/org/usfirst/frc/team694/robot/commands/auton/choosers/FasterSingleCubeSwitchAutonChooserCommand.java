@@ -15,6 +15,6 @@ public class FasterSingleCubeSwitchAutonChooserCommand extends ConditionalComman
     }
     
     public boolean condition() {
-        return Robot.isRobotOnRight();
+        return Robot.isSwitchOnRight();
     }
 }

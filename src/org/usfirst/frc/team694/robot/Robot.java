@@ -185,7 +185,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
         autonChooser.addObject("1.5 switch go to scale", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
-        autonChooser.addObject("2.5 switch", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
+        autonChooser.addObject("2.5 center switch", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
         autonChooser.addObject("2.5 same side scale or 1.5 opposite side", new TripleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Fit with Black Hawk/KillerTrees", 
                 new CommandChooser(
@@ -302,7 +302,7 @@ public class Robot extends IterativeRobot {
         return isRobotOnRight;
     }
 
-    public static boolean isRobotOnRight() {
+    public static boolean isSwitchOnRight() {
         return isAllianceSwitchRight;
     }
 
