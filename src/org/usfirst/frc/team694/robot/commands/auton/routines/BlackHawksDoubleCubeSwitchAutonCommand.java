@@ -26,35 +26,50 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
 
     public BlackHawksDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
 
+        double INITIAL_DRIVE_TO_SWITCH_DISTANCE = 235 - 14 + 7 + 5;
+
         // Drive to rough scoring position
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 15));
-        addSequential(new DriveStraightWithRampingCommand(235 - 14 + 7 + 5), 2.5);
+        addSequential(new DriveStraightWithRampingCommand(INITIAL_DRIVE_TO_SWITCH_DISTANCE), 2.5);
         addSequential(new WaitCommand(0.5));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 1.4);
         addParallel(new LiftMoveToHeightCommand(10));
         addParallel(new QuisitorAcquireCommand(), 0.5);
-        if (isSwitchSameSide){
-            addSequential(new DriveStraightWithRampingCommand(15 + 18 + 5 + 6.5 + 9 - 11));
+
+        double APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE;
+
+        if (isSwitchSameSide) {
+            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 15 + 18 + 5 + 6.5 + 9 - 11;
         } else {
-            addSequential(new DriveStraightWithRampingCommand(121));
+            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 121;
         }
+        addSequential(new DriveStraightWithRampingCommand(APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE));
+
         //addSequential(new DriveStraightWithRampingCommand(isSwitchSameSide ? 15 + 24 + 5 : 121));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -180 : 180), 1.5);
 
         // Score 1st cube
         //drive forward
+
+        double SCORE_1ST_CUBE_DISTANCE = 13 + 3 + 3 + 5;
+        double SCORE_1ST_CUBE_SPEED = 0.3 + 0.1;
+
         addParallel(new LiftMoveToHeightCommand(30));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(13 + 3 + 3 + 5, .3 + 0.1),2);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(SCORE_1ST_CUBE_DISTANCE, SCORE_1ST_CUBE_SPEED), 2);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
 
         // Grab 2nd cube
-        //backup parallel 6in
-        addSequential(new DrivetrainMoveInchesEncoderCommand(6, -1));
+
+        double BACKUP_TO_GET_READY_DISTANCE = 6;
+        double GRAB_2ND_CUBE_DISTANCE = 10;
+        double GRAB_2ND_CUBE_SPEED = 0.5;
+
+        addSequential(new DrivetrainMoveInchesEncoderCommand(BACKUP_TO_GET_READY_DISTANCE, -1));
         addSequential(new QuisitorOpenCommand());
         addSequential(new LiftMoveToBottomCommand());
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
-        addParallel(new DrivetrainMoveInchesEncoderCommand(10, 0.5));
+        addParallel(new DrivetrainMoveInchesEncoderCommand(GRAB_2ND_CUBE_DISTANCE, GRAB_2ND_CUBE_SPEED));
         addSequential(new WaitUntilCubeDetectedCommand());
         addSequential(new DrivetrainStopCommand());
 
@@ -78,29 +93,29 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
 
         // Go to other side
 
-//        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(15), 50));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(176, 0.8));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -90));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.8)); //TODO: Check distance
-//        addSequential(new QuisitorDeacquireCommand(), 0.5);
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(-5, 0.2));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
-//
-//        // Grab the second cube
-//        addSequential(new LiftMoveToBottomCommand());
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(70, 0.4));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -90));
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.3));
-//        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 180 : -180));
-//        addSequential(new QuisitorOpenCommand());
-//        addParallel(new QuisitorAcquireCommand());
-//        addSequential(new DrivetrainMoveInchesEncoderCommand(6, 0.8));
-//        addSequential(new QuisitorCloseCommand());
-//        addSequential(new QuisitorStopCommand());
-//
-//        // Score 2nd time
-//        addSequential(new LiftMoveToHeightCommand(30));
-//        addSequential(new QuisitorDeacquireCommand());
+        //        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(15), 50));
+        //        addSequential(new DrivetrainMoveInchesEncoderCommand(176, 0.8));
+        //        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -90));
+        //        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.8)); //TODO: Check distance
+        //        addSequential(new QuisitorDeacquireCommand(), 0.5);
+        //        addSequential(new DrivetrainMoveInchesEncoderCommand(-5, 0.2));
+        //        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+        //
+        //        // Grab the second cube
+        //        addSequential(new LiftMoveToBottomCommand());
+        //        addSequential(new DrivetrainMoveInchesEncoderCommand(70, 0.4));
+        //        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 90 : -90));
+        //        addSequential(new DrivetrainMoveInchesEncoderCommand(15, 0.3));
+        //        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight? 180 : -180));
+        //        addSequential(new QuisitorOpenCommand());
+        //        addParallel(new QuisitorAcquireCommand());
+        //        addSequential(new DrivetrainMoveInchesEncoderCommand(6, 0.8));
+        //        addSequential(new QuisitorCloseCommand());
+        //        addSequential(new QuisitorStopCommand());
+        //
+        //        // Score 2nd time
+        //        addSequential(new LiftMoveToHeightCommand(30));
+        //        addSequential(new QuisitorDeacquireCommand());
 
     }
 }
