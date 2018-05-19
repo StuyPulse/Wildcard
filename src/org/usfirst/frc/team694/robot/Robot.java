@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 
     // true:  Mildcard (Practice)
     // false: Wildcard (Competition)
-    public static final boolean IS_MILDCARD = false;
+    public static final boolean IS_MILDCARD = true;
 
     // The main instance of Robot
     private static Robot myInstance;

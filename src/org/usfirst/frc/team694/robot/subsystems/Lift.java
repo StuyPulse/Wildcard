@@ -27,6 +27,8 @@ public class Lift extends Subsystem {
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
 
+    private boolean isOverridingLimitSwitch;
+
     public Lift() {
         followerSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
         masterSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -97,7 +99,7 @@ public class Lift extends Subsystem {
     }
 
     private void moveLift(double speed) {
-        if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
+        if (!isOverridingLimitSwitch && ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0))) {
             stop();
         } else {
             //            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
@@ -226,6 +228,14 @@ public class Lift extends Subsystem {
     public void disableCurrentLimit() {
         followerSideTalon.enableCurrentLimit(false);
         masterSideTalon.enableCurrentLimit(false);
+    }
+
+    public void enableOverrideLimitSwitch() {
+        isOverridingLimitSwitch = true;
+    }
+
+    public void disableOverrideLimitSwitch() {
+        isOverridingLimitSwitch = false;
     }
 
     public double getCurrent() {
