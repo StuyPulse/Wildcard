@@ -23,7 +23,7 @@ public class SameSideScaleNinetyNullAutonCommand extends CommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5.0), 30));
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(10.0), 250));
         //TODO: Change to the right distance for driving straight into the null zone 
-        addSequential(new DriveStraightWithRampingCommand(300 + 5 + 24), 4);
+        addSequential(new DriveStraightWithRampingCommand(300 + 5 + 24 + 10), 4);
         //TODO: Change the timeout of the Rotate Command
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -(80+10) : (80+10)), 2);
         //TODO: Check if the move height is correct
