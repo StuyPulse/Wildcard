@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.util.IRSensor;
 
@@ -24,7 +25,19 @@ public class Quisitor extends Subsystem {
     public Quisitor() {
         quisitorMotor = new WPI_VictorSPX(RobotMap.QUISITOR_MOTOR_PORT);
         quisitorMotor.setNeutralMode(NeutralMode.Brake);
-        quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT, RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT);
+
+        if (Robot.IS_MILDCARD) {
+            quisitorGrabberSolenoid = new DoubleSolenoid(
+                    RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT_MILDCARD, 
+                    RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT_MILDCARD
+                    );
+        } else {
+            quisitorGrabberSolenoid = new DoubleSolenoid(
+                    RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT, 
+                    RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT
+                    );
+        }
+
 //        quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
         quisitorCubeSensor = new IRSensor(RobotMap.QUISITOR_IR_SENSOR_PORT);
 

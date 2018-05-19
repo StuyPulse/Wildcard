@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.subsystems;
 
+import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
 import org.usfirst.frc.team694.robot.commands.LiftMoveCommand;
 
@@ -18,38 +19,38 @@ public class Lift extends Subsystem {
     private static final int PEAK_LIMIT_AMPS = 23; // 26 is max roughly
     //    private static final int PEAK_LIMIT_MILLISECONDS = 250;
 
-    private WPI_TalonSRX innerLeftMotor;
-    private WPI_TalonSRX innerRightMotor;
-    private WPI_VictorSPX outerLeftMotor;
-    private WPI_VictorSPX outerRightMotor;
+    private WPI_TalonSRX followerSideTalon;
+    private WPI_TalonSRX masterSideTalon;
+    private WPI_VictorSPX leftSideVictor;
+    private WPI_VictorSPX rightSideVictor;
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
 
     public Lift() {
-        innerLeftMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
-        innerRightMotor = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
+        followerSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
+        masterSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
         //We will be using encoder data from the left motor only, and leaving it as a TalonSRX.
 
-        outerLeftMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_LEFT_MOTOR_PORT);
-        outerRightMotor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_RIGHT_MOTOR_PORT);
+        leftSideVictor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_LEFT_MOTOR_PORT);
+        rightSideVictor = new WPI_VictorSPX(RobotMap.LIFT_OUTER_RIGHT_MOTOR_PORT);
 
         /// Brake Mode
-        innerLeftMotor.setNeutralMode(NeutralMode.Brake);
-        innerRightMotor.setNeutralMode(NeutralMode.Brake);
-        outerLeftMotor.setNeutralMode(NeutralMode.Brake);
-        outerRightMotor.setNeutralMode(NeutralMode.Brake);
+        followerSideTalon.setNeutralMode(NeutralMode.Brake);
+        masterSideTalon.setNeutralMode(NeutralMode.Brake);
+        leftSideVictor.setNeutralMode(NeutralMode.Brake);
+        rightSideVictor.setNeutralMode(NeutralMode.Brake);
 
-        innerLeftMotor.configContinuousCurrentLimit(PEAK_LIMIT_AMPS, 0);
-        innerRightMotor.configContinuousCurrentLimit(PEAK_LIMIT_AMPS, 0);
+        followerSideTalon.configContinuousCurrentLimit(PEAK_LIMIT_AMPS, 0);
+        masterSideTalon.configContinuousCurrentLimit(PEAK_LIMIT_AMPS, 0);
         //        innerLeftMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
         //        innerRightMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
-        innerLeftMotor.enableCurrentLimit(false);
-        innerRightMotor.enableCurrentLimit(false);
+        followerSideTalon.enableCurrentLimit(false);
+        masterSideTalon.enableCurrentLimit(false);
 
-        innerLeftMotor.follow(innerRightMotor);
-        outerRightMotor.follow(innerRightMotor);
-        outerLeftMotor.follow(innerRightMotor);
+        followerSideTalon.follow(masterSideTalon);
+        rightSideVictor.follow(masterSideTalon);
+        leftSideVictor.follow(masterSideTalon);
         
 
         /// Followers
@@ -58,16 +59,20 @@ public class Lift extends Subsystem {
         //        outerLeftMotor.follow(innerLeftMotor);
 
         /// Encoders
-        innerLeftMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-        innerRightMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        followerSideTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+        masterSideTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         // Lift P, to ramp up to a height
         //        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
-        innerRightMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
+        masterSideTalon.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
-        innerLeftMotor.setSensorPhase(true);
-        innerRightMotor.setSensorPhase(true);
-
+        if (Robot.IS_MILDCARD) {
+            followerSideTalon.setSensorPhase(false);
+            masterSideTalon.setSensorPhase(false);
+        } else {
+            followerSideTalon.setSensorPhase(true);
+            masterSideTalon.setSensorPhase(true);
+        }
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
 
@@ -87,8 +92,8 @@ public class Lift extends Subsystem {
     }
 
     public void resetEncoders() {
-        innerLeftMotor.setSelectedSensorPosition(0, 0, 0);
-        innerRightMotor.setSelectedSensorPosition(0, 0, 0);
+        followerSideTalon.setSelectedSensorPosition(0, 0, 0);
+        masterSideTalon.setSelectedSensorPosition(0, 0, 0);
     }
 
     private void moveLift(double speed) {
@@ -96,7 +101,7 @@ public class Lift extends Subsystem {
             stop();
         } else {
             //            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
-            innerRightMotor.set(ControlMode.PercentOutput, speed);
+            masterSideTalon.set(ControlMode.PercentOutput, speed);
         }
     }
 
@@ -158,17 +163,17 @@ public class Lift extends Subsystem {
     }
 
     public void setHeight(double height) {
-        innerRightMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
+        masterSideTalon.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
         //        innerLeftMotor.set(ControlMode.Position, height / RobotMap.LIFT_ENCODER_RAW_MULTIPLIER);
     }
 
     public void stop() {
-        innerRightMotor.set(ControlMode.PercentOutput, 0);
+        masterSideTalon.set(ControlMode.PercentOutput, 0);
         //        innerLeftMotor.set(ControlMode.PercentOutput, 0);
     }
 
     public double getSpeed() {
-        return innerRightMotor.get();
+        return masterSideTalon.get();
         //        return innerLeftMotor.get();
     }
 
@@ -181,19 +186,19 @@ public class Lift extends Subsystem {
     }
 
     public double getLeftRawEncoderDistance() {
-        return innerLeftMotor.getSelectedSensorPosition(0);
+        return followerSideTalon.getSelectedSensorPosition(0);
     }
 
     public double getRightRawEncoderDistance() {
-        return innerRightMotor.getSelectedSensorPosition(0);
+        return masterSideTalon.getSelectedSensorPosition(0);
     }
 
     public double getLeftEncoderDistance() {
-        return innerLeftMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+        return followerSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getRightEncoderDistance() {
-        return innerRightMotor.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
+        return masterSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getLiftHeight() {
@@ -201,30 +206,30 @@ public class Lift extends Subsystem {
     }
 
     public double getMotorVelocity() {
-        return innerRightMotor.getSelectedSensorVelocity(0);
+        return masterSideTalon.getSelectedSensorVelocity(0);
         //       return innerLeftMotor.getSelectedSensorVelocity(0);
     }
 
     public void enableCurrentLimit() {
-        innerLeftMotor.enableCurrentLimit(true);
-        innerRightMotor.enableCurrentLimit(true);
+        followerSideTalon.enableCurrentLimit(true);
+        masterSideTalon.enableCurrentLimit(true);
     }
 
     public void enableRamping() {
-        innerRightMotor.configOpenloopRamp(0.2, 0);
+        masterSideTalon.configOpenloopRamp(0.2, 0);
     }
     
     public void disableRamping() {
-        innerRightMotor.configOpenloopRamp(0, 0);
+        masterSideTalon.configOpenloopRamp(0, 0);
     }
     
     public void disableCurrentLimit() {
-        innerLeftMotor.enableCurrentLimit(false);
-        innerRightMotor.enableCurrentLimit(false);
+        followerSideTalon.enableCurrentLimit(false);
+        masterSideTalon.enableCurrentLimit(false);
     }
 
     public double getCurrent() {
-        return innerLeftMotor.getOutputCurrent() + innerRightMotor.getOutputCurrent()
-                + outerLeftMotor.getOutputCurrent() + outerRightMotor.getOutputCurrent();
+        return followerSideTalon.getOutputCurrent() + masterSideTalon.getOutputCurrent()
+                + leftSideVictor.getOutputCurrent() + rightSideVictor.getOutputCurrent();
     }
 }

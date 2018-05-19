@@ -91,6 +91,8 @@ public final class RobotMap {
 
     public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT = 3;//Left 
     public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT = 2;//Right
+    public static final int QUISITOR_GRABBER_SOLENOID_OPEN_PORT_MILDCARD = 6;//Left 
+    public static final int QUISITOR_GRABBER_SOLENOID_CLOSE_PORT_MILDCARD = 5;//Right
 
     /*****************************************************************************
      * Analog Ports

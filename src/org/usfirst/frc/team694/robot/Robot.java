@@ -34,6 +34,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 
+    // true:  Mildcard (Practice)
+    // false: Wildcard (Competition)
+    public static final boolean IS_MILDCARD = false;
+
     // The main instance of Robot
     private static Robot myInstance;
 
