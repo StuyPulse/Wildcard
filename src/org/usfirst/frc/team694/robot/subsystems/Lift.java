@@ -185,24 +185,24 @@ public class Lift extends Subsystem {
         return !topLimitSwitch.get();
     }
 
-    public double getLeftRawEncoderDistance() {
+    public double getFollowerRawEncoderDistance() {
         return followerSideTalon.getSelectedSensorPosition(0);
     }
 
-    public double getRightRawEncoderDistance() {
+    public double getMasterRawEncoderDistance() {
         return masterSideTalon.getSelectedSensorPosition(0);
     }
 
-    public double getLeftEncoderDistance() {
+    public double getFollowerEncoderDistance() {
         return followerSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
-    public double getRightEncoderDistance() {
+    public double getMasterEncoderDistance() {
         return masterSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getLiftHeight() {
-        return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
+        return Math.max(getFollowerEncoderDistance(), getMasterEncoderDistance());
     }
 
     public double getMotorVelocity() {
