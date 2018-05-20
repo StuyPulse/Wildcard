@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 
 public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
-
+ 
     public BlackHawksDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
 
         double INITIAL_DRIVE_TO_SWITCH_DISTANCE = 235 - 14 + 7 + 5 + 6;

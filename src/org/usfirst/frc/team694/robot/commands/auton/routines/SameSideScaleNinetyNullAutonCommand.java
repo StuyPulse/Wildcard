@@ -2,7 +2,6 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;

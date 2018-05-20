@@ -29,8 +29,8 @@ public class OI {
         //Needs to be set to X mode for rumbling to work
         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
 
-        driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
-        driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
+        driverGamepad.getBottomButton().whenPressed(new DrivetrainHighGearCommand());
+        driverGamepad.getBottomButton().whenReleased(new DrivetrainLowGearCommand());
 
         operatorGamepad.getLeftButton().whenPressed(new QuisitorOpenCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());

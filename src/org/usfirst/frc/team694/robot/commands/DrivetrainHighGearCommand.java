@@ -15,7 +15,8 @@ public class DrivetrainHighGearCommand extends InstantCommand {
 
     @Override
     protected void initialize() {
-        Robot.drivetrain.highGearShift();
+        if (!Robot.getInstance().isAutonomous())
+            Robot.drivetrain.highGearShift();
     }
 
 }

@@ -125,6 +125,7 @@ public class Robot extends IterativeRobot {
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
+        drivetrain.highGearShift();
 
         gameData = null;
 
@@ -164,6 +165,8 @@ public class Robot extends IterativeRobot {
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
         drivetrain.setRamp(0.0);
+
+        drivetrain.lowGearShift();
 
         if (autonCommand != null) {
             autonCommand.cancel();
