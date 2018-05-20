@@ -53,7 +53,6 @@ public class Lift extends Subsystem {
         followerSideTalon.follow(masterSideTalon);
         rightSideVictor.follow(masterSideTalon);
         leftSideVictor.follow(masterSideTalon);
-        
 
         /// Followers
         //        innerRightMotor.follow(innerLeftMotor);
@@ -220,11 +219,11 @@ public class Lift extends Subsystem {
     public void enableRamping() {
         masterSideTalon.configOpenloopRamp(0.2, 0);
     }
-    
+
     public void disableRamping() {
         masterSideTalon.configOpenloopRamp(0, 0);
     }
-    
+
     public void disableCurrentLimit() {
         followerSideTalon.enableCurrentLimit(false);
         masterSideTalon.enableCurrentLimit(false);
