@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift extends Subsystem {
 
-    private static final int PEAK_LIMIT_AMPS = 23; // 26 is max roughly
+    private static final int PEAK_LIMIT_AMPS = 23 + 999; // 26 is max roughly
     //    private static final int PEAK_LIMIT_MILLISECONDS = 250;
 
     private WPI_TalonSRX followerSideTalon;

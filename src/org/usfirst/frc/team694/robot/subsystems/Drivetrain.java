@@ -54,8 +54,6 @@ public class Drivetrain extends Subsystem {
     private Ultrasonic rearSonar;
     private Ultrasonic frontSonar;
 
-//    private boolean brownoutProtectionEnabled;
-
     public Drivetrain() {
         /// Left Motors
         leftTopMotor = new WPI_VictorSPX(RobotMap.DRIVETRAIN_LEFT_TOP_MOTOR_PORT);
