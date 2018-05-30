@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Lift extends Subsystem {
 
-    private static final int PEAK_LIMIT_AMPS = 23; // 26 is max roughly
+    private static final int PEAK_LIMIT_AMPS = 23 + 999; // 26 is max roughly
     //    private static final int PEAK_LIMIT_MILLISECONDS = 250;
 
     private WPI_TalonSRX followerSideTalon;
@@ -26,6 +26,8 @@ public class Lift extends Subsystem {
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
+
+    private boolean isOverridingLimitSwitch;
 
     public Lift() {
         followerSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
@@ -51,7 +53,6 @@ public class Lift extends Subsystem {
         followerSideTalon.follow(masterSideTalon);
         rightSideVictor.follow(masterSideTalon);
         leftSideVictor.follow(masterSideTalon);
-        
 
         /// Followers
         //        innerRightMotor.follow(innerLeftMotor);
@@ -97,7 +98,7 @@ public class Lift extends Subsystem {
     }
 
     private void moveLift(double speed) {
-        if ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0)) {
+        if (!isOverridingLimitSwitch && ((isAtTop() && speed > 0) || (isAtBottom() && speed < 0))) {
             stop();
         } else {
             //            innerLeftMotor.set(ControlMode.PercentOutput,speed); 
@@ -185,24 +186,24 @@ public class Lift extends Subsystem {
         return !topLimitSwitch.get();
     }
 
-    public double getLeftRawEncoderDistance() {
+    public double getFollowerRawEncoderDistance() {
         return followerSideTalon.getSelectedSensorPosition(0);
     }
 
-    public double getRightRawEncoderDistance() {
+    public double getMasterRawEncoderDistance() {
         return masterSideTalon.getSelectedSensorPosition(0);
     }
 
-    public double getLeftEncoderDistance() {
+    public double getFollowerEncoderDistance() {
         return followerSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
-    public double getRightEncoderDistance() {
+    public double getMasterEncoderDistance() {
         return masterSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getLiftHeight() {
-        return Math.max(getLeftEncoderDistance(), getRightEncoderDistance());
+        return Math.max(getFollowerEncoderDistance(), getMasterEncoderDistance());
     }
 
     public double getMotorVelocity() {
@@ -218,14 +219,22 @@ public class Lift extends Subsystem {
     public void enableRamping() {
         masterSideTalon.configOpenloopRamp(0.2, 0);
     }
-    
+
     public void disableRamping() {
         masterSideTalon.configOpenloopRamp(0, 0);
     }
-    
+
     public void disableCurrentLimit() {
         followerSideTalon.enableCurrentLimit(false);
         masterSideTalon.enableCurrentLimit(false);
+    }
+
+    public void enableOverrideLimitSwitch() {
+        isOverridingLimitSwitch = true;
+    }
+
+    public void disableOverrideLimitSwitch() {
+        isOverridingLimitSwitch = false;
     }
 
     public double getCurrent() {

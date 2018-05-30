@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class WaitUntilLiftGoesToHeightCommand extends Command {
+public class WaitUntilLiftGoesBelowHeightCommand extends Command {
 
     private double targetHeight;
 
-    public WaitUntilLiftGoesToHeightCommand(double targetHeight) {
+    public WaitUntilLiftGoesBelowHeightCommand(double targetHeight) {
         this.targetHeight = targetHeight;
     }
 
@@ -25,7 +25,7 @@ public class WaitUntilLiftGoesToHeightCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs(Robot.lift.getLiftHeight() - targetHeight) < 3;
+        return Math.abs(Robot.lift.getLiftHeight()) < targetHeight;
     }
 
     // Called once after isFinished returns true

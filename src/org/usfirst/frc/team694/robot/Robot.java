@@ -266,8 +266,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData("Scheduler", Scheduler.getInstance());
 
         SmartDashboard.putBoolean("Lift: Top Limit Switch", Robot.lift.isAtTop());
-        SmartDashboard.putNumber("Lift: Left Encoder Values", Robot.lift.getLeftEncoderDistance());
-        SmartDashboard.putNumber("Lift: Right Encoder Values", Robot.lift.getRightEncoderDistance());
+        SmartDashboard.putNumber("Lift: Follower Encoder Values", Robot.lift.getFollowerEncoderDistance());
+        SmartDashboard.putNumber("Lift: Master Encoder Values", Robot.lift.getMasterEncoderDistance());
         SmartDashboard.putBoolean("Lift: Bottom Limit Switch", Robot.lift.isAtBottom());
         SmartDashboard.putNumber("Lift Speed", Robot.lift.getSpeed());
 

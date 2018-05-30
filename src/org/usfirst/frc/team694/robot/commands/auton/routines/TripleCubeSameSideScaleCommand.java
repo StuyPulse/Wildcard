@@ -13,7 +13,7 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderC
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
-import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesBelowHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -55,7 +55,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
             addSequential(new DrivetrainMoveInchesEncoderCommand(-15, -0.4));
             // Don't wait until lift hits the bottom before rotating
 //            addSequential(new LiftMoveToBottomCommand());
-            addSequential(new WaitUntilLiftGoesToHeightCommand(10));
+            addSequential(new WaitUntilLiftGoesBelowHeightCommand(10));
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150 : 150), 1.25);
         }
         addSequential(new QuisitorOpenCommand());
@@ -93,7 +93,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
         addSequential(new DrivetrainMoveInchesEncoderCommand(15+3, -0.4));
 //        addSequential(new LiftMoveToBottomCommand());
-        addSequential(new WaitUntilLiftGoesToHeightCommand(10));
+        addSequential(new WaitUntilLiftGoesBelowHeightCommand(10));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -125 : 125), 1.25);
 
         // Prepare to grab 3rd cube
