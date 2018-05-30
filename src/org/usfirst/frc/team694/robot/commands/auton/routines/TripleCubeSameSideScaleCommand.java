@@ -14,7 +14,6 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegr
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
 import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesBelowHeightCommand;
-import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesToHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -94,7 +93,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
         addSequential(new DrivetrainMoveInchesEncoderCommand(15+3, -0.4));
 //        addSequential(new LiftMoveToBottomCommand());
-        addSequential(new WaitUntilLiftGoesToHeightCommand(10));
+        addSequential(new WaitUntilLiftGoesBelowHeightCommand(10));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -125 : 125), 1.25);
 
         // Prepare to grab 3rd cube

@@ -13,7 +13,7 @@ import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderC
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainStopCommand;
 import org.usfirst.frc.team694.robot.commands.auton.WaitUntilCubeDetectedCommand;
-import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesToHeightCommand;
+import org.usfirst.frc.team694.robot.commands.auton.WaitUntilLiftGoesBelowHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -55,7 +55,7 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new QuisitorAcquireCommand(), 0.5);
 
         addParallel(new LiftMoveToHeightCommand(65));
-        addSequential(new WaitUntilLiftGoesToHeightCommand(20));
+        addSequential(new WaitUntilLiftGoesBelowHeightCommand(20));
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.25), 1);
         addSequential(new DriveStraightPIDCommand(10, 0.25), 1);
 
