@@ -61,7 +61,7 @@ public final class RobotMap {
 
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
-    public static final double ENCODER_TO_SPROCKET_REDUCTION = (1.0 / 4) * (1.0 / 3);
+    public static final double ENCODER_TO_SPROCKET_REDUCTION = 1.0 / 106.94;
     public static final double LIFT_ENCODER_RAW_MULTIPLIER = 
             LIFT_EMPERICAL_RAW_MULTIPLIER * (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) 
             / 4.4 * ENCODER_TO_SPROCKET_REDUCTION;
