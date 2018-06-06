@@ -60,7 +60,6 @@ public class Lift extends Subsystem {
         //        outerLeftMotor.follow(innerLeftMotor);
 
         /// Encoders
-        followerSideTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
         masterSideTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         // Lift P, to ramp up to a height
@@ -93,7 +92,6 @@ public class Lift extends Subsystem {
     }
 
     public void resetEncoders() {
-        followerSideTalon.setSelectedSensorPosition(0, 0, 0);
         masterSideTalon.setSelectedSensorPosition(0, 0, 0);
     }
 
@@ -186,16 +184,8 @@ public class Lift extends Subsystem {
         return !topLimitSwitch.get();
     }
 
-    public double getFollowerRawEncoderDistance() {
-        return followerSideTalon.getSelectedSensorPosition(0);
-    }
-
     public double getMasterRawEncoderDistance() {
         return masterSideTalon.getSelectedSensorPosition(0);
-    }
-
-    public double getFollowerEncoderDistance() {
-        return followerSideTalon.getSelectedSensorPosition(0) * RobotMap.LIFT_ENCODER_RAW_MULTIPLIER;
     }
 
     public double getMasterEncoderDistance() {
@@ -203,7 +193,7 @@ public class Lift extends Subsystem {
     }
 
     public double getLiftHeight() {
-        return Math.max(getFollowerEncoderDistance(), getMasterEncoderDistance());
+        return getMasterEncoderDistance();
     }
 
     public double getMotorVelocity() {
