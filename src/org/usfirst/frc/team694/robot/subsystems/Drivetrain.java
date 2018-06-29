@@ -197,7 +197,15 @@ public class Drivetrain extends Subsystem {
         rightBottomMotor.setSelectedSensorPosition(
                 (int) (getRightRawEncoderDistance() + (inches / RobotMap.DRIVETRAIN_RAW_MULTIPLIER)), 0, 0);
     }
-
+    
+    public int getLeftEncoderTicks() {
+        return leftBottomMotor.getSensorCollection().getQuadraturePosition();
+    }
+    
+    public int getRightEncoderTicks() {
+        return rightBottomMotor.getSensorCollection().getQuadraturePosition();
+    }
+    
     public void tankDrive(double left, double right) {
         if (brownoutProtectionEnabled) {
             left = Math.signum(left) * Math.min(Math.abs(left),BROWNOUT_PROTECTION_PVBUS_CAP);

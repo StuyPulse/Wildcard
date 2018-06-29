@@ -127,7 +127,18 @@ public final class RobotMap {
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
             DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
             / (DRIVETRAIN_ENCODERS_PULSES_PER_REVOLUTION * DRIVETRAIN_ENCODERS_FACTOR);
-
+    
+    public static final int DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION = 1024; 
+    
+    /******************************************************************************
+     * Motion Profile Constants
+     ******************************************************************************/
+    //Make dt 0.05 by default
+    public static final double dt = 0.05; 
+    public static final double maxVelocity = 17.5; 
+    public static final double kv = 1 / maxVelocity; 
+    //public static final double vIntercept;
+    
     /******************************************************************************
      * LED Device Addresses
      ******************************************************************************/

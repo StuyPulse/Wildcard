@@ -13,6 +13,7 @@ import org.usfirst.frc.team694.robot.commands.auton.choosers.CommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KillerTreesDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KryptoniteAutonCommandChooser;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.MPDoubleCubeScaleAutonCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCube90DegreeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
@@ -191,6 +192,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("1.5 switch go to scale", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
         autonChooser.addObject("2.5 center switch", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
         autonChooser.addObject("2.5 same side scale or 1.5 opposite side", new TripleCubeScaleAutonChooserCommand());
+        autonChooser.addObject("2 MP opposite side or 2.5 same side", new MPDoubleCubeScaleAutonCommand());
         autonChooser.addObject("Fit with Black Hawk/KillerTrees", 
                 new CommandChooser(
                         new TripleCubeScaleAutonChooserCommand(), 
