@@ -27,19 +27,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
     private static final boolean IS_2ND_SCORE_FAST_AND_CRAZY = false;
 
     public TripleCubeSameSideScaleCommand(boolean isRight) {
-
-        DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
-        driveCommand.addSpeedChange(0, 0.75);
-        driveCommand.addTurn(130 - 35, isRight ? -(45/2 - 5 - 5) : (45/2 - 5 - 5));
-//        driveCommand.addTurn(130 + 116, isRight ? 5 : -5);
-
-        // Curve to the scale + ready to score
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 15));
-        addSequential(driveCommand, 3.3);
-
-        // Spit out cube
-        addParallel(new QuisitorMoveSpeedCommand(-0.7), 0.5);
-
+        addSequential(new SingleCubeSameSideScaleAutonCommand(isRight));
         // Go down and grab 2nd cube
         if (IS_2ND_SCORE_FAST_AND_CRAZY) {
             // K turn / Drift
