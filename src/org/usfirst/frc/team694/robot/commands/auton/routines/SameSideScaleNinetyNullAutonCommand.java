@@ -2,7 +2,6 @@ package org.usfirst.frc.team694.robot.commands.auton.routines;
 
 import org.usfirst.frc.team694.robot.commands.LiftMoveToBottomCommand;
 import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
-import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightWithRampingCommand;
@@ -23,7 +22,7 @@ public class SameSideScaleNinetyNullAutonCommand extends CommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5.0), 30));
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(10.0), 250));
         //TODO: Change to the right distance for driving straight into the null zone 
-        addSequential(new DriveStraightWithRampingCommand(300 + 5 + 24), 4);
+        addSequential(new DriveStraightWithRampingCommand(300 + 5 + 24 - 11), 4); // I'm sorry Mr. Blay, this was way overdue
         //TODO: Change the timeout of the Rotate Command
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -(80+10) : (80+10)), 2);
         //TODO: Check if the move height is correct
