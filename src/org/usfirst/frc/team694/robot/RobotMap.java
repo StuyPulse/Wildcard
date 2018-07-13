@@ -63,8 +63,12 @@ public final class RobotMap {
     private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = 1.088376142794949934697431432303;//(51.5 - 9) / 38.7;//(68 - 9)/56.0;
 =======
     // Extra factor empirically determined
+<<<<<<< HEAD
     private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (51.5 - 9) / 38.7;
 >>>>>>> 485d51b... Update lift variables in RobotMap from new gearbox
+=======
+    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (45 + 46.5 + 39)/(41.125 + 42.199 + 35.44);
+>>>>>>> 86eb21b... Change encoder constant and flip encoder phases for new lift gearbox
 
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873; //unchanged for new
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25; //unchanged for new
@@ -79,7 +83,7 @@ public final class RobotMap {
     public static final double LIFT_BACKDRIVE_SPEED = 0.16667; //piotr says wont change much
 
     public static final double LIFT_MIN_SPEED = 0.1;//0.25;
-    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 30;//20.0; //asking adris
+    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 30;//20.0; //adris says wont change
     public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_RAMP_HEIGHT_THRESHOLD;
     public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
     public static final double LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD = 2;
