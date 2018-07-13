@@ -50,11 +50,17 @@ public class OI {
         operatorGamepad.getRightTrigger().whileHeld(new QuisitorMoveSpeedCommand(1.0));
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
 
+<<<<<<< HEAD
 //        operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
 //        operatorGamepad.getDPadLeft().whenPressed(new LiftDisableRampingCommand());
 
         operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
         operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
+=======
+        operatorGamepad.getDPadRight().whenPressed(new LiftDisableRampingCommand());
+        operatorGamepad.getDPadLeft().whenPressed(new LiftEnableRampingCommand());
+        //operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
+>>>>>>> 2ea9ee5... Enable lift ramping during teleop, decrease last distance traveled
         operatorGamepad.getDPadDown().whenPressed(new LiftEnableOverrideLimitSwitch());
         operatorGamepad.getDPadUp().whenPressed(new LiftDisableOverrideLimitSwitch());
 
