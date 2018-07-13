@@ -47,7 +47,7 @@ public class OI {
 //        operatorGamepad.getDPadLeft().whenPressed(new LiftDisableRampingCommand());
 
         operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
-        operatorGamepad.getDPadLeft().whenPressed(new LiftDisableRampingCommand());
+        operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand());
         operatorGamepad.getDPadDown().whenPressed(new LiftEnableOverrideLimitSwitch());
         operatorGamepad.getDPadUp().whenPressed(new LiftEnableOverrideLimitSwitch());
 
@@ -60,7 +60,9 @@ public class OI {
         //        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
         //        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
 //                driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
-//                driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(90));
+//               driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(90));
+//               driverGamepad.getDPadDown().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(-90));
+//               
 
     }
 }
