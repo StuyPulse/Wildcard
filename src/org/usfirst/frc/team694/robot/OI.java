@@ -9,6 +9,7 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
+import org.usfirst.frc.team694.robot.commands.LiftDisableOverrideLimitSwitch;
 import org.usfirst.frc.team694.robot.commands.LiftDisableRampingCommand;
 import org.usfirst.frc.team694.robot.commands.LiftEnableOverrideLimitSwitch;
 import org.usfirst.frc.team694.robot.commands.LiftEnableRampingCommand;
@@ -30,9 +31,20 @@ public class OI {
         //Needs to be set to X mode for rumbling to work
         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
 
+<<<<<<< HEAD
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
+=======
+<<<<<<< HEAD
+        driverGamepad.getBottomButton().whenPressed(new DrivetrainHighGearCommand());
+        driverGamepad.getBottomButton().whenReleased(new DrivetrainLowGearCommand());
+>>>>>>> f6155ed... Adjust angles on triple cube second cube scoring and decrease speed when
 
+=======
+        driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
+        driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
+        
+>>>>>>> 41759b8... Adjust angles on triple cube second cube scoring and decrease speed when
         operatorGamepad.getLeftButton().whenPressed(new QuisitorOpenCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());
         //        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
@@ -44,9 +56,9 @@ public class OI {
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
 
         operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
-        operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand());
+        operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
         operatorGamepad.getDPadDown().whenPressed(new LiftEnableOverrideLimitSwitch());
-        operatorGamepad.getDPadUp().whenPressed(new LiftEnableOverrideLimitSwitch());
+        operatorGamepad.getDPadUp().whenPressed(new LiftDisableOverrideLimitSwitch());
 
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
         //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());

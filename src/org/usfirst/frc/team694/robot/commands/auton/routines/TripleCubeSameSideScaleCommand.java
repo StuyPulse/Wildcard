@@ -88,7 +88,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
             addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
             addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
             addParallel(new QuisitorAcquireCommand(), 1);
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)), 1.25);
+            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
 //            addParallel(new LiftMoveToHeightCommand(68));
             addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.4));
         }
