@@ -39,7 +39,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         double APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE;
 
         if (isSwitchSameSide) {
-            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 15 + 18 + 5 + 6.5 + 9 - 11;
+            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 15 + 18 + 5 + 6.5 + 9 - 11 - 10;
         } else {
             APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 121;
         }
@@ -54,7 +54,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         double SCORE_1ST_CUBE_DISTANCE = 13 + 3 + 3 + 5;
         double SCORE_1ST_CUBE_SPEED = 0.3 + 0.1;
 
-        addParallel(new LiftMoveToHeightCommand(30));
+        addParallel(new LiftMoveToHeightCommand(30), 4);
         addSequential(new DrivetrainMoveInchesEncoderCommand(SCORE_1ST_CUBE_DISTANCE, SCORE_1ST_CUBE_SPEED), 2);
         addSequential(new QuisitorDeacquireCommand(), 0.5);
 
@@ -64,13 +64,14 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         double GRAB_2ND_CUBE_DISTANCE = 10;
         double GRAB_2ND_CUBE_SPEED = 0.5;
 
-        addSequential(new DrivetrainMoveInchesEncoderCommand(BACKUP_TO_GET_READY_DISTANCE, -1));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(BACKUP_TO_GET_READY_DISTANCE, -1), 1);
         addSequential(new QuisitorOpenCommand());
-        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new LiftMoveToBottomCommand(), 1.2);
+        
         addParallel(new QuisitorAcquireCommand(), 0.5);
-
         addParallel(new DrivetrainMoveInchesEncoderCommand(GRAB_2ND_CUBE_DISTANCE, GRAB_2ND_CUBE_SPEED));
         addSequential(new WaitUntilCubeDetectedCommand());
+        
         addSequential(new DrivetrainStopCommand());
 
         addSequential(new QuisitorCloseCommand());

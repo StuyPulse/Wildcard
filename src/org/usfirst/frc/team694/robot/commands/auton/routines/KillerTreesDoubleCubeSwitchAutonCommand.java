@@ -44,7 +44,7 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
 
         // Move towards cube to grab
         addSequential(new QuisitorOpenCommand());
-        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new LiftMoveToBottomCommand(), 2);
         addParallel(new QuisitorAcquireCommand());
 
         addParallel(new DrivetrainMoveInchesEncoderCommand(10+24, 0.3 + .2));
@@ -66,7 +66,7 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
         addSequential(new QuisitorOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 12, -0.3));
-        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new LiftMoveToBottomCommand(), 3);
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -(180 + 30) : (180 + 30) ), 1);
         addParallel(new QuisitorAcquireCommand());
         addParallel(new DrivetrainMoveInchesEncoderCommand(20, 0.4));
