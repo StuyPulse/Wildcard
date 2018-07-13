@@ -20,7 +20,7 @@ public class RoboTigersOppositeSideScaleMobilityAutonCommand extends CommandGrou
 
         addSequential(new LiftMoveToHeightCommand(10));
 
-        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12 + 4*12), 3);
+        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12 + 4*12 + 30), 3);
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
     }

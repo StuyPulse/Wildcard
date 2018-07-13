@@ -44,8 +44,9 @@ public class OI {
         operatorGamepad.getRightTrigger().whileHeld(new QuisitorMoveSpeedCommand(1.0));
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
 
-        operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
-        operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
+        operatorGamepad.getDPadRight().whenPressed(new LiftDisableRampingCommand());
+        operatorGamepad.getDPadLeft().whenPressed(new LiftEnableRampingCommand());
+        //operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
         operatorGamepad.getDPadDown().whenPressed(new LiftEnableOverrideLimitSwitch());
         operatorGamepad.getDPadUp().whenPressed(new LiftDisableOverrideLimitSwitch());
 
