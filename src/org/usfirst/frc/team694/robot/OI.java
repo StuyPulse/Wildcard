@@ -9,6 +9,7 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
+import org.usfirst.frc.team694.robot.commands.LiftDisableOverrideLimitSwitch;
 import org.usfirst.frc.team694.robot.commands.LiftDisableRampingCommand;
 import org.usfirst.frc.team694.robot.commands.LiftEnableOverrideLimitSwitch;
 import org.usfirst.frc.team694.robot.commands.LiftEnableRampingCommand;
@@ -32,7 +33,7 @@ public class OI {
 
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
-
+        
         operatorGamepad.getLeftButton().whenPressed(new QuisitorOpenCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());
         //        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
@@ -44,9 +45,9 @@ public class OI {
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
 
         operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
-        operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand());
+        operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
         operatorGamepad.getDPadDown().whenPressed(new LiftEnableOverrideLimitSwitch());
-        operatorGamepad.getDPadUp().whenPressed(new LiftEnableOverrideLimitSwitch());
+        operatorGamepad.getDPadUp().whenPressed(new LiftDisableOverrideLimitSwitch());
 
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
         //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
