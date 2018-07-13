@@ -29,6 +29,8 @@ public class Lift extends Subsystem {
 
     private boolean isOverridingLimitSwitch;
 
+    public static boolean rampDisabled;
+
     public Lift() {
         followerSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
         masterSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -217,10 +219,12 @@ public class Lift extends Subsystem {
     }
 
     public void enableRamping() {
+        rampDisabled = false;
         masterSideTalon.configOpenloopRamp(0.2, 0);
     }
 
     public void disableRamping() {
+        rampDisabled = true;
         masterSideTalon.configOpenloopRamp(0, 0);
     }
 
