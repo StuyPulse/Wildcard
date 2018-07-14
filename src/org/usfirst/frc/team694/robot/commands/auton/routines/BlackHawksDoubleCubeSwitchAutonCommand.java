@@ -39,7 +39,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         double APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE;
 
         if (isSwitchSameSide) {
-            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 15 + 18 + 5 + 6.5 + 9 - 11 - 10;
+            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 15 + 18 + 5 + 6.5 + 9 - 11 - 6;
         } else {
             APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 121;
         }
