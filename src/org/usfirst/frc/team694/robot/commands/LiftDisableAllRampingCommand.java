@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class LiftDisableRampingCommand extends InstantCommand {
+public class LiftDisableAllRampingCommand extends InstantCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.lift.disableRamping();
+        Robot.lift.disableAllRamping();
     }
 
 }

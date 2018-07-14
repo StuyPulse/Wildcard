@@ -55,12 +55,13 @@ public class Robot extends IterativeRobot {
     private static boolean isRobotOnRight;
     private static boolean isAllianceSwitchRight;
     private static boolean isScaleRight;
+    private static boolean isInTeleop;
 
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private static SendableChooser<RobotStartPosition> sideChooser = new SendableChooser<>();
 
     private Command autonCommand; // Selected command run during auton
-    
+
     //private GamepadRumbleWhenCubeDetectedCommand driverpadRumbleCommand;
     private GamepadRumbleWhenCubeDetectedCommand operatorpadRumbleCommand;
 
@@ -119,7 +120,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-
+        isInTeleop = false;
+        lift.enableRamping();
         liftLED.initialize();
 
         drivetrain.resetEncoders();
@@ -158,6 +160,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+        isInTeleop = true;
+        lift.enableRamping();
         liftLED.initialize();
 
         drivetrain.resetEncoders();
@@ -334,4 +338,7 @@ public class Robot extends IterativeRobot {
         return myInstance;
     }
 
+    public static boolean isInTeleop() {
+        return isInTeleop;
+    }
 }

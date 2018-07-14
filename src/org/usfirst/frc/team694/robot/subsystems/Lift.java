@@ -224,10 +224,19 @@ public class Lift extends Subsystem {
 
     public void enableRamping() {
         rampDisabled = false;
+        if (Robot.isInTeleop()) {
+            masterSideTalon.configOpenloopRamp(0.5, 0);
+        } else {
+            masterSideTalon.configOpenloopRamp(0.2, 0);
+        }
+    }
+    
+    public void disableLoopRamping() {
+        rampDisabled = false;
         masterSideTalon.configOpenloopRamp(0.2, 0);
     }
 
-    public void disableRamping() {
+    public void disableAllRamping() {
         rampDisabled = true;
         masterSideTalon.configOpenloopRamp(0, 0);
     }
