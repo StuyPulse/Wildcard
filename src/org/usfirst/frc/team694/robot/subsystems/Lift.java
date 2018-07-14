@@ -72,9 +72,13 @@ public class Lift extends Subsystem {
         if (Robot.IS_MILDCARD) {
             followerSideTalon.setSensorPhase(true);
             masterSideTalon.setSensorPhase(true);
+//            followerSideTalon.setSensorPhase(false);
+//            masterSideTalon.setSensorPhase(false);
         } else {
             followerSideTalon.setSensorPhase(false);
             masterSideTalon.setSensorPhase(false);
+//            followerSideTalon.setSensorPhase(true);
+//            masterSideTalon.setSensorPhase(true);
         }
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
