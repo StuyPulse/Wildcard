@@ -57,22 +57,22 @@ public final class RobotMap {
      * Lift Constants
      *************************************************************************/
     // Extra factor empirically determined
-    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (51.5 - 9) / 38.7;//(68 - 9)/56.0;
+    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (45 + 46.5 + 39)/(41.125 + 42.199 + 35.44);
 
-    public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873;
-    public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25;
-    public static final double ENCODER_TO_SPROCKET_REDUCTION = (1.0 / 4) * (1.0 / 3);
+    public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873; //unchanged for new
+    public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25; //unchanged for new
+    public static final double ENCODER_TO_SPROCKET_REDUCTION = 1 / 106.94; //(1.0 / 4) * (1.0 / 3); // updated
     public static final double LIFT_ENCODER_RAW_MULTIPLIER = 
             LIFT_EMPERICAL_RAW_MULTIPLIER * (LIFT_DIAMETER_OF_ENCODER_SPROCKET * Math.PI * 3 / 1024) 
-            / 4.4 * ENCODER_TO_SPROCKET_REDUCTION;
+            / 4.4 * ENCODER_TO_SPROCKET_REDUCTION; 
 
-    public static final double MIN_HEIGHT_OF_LIFT = 20.5;
-    public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT;
+    public static final double MIN_HEIGHT_OF_LIFT = 20.5; // unchanged
+    public static final double MAX_HEIGHT_OF_LIFT = LIFT_TOTAL_CARRIAGE_MOVEMENT + MIN_HEIGHT_OF_LIFT; //unchanged
     public static final double LIFT_MAX_SPEED = 1;
-    public static final double LIFT_BACKDRIVE_SPEED = 0.16667;
+    public static final double LIFT_BACKDRIVE_SPEED = 0.16667; //piotr says wont change much
 
     public static final double LIFT_MIN_SPEED = 0.1;//0.25;
-    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 30;//20.0;
+    public static final double LIFT_RAMP_HEIGHT_THRESHOLD = 30;//20.0; //adris says wont change
     public static final double LIFT_RAMP_SLOPE = (LIFT_MAX_SPEED - LIFT_MIN_SPEED) / LIFT_RAMP_HEIGHT_THRESHOLD;
     public static final double LIFT_JOYSTICK_MOVE_THRESHOLD = .05;
     public static final double LIFT_CLOSE_ENOUGH_HEIGHT_THRESHOLD = 2;

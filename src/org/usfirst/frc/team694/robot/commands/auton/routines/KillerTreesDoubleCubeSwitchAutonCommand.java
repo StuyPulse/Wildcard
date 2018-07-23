@@ -5,6 +5,7 @@ import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorAcquireCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorCloseCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorDeacquireCommand;
+import org.usfirst.frc.team694.robot.commands.QuisitorMoveSpeedCommand;
 import org.usfirst.frc.team694.robot.commands.QuisitorOpenCommand;
 import org.usfirst.frc.team694.robot.commands.auton.ConditionalDistanceEncodersCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DriveStraightPIDCommand;
@@ -34,9 +35,9 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -135 : 135), 1);
         addParallel(new DrivetrainMoveInchesEncoderCommand(13 + 12, .4));
 
-        addSequential(new LiftMoveToHeightCommand(60));
+        addSequential(new LiftMoveToHeightCommand(60), 4);
         // Score 1st cube
-        addParallel(new QuisitorDeacquireCommand(), 0.5);
+        addParallel(new QuisitorMoveSpeedCommand(-.75), 0.5);
 
         // Move back and get ready to grab cube
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
@@ -44,7 +45,7 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
 
         // Move towards cube to grab
         addSequential(new QuisitorOpenCommand());
-        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new LiftMoveToBottomCommand(), 2);
         addParallel(new QuisitorAcquireCommand());
 
         addParallel(new DrivetrainMoveInchesEncoderCommand(10+24, 0.3 + .2));
@@ -54,19 +55,19 @@ public class KillerTreesDoubleCubeSwitchAutonCommand extends CommandGroup {
         // Give it a little bit of time to acquire
         addSequential(new QuisitorAcquireCommand(), 0.5);
 
-        addParallel(new LiftMoveToHeightCommand(65));
+        addParallel(new LiftMoveToHeightCommand(65), 5);
         addSequential(new WaitUntilLiftGoesBelowHeightCommand(20));
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(10, 0.25), 1);
         addSequential(new DriveStraightPIDCommand(10, 0.25), 1);
 
         // Score 2nd cube
-        addSequential(new QuisitorDeacquireCommand(), 0.25);
+        addSequential(new QuisitorMoveSpeedCommand(-0.75), 0.25);
 
         // Get to the 3rd cube
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
         addSequential(new QuisitorOpenCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 12, -0.3));
-        addSequential(new LiftMoveToBottomCommand());
+        addSequential(new LiftMoveToBottomCommand(), 3);
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -(180 + 30) : (180 + 30) ), 1);
         addParallel(new QuisitorAcquireCommand());
         addParallel(new DrivetrainMoveInchesEncoderCommand(20, 0.4));
