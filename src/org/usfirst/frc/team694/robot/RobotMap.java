@@ -56,19 +56,9 @@ public final class RobotMap {
     /***************************************************************************
      * Lift Constants
      *************************************************************************/
-<<<<<<< HEAD
-    /** 
-     * Extra factor empirically determined
-     */
-    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = 1.088376142794949934697431432303;//(51.5 - 9) / 38.7;//(68 - 9)/56.0;
-=======
     // Extra factor empirically determined
-<<<<<<< HEAD
-    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (51.5 - 9) / 38.7;
->>>>>>> 485d51b... Update lift variables in RobotMap from new gearbox
-=======
+
     private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (45 + 46.5 + 39)/(41.125 + 42.199 + 35.44);
->>>>>>> 86eb21b... Change encoder constant and flip encoder phases for new lift gearbox
 
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873; //unchanged for new
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25; //unchanged for new
