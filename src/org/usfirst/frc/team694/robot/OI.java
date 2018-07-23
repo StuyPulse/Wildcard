@@ -31,20 +31,9 @@ public class OI {
         //Needs to be set to X mode for rumbling to work
         operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
 
-<<<<<<< HEAD
         driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
         driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
-=======
-<<<<<<< HEAD
-        driverGamepad.getBottomButton().whenPressed(new DrivetrainHighGearCommand());
-        driverGamepad.getBottomButton().whenReleased(new DrivetrainLowGearCommand());
->>>>>>> f6155ed... Adjust angles on triple cube second cube scoring and decrease speed when
 
-=======
-        driverGamepad.getBottomButton().whenPressed(new DrivetrainLowGearCommand());
-        driverGamepad.getBottomButton().whenReleased(new DrivetrainHighGearCommand());
-        
->>>>>>> 41759b8... Adjust angles on triple cube second cube scoring and decrease speed when
         operatorGamepad.getLeftButton().whenPressed(new QuisitorOpenCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());
         //        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
@@ -55,20 +44,10 @@ public class OI {
         operatorGamepad.getRightTrigger().whileHeld(new QuisitorMoveSpeedCommand(1.0));
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-//        operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
-//        operatorGamepad.getDPadLeft().whenPressed(new LiftDisableRampingCommand());
-
->>>>>>> 66365dc... Enable lift ramping during teleop, decrease last distance traveled
         operatorGamepad.getDPadRight().whenPressed(new LiftEnableRampingCommand());
         operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
-=======
         operatorGamepad.getDPadRight().whenPressed(new LiftDisableRampingCommand());
         operatorGamepad.getDPadLeft().whenPressed(new LiftEnableRampingCommand());
-        //operatorGamepad.getSelectButton().whenPressed(new LiftDisableRampingCommand()); //back button
->>>>>>> 2ea9ee5... Enable lift ramping during teleop, decrease last distance traveled
         operatorGamepad.getDPadDown().whenPressed(new LiftEnableOverrideLimitSwitch());
         operatorGamepad.getDPadUp().whenPressed(new LiftDisableOverrideLimitSwitch());
 

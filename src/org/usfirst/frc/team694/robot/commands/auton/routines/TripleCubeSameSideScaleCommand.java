@@ -30,15 +30,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
 
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
         driveCommand.addSpeedChange(0, 0.75);
-<<<<<<< HEAD
-        driveCommand.addTurn(130 - 35, isRight ? -(45/2 - 5 - 5) : (45/2 - 5 - 5));
-=======
-<<<<<<< HEAD
-        driveCommand.addTurn(130 - 35, isRight ? -(45/2 - 5 - 5 + 10) : (45/2 - 5 - 5 + 10));
-=======
         driveCommand.addTurn(130 - 35, isRight ? -(45/2 - 5 - 5 + 5) : (45/2 - 5 - 5 + 5));
->>>>>>> 0a6f1a7... Add 5 degrees to the first cube scoring for the triple cube scale autoni
->>>>>>> 4a9639a... Add 5 degrees to the first cube scoring for the triple cube scale autoni
 //        driveCommand.addTurn(130 + 116, isRight ? 5 : -5);
 
         // Curve to the scale + ready to score
