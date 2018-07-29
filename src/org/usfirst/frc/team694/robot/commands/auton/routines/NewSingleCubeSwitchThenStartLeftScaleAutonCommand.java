@@ -1,5 +1,6 @@
 package org.usfirst.frc.team694.robot.commands.auton.routines;
 
+import org.usfirst.frc.team694.robot.commands.LiftMoveToHeightCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainMoveInchesEncoderCommand;
 import org.usfirst.frc.team694.robot.commands.auton.DrivetrainRotateAbsoluteDegreesPIDCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchAutonChooserCommand;
@@ -26,6 +27,9 @@ public class NewSingleCubeSwitchThenStartLeftScaleAutonCommand extends CommandGr
 
         //Going to the scale
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
+        addParallel(new LiftMoveToHeightCommand(5.0));
         addSequential(new DrivetrainMoveInchesEncoderCommand(200, 1));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand((60-15)), 1.5);
+        addSequential(new LiftMoveToHeightCommand(86));
     }
 }
