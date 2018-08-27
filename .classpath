@@ -10,5 +10,8 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix-sources.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/jna-4.0.0.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/opencv-320.jar"/>
+	<classpathentry kind="var" path="USERLIBS_DIR/purejavahidapi.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
