@@ -39,7 +39,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         // Grab the diagonal if we want to
         if (isThirdCube && !CUBE_3_GRAB_MIDDLE_CUBE) {
             // Get into diagonal grabbing orientation
-            addParallel(new LiftMoveToBottomCommand());
+            addParallel(new LiftMoveToBottomCommand(), 2);
 //            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
 //            addSequential(new DrivetrainMoveInchesEncoderCommand(28 / 2, -0.4));
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isSwitchRight? -45 : 45), 1);
@@ -87,7 +87,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
                 addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
             }
             else {
-                addParallel(new LiftMoveToBottomCommand());
+                addParallel(new LiftMoveToBottomCommand(), 2);
                 addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4 - .1));
             }
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), 1);
