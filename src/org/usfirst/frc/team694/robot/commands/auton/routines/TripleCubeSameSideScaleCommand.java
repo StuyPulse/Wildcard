@@ -54,31 +54,14 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addParallel(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/24 + 12 , 0.3 + 0.1));
         addSequential(new WaitUntilCubeDetectedCommand());
         addSequential(new DrivetrainStopCommand());
-//        addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
+//      addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
         addSequential(new QuisitorCloseCommand());
-
-        // Get ready to score a 2nd time
-<<<<<<< HEAD
         addParallel(new QuisitorAcquireCommand(), 1);
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
         addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
         addParallel(new QuisitorAcquireCommand(), 1);
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2) : (45/2)), 1.25);
-=======
-        if (IS_2ND_SCORE_FAST_AND_CRAZY) {
-            // K turn / Drift
-            DrivetrainDriveCurveCommand kTurnCommand = new DrivetrainDriveCurveCommand(-30, RampMode.NO_RAMPING);
-            kTurnCommand.addSpeedChange(0, 0.75);
-            kTurnCommand.addTurn(15, 0);
-            addSequential(kTurnCommand);
-        } else {
-            addParallel(new QuisitorAcquireCommand(), 1);
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
-            addParallel(new QuisitorAcquireCommand(), 1);
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
->>>>>>> 87450592dbb1c7628cfb1dcda1bce9c96865e3ee
-//            addParallel(new LiftMoveToHeightCommand(68));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
+//      addParallel(new LiftMoveToHeightCommand(68));
         addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.4));
 
         // Wait to stabilize
