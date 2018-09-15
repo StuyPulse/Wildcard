@@ -4,7 +4,6 @@ import java.io.File;
 
 import org.usfirst.frc.team694.robot.Robot;
 import org.usfirst.frc.team694.robot.RobotMap;
-import org.usfirst.frc.team694.util.PathGenerator;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,8 +26,9 @@ public class DrivetrainMotionProfileJaciEncoderCommand extends Command {
 	Trajectory rightTraj;
 
 	Notifier profileProcessor; 
+	double dt; 
 	
-    public DrivetrainMotionProfileJaciEncoderCommand(String nameOfPath) {
+    public DrivetrainMotionProfileJaciEncoderCommand(String nameOfPath, double dt) {
     	requires(Robot.drivetrain);
     	leftCSV = new File("/home/lvuser/Paths/" + nameOfPath + "_left_Jaci.csv");
     	rightCSV = new File("/home/lvuser/Paths/" + nameOfPath + "_right_Jaci.csv");
@@ -36,13 +36,9 @@ public class DrivetrainMotionProfileJaciEncoderCommand extends Command {
         rightTraj = Pathfinder.readFromCSV(rightCSV);
         System.out.println("CSV has been locked and loaded"); 
     	profileProcessor = new Notifier(new RunProfile());
+    	this.dt = dt; 
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    }
-
-    public DrivetrainMotionProfileJaciEncoderCommand(PathGenerator path) {
-    	leftTraj = path.modifier.getLeftTrajectory(); 
-    	rightTraj = path.modifier.getRightTrajectory();
     }
 
     // Called just before this Command runs the first time
@@ -56,7 +52,7 @@ public class DrivetrainMotionProfileJaciEncoderCommand extends Command {
     	rightFollower.configureEncoder(Robot.drivetrain.getRightEncoderTicks(), RobotMap.DRIVETRAIN_ENCODER_TICKS_PER_REVOLUTION, RobotMap.DRIVETRAIN_WHEEL_DIAMETER / 12);
     	leftFollower.configurePIDVA(SmartDashboard.getNumber("kp", 0.0), SmartDashboard.getNumber("ki", 0), SmartDashboard.getNumber("kd", 0.0), RobotMap.kv, SmartDashboard.getNumber("ka", 0));
     	rightFollower.configurePIDVA(SmartDashboard.getNumber("kp", 0.0), SmartDashboard.getNumber("ki", 0), SmartDashboard.getNumber("kd", 0.0), RobotMap.kv, SmartDashboard.getNumber("ka", 0));
-    	profileProcessor.startPeriodic(RobotMap.dt);
+    	profileProcessor.startPeriodic(dt);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -87,12 +83,6 @@ public class DrivetrainMotionProfileJaciEncoderCommand extends Command {
     	Robot.drivetrain.stop();
     }
     
-    //From Oblarg's whitepaper on robot drivetrain characterization
-    private double calculate(EncoderFollower follower, int encoderTicks) {
-    	//TODO Find the vIntercept
-    	return follower.calculate(encoderTicks) /*+ RobotMap.vIntercept*/;
-    }
-    
     class RunProfile implements java.lang.Runnable {
     	int segmentNumber = 0; 
 		@Override
@@ -106,7 +96,7 @@ public class DrivetrainMotionProfileJaciEncoderCommand extends Command {
 	    	//kg is the turn gain and is the p for the angle loop
 	    	double turn = SmartDashboard.getNumber("kg", 0.08) * (-1.0 / 80.0) * angleDifference;
 	    	Robot.drivetrain.tankDrive(leftOutput + turn, rightOutput - turn);
-	    	System.out.println(segmentNumber + "-Left Power: " + (leftOutput + turn) + " Right Power: " + (rightOutput - turn));
+	    	//System.out.println(segmentNumber + "-Left Power: " + (leftOutput + turn) + " Right Power: " + (rightOutput - turn));
 	    	segmentNumber++; 
 		}
     }

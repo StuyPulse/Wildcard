@@ -133,11 +133,8 @@ public final class RobotMap {
     /******************************************************************************
      * Motion Profile Constants
      ******************************************************************************/
-    //Make dt 0.05 by default
-    public static final double dt = 0.05; 
     public static final double maxVelocity = 17.5; 
     public static final double kv = 1 / maxVelocity; 
-    //public static final double vIntercept;
     
     /******************************************************************************
      * LED Device Addresses
