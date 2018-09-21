@@ -24,8 +24,6 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class TripleCubeSameSideScaleCommand extends CommandGroup {
     private static final double DISTANCE_TOTAL = 130 + 116 + 40;//296 - 4;
 
-    private static final boolean IS_2ND_SCORE_FAST_AND_CRAZY = false;
-
     public TripleCubeSameSideScaleCommand(boolean isRight) {
 
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
@@ -42,48 +40,29 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addParallel(new QuisitorMoveSpeedCommand(-0.7), 0.5);
 
         // Go down and grab 2nd cube
-        if (IS_2ND_SCORE_FAST_AND_CRAZY) {
-            // K turn / Drift
-            DrivetrainDriveCurveCommand kTurnCommand = new DrivetrainDriveCurveCommand(-20, RampMode.NO_RAMPING);
-            kTurnCommand.addSpeedChange(0, 0.4);
-            kTurnCommand.addTurn(0, 15);
-            kTurnCommand.addTurn(10, 180);
-            kTurnCommand.addSpeedChange(15, -0.4);
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
-            addSequential(kTurnCommand);
-        } else {
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(-15, -0.4));
-            // Don't wait until lift hits the bottom before rotating
+
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 5));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(-15, -0.4));
+        // Don't wait until lift hits the bottom before rotating
 //            addSequential(new LiftMoveToBottomCommand());
-            addSequential(new WaitUntilLiftGoesBelowHeightCommand(10));
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150 : 150), 1.25);
-        }
+        addSequential(new WaitUntilLiftGoesBelowHeightCommand(10));
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -150 : 150), 1.25);
+
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(), 2);
 
         addParallel(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/24 + 12 , 0.3 + 0.1));
         addSequential(new WaitUntilCubeDetectedCommand());
         addSequential(new DrivetrainStopCommand());
-//        addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
+//      addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
         addSequential(new QuisitorCloseCommand());
-
-        // Get ready to score a 2nd time
-        if (IS_2ND_SCORE_FAST_AND_CRAZY) {
-            // K turn / Drift
-            DrivetrainDriveCurveCommand kTurnCommand = new DrivetrainDriveCurveCommand(-30, RampMode.NO_RAMPING);
-            kTurnCommand.addSpeedChange(0, 0.75);
-            kTurnCommand.addTurn(15, 0);
-            addSequential(kTurnCommand);
-        } else {
-            addParallel(new QuisitorAcquireCommand(), 1);
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
-            addParallel(new QuisitorAcquireCommand(), 1);
-            addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
-//            addParallel(new LiftMoveToHeightCommand(68));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.4));
-        }
+        addParallel(new QuisitorAcquireCommand(), 1);
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
+        addParallel(new QuisitorAcquireCommand(), 1);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
+//      addParallel(new LiftMoveToHeightCommand(68));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(/*62 - 20*/10+3, 0.4));
 
         // Wait to stabilize
         addSequential(new WaitCommand(0.2));
