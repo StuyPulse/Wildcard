@@ -26,7 +26,9 @@ public class Lift extends Subsystem {
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
-
+    
+    public static boolean rampDisabled = false;
+    
     private boolean isOverridingLimitSwitch;
 
     public Lift() {
@@ -217,11 +219,13 @@ public class Lift extends Subsystem {
     }
 
     public void enableRamping() {
-        masterSideTalon.configOpenloopRamp(0.2, 0);
+        //masterSideTalon.configOpenloopRamp(0.2, 0);
+        rampDisabled = false;
     }
 
     public void disableRamping() {
-        masterSideTalon.configOpenloopRamp(0, 0);
+        //masterSideTalon.configOpenloopRamp(0, 0);
+        rampDisabled = true;
     }
 
     public void disableCurrentLimit() {
