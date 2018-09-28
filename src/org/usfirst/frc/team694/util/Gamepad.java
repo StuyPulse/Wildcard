@@ -67,7 +67,7 @@ public class Gamepad extends Joystick {
 			case SWITCH_D:
 				return getRawAxis(4);
 			case SWITCH_X:
-				return getRawAxis(0);
+				return getRawAxis(4);
 			case PS4:
 			    return getRawAxis(2);
 			default:

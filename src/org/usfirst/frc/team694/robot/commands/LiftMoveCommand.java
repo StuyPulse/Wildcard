@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.robot.commands;
 
 import org.usfirst.frc.team694.robot.Robot;
+import org.usfirst.frc.team694.robot.subsystems.Lift;
 
 /**
  *
@@ -27,7 +28,12 @@ public class LiftMoveCommand extends DefaultCommand {
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
 
         if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
-            Robot.lift.moveDangerous(liftSquared);
+            //Robot.lift.moveDangerous(liftSquared);
+            if (Lift.rampDisabled) {
+                Robot.lift.moveDangerous(liftSquared);
+            } else {
+                Robot.lift.moveRamp(liftSquared);
+            }
 //            Robot.drivetrain.enableCurrentLimit();
         } else {
             Robot.lift.stop();
