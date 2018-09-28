@@ -76,7 +76,15 @@ public class Quisitor extends Subsystem {
        return quisitorCubeSensor.isSensorTriggered();
 //        return !(quisitorLimitSwitch.get());
     }
-    
+
+    public void setLEDNeutral() {
+        quisitorCubeSensor.setNeutral();
+    }
+
+    public void setLEDForward() {
+        quisitorCubeSensor.setForward();
+    }
+
     public void open() {
         quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kForward);
     }

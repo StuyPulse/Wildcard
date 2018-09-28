@@ -82,8 +82,12 @@ public class ArduinoLED {
         }
 
         if (cubeDetected) {
+            Robot.quisitor.setLEDForward();
             state = LED_STATE.SOLID_GREEN;
+        } else {
+            Robot.quisitor.setLEDNeutral();
         }
+
         if (operatorSignalPress) {
             state = LED_STATE.PULSE_POLICE;
         }

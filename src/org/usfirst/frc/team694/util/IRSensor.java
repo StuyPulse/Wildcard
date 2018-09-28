@@ -1,6 +1,7 @@
 package org.usfirst.frc.team694.util;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Relay;
 
 public class IRSensor {
     //Equation numbers
@@ -26,6 +27,7 @@ public class IRSensor {
 //    public static final double CONVERSION_FACTOR_CM_TO_INCHES = 0.393701;
     
     private static DigitalInput cubeSensor;
+    private static Relay relay;
 
     // Create instance of a timer that we can use to keep track of how long the
     // gear is kept in the position for.
@@ -35,14 +37,23 @@ public class IRSensor {
 
     public IRSensor(int port) {
         cubeSensor = new DigitalInput(port);
+        relay = new Relay(0);
 //        timeSinceEntry = new Timer();
 //        isTimerRunning = false;
+        
     }
 
     public boolean isSensorTriggered() {
         return !cubeSensor.get();
     }
 
+    public void setNeutral() {
+        relay.set(Relay.Value.kOff);
+    }
+    
+    public void setForward() {
+        relay.set(Relay.Value.kForward);
+    }
     // The use of LEDs for the robot is currently unclear so this needs further detail in the future
     /*
     public void cubeLEDSignalControl() {
