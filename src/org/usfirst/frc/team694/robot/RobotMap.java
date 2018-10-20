@@ -57,7 +57,7 @@ public final class RobotMap {
      * Lift Constants
      *************************************************************************/
     // Extra factor empirically determined
-    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = (45 + 46.5 + 39)/(41.125 + 42.199 + 35.44);
+    private static final double LIFT_EMPERICAL_RAW_MULTIPLIER = 1.00879;//(45 + 46.5 + 39)/(41.125 + 42.199 + 35.44);
 
     public static final double LIFT_DIAMETER_OF_ENCODER_SPROCKET = 2.873; //unchanged for new
     public static final double LIFT_TOTAL_CARRIAGE_MOVEMENT = 92.25; //unchanged for new
@@ -122,7 +122,7 @@ public final class RobotMap {
      **/
 
     // Extra factor imperically determined
-    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = (63.7 / 63.0) * 61.1 / ((463.544 + 461.814) / 2.0);//163/1246.0;
+    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = ((63.7 / 63.0) * 61.1 / ((463.544 + 461.814) / 2.0));//163/1246.0;
 
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
             DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
