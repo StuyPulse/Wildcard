@@ -122,7 +122,7 @@ public final class RobotMap {
      **/
 
     // Extra factor imperically determined
-    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = ((63.7 / 63.0) * 61.1 / ((463.544 + 461.814) / 2.0));//163/1246.0;
+    private static final double DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER = (((63.7 / 63.0) * 61.1 / ((463.544 + 461.814) / 2.0)));//163/1246.0;
 
     public static final double DRIVETRAIN_RAW_MULTIPLIER = 
             DRIVETRAIN_EMPERICAL_RAW_MULTIPLIER * DRIVETRAIN_ENCODERS_INCHES_PER_REVOLUTION
