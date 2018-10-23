@@ -39,7 +39,7 @@ public class SingleCubeDifferentSideScaleAutonCommand extends CommandGroup {
         addSequential(new DriveStraightRampDownOnlyCommand(-1 * (234 + 20 + 24 + 24 + 10) ), 3 - .5);
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
-        addParallel(new LiftMoveToHeightCommand(86 - 11 - 6), 2.5);
+        addParallel(new LiftMoveToHeightCommand(86 - 11 - 6 + 2), 2.5);
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 35 : -35), 1.5 );//Was originally 45, then 35
 
         // Drive forward and raise lift for scoring
