@@ -39,7 +39,7 @@ public class DoubleCubeSwitchAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(SWITCH_SCORE_DISTANCE - (isSwitchRight ? 0 : 10.0/1.4), 0.3), 1);
         //addSequential(new DrivetrainDriveCurveCommand(SWITCH_SCORE_DISTANCE, RampMode.NO_RAMP_UP), 2.0);
         addSequential(new WaitCommand(.25/*0.5*/));
-        addSequential(new QuisitorDeacquireCommand(), 0.25);
+        addSequential(new QuisitorDeacquireCommand(), 0.75);
         addSequential(new DrivetrainMoveInchesEncoderCommand(10 + 5, -1)); // -0.45
 
         // Old routine, not sure if it works

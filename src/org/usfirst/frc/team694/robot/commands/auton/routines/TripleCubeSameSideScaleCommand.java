@@ -34,7 +34,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
 //        driveCommand.addTurn(130 + 116, isRight ? 5 : -5);
 
         // Curve to the scale + ready to score
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 15));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86 - 11 - 6 + 2), 15));
         
         addSequential(driveCommand, 3.3);
 
@@ -62,8 +62,8 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(), 2);
 
-        addParallel(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/24 + 12 , 0.3 + 0.1));
-        addSequential(new WaitUntilCubeDetectedCommand());
+        addParallel(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/36, 0.4));
+        addSequential(new WaitUntilCubeDetectedCommand(), 1.7);
         addSequential(new DrivetrainStopCommand());
 //        addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
         addSequential(new QuisitorCloseCommand());
@@ -77,7 +77,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
             addSequential(kTurnCommand);
         } else {
             addParallel(new QuisitorAcquireCommand(), 1);
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86), 10));
+            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86 - 11 - 6  + 2), 10));
             addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
             addParallel(new QuisitorAcquireCommand(), 1);
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
