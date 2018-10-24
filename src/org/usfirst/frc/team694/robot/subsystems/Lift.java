@@ -26,7 +26,9 @@ public class Lift extends Subsystem {
 
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
-
+    
+    public static boolean rampDisabled = false;
+    
     private boolean isOverridingLimitSwitch;
 
     public static boolean rampDisabled;
