@@ -13,6 +13,7 @@ import org.usfirst.frc.team694.robot.commands.auton.choosers.CommandChooser;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.DoubleCubeSwitchThenGrabAnotherAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KillerTreesDoubleCubeSwitchAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.KryptoniteAutonCommandChooser;
+import org.usfirst.frc.team694.robot.commands.auton.choosers.NewSingleCubeSwitchThenStartScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.RoboTigersMobilityAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCube90DegreeScaleAutonChooserCommand;
 import org.usfirst.frc.team694.robot.commands.auton.choosers.SingleCubeSwitchThenStartScaleAutonChooserCommand;
@@ -55,12 +56,13 @@ public class Robot extends IterativeRobot {
     private static boolean isRobotOnRight;
     private static boolean isAllianceSwitchRight;
     private static boolean isScaleRight;
+    private static boolean isInTeleop;
 
     private static SendableChooser<Command> autonChooser = new SendableChooser<>();
     private static SendableChooser<RobotStartPosition> sideChooser = new SendableChooser<>();
 
     private Command autonCommand; // Selected command run during auton
-    
+
     //private GamepadRumbleWhenCubeDetectedCommand driverpadRumbleCommand;
     private GamepadRumbleWhenCubeDetectedCommand operatorpadRumbleCommand;
 
@@ -119,7 +121,8 @@ public class Robot extends IterativeRobot {
     @Override
     public void autonomousInit() {
         Scheduler.getInstance().removeAll();
-
+        isInTeleop = false;
+        lift.enableRamping();
         liftLED.initialize();
 
         drivetrain.resetEncoders();
@@ -159,6 +162,8 @@ public class Robot extends IterativeRobot {
 
     @Override
     public void teleopInit() {
+        isInTeleop = true;
+        lift.enableRamping();
         liftLED.initialize();
 
         drivetrain.resetEncoders();
@@ -192,6 +197,7 @@ public class Robot extends IterativeRobot {
         autonChooser.addDefault("Do Nothing", new CommandGroup());
         autonChooser.addObject("Mobility", new MobilityAutonCommand());
         autonChooser.addObject("1.5 switch go to scale", new SingleCubeSwitchThenStartScaleAutonChooserCommand());//new SingleCubeSwitchThenStartLeftScaleAutonCommand(false));
+        autonChooser.addObject("NEW 1.5 switch go to scale", new NewSingleCubeSwitchThenStartScaleAutonChooserCommand());
         autonChooser.addObject("2.5 center switch", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
         autonChooser.addObject("2.5 same side scale or 1.5 opposite side", new TripleCubeScaleAutonChooserCommand());
         autonChooser.addObject("Fit with Black Hawk/KillerTrees", 
@@ -337,4 +343,7 @@ public class Robot extends IterativeRobot {
         return myInstance;
     }
 
+    public static boolean isInTeleop() {
+        return isInTeleop;
+    }
 }

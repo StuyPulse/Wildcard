@@ -28,7 +28,8 @@ public class LiftMoveCommand extends DefaultCommand {
         double liftSquared = Math.pow(liftControl, 2) * Math.signum(liftControl);
 
         if (Math.abs(liftControl) > GAMEPAD_LIFT_THRESHOLD) {
-            if(Lift.rampDisabled) {
+            //Robot.lift.moveDangerous(liftSquared);
+            if (Lift.rampDisabled) {
                 Robot.lift.moveDangerous(liftSquared);
             } else {
                 Robot.lift.moveRamp(liftSquared);

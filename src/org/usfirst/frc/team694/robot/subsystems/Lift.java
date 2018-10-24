@@ -31,6 +31,8 @@ public class Lift extends Subsystem {
     
     private boolean isOverridingLimitSwitch;
 
+    public static boolean rampDisabled;
+
     public Lift() {
         followerSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
         masterSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_LEFT_MOTOR_PORT);
@@ -70,11 +72,11 @@ public class Lift extends Subsystem {
         masterSideTalon.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
         if (Robot.IS_MILDCARD) {
-            followerSideTalon.setSensorPhase(false);
-            masterSideTalon.setSensorPhase(false);
-        } else {
             followerSideTalon.setSensorPhase(true);
             masterSideTalon.setSensorPhase(true);
+        } else {
+            followerSideTalon.setSensorPhase(false);
+            masterSideTalon.setSensorPhase(false);
         }
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
@@ -219,13 +221,22 @@ public class Lift extends Subsystem {
     }
 
     public void enableRamping() {
-        //masterSideTalon.configOpenloopRamp(0.2, 0);
         rampDisabled = false;
+        if (Robot.isInTeleop()) {
+            masterSideTalon.configOpenloopRamp(0.5, 0);
+        } else {
+            masterSideTalon.configOpenloopRamp(0.2, 0);
+        }
+    }
+    
+    public void disableLoopRamping() {
+        rampDisabled = false;
+        masterSideTalon.configOpenloopRamp(0.2, 0);
     }
 
-    public void disableRamping() {
-        //masterSideTalon.configOpenloopRamp(0, 0);
+    public void disableAllRamping() {
         rampDisabled = true;
+        masterSideTalon.configOpenloopRamp(0, 0);
     }
 
     public void disableCurrentLimit() {
