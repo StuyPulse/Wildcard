@@ -27,11 +27,9 @@ public class Lift extends Subsystem {
     private DigitalInput topLimitSwitch;
     private DigitalInput bottomLimitSwitch;
     
-    public static boolean rampDisabled = false;
+    public static boolean rampDisabled;
     
     private boolean isOverridingLimitSwitch;
-
-    public static boolean rampDisabled;
 
     public Lift() {
         followerSideTalon = new WPI_TalonSRX(RobotMap.LIFT_INNER_RIGHT_MOTOR_PORT);
@@ -228,13 +226,9 @@ public class Lift extends Subsystem {
             masterSideTalon.configOpenloopRamp(0.2, 0);
         }
     }
-    
-    public void disableLoopRamping() {
-        rampDisabled = false;
-        masterSideTalon.configOpenloopRamp(0.2, 0);
-    }
 
-    public void disableAllRamping() {
+    public void disableRamping() {
+        masterSideTalon.configOpenloopRamp(0.2, 0);
         rampDisabled = true;
         masterSideTalon.configOpenloopRamp(0, 0);
     }
@@ -244,6 +238,15 @@ public class Lift extends Subsystem {
         masterSideTalon.enableCurrentLimit(false);
     }
 
+    public void disableLoopRamping() {
+        rampDisabled = false;
+        masterSideTalon.configOpenloopRamp(0.2, 0);
+    }
+
+    public void disableAllRamping() {
+        rampDisabled = true;
+        masterSideTalon.configOpenloopRamp(0, 0);
+    }
     public void enableOverrideLimitSwitch() {
         isOverridingLimitSwitch = true;
     }

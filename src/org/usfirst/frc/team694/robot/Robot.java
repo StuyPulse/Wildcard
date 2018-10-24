@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 
         liftLED.initialize();
         initSmartDashboard();
-        
+
         //driverpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.driverGamepad, 0.5, 0.5);
         operatorpadRumbleCommand = new GamepadRumbleWhenCubeDetectedCommand(Robot.oi.operatorGamepad, 0.5, 0.5);
     }
@@ -166,6 +166,9 @@ public class Robot extends IterativeRobot {
         lift.enableRamping();
         liftLED.initialize();
 
+        isInTeleop = true;
+        lift.enableRamping();
+
         drivetrain.resetEncoders();
         drivetrain.resetGyro();
         drivetrain.resetGyroError();
@@ -177,7 +180,7 @@ public class Robot extends IterativeRobot {
             autonCommand.cancel();
         }
 
-//        driverpadRumbleCommand.start();
+        //        driverpadRumbleCommand.start();
         operatorpadRumbleCommand.start();
     }
 
@@ -200,42 +203,29 @@ public class Robot extends IterativeRobot {
         autonChooser.addObject("NEW 1.5 switch go to scale", new NewSingleCubeSwitchThenStartScaleAutonChooserCommand());
         autonChooser.addObject("2.5 center switch", new DoubleCubeSwitchThenGrabAnotherAutonChooserCommand());
         autonChooser.addObject("2.5 same side scale or 1.5 opposite side", new TripleCubeScaleAutonChooserCommand());
-        autonChooser.addObject("Fit with Black Hawk/KillerTrees", 
-                new CommandChooser(
-                        new TripleCubeScaleAutonChooserCommand(), 
-                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
-                        new TripleCubeScaleAutonChooserCommand(), 
+        autonChooser.addObject("Fit with Black Hawk/KillerTrees",
+                new CommandChooser(new TripleCubeScaleAutonChooserCommand(),
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), new TripleCubeScaleAutonChooserCommand(),
                         new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
-        autonChooser.addObject("Don't fit with Black Hawk/KillerTrees", 
-                new CommandChooser(
-                        new TripleCubeScaleAutonChooserCommand(), 
-                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
-                        new TripleCubeScaleAutonChooserCommand(), 
+        autonChooser.addObject("Don't fit with Black Hawk/KillerTrees",
+                new CommandChooser(new TripleCubeScaleAutonChooserCommand(),
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), new TripleCubeScaleAutonChooserCommand(),
                         new RoboTigersMobilityAutonChooserCommand()));
         autonChooser.addObject("Fit with 195",
-                new CommandChooser(
-                        new SingleCube90DegreeScaleAutonChooserCommand(),
-                        new KryptoniteAutonCommandChooser(), 
-                        new SingleCube90DegreeScaleAutonChooserCommand(),
+                new CommandChooser(new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new KryptoniteAutonCommandChooser(), new SingleCube90DegreeScaleAutonChooserCommand(),
                         new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
-        autonChooser.addObject("Don't fit with 195", 
-                new CommandChooser(
-                        new SingleCube90DegreeScaleAutonChooserCommand(),
-                        new KryptoniteAutonCommandChooser(), 
-                        new SingleCube90DegreeScaleAutonChooserCommand(),
+        autonChooser.addObject("Don't fit with 195",
+                new CommandChooser(new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new KryptoniteAutonCommandChooser(), new SingleCube90DegreeScaleAutonChooserCommand(),
                         new RoboTigersMobilityAutonChooserCommand()));
-        autonChooser.addObject("Fit with 2056",
-                new CommandChooser(
-                        new SingleCube90DegreeScaleAutonChooserCommand(),
-                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
-                        new SingleCube90DegreeScaleAutonChooserCommand(), 
-                        new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
-        autonChooser.addObject("Don't fit with 2056", 
-                new CommandChooser(
-                        new SingleCube90DegreeScaleAutonChooserCommand(),
-                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(), 
-                        new SingleCube90DegreeScaleAutonChooserCommand(), 
-                        new RoboTigersMobilityAutonChooserCommand()));
+        autonChooser.addObject("Fit with 2056", new CommandChooser(new SingleCube90DegreeScaleAutonChooserCommand(),
+                new BlackHawksDoubleCubeSwitchAutonChooserCommand(), new SingleCube90DegreeScaleAutonChooserCommand(),
+                new KillerTreesDoubleCubeSwitchAutonChooserCommand()));
+        autonChooser.addObject("Don't fit with 2056",
+                new CommandChooser(new SingleCube90DegreeScaleAutonChooserCommand(),
+                        new BlackHawksDoubleCubeSwitchAutonChooserCommand(),
+                        new SingleCube90DegreeScaleAutonChooserCommand(), new RoboTigersMobilityAutonChooserCommand()));
         SmartDashboard.putData("Autonomous", autonChooser);
 
         // SIDE CHOOSER
@@ -342,7 +332,7 @@ public class Robot extends IterativeRobot {
     public static Robot getInstance() {
         return myInstance;
     }
-
+    
     public static boolean isInTeleop() {
         return isInTeleop;
     }
