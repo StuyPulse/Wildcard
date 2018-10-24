@@ -44,10 +44,7 @@ public class OI {
         
         operatorGamepad.getLeftButton().whenPressed(new QuisitorOpenCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());
-        //        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
-        //        operatorGamepad.getBottomButton().whenPressed(new QuisitorCloseCommand());
 
-        //operatorGamepad.getRightBumper().whileHeld(new QuisitorAcquireCommand());
         operatorGamepad.getLeftBumper().whileHeld(new QuisitorMoveSpeedCommand(-0.4));
         operatorGamepad.getRightTrigger().whileHeld(new QuisitorMoveSpeedCommand(1.0));
         operatorGamepad.getLeftTrigger().whileHeld(new QuisitorMoveSpeedCommand(-1.0));
@@ -62,15 +59,13 @@ public class OI {
         operatorGamepad.getStartButton().whileHeld(new LiftMoveSpeedCommand(-1 * RobotMap.LIFT_BACKDRIVE_SPEED));
         //        operatorGamepad.getRightButton().whenPressed( new PrepareForClimbCommand());
 
-        /// TESTING
-        //        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
-        //        driverGamepad.getDPadUp().whenPressed(new TestCommand());
-        //        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
-        //        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
-//                driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
-//               driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(90));
-//               driverGamepad.getDPadDown().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(-90));
-//               
-
+/// TESTING
+//        driverGamepad.getDPadUp().whenPressed(new LiftMoveToHeightCommand(86.0));
+//        driverGamepad.getDPadUp().whenPressed(new TestCommand());
+//        driverGamepad.getDPadUp().whenPressed(new DriveStraightRampDownOnlyCommand(250));
+//        driverGamepad.getDPadDown().whenPressed(new DriveStraightRampDownOnlyCommand(-250));
+//        driverGamepad.getDPadUp().whenPressed(new DrivetrainRotateAbsoluteDegreesPIDCommand(45));
+//        driverGamepad.getDPadRight().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(90));
+//        driverGamepad.getDPadDown().whenPressed(new DrivetrainRotateRelativeDegreesPIDCommand(-90));
     }
 }

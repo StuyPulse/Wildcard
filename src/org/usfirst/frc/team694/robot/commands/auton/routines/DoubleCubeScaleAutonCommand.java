@@ -24,11 +24,11 @@ public class DoubleCubeScaleAutonCommand extends CommandGroup {
         addSequential(new SingleCubeScaleAutonChooserCommand());
 
         // Grab the second cube
-        double GRAB_APPROACH_ANGLE = 150 - 5;
-        double GRAB_APPROACH_DISTANCE = 71 + 12;
-        double GRAB_BACKUP_DISTANCE = 64.0 - 25 + 5;
+        double GRAB_APPROACH_ANGLE = 145;
+        double GRAB_APPROACH_DISTANCE = 83;
+        double GRAB_BACKUP_DISTANCE = 44;
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand( (isRight ? -1 : 1) * GRAB_APPROACH_ANGLE), 0.5 + .5);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand( (isRight ? -1 : 1) * GRAB_APPROACH_ANGLE), 1);
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand());
         addSequential(new DriveStraightRampDownOnlyCommand(GRAB_APPROACH_DISTANCE), 2);
@@ -36,14 +36,14 @@ public class DoubleCubeScaleAutonCommand extends CommandGroup {
         addSequential(new QuisitorCloseCommand());
         addSequential(new QuisitorAcquireCommand(), .5);
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACKUP_DISTANCE, -1), 2 + .5);
+        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACKUP_DISTANCE, -1), 2.5);
 
         // Move back while lifting to give cube clearance before scoring
-        double SCORE_ANGLE = 60 + 25;
-        double SCORE_BACKUP_DISTANCE = 5 + 20;
+        double SCORE_ANGLE = 85;
+        double SCORE_BACKUP_DISTANCE = 25;
         double SCORE_BACKUP_SPEED = 0.4;
 
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand((isRight ? -1 : 1) * SCORE_ANGLE ), .5 + .3);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand((isRight ? -1 : 1) * SCORE_ANGLE ), .8);
         addSequential(new QuisitorStopCommand());
         addParallel(new DrivetrainMoveInchesEncoderCommand(SCORE_BACKUP_DISTANCE, -1 * SCORE_BACKUP_SPEED));
         addSequential(new LiftMoveToHeightCommand(83.0));

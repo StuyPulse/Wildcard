@@ -29,7 +29,7 @@ public class Drivetrain extends Subsystem {
 //    private double LIFT_AND_DRIVETRAIN_CURRENT_LIMIT = 999999;
 //    private int DRIVETRAIN_CURRENT_LIMIT_LIFT = 10;
     // Remove brownout protection
-    private static final double BROWNOUT_PROTECTION_PVBUS_CAP = 1;//0.9;
+    private static final double BROWNOUT_PROTECTION_PVBUS_CAP = 1;
 
     private WPI_VictorSPX leftTopMotor;
     private WPI_VictorSPX leftMiddleMotor;

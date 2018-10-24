@@ -19,7 +19,7 @@ public class SingleCubeDifferentSideScale90DegreesAutonCommand extends CommandGr
     public SingleCubeDifferentSideScale90DegreesAutonCommand(boolean isRight) {
             addSequential(new PrintCommand("[SingleCubeDifferentSideScale90DegreesAutonCommand] isRight? " + isRight));
             // Add Commands here:
-            addSequential(new DriveStraightRampDownOnlyCommand(235 - 14), 3);
+            addSequential(new DriveStraightRampDownOnlyCommand(221), 3);
             // Rotate so that we're BACKWARDS.
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
             addSequential(new LiftMoveToHeightCommand(5));      

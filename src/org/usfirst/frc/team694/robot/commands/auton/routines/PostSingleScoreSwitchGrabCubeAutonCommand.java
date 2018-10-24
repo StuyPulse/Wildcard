@@ -69,17 +69,17 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
                 addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
             }
 
-            DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(-1 * (45 + 26 + 13 + 5));
+            DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(-89);
 
             driveCommand.addSpeedChange(0, 1.5);
             driveCommand.addTurn(0, isSwitchRight ? 90.0 : -90.0);
-            driveCommand.addTurn(30 + 26 + 13 + 5, 0.0);
+            driveCommand.addTurn(74, 0.0);
             addSequential(driveCommand);
         } else {
 
             // Get in position to grab second cube
-            double GRAB_READY_ANGLE = 45 + 15;
-            double GRAB_READY_DISTANCE = 55 - 10 - 3 + 4 - 12 + 10 + (isSwitchRight? 0 : 8.4);
+            double GRAB_READY_ANGLE = 60;
+            double GRAB_READY_DISTANCE = 44 + (isSwitchRight? 0 : 8.4);
 
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
                     isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), 1);
@@ -95,7 +95,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         }
 
         // Grab the second cube
-        double GRAB_FORWARD_DISTANCE = 30 + 5;
+        double GRAB_FORWARD_DISTANCE = 35;
         double GRAB_BACK_DISTANCE = 30 - (isSwitchRight ? 0 : 15);
 
         addSequential(new QuisitorOpenCommand());
@@ -104,7 +104,7 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         }
         addParallel(new QuisitorAcquireCommand());
 
-        addParallel(new DrivetrainMoveInchesEncoderCommand(isThirdCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3/*+.2*/), 1.5);
+        addParallel(new DrivetrainMoveInchesEncoderCommand(isThirdCube ? (GRAB_FORWARD_DISTANCE + 13) : GRAB_FORWARD_DISTANCE, 0.3), 1.5);
         addSequential(new WaitUntilCubeDetectedCommand());
         addSequential(new DrivetrainStopCommand());
 
@@ -113,7 +113,6 @@ class PostSingleScoreSwitchGrabCubeAutonCommand extends CommandGroup {
         addSequential(new WaitCommand(0.5));
         addParallel(new QuisitorStopCommand());
         DrivetrainDriveCurveCommand backupCommand = new DrivetrainDriveCurveCommand(GRAB_BACK_DISTANCE, RampMode.NO_RAMPING);
-        //addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -0.5));
         backupCommand.addTurn(0, 0);
         backupCommand.addSpeedChange(0, -0.5);
         addSequential(backupCommand);

@@ -13,14 +13,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RoboTigersOppositeSideScaleMobilityAutonCommand extends CommandGroup {
 
     public RoboTigersOppositeSideScaleMobilityAutonCommand(boolean isRight) {
-        addSequential(new DriveStraightRampDownOnlyCommand(235 - 14), 3);
+        addSequential(new DriveStraightRampDownOnlyCommand(221), 3);
 
         // Rotate so that we're BACKWARDS
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? 90 : -90), 2);
 
         addSequential(new LiftMoveToHeightCommand(10));
 
-        addSequential(new DriveStraightRampDownOnlyCommand(-312 / 2 - 12 + 4*12 + 30), 3);
+        addSequential(new DriveStraightRampDownOnlyCommand(-90), 3);
         addParallel(new QuisitorAcquireCommand(), 0.5);
 
     }

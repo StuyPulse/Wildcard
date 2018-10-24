@@ -47,8 +47,6 @@ public class Lift extends Subsystem {
 
         followerSideTalon.configContinuousCurrentLimit(PEAK_LIMIT_AMPS, 0);
         masterSideTalon.configContinuousCurrentLimit(PEAK_LIMIT_AMPS, 0);
-        //        innerLeftMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
-        //        innerRightMotor.configPeakCurrentDuration(PEAK_LIMIT_MILLISECONDS, 0);
         followerSideTalon.enableCurrentLimit(false);
         masterSideTalon.enableCurrentLimit(false);
 
@@ -66,19 +64,14 @@ public class Lift extends Subsystem {
         masterSideTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         // Lift P, to ramp up to a height
-        //        innerLeftMotor.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
         masterSideTalon.config_kP(0, SmartDashboard.getNumber("Lift P", 0.3), 0);
 
         if (Robot.IS_MILDCARD) {
             followerSideTalon.setSensorPhase(true);
             masterSideTalon.setSensorPhase(true);
-//            followerSideTalon.setSensorPhase(false);
-//            masterSideTalon.setSensorPhase(false);
         } else {
             followerSideTalon.setSensorPhase(false);
             masterSideTalon.setSensorPhase(false);
-//            followerSideTalon.setSensorPhase(true);
-//            masterSideTalon.setSensorPhase(true);
         }
         topLimitSwitch = new DigitalInput(RobotMap.LIFT_TOP_LIMIT_SWITCH_PORT);
         bottomLimitSwitch = new DigitalInput(RobotMap.LIFT_BOTTOM_LIMIT_SWITCH_PORT);
@@ -128,7 +121,6 @@ public class Lift extends Subsystem {
         //                    }
         //                }
 
-        // TODO: ADD ME BACK
         //        double speed = currentSpeed;
         //        if (currentHeight < 0) {
         //            speed = Math.max(-RobotMap.LIFT_MIN_SPEED,speed);

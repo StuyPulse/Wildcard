@@ -89,23 +89,6 @@ public class Robot extends IterativeRobot {
         RIGHT_SIDE_OF_DRIVER, LEFT_SIDE_OF_DRIVER
     }
 
-    //Bottom means side closer to the scoring table
-    public static FieldMapInterface getRobotQuadrant() {
-        // TESTING ONLY
-        return new FieldMapRedFarFromScoringTableQuadrant();
-
-        /*if(DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red) {
-            if(isRobotOnRight) {
-                return new FieldMapRedFarFromScoringTableQuadrant(); 
-            }
-            return new FieldMapRedNearScoringTableQuadrant();      
-        }
-        if(isRobotOnRight) {
-            return new FieldMapBlueNearScoringTableQuadrant();
-        }
-        return new FieldMapBlueFarFromScoringTableQuadrant();
-        */
-    }
 
     @Override
     public void disabledInit() {

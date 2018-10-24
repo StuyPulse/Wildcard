@@ -15,6 +15,6 @@ public class SingleCubeScaleThenBackupAutonCommand extends CommandGroup {
     public SingleCubeScaleThenBackupAutonCommand(boolean isRight) {
         addSequential(new SingleCubeScaleAutonChooserCommand());
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0));
-        addSequential(new DriveStraightWithRampingCommand(261 + 12 + 6), 3.5);
+        addSequential(new DriveStraightWithRampingCommand(279), 3.5);
     }
 }

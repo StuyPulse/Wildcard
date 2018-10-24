@@ -19,25 +19,25 @@ public class FasterPostSingleScoreSwitchGrabCubeAutonCommand extends CommandGrou
     public FasterPostSingleScoreSwitchGrabCubeAutonCommand(boolean isSwitchRight) {
      // Get in position to grab second cube
         double GRAB_READY_ANGLE = 45;
-        double GRAB_READY_DISTANCE = 55 - 10 - 3;
+        double GRAB_READY_DISTANCE = 42;
 
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(
-                isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), .8/*1*/);
+                isSwitchRight ? GRAB_READY_ANGLE : -1 * GRAB_READY_ANGLE), .8);
         addParallel(new LiftMoveToBottomCommand());
         addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_READY_DISTANCE, -0.4));
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), .8/*1*/);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(0), .8);
 
         // Grab the second cube
-        double GRAB_FORWARD_DISTANCE = 30 /*+ 5*/;
-        double GRAB_BACK_DISTANCE = /*30*/ 30 - 10;
+        double GRAB_FORWARD_DISTANCE = 30;
+        double GRAB_BACK_DISTANCE = 20;
 
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_FORWARD_DISTANCE, 1/*0.3*/));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_FORWARD_DISTANCE, 1));
         addSequential(new QuisitorCloseCommand());
         addParallel(new QuisitorAcquireCommand());
         addSequential(new WaitCommand(0.5));
         addParallel(new QuisitorStopCommand());
-        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -1/*-0.5*/));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(GRAB_BACK_DISTANCE, -1));
     }
 }

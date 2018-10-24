@@ -22,9 +22,9 @@ public class SameSideScaleNinetyNullAutonCommand extends CommandGroup {
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5.0), 30));
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(10.0), 250));
         //TODO: Change to the right distance for driving straight into the null zone 
-        addSequential(new DriveStraightWithRampingCommand(300 + 5 + 24 + 10 - 8 - 18 + 4 + 12), 4);
+        addSequential(new DriveStraightWithRampingCommand(329), 4);
         //TODO: Change the timeout of the Rotate Command
-        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -(80+10 + 10) : (80+10 +10)), 2);
+        addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight? -100 : 100), 2);
         //TODO: Check if the move height is correct
         //addSequential(new DrivetrainMoveInchesEncoderCommand(10 - 5, -0.5));
         addSequential(new DrivetrainMoveInchesEncoderCommand(5, -.3));
@@ -32,7 +32,7 @@ public class SameSideScaleNinetyNullAutonCommand extends CommandGroup {
         addSequential(new DrivetrainMoveInchesEncoderCommand(5, .3));
         //TODO: Check if this is necessary
         //addSequential(new DrivetrainMoveInchesEncoderCommand(5, 0.5), .5);
-        addSequential(new QuisitorMoveSpeedCommand(-(1 - 0.5)), 0.5 + 0.5);
+        addSequential(new QuisitorMoveSpeedCommand(-(1 - 0.5)), 1);
         addSequential(new DrivetrainMoveInchesEncoderCommand(5, -.3));
         //TODO: Check if this is necessary
 //        addSequential(new DrivetrainMoveInchesEncoderCommand(5, -0.5), .5);

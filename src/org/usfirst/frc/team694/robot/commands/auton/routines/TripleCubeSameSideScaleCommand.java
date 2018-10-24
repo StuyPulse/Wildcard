@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  * WITH CURVES
  */
 public class TripleCubeSameSideScaleCommand extends CommandGroup {
-    private static final double DISTANCE_TOTAL = 130 + 116 + 40;//296 - 4;
+    private static final double DISTANCE_TOTAL = 286;
 
     private static final boolean IS_2ND_SCORE_FAST_AND_CRAZY = false;
 
@@ -30,11 +30,11 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
 
         DrivetrainDriveCurveCommand driveCommand = new DrivetrainDriveCurveCommand(DISTANCE_TOTAL);
         driveCommand.addSpeedChange(0, 0.75);
-        driveCommand.addTurn(130 - 35, isRight ? -(45/2 - 5 - 5 + 5) : (45/2 - 5 - 5 + 5));
+        driveCommand.addTurn(130 - 35, isRight ? -17.5 : 17.5);
 //        driveCommand.addTurn(130 + 116, isRight ? 5 : -5);
 
         // Curve to the scale + ready to score
-        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86 - 11 - 6 + 2), 15));
+        addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(71), 15));
         
         addSequential(driveCommand, 3.3);
 
@@ -62,7 +62,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addSequential(new QuisitorOpenCommand());
         addParallel(new QuisitorAcquireCommand(), 2);
 
-        addParallel(new DrivetrainMoveInchesEncoderCommand(/*60 - 10*/36, 0.4));
+        addParallel(new DrivetrainMoveInchesEncoderCommand(36, 0.4));
         addSequential(new WaitUntilCubeDetectedCommand(), 1.7);
         addSequential(new DrivetrainStopCommand());
 //        addSequential(new DriveStraightRampDownOnlyCommand(60 - 10));
@@ -77,8 +77,8 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
             addSequential(kTurnCommand);
         } else {
             addParallel(new QuisitorAcquireCommand(), 1);
-            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(86 - 11 - 6  + 2), 10));
-            addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.3 - 0.1));
+            addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(71), 10));
+            addSequential(new DrivetrainMoveInchesEncoderCommand(-24, -0.4));
             addParallel(new QuisitorAcquireCommand(), 1);
             addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -(45/2 - 5) : (45/2 - 5)), 1.25);
 //            addParallel(new LiftMoveToHeightCommand(68));
@@ -92,7 +92,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addParallel(new QuisitorMoveSpeedCommand(-0.5), 1);
 
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToBottomCommand(), 15));
-        addSequential(new DrivetrainMoveInchesEncoderCommand(15+3, -0.4));
+        addSequential(new DrivetrainMoveInchesEncoderCommand(18, -0.4));
 //        addSequential(new LiftMoveToBottomCommand());
         addSequential(new WaitUntilLiftGoesBelowHeightCommand(10));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRight ? -125 : 125), 1.25);
@@ -102,7 +102,7 @@ public class TripleCubeSameSideScaleCommand extends CommandGroup {
         addParallel(new QuisitorAcquireCommand(), 2);
 
         // Approach 3rd cube to grab
-        addParallel(new DrivetrainMoveInchesEncoderCommand(26 + 6 + 12 + 24, 0.3 + 0.1), 1.5);
+        addParallel(new DrivetrainMoveInchesEncoderCommand(68, 0.4), 1.5);
         addSequential(new WaitUntilCubeDetectedCommand());
         addSequential(new DrivetrainStopCommand());
 
