@@ -26,11 +26,11 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
  
     public BlackHawksDoubleCubeSwitchAutonCommand(boolean isRobotRight, boolean isSwitchSameSide) {
 
-        double INITIAL_DRIVE_TO_SWITCH_DISTANCE = 235 - 14 + 7 + 5 + 6;
+        double INITIAL_DRIVE_TO_SWITCH_DISTANCE = 239 + 10;//235 - 14 + 7 + 5 + 6;
 
         // Drive to rough scoring position
         addParallel(new ConditionalDistanceEncodersCommand(new LiftMoveToHeightCommand(5), 15));
-        addSequential(new DriveStraightWithRampingCommand(INITIAL_DRIVE_TO_SWITCH_DISTANCE), 2.5 + 1);
+        addSequential(new DriveStraightWithRampingCommand(INITIAL_DRIVE_TO_SWITCH_DISTANCE), 10);//2.5 + 1);
         addSequential(new WaitCommand(0.5));
         addSequential(new DrivetrainRotateAbsoluteDegreesPIDCommand(isRobotRight ? -90 : 90), 1.4);
         addParallel(new LiftMoveToHeightCommand(10), 3);
@@ -39,7 +39,7 @@ public class BlackHawksDoubleCubeSwitchAutonCommand extends CommandGroup {
         double APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE;
 
         if (isSwitchSameSide) {
-            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 15 + 18 + 5 + 6.5 + 9 - 11 - 6;
+            APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 36.5 + 4;//15 + 18 + 5 + 6.5 + 9 - 11 - 6;
         } else {
             APPROACH_SWITCH_SIDE_PARALLEL_DISTANCE = 121;
         }
