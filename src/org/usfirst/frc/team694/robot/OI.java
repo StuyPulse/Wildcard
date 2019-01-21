@@ -9,6 +9,8 @@ package org.usfirst.frc.team694.robot;
 
 import org.usfirst.frc.team694.robot.commands.DrivetrainHighGearCommand;
 import org.usfirst.frc.team694.robot.commands.DrivetrainLowGearCommand;
+import org.usfirst.frc.team694.robot.commands.FangsCloseCommand;
+import org.usfirst.frc.team694.robot.commands.FangsOpenCommand;
 import org.usfirst.frc.team694.robot.commands.LiftDisableAllRampingCommand;
 import org.usfirst.frc.team694.robot.commands.LiftDisableLoopRampingCommand;
 import org.usfirst.frc.team694.robot.commands.LiftDisableOverrideLimitSwitch;
@@ -44,8 +46,8 @@ public class OI {
 
         operatorGamepad.getLeftButton().whenPressed(new QuisitorOpenCommand());
         operatorGamepad.getRightButton().whenPressed(new QuisitorCloseCommand());
-        //        operatorGamepad.getTopButton().whenPressed(new QuisitorOpenCommand());
-        //        operatorGamepad.getBottomButton().whenPressed(new QuisitorCloseCommand());
+        operatorGamepad.getTopButton().whenPressed(new FangsOpenCommand());
+        operatorGamepad.getBottomButton().whenPressed(new FangsCloseCommand());
 
         //operatorGamepad.getRightBumper().whileHeld(new QuisitorAcquireCommand());
         operatorGamepad.getLeftBumper().whileHeld(new QuisitorMoveSpeedCommand(-0.4));

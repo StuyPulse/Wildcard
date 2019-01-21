@@ -15,6 +15,7 @@ public class Quisitor extends Subsystem {
 
     private WPI_VictorSPX quisitorMotor;//Motor for intake/outtake
     private DoubleSolenoid quisitorGrabberSolenoid;//solenoid for grabbing
+    private DoubleSolenoid fangs;
     //    private DigitalInput quisitorLimitSwitch;//Not used but here anyways
     private IRSensor quisitorCubeSensor;
 
@@ -32,7 +33,7 @@ public class Quisitor extends Subsystem {
             quisitorGrabberSolenoid = new DoubleSolenoid(RobotMap.QUISITOR_GRABBER_SOLENOID_CLOSE_PORT,
                     RobotMap.QUISITOR_GRABBER_SOLENOID_OPEN_PORT);
         }
-
+        fangs = new DoubleSolenoid(RobotMap.FANG_CLOSE_PORT, RobotMap.FANG_OPEN_PORT);
         //        quisitorLimitSwitch = new DigitalInput(RobotMap.QUISITOR_LIMIT_SWITCH_PORT);
         quisitorCubeSensor = new IRSensor(RobotMap.QUISITOR_IR_SENSOR_PORT);
 
@@ -87,12 +88,28 @@ public class Quisitor extends Subsystem {
     public void close() {
         quisitorGrabberSolenoid.set(DoubleSolenoid.Value.kReverse);
     }
-
+   
+    public void fangsOpen() {
+        fangs.set(DoubleSolenoid.Value.kForward);
+    }
+    
+    public void fangsClose() {
+        fangs.set(DoubleSolenoid.Value.kReverse);
+    }
+ 
     public void toggle() {
         if (quisitorGrabberSolenoid.get() == DoubleSolenoid.Value.kForward) {
             close();
         } else {
             open();
+        }
+    }
+    
+    public void fangsToggle() {
+        if (fangs.get() == DoubleSolenoid.Value.kForward) {
+            fangsClose();
+        } else {
+            fangsOpen();
         }
     }
 
