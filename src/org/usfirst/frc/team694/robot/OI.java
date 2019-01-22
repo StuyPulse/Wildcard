@@ -35,9 +35,9 @@ public class OI {
         //DS4Windows does not work on COMputer
         //driverGamepad = new Gamepad(RobotMap.DRIVER_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
         //Needs to be set to X mode for rumbling to work
-        operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.PS4);
+        //operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.PS4);
 	//TODO:Another temp change for HVR; Reimplement orig operatorGamepad when we have enough non-broken controllers
-        //operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
+        operatorGamepad = new Gamepad(RobotMap.OPERATOR_GAMEPAD_PORT, GamepadSwitchMode.SWITCH_X);
 
 
 
