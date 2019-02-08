@@ -315,15 +315,6 @@ public class Drivetrain extends Subsystem {
 //        rightBottomMotor.enableCurrentLimit(false);
     }
 
-    public double getCurrent() {
-        return leftBottomMotor.getOutputCurrent() 
-             + rightBottomMotor.getOutputCurrent()
-             + leftMiddleMotor.getOutputCurrent()
-             + rightMiddleMotor.getOutputCurrent()
-             + leftTopMotor.getOutputCurrent()
-             + rightTopMotor.getOutputCurrent();
-    }
-
     public double getAbsoluteGyroAngle() {
         return absoluteGyroError + getGyroAngle();
     }
