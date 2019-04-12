@@ -255,8 +255,8 @@ public class Lift extends Subsystem {
         isOverridingLimitSwitch = false;
     }
 
-    public double getCurrent() {
-        return followerSideTalon.getOutputCurrent() + masterSideTalon.getOutputCurrent()
-                + leftSideVictor.getOutputCurrent() + rightSideVictor.getOutputCurrent();
-    }
+    // public double getCurrent() {
+    //     return followerSideTalon.getOutputCurrent() + masterSideTalon.getOutputCurrent()
+    //             + leftSideVictor.getOutputCurrent() + rightSideVictor.getOutputCurrent();
+    // }
 }
