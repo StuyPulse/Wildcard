@@ -275,7 +275,7 @@ public class Robot extends IterativeRobot {
 
         SmartDashboard.putBoolean("Quisitor: Detect Cube", Robot.quisitor.isCubeDetected());
 
-        SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());
+        //SmartDashboard.putNumber("Drivetrain Current", drivetrain.getCurrent());
 
         SmartDashboard.putString("Drivetrain Current Command", drivetrain.getCurrentCommandName());
     }
